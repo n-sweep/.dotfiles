@@ -23,3 +23,12 @@ g.mapleader = ' '
 -- Netrw Settings
 g.netrw_banner = 0
 g.netrw_liststyle = 3
+
+
+-- Undo file
+local dir = "/tmp/.vim-undo-dir"
+if not vim.fn.isdirectory(dir)
+    then vim.fn.mkdir(dir, '', 0700)
+end
+opt.undodir=dir
+opt.undofile = true
