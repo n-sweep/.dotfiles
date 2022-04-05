@@ -128,7 +128,10 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+function cpf { cat "$1" | clip.exe; }
+
 # ClosedLoop aliases
+alias ci='code-insiders'
 alias jup="jupyter lab --notebook-dir=~/work --no-browser > /dev/null 2>&1 &"
 alias generate_aws_creds="python ~/work/closedloop-api-python/closedloop/api_private/scripts/set_aws_prod_s3_credentials.py"
 
