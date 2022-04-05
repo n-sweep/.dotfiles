@@ -34,22 +34,22 @@ call plug#begin('~/.vim/plugged')
     " sudo add-apt-repository ppa:neovim-ppa/unstable
     " sudo apt-get update
     " sudo apt-get install neovim
-    Plug 'nvim-telescope/telescope.nvim'
+    "Plug 'nvim-telescope/telescope.nvim'
 
     " pip install jedi pynvim
-    Plug 'davidhalter/jedi-vim'
-    Plug 'deoplete-plugins/deoplete-jedi'
-    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+    "Plug 'davidhalter/jedi-vim'
+    "Plug 'deoplete-plugins/deoplete-jedi'
+    "Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 
-    Plug 'preservim/nerdtree'
-    Plug 'preservim/nerdcommenter'
-    Plug 'tpope/vim-surround'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'tmhedberg/SimpylFold'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'gruvbox-community/gruvbox'
+    "Plug 'preservim/nerdtree'
+    "Plug 'preservim/nerdcommenter'
+    "Plug 'tpope/vim-surround'
+    "Plug 'jiangmiao/auto-pairs'
+    "Plug 'tmhedberg/SimpylFold'
+    "Plug 'nvim-lua/plenary.nvim'
+    "Plug 'vim-airline/vim-airline'
+    "Plug 'vim-airline/vim-airline-themes'
+    "Plug 'gruvbox-community/gruvbox'
 
     let g:deoplete#enable_at_startup = 1
 
