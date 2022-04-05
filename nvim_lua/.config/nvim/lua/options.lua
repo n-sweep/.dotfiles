@@ -1,5 +1,6 @@
 -- Aliases
 local opt = vim.opt
+local g = vim.g
 
 -- Options
 opt.completeopt = 'menu'
@@ -15,3 +16,10 @@ opt.softtabstop = 4
 opt.swapfile = false
 opt.tabstop = 4
 opt.wrap = false
+
+-- Set Leader
+g.mapleader = ' '
+
+-- Netrw Settings
+g.netrw_banner = 0
+g.netrw_liststyle = 3

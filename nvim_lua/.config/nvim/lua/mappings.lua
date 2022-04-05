@@ -1,6 +1,7 @@
 -- Aliases
-let = vim.g
+local g = vim.g
 
+-- Mapping Functions
 function map(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, {noremap=true})
 end
@@ -16,9 +17,6 @@ end
 function tmap(shortcut, command)
     map('t', shortcut, command)
 end
-
--- Set Leader
-let.mapleader = ' '
 
 -- Quick Write
 nmap('<leader>w', ':w<Enter>')
@@ -39,8 +37,12 @@ imap('<A-t>', '<ESC>:ToggleTerm<CR>')
 -- Toggle Start Page
 nmap('<leader>a', ':Alpha<CR>')
 
+-- Toggle netrw
+nmap('<leader>n', ':Explore<CR>')
+
 -- Telescope remapping
 nmap('<leader>ff', ':Telescope find_files <CR>')
 nmap('<leader>fg', ':Telescope live_grep <CR>')
 nmap('<leader>fb', ':Telescope buffers <CR>')
 nmap('<leader>fh', ':Telescope help_tags <CR>')
+

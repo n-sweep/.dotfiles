@@ -1,8 +1,8 @@
+require('plugins')
+require('options')
+require('mappings')
 require('lsp')
 require('completion')
-require('mappings')
-require('options')
-require('plugins')
 
 vim.cmd[[colorscheme gruvbox]]
 
