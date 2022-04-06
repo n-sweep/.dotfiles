@@ -18,8 +18,15 @@ function tmap(shortcut, command)
     map('t', shortcut, command)
 end
 
+function vmap(shortcut, command)
+    map('v', shortcut, command)
+end
+
 -- Quick Write
-nmap('<leader>w', ':w<Enter>')
+nmap('<leader>w', ':w<CR>')
+
+-- Quick Copy to Clipboard
+vmap('<leader>y', '"+y')
 
 -- Insert new line w/o entering insert mode
 nmap('<leader>o', 'o<ESC>')
