@@ -51,6 +51,7 @@ require('packer').startup(function()
         'williamboman/nvim-lsp-installer'
     }
 
+    -- LuaLine
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
@@ -65,6 +66,7 @@ require('packer').startup(function()
 end)
 
 require('nvim-autopairs').setup{}
+require('toggleterm').setup{}
 require('lualine').setup{
     options = {
         theme = 'gruvbox'
