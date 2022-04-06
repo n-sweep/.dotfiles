@@ -22,6 +22,10 @@ function vmap(shortcut, command)
     map('v', shortcut, command)
 end
 
+function nvomap(shortcut, command)
+    map('nvo', shortcut, command)
+end
+
 -- Quick Write
 nmap('<leader>w', ':w<CR>')
 
@@ -34,6 +38,12 @@ nmap('<leader>O', 'O<ESC>')
 
 -- Remap ctrl+a because tmux uses it
 nmap('<C-c>', '<C-a>')
+
+-- Easier window switching
+nvomap('<C-j>', '<C-W>j')
+nvomap('<C-k>', '<C-W>k')
+nvomap('<C-h>', '<C-W>h')
+nvomap('<C-l>', '<C-W>l')
 
 -- Terminal Toggling
 tmap('<ESC>', '<C-\\><C-n>')
