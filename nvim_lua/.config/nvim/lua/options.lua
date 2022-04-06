@@ -24,6 +24,8 @@ g.mapleader = ' '
 g.netrw_banner = 0
 g.netrw_liststyle = 3
 
+-- Use system slipboard (WSL)
+g.clipboard = 'unnamedplus'
 
 -- Undo file
 local dir = "/tmp/.vim-undo-dir"
