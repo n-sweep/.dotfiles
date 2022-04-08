@@ -2,24 +2,28 @@
 local g = vim.g
 
 -- Mapping Functions
-function map(mode, shortcut, command)
+function set_keymap(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, {noremap=true})
 end
 
 function nmap(shortcut, command)
-    map('n', shortcut, command)
+    set_keymap('n', shortcut, command)
 end
 
 function imap(shortcut, command)
-    map('i', shortcut, command)
+    set_keymap('i', shortcut, command)
 end
 
 function tmap(shortcut, command)
-    map('t', shortcut, command)
+    set_keymap('t', shortcut, command)
 end
 
 function vmap(shortcut, command)
-    map('v', shortcut, command)
+    set_keymap('v', shortcut, command)
+end
+
+function map(shortcut, command)
+    set_keymap('', shortcut, command)
 end
 
 -- Quick Write
@@ -34,6 +38,12 @@ nmap('<leader>O', 'O<ESC>')
 
 -- Remap ctrl+a because tmux uses it
 nmap('<C-c>', '<C-a>')
+
+-- Easier window switching
+map('<C-j>', '<C-W>j')
+map('<C-k>', '<C-W>k')
+map('<C-h>', '<C-W>h')
+map('<C-l>', '<C-W>l')
 
 -- Terminal Toggling
 tmap('<ESC>', '<C-\\><C-n>')

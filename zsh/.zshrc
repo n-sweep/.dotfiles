@@ -128,7 +128,12 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-function cpf { cat "$1" | clip.exe; }
+# Clipboard > File (WSL)
+#function cpf { cat "$1" | clip.exe; }
+function cpf { cat "$1" | win32yank.exe -i }
+# File > Clipboard
+#function psf { powershell.exe Get-Clipboard > "$1"}
+function psf { win32yank.exe -o > "$1" }
 
 # ClosedLoop aliases
 alias ci='code-insiders'
