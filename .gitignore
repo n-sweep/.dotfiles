@@ -1,2 +1,2 @@
 # Exclude compile
-nvim_lua/.config/nvim/plugin/packer_compiled.lua
+*packer_compiled.lua
