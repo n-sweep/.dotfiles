@@ -6,7 +6,8 @@ require('packer').startup(function()
         'tpope/vim-surround',
         'Yggdroot/indentLine',
         'akinsho/toggleterm.nvim',
-        'preservim/nerdcommenter'
+        'preservim/nerdcommenter',
+        'untitled-ai/jupyter_ascending.vim'
     }
 
     -- FireNvim

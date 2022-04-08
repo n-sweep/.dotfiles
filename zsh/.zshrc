@@ -140,6 +140,9 @@ alias ci='code-insiders'
 alias jup="jupyter lab --notebook-dir=~/work --no-browser > /dev/null 2>&1 &"
 alias generate_aws_creds="python ~/work/closedloop-api-python/closedloop/api_private/scripts/set_aws_prod_s3_credentials.py"
 
+# Allow Jupyter to open the browser automatically on launch 
+BROWSER='/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe'
+
 # Vault address export
 export VAULT_ADDR=https://vault.it.cl-aws.net:8200
 
