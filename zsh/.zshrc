@@ -4,6 +4,11 @@
 source ~/.dotfiles/zsh/.cl_zshrc
 source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts
 
+alias nb="jupyter notebook --port=8889"
+
+export JUPYTER_ASCENDING_EXECUTE_HOST=localhost
+export JUPYTER_ASCENDING_EXECUTE_PORT=8889
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -130,32 +135,6 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-## Clipboard > File (WSL)
-#cpf () { cat "$1" | win32yank.exe -i }
-## File > Clipboard
-#psf () { win32yank.exe -o > "$1" }
-
-## ClosedLoop aliases
-#alias ci='code-insiders'
-#alias jup="jupyter lab --notebook-dir=~/work --port=8889 --no-browser > /dev/null 2>&1 &"
-#alias generate_aws_creds="python ~/work/closedloop-api-python/closedloop/api_private/scripts/set_aws_prod_s3_credentials.py"
-
-## Allow Jupyter to open the browser automatically on launch 
-#BROWSER='/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe'
-
-## Copy an existing notebook and create a jupyter_ascending synced pair
-#make_synced_pair () {
-    #local fn=$1
-    #local base=${fn%.ipynb}
-    #local sync_nb="${base}.sync.ipynb"
-    #cp $fn $sync_nb
-    #jupytext --to py:percent $sync_nb
-    #python -m jupyter_ascending.requests.sync --filename sync_py
-#}
-
-## Vault address export
-#export VAULT_ADDR=https://vault.it.cl-aws.net:8200
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
