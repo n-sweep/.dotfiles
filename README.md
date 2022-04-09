@@ -48,3 +48,12 @@ jupytext --to py:percent nb_file.sync.ipynb
 # Sync notebook w/ python file
 python -m jupyter_ascending.requests.sync --filename py_file.sync.py
 ```
+
+```bash
+# Jupyter notebook themes
+pip install jupyterthemes
+pip install --upgrade jupyterthemes
+
+jt -t gruvboxd -f ubuntu -nfs 11 -T -N -kl
+
+```
