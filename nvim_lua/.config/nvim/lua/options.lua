@@ -3,6 +3,7 @@ local opt = vim.opt
 local g = vim.g
 
 -- Options
+opt.colorcolumn = '80'
 opt.completeopt = 'menu'
 opt.errorbells = false
 opt.expandtab = true

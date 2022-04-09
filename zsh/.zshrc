@@ -129,19 +129,27 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Clipboard > File (WSL)
-#function cpf { cat "$1" | clip.exe; }
-function cpf { cat "$1" | win32yank.exe -i }
+cpf () { cat "$1" | win32yank.exe -i }
 # File > Clipboard
-#function psf { powershell.exe Get-Clipboard > "$1"}
-function psf { win32yank.exe -o > "$1" }
+psf () { win32yank.exe -o > "$1" }
 
 # ClosedLoop aliases
 alias ci='code-insiders'
-alias jup="jupyter lab --notebook-dir=~/work --no-browser > /dev/null 2>&1 &"
+alias jup="jupyter lab --notebook-dir=~/work --port=8889 --no-browser > /dev/null 2>&1 &"
 alias generate_aws_creds="python ~/work/closedloop-api-python/closedloop/api_private/scripts/set_aws_prod_s3_credentials.py"
 
 # Allow Jupyter to open the browser automatically on launch 
 BROWSER='/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe'
+
+# Copy an existing notebook and create a jupyter_ascending synced pair
+make_synced_pair () {
+    local fn=$1
+    local base=${fn%.ipynb}
+    local sync_nb="${base}.sync.ipynb"
+    cp $fn $sync_nb
+    jupytext --to py:percent $sync_nb
+    python -m jupyter_ascending.requests.sync --filename sync_py
+}
 
 # Vault address export
 export VAULT_ADDR=https://vault.it.cl-aws.net:8200
