@@ -11,10 +11,10 @@ require('packer').startup(function()
     }
 
     -- FireNvim
-    use {
-        'glacambre/firenvim',
-        run = function() vim.fn['firenvim#install'](0) end
-    }
+    --use {
+        --'glacambre/firenvim',
+        --run = function() vim.fn['firenvim#install'](0) end
+    --}
 
     -- Telescope
     use {
@@ -55,6 +55,8 @@ require('packer').startup(function()
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/nvim-cmp',
+        'hrsh7th/cmp-vsnip',
+        'hrsh7th/vim-vsnip',
         'neovim/nvim-lspconfig',
         'williamboman/nvim-lsp-installer'
     }
@@ -63,7 +65,6 @@ require('packer').startup(function()
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-
     }
 
     -- color schemes
