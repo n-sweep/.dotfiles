@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Create new synced pair
+make_synced_nb () { python -m jupyter_ascending.scripts.make_pair --base $1 }
+
+# Copy an existing notebook and create a jupyter_ascending synced pair
+sync_existing_nb () {
+    local fn=$1
+    local base=${fn%.ipynb}
+    local sync_nb="${base}.sync.ipynb"
+    cp $fn $sync_nb
+    jupytext --to py:percent $sync_nb
+    python -m jupyter_ascending.requests.sync --filename sync_py
+}
+
+# Overwrite nb with synced nb & rm synced files
+commit_synced_nb () {
+    local fn=$1
+    local base=${fn%.sync}
+    cp $fn "${base}.ipynb"
+    rm $fn "${base}.sync.py"
+}

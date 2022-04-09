@@ -33,3 +33,18 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 # Run :PackerInstall in neovim
 ```
 
+```bash
+# Install jupyter_ascending
+pip install jupyter_ascending && \
+jupyter nbextension install jupyter_ascending --sys-prefix --py && \
+jupyter nbextension enable jupyter_ascending --sys-prefix --py && \
+jupyter serverextension enable jupyter_ascending --sys-prefix --py
+
+# Make a new paired file
+python -m jupyter_ascending.scripts.make_pair --base file_name
+
+# Convert existing notebook to py file
+jupytext --to py:percent nb_file.sync.ipynb
+# Sync notebook w/ python file
+python -m jupyter_ascending.requests.sync --filename py_file.sync.py
+```
