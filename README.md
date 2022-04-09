@@ -1,6 +1,5 @@
 # Environment Setup
 
-## Install NeoVim
 
 ```bash
 # Install Packages
