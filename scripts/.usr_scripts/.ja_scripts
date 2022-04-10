@@ -16,7 +16,7 @@ sync_existing_nb () {
 # Overwrite nb with synced nb & rm synced files
 commit_synced_nb () {
     local fn=$1
-    local base=${fn%.sync}
-    cp $fn "${base}.ipynb"
-    rm $fn "${base}.sync.py"
+    local base=${fn%.sync.ipynb}
+    cp ./$fn ./"${base}.ipynb"
+    rm ./$fn ./"${base}.sync.py"
 }

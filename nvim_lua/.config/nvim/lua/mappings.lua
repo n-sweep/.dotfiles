@@ -62,4 +62,3 @@ nmap('<leader>ff', ':Telescope find_files <CR>')
 nmap('<leader>fg', ':Telescope live_grep <CR>')
 nmap('<leader>fb', ':Telescope buffers <CR>')
 nmap('<leader>fh', ':Telescope help_tags <CR>')
-
