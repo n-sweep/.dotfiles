@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Create new synced pair
-make_synced_nb () { python -m jupyter_ascending.scripts.make_pair --base $1 }
+jasc_create_pair () { python -m jupyter_ascending.scripts.make_pair --base $1 }
 
 # Copy an existing notebook and create a jupyter_ascending synced pair
-sync_existing_nb () {
+jasc_sync_nb () {
     local fn=$1
     local base=${fn%.ipynb}
     local sync_nb="${base}.sync.ipynb"
@@ -14,7 +14,7 @@ sync_existing_nb () {
 }
 
 # Overwrite nb with synced nb & rm synced files
-commit_synced_nb () {
+jasc_commit_nb () {
     local fn=$1
     local base=${fn%.sync.ipynb}
     cp ./$fn ./"${base}.ipynb"

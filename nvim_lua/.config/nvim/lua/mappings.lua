@@ -32,6 +32,9 @@ nmap('<leader>w', ':w<CR>')
 -- Quick Copy to Clipboard
 vmap('<leader>y', '"+y')
 
+-- Docstring Hover
+nmap('<leader>k', '<cmd>lua vim.lsp.buf.hover()<CR>')
+
 -- Insert new line w/o entering insert mode
 nmap('<leader>o', 'o<ESC>')
 nmap('<leader>O', 'O<ESC>')
@@ -62,3 +65,4 @@ nmap('<leader>ff', ':Telescope find_files <CR>')
 nmap('<leader>fg', ':Telescope live_grep <CR>')
 nmap('<leader>fb', ':Telescope buffers <CR>')
 nmap('<leader>fh', ':Telescope help_tags <CR>')
+nmap('<leader>ld', ':Telescope lsp_definitions <CR>')
