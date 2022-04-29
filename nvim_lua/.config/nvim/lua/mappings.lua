@@ -35,6 +35,11 @@ vmap('<leader>y', '"+y')
 -- Docstring Hover
 nmap('<leader>k', '<cmd>lua vim.lsp.buf.hover()<CR>')
 
+-- Linting Hover
+nmap('<leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>')
+nmap('<leader>en', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+nmap('<leader>eN', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+
 -- Insert new line w/o entering insert mode
 nmap('<leader>o', 'o<ESC>')
 nmap('<leader>O', 'O<ESC>')
