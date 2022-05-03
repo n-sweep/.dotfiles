@@ -4,6 +4,7 @@ require('packer').startup(function()
         'wbthomason/packer.nvim',
         'windwp/nvim-autopairs',
         'tpope/vim-surround',
+        'Vimjas/vim-python-pep8-indent',
         'Yggdroot/indentLine',
         'akinsho/toggleterm.nvim',
         'preservim/nerdcommenter',

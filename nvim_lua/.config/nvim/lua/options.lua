@@ -33,5 +33,5 @@ local dir = "/tmp/.vim-undo-dir"
 if not vim.fn.isdirectory(dir)
     then vim.fn.mkdir(dir, '', 0700)
 end
-opt.undodir=dir
+opt.undodir = dir
 opt.undofile = true
