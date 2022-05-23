@@ -1,22 +1,45 @@
 #!/bin/bash
 
+# Jupyter Ascending wrapper func
+ja () {
+    local cmd=$1
+    local file=$2
+    echo $cmd
+
+    if [ "$cmd" = "create" ]
+    then
+        echo $file
+        create_pair $file
+    elif [ "$cmd" = "commit" ]
+    then
+        echo $file
+        commit_nb $file
+    elif [ "$cmd" = "sync" ]
+    then
+        echo $file
+        sync_nb $file
+    fi
+}
+
 # Create new synced pair
-jasc_create_pair () { python -m jupyter_ascending.scripts.make_pair --base $1 }
+create_pair () {
+    python -m jupyter_ascending.scripts.make_pair --base $1
+}
+
+# Overwrite nb with synced nb & rm synced files
+commit_nb () {
+    local fn=$1
+    local base=${fn%.sync.ipynb}
+    cp ./$fn ./"${base}.ipynb"
+    rm ./$fn ./"${base}.sync.py"
+}
 
 # Copy an existing notebook and create a jupyter_ascending synced pair
-jasc_sync_nb () {
+sync_nb () {
     local fn=$1
     local base=${fn%.ipynb}
     local sync_nb="${base}.sync.ipynb"
     cp $fn $sync_nb
     jupytext --to py:percent $sync_nb
     python -m jupyter_ascending.requests.sync --filename sync_py
-}
-
-# Overwrite nb with synced nb & rm synced files
-jasc_commit_nb () {
-    local fn=$1
-    local base=${fn%.sync.ipynb}
-    cp ./$fn ./"${base}.ipynb"
-    rm ./$fn ./"${base}.sync.py"
 }
