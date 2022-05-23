@@ -4,19 +4,15 @@
 ja () {
     local cmd=$1
     local file=$2
-    echo $cmd
 
     if [ "$cmd" = "create" ]
     then
-        echo $file
         create_pair $file
     elif [ "$cmd" = "commit" ]
     then
-        echo $file
         commit_nb $file
     elif [ "$cmd" = "sync" ]
     then
-        echo $file
         sync_nb $file
     fi
 }
