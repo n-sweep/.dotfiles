@@ -27,6 +27,7 @@ require('packer').startup(function()
             'BurntSushi/ripgrep'
         }
     }
+    use { "nvim-telescope/telescope-file-browser.nvim" }
 
     -- Alpha welcome screen
     use {
@@ -66,6 +67,8 @@ require('packer').startup(function()
     }
 end)
 
+require('telescope').setup{}
+require('telescope').load_extension 'file_browser'
 require('nvim-autopairs').setup{}
 require('toggleterm').setup{}
 require('lualine').setup{

@@ -35,3 +35,6 @@ if not vim.fn.isdirectory(dir)
 end
 opt.undodir = dir
 opt.undofile = true
+
+-- Screen tearing fix (?)
+vim.api.nvim_command('autocmd BufEnter * highlight Normal guibg=0')
