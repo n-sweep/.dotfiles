@@ -62,10 +62,8 @@ imap('<A-t>', '<ESC>:ToggleTerm<CR>')
 -- Toggle Start Page
 nmap('<leader>a', ':Alpha<CR>')
 
--- Toggle netrw
-nmap('<leader>n', ':Explore<CR>')
-
 -- Telescope remapping
+nmap('<leader>n', ':Telescope file_browser <CR>')
 nmap('<leader>ff', ':Telescope find_files <CR>')
 nmap('<leader>fg', ':Telescope live_grep <CR>')
 nmap('<leader>fb', ':Telescope buffers <CR>')
