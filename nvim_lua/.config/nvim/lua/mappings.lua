@@ -63,7 +63,7 @@ imap('<A-t>', '<ESC>:ToggleTerm<CR>')
 nmap('<leader>a', ':Alpha<CR>')
 
 -- Telescope remapping
-nmap('<leader>n', ':Telescope file_browser <CR>')
+nmap('<leader>n', ':Telescope file_browser path=%:p:h <CR>')
 nmap('<leader>ff', ':Telescope find_files <CR>')
 nmap('<leader>fg', ':Telescope live_grep <CR>')
 nmap('<leader>fb', ':Telescope buffers <CR>')
