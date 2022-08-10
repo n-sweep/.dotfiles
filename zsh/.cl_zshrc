@@ -17,3 +17,9 @@ cpf () { cat "$1" | win32yank.exe -i }
 # File > Clipboard
 psf () { win32yank.exe -o > "$1" }
 
+# correct work env
+conda deactivate
+conda activate cl
+
+# gcal api script
+alias tb=timeblock.py

@@ -8,7 +8,8 @@ require('packer').startup(function()
         'Yggdroot/indentLine',
         'akinsho/toggleterm.nvim',
         'preservim/nerdcommenter',
-        'untitled-ai/jupyter_ascending.vim'
+        'untitled-ai/jupyter_ascending.vim',
+        'goerz/jupytext.vim'
     }
 
     -- FireNvim
