@@ -1,9 +1,6 @@
 # Install Oh My ZSH!
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-source ~/.dotfiles/zsh/.cl_zshrc
-source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts
-
 alias nb="jupyter notebook --port=8889"
 
 export JUPYTER_ASCENDING_EXECUTE_HOST=localhost
@@ -152,5 +149,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+neofetch
+
+source ~/.dotfiles/zsh/.cl_zshrc
+source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts
