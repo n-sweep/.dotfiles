@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-    default_prog = {'wsl.exe', '~'}
+    return { default_prog = {'wsl.exe', '~'} }
 end
 
 return {
