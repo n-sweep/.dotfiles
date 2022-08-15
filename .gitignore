@@ -2,3 +2,9 @@
 *packer_compiled.lua
 
 *.swp
+
+nvim/*
+!nvim/.config/
+nvim/.config/*
+!nvim/.config/nvim/
+!nvim/.config/pycodestyle
