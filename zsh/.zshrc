@@ -152,5 +152,4 @@ unset __conda_setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 neofetch
 
-source ~/.dotfiles/zsh/.cl_zshrc
 source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts

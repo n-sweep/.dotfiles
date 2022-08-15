@@ -23,3 +23,5 @@ conda activate cl
 
 # gcal api script
 alias tb=timeblock.py
+
+source ~/.zshrc
