@@ -1,10 +1,6 @@
 local wezterm = require 'wezterm'
 
-if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-    return { default_prog = {'wsl.exe', '~'} }
-end
-
-return {
+local config = {
     font = wezterm.font 'mononoki Nerd Font Mono',
     color_scheme = 'Gruvbox Dark',
     initial_rows = 59,
@@ -17,5 +13,12 @@ return {
         top = 0,
         bottom = 0
     },
+    default_prog
 }
 
+-- if on windows, make wsl the default program
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+    config['default_prog'] = {'wsl.exe', '~'}
+end
+
+return config
