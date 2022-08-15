@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# source normal zshrc
+source ~/.dotfiles/zsh/.zshrc
+
 # Vault address export
 export VAULT_ADDR=https://vault.it.cl-aws.net:8200
 
@@ -24,4 +27,4 @@ conda activate cl
 # gcal api script
 alias tb=timeblock.py
 
-source ~/.zshrc
+alias tm='cd ~/work && tmux'
