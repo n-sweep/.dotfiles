@@ -2,7 +2,7 @@
 
 ## Wezterm
 
-['Installation Instructions'](https://wezfurlong.org/wezterm/install/linux.html)
+[Installation Instructions](https://wezfurlong.org/wezterm/install/linux.html)
 
 ```bash
 flatpak install falthub org.wezfurlong.wezterm
