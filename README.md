@@ -1,11 +1,25 @@
 # Environment Setup
 
+## Wezterm
+
+['Installation Instructions'](https://wezfurlong.org/wezterm/install/linux.html)
+
+```bash
+flatpak install falthub org.wezfurlong.wezterm
+
+# alias for running terminal
+alias wezterm = flatpak run org.wezfurlong.wezterm
+```
+
+## Misc Packages
 
 ```bash
 # Install Packages
 apt-get install git
 apt-get install ripgrep
 ```
+
+## ZSH
 
 ```bash
 # Install zsh
@@ -22,20 +36,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
-```bash
-# Install NeoVim
-sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:neovim-ppa/unstable
-sudo apt-get update
-sudo apt-get install neovim
-```
-
-```bash
-# Install Packer plugin manager
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-# Run :PackerInstall in neovim
-```
+## Github CLI
 
 ```bash
 # Install GitHub CLI
@@ -44,6 +45,27 @@ sudo apt-add-repository https://cli.github.com/packages
 sudo apt-get update
 sudo apt-get install gh
 ```
+
+## NeoVim
+
+```bash
+# Install NeoVim
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:neovim-ppa/unstable
+sudo apt-get update
+sudo apt-get install neovim
+```
+
+### Packer - NeoVim plugin manager
+
+```bash
+# Install Packer plugin manager
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+# Run :PackerInstall in neovim
+```
+
+## Jupyter Ascending
 
 ```bash
 # Install jupyter_ascending
