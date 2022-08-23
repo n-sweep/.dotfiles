@@ -6,6 +6,9 @@ source ~/.dotfiles/zsh/.zshrc
 # Vault address export
 export VAULT_ADDR=https://vault.it.cl-aws.net:8200
 
+# QA scratch folder
+export PREDICTOR_SCRATCH=~n/.closedloop/predictor_scratch
+
 # ClosedLoop aliases
 alias ci='code-insiders'
 alias lab="jupyter lab --notebook-dir=~/work"

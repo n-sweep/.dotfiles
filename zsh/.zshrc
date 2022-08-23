@@ -1,11 +1,6 @@
 # Install Oh My ZSH!
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-alias nb="jupyter notebook --port=8889"
-
-export JUPYTER_ASCENDING_EXECUTE_HOST=localhost
-export JUPYTER_ASCENDING_EXECUTE_PORT=8889
-
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -152,4 +147,13 @@ unset __conda_setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 neofetch
 
+# Noted aliases
+alias n=noted
+alias ne=noted edit
+
+# Jupyter & Jupyter Ascending
+alias nb="jupyter notebook --port=8889"
+export JUPYTER_ASCENDING_EXECUTE_HOST=localhost
+export JUPYTER_ASCENDING_EXECUTE_PORT=8889
 source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts
+
