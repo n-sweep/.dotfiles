@@ -7,7 +7,7 @@ source ~/.dotfiles/zsh/.zshrc
 export VAULT_ADDR=https://vault.it.cl-aws.net:8200
 
 # QA scratch folder
-export PREDICTOR_SCRATCH=~n/.closedloop/predictor_scratch
+export PREDICTOR_SCRATCH=$HOME/.closedloop/predictor_scratch
 
 # ClosedLoop aliases
 alias ci='code-insiders'
