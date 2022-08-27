@@ -1,6 +1,7 @@
 local wezterm = require 'wezterm'
 
 local config = {
+    audible_bell = 'Disabled',
     font = wezterm.font 'mononoki Nerd Font Mono',
     color_scheme = 'Gruvbox Dark',
     initial_rows = 59,

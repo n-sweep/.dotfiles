@@ -6,7 +6,7 @@ require('packer').startup(function()
         'tpope/vim-surround',
         'Vimjas/vim-python-pep8-indent',
         'Yggdroot/indentLine',
-        'akinsho/toggleterm.nvim',
+        'numToStr/FTerm.nvim',
         'preservim/nerdcommenter',
         'untitled-ai/jupyter_ascending.vim',
         'goerz/jupytext.vim'
@@ -77,7 +77,6 @@ require('telescope').setup{
 }
 require('telescope').load_extension 'file_browser'
 require('nvim-autopairs').setup{}
-require('toggleterm').setup{}
 require('lualine').setup{
     options = {
         theme = 'gruvbox'
