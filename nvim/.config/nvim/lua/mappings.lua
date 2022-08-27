@@ -54,10 +54,10 @@ map('<C-h>', '<C-W>h')
 map('<C-l>', '<C-W>l')
 
 -- Terminal Toggling
-tmap('<ESC>', '<C-\\><C-n>')
-tmap('<A-t>', '<C-\\><C-n>:ToggleTerm<CR>')
-nmap('<A-t>', ':ToggleTerm<CR>')
-imap('<A-t>', '<ESC>:ToggleTerm<CR>')
+nmap('<A-t>', '<CMD>lua require("FTerm").toggle()<CR>')
+tmap('<A-t>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+--tmap('<ESC>', '<C-\\><C-n>')
+--imap('<A-t>', '<ESC>:ToggleTerm<CR>')
 
 -- Toggle Start Page
 nmap('<leader>a', ':Alpha<CR>')
@@ -69,3 +69,6 @@ nmap('<leader>ff', ':Telescope find_files <CR>')
 nmap('<leader>fg', ':Telescope live_grep <CR>')
 nmap('<leader>fh', ':Telescope help_tags <CR>')
 nmap('<leader>ld', ':Telescope lsp_definitions <CR>')
+
+-- Jupyter Ascending execute cmd
+nmap('<leader>x', '<Plug>JupyterExecute')
