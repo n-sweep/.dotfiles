@@ -99,6 +99,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Set vi mode
+set -o vi
+
 # Configure zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5E5C64"
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
@@ -111,11 +114,11 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='nvim'
+ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -128,6 +131,22 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Noted aliases
+alias n=noted
+alias ne=noted edit
+
+# Jupyter & Jupyter Ascending
+alias nb="jupyter notebook --port=8889"
+export JUPYTER_ASCENDING_EXECUTE_HOST=localhost
+export JUPYTER_ASCENDING_EXECUTE_PORT=8889
+source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts
+
+# fzf init (?)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# run neofetch on startup
+neofetch
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -143,17 +162,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-neofetch
-
-# Noted aliases
-alias n=noted
-alias ne=noted edit
-
-# Jupyter & Jupyter Ascending
-alias nb="jupyter notebook --port=8889"
-export JUPYTER_ASCENDING_EXECUTE_HOST=localhost
-export JUPYTER_ASCENDING_EXECUTE_PORT=8889
-source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts
-
