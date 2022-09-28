@@ -72,3 +72,7 @@ nmap('<leader>ld', ':Telescope lsp_definitions <CR>')
 
 -- Jupyter Ascending execute cmd
 nmap('<leader>x', '<Plug>JupyterExecute')
+
+-- Black formatting
+nmap('<c-q>', '<cmd>call Black()<cr>')
+imap('<c-q>', '<cmd>call Black()<cr>')

@@ -9,7 +9,8 @@ require('packer').startup(function()
         'numToStr/FTerm.nvim',
         'preservim/nerdcommenter',
         'untitled-ai/jupyter_ascending.vim',
-        'goerz/jupytext.vim'
+        'goerz/jupytext.vim',
+        'averms/black-nvim'
     }
 
     -- FireNvim
