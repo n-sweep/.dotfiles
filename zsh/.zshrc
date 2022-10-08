@@ -12,7 +12,7 @@ export ZSH="/home/n/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"  # default
-ZSH_THEME="nanotech"
+ZSH_THEME="refined"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -87,20 +87,21 @@ ZSH_THEME="nanotech"
 # Install fuzzy finder
 # git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
+# omz vi-mode
+VI_MODE_SET_CURSOR=true
+
 plugins=(
-    git
     dnf
-    zsh-syntax-highlighting
-    zsh-autosuggestions
     fzf
+    git
+    vi-mode
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# Set vi mode
-set -o vi
 
 # Configure zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5E5C64"
