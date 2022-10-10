@@ -14,7 +14,6 @@ local config = {
         top = 0,
         bottom = 0
     },
-    default_prog
 }
 
 -- if on windows, make wsl the default program

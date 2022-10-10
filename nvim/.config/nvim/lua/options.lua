@@ -3,6 +3,7 @@ local opt = vim.opt
 local g = vim.g
 
 -- Options
+opt.textwidth = 80
 opt.colorcolumn = '80'
 opt.completeopt = 'menu'
 opt.errorbells = false
@@ -21,10 +22,6 @@ opt.wrap = false
 -- Set Leader
 g.mapleader = ' '
 
--- Netrw Settings
-g.netrw_banner = 0
-g.netrw_liststyle = 3
-
 -- Use system slipboard (WSL)
 opt.clipboard = 'unnamedplus'
 
@@ -35,6 +32,3 @@ if not vim.fn.isdirectory(dir)
 end
 opt.undodir = dir
 opt.undofile = true
-
--- Screen tearing fix (?)
-vim.api.nvim_command('autocmd BufEnter * highlight Normal guibg=0')
