@@ -59,9 +59,6 @@ tmap('<A-t>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 --tmap('<ESC>', '<C-\\><C-n>')
 --imap('<A-t>', '<ESC>:ToggleTerm<CR>')
 
--- Toggle Start Page
-nmap('<leader>a', ':Alpha<CR>')
-
 -- Telescope remapping
 nmap('<leader>n', ':Telescope file_browser path=%:p:h <CR>')
 nmap('<leader>b', ':Telescope buffers <CR>')
