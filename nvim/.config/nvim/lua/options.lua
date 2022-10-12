@@ -3,11 +3,11 @@ local opt = vim.opt
 local g = vim.g
 
 -- Options
-opt.textwidth = 80
 opt.colorcolumn = '80'
 opt.completeopt = 'menu'
 opt.errorbells = false
 opt.expandtab = true
+opt.formatoptions:append('q')
 opt.hlsearch = false
 opt.number = true
 opt.relativenumber = true
@@ -21,9 +21,6 @@ opt.wrap = false
 
 -- Set Leader
 g.mapleader = ' '
-
--- Use system slipboard (WSL)
-opt.clipboard = 'unnamedplus'
 
 -- Undo file
 local dir = "/tmp/.vim-undo-dir"
