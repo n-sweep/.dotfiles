@@ -8,7 +8,6 @@ require('packer').startup(function()
         'Yggdroot/indentLine',
         'numToStr/FTerm.nvim',
         'preservim/nerdcommenter',
-        'untitled-ai/jupyter_ascending.vim',
         'goerz/jupytext.vim',
         'averms/black-nvim'
     }
@@ -21,11 +20,17 @@ require('packer').startup(function()
         ) end
     }
 
+    -- magma-nvim
+    use {
+        'dccsillag/magma-nvim',
+        run = ':UpdateRemotePlugins'
+    }
+
     -- FireNvim
-    --use {
-        --'glacambre/firenvim',
-        --run = function() vim.fn['firenvim#install'](0) end
-    --}
+    use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end
+    }
 
     -- Telescope
     use {

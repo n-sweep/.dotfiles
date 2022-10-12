@@ -42,7 +42,10 @@ vmap('<leader>y', '"+y')
 nmap('<leader>Y', '"+Y')
 
 -- Paste from system clipboard
-nmap('<leader>P', '"+p')
+nmap('<leader>v', '"+p')
+vmap('<leader>v', '"+p')
+nmap('<leader>V', '"+P')
+vmap('<leader>V', '"+P')
 
 -- Delete w/o yanking
 nmap('<leader>d', '"_d')

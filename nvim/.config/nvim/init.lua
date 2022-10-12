@@ -12,3 +12,6 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     pattern = '*.py',
     command = ':%s/\\s\\+$//e'
 })
+
+-- Screen tearing fix (?)
+vim.api.nvim_command('autocmd BufEnter * highlight Normal guibg=0')
