@@ -6,6 +6,14 @@ function set_keymap(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, {noremap=true})
 end
 
+function set_keymap_expr(mode, shortcut, command)
+    vim.api.nvim_set_keymap(mode, shortcut, command, {expr=true, noremap=true})
+end
+
+function nmap_expr(shortcut, command)
+    set_keymap_expr('n', shortcut, command)
+end
+
 function nmap(shortcut, command)
     set_keymap('n', shortcut, command)
 end
@@ -42,7 +50,10 @@ vmap('<leader>y', '"+y')
 nmap('<leader>Y', '"+Y')
 
 -- Paste from system clipboard
-nmap('<leader>P', '"+p')
+nmap('<leader>v', '"+p')
+vmap('<leader>v', '"+p')
+nmap('<leader>V', '"+P')
+vmap('<leader>V', '"+P')
 
 -- Delete w/o yanking
 nmap('<leader>d', '"_d')
@@ -82,8 +93,14 @@ nmap('<leader>fg', ':Telescope live_grep <CR>')
 nmap('<leader>fh', ':Telescope help_tags <CR>')
 nmap('<leader>ld', ':Telescope lsp_definitions <CR>')
 
--- Jupyter Ascending execute cmd
-nmap('<leader>x', '<Plug>JupyterExecute')
+-- Settings for magma-nvim
+nmap('<leader>mi', ':MagmaInit python<CR>')
+nmap('<leader>mr', ':MagmaRestart<CR>')
+nmap_expr('<leader>r', ':MagmaEvaluateOperator<CR>')
+nmap('<leader>rr', ':MagmaEvaluateLine<CR>')
+nmap('<leader>rx', ':MagmaReevaluateCell<CR>')
+xmap('<leader>r', ':<C-u>MagmaEvaluateVisual<CR>')
+nmap('<leader>ro', ':MagmaShowOutput<CR>')
 
 -- Black formatting
 nmap('<c-q>', '<cmd>call Black()<cr>')
