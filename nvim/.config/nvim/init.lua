@@ -9,7 +9,7 @@ vim.cmd[[colorscheme gruvbox]]
 
 -- Remove trailing whitespace in py files
 vim.api.nvim_create_autocmd('BufWritePre', {
-    pattern = '*.py',
+    pattern = {'*.py', '*.ipynb'},
     command = ':%s/\\s\\+$//e'
 })
 

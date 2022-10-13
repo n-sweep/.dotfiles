@@ -29,3 +29,9 @@ if not vim.fn.isdirectory(dir)
 end
 opt.undodir = dir
 opt.undofile = true
+
+-- jupytext settings
+g.jupytext_fmt = 'py:percent'
+
+-- magma-nvim settings
+g.magma_automatically_open_output = false

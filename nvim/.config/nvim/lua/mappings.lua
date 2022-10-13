@@ -96,11 +96,12 @@ nmap('<leader>ld', ':Telescope lsp_definitions <CR>')
 -- Settings for magma-nvim
 nmap('<leader>mi', ':MagmaInit python<CR>')
 nmap('<leader>mr', ':MagmaRestart<CR>')
-nmap_expr('<leader>r', ':MagmaEvaluateOperator<CR>')
+xmap('<leader>r', ':<C-u>MagmaEvaluateVisual<CR>')
 nmap('<leader>rr', ':MagmaEvaluateLine<CR>')
 nmap('<leader>rx', ':MagmaReevaluateCell<CR>')
-xmap('<leader>r', ':<C-u>MagmaEvaluateVisual<CR>')
 nmap('<leader>ro', ':MagmaShowOutput<CR>')
+nmap('<leader>rd', ':MagmaDelete<CR>')
+nmap('<leader>rq', ':noautocmd MagmaEnterOutput<CR>')
 
 -- Black formatting
 nmap('<c-q>', '<cmd>call Black()<cr>')
