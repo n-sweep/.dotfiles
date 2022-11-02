@@ -93,6 +93,9 @@ nmap('<leader>fg', ':Telescope live_grep <CR>')
 nmap('<leader>fh', ':Telescope help_tags <CR>')
 nmap('<leader>ld', ':Telescope lsp_definitions <CR>')
 
+-- Jupyter Ascending execute cmd
+nmap('<leader>x', '<Plug>JupyterExecute')
+
 -- Settings for magma-nvim
 nmap('<leader>mi', ':MagmaInit python<CR>')
 nmap('<leader>mr', ':MagmaRestart<CR>')
