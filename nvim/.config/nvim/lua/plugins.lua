@@ -69,6 +69,13 @@ require('packer').startup(function()
         'gruvbox-community/gruvbox',
         'Mofiqul/dracula.nvim'
     }
+
+    -- md previewer
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
 end)
 
 require('nvim-treesitter.configs').setup{

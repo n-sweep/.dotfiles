@@ -5,6 +5,7 @@ local g = vim.g
 -- Options
 opt.colorcolumn = '80'
 opt.completeopt = 'menu'
+opt.conceallevel = 0
 opt.errorbells = false
 opt.expandtab = true
 opt.formatoptions:append('q')
@@ -36,3 +37,9 @@ g.jupytext_fmt = 'py:percent'
 -- magma-nvim settings
 g.magma_automatically_open_output = false
 g.magma_image_provider = 'ueberzug'
+
+-- Markdown settings
+g.vim_markdown_folding_disabled = 1
+g.vim_markdown_conceal = 0
+g.vim_markdown_conceal_code_blocks = 0
+g.vim_markdown_formatter = 1
