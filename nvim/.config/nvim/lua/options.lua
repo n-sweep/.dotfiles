@@ -10,6 +10,7 @@ opt.errorbells = false
 opt.expandtab = true
 opt.formatoptions:append('q')
 opt.hlsearch = false
+opt.mouse = ''
 opt.number = true
 opt.relativenumber = true
 opt.scrolloff = 1999
