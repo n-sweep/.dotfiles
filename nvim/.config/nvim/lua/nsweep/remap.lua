@@ -1,6 +1,3 @@
--- Open netrw
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-
 -- Quick write
 vim.keymap.set("n", "<leader>w", vim.cmd.w)
 

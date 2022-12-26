@@ -1,6 +1,17 @@
-require('telescope').load_extension 'file_browser'
-local builtin = require('telescope.builtin')
+-- open file_browser when opening neovim / netrw
+require('telescope').setup{
+    extensions = {
+        file_browser = {
+            hijack_netrw = true
+        }
+    }
+}
 
+-- load file_browser after telescope.setup
+require('telescope').load_extension 'file_browser'
+
+-- keymappings
+local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>n', ':Telescope file_browser path=%:p:h <CR>')
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

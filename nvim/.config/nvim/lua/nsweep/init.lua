@@ -19,12 +19,13 @@ autocmd('TextYankPost', {
     end,
 })
 
+-- remove trailing whitespace on save
 autocmd({"BufWritePre"}, {
     group = nsweep_group,
     pattern = "*",
-    command = [[%s/\s\+$//e]],
+    callback = function()
+        if vim.bo.filetype ~= 'markdown' then
+            vim.cmd([[%s/\s\+$//e]])
+        end
+    end
 })
-
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
