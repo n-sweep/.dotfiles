@@ -29,14 +29,13 @@ return require('packer').startup(function(use)
         }
     }
 
-    -- color scheme
-    use {
-        'gruvbox-community/gruvbox',
-        as = 'gruvbox',
-        config = function()
-            vim.cmd('colorscheme gruvbox')
-        end
-    }
+    -- color schemes
+    use {'gruvbox-community/gruvbox', as = 'gruvbox'}
+    use {'sainnhe/gruvbox-material', as = 'gruvbox-material'}
+    use {'sainnhe/everforest', as = 'everforest'}
+    use {'Mofiqul/dracula.nvim', as = 'dracula'}
+    use {'jnurmine/Zenburn', as = 'zenburn'}
+    use {'shaunsingh/nord.nvim', as = 'nord'}
 
     -- treesitter
     use {
