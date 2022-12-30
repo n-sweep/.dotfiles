@@ -26,5 +26,5 @@ vim.opt.wrap = false
 vim.opt.errorbells = false
 vim.opt.termguicolors = true
 
--- Allow formatting of comments with "gq".
+-- Allow formatting of long lines with "gq".
 vim.opt.formatoptions:append('q')
