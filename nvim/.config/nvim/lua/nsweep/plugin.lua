@@ -17,16 +17,7 @@ return require('packer').startup(function(use)
         'goerz/jupytext.vim',
         'untitled-ai/jupyter_ascending.vim',
         'averms/black-nvim',
-        'Vimjas/vim-python-pep8-indent'
-    }
-
-    -- Telescope
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        requires = {
-            'nvim-telescope/telescope-file-browser.nvim',
-            'nvim-lua/plenary.nvim'
-        }
+        'Vimjas/vim-python-pep8-indent',
     }
 
     -- color schemes
@@ -36,6 +27,15 @@ return require('packer').startup(function(use)
     use {'Mofiqul/dracula.nvim', as = 'dracula'}
     use {'jnurmine/Zenburn', as = 'zenburn'}
     use {'shaunsingh/nord.nvim', as = 'nord'}
+
+    -- Telescope
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        requires = {
+            'nvim-telescope/telescope-file-browser.nvim',
+            'nvim-lua/plenary.nvim'
+        }
+    }
 
     -- treesitter
     use {
@@ -50,21 +50,32 @@ return require('packer').startup(function(use)
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
+            'neovim/nvim-lspconfig',
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
 
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'saadparwaiz1/cmp_luasnip'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'hrsh7th/cmp-nvim-lua'},
+            'hrsh7th/nvim-cmp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'saadparwaiz1/cmp_luasnip',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lua',
 
             -- Snippets
-            {'L3MON4D3/LuaSnip'},
-            {'rafamadriz/friendly-snippets'},
+            'L3MON4D3/LuaSnip',
+            'rafamadriz/friendly-snippets',
+        }
+    }
+
+    -- dap
+    use {
+        'mfussenegger/nvim-dap',
+        requires = {
+            'rcarriga/nvim-dap-ui',
+            'mfussenegger/nvim-dap-python',
+            'theHamsta/nvim-dap-virtual-text',
+            'nvim-telescope/telescope-dap.nvim'
         }
     }
 
@@ -87,10 +98,9 @@ return require('packer').startup(function(use)
     }
 
     -- md previewer
-    use({
+    use {
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
-    })
-
+    }
 
 end)

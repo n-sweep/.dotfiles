@@ -20,7 +20,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
         elseif has_words_before() then
             cmp.complete()
         else
-            fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            fallback()
         end
     end, { "i", "s" }),
 
@@ -41,7 +42,11 @@ lsp.ensure_installed({
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings
 })
-lsp.nvim_workspace()
+
+vim.diagnostic.config({
+    virtual_text = true
+})
+
 lsp.setup()
 
 -- Docstring hover
