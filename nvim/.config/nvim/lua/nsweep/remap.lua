@@ -28,15 +28,3 @@ vim.keymap.set("v", "<leader>d", '"_d')
 -- Move highlighted lines in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
--- vim pane navigation
-vim.keymap.set("n", "<M-h>", ":wincmd h<CR>")
-vim.keymap.set("n", "<M-j>", ":wincmd j<CR>")
-vim.keymap.set("n", "<M-k>", ":wincmd k<CR>")
-vim.keymap.set("n", "<M-l>", ":wincmd l<CR>")
-
--- vim pane resizing
-vim.keymap.set("n", "<C-M-h>", "<C-w><")
-vim.keymap.set("n", "<C-M-j>", "<C-w>-")
-vim.keymap.set("n", "<C-M-k>", "<C-w>+")
-vim.keymap.set("n", "<C-M-l>", "<C-w>>")
