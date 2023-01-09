@@ -32,12 +32,15 @@ autocmd({"BufWritePre"}, {
 })
 
 -- keep cursor centered at bottom of file
-autocmd({"CursorMoved", "CursorMovedI", "WinScrolled"}, {
-    group = center_group,
-    pattern = "*",
-    callback = function()
-        local pos = vim.api.nvim_win_get_cursor(0)
-        vim.cmd([[:normal zz]])
-        vim.api.nvim_win_set_cursor(0,pos)
-    end
-})
+-- removed for now - doesn't retain the column position of cursor due to the
+-- zz command call
+
+--autocmd({"CursorMoved", "CursorMovedI", "WinScrolled"}, {
+    --group = center_group,
+    --pattern = "*",
+    --callback = function()
+        --local pos = vim.api.nvim_win_get_cursor(0)
+        --vim.cmd([[:normal zz]])
+        --vim.api.nvim_win_set_cursor(0,pos)
+    --end
+--})

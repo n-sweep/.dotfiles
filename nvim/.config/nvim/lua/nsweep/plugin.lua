@@ -1,3 +1,4 @@
+local vim = vim
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd("packer.nvim")
 
@@ -18,6 +19,7 @@ return require('packer').startup(function(use)
         'untitled-ai/jupyter_ascending.vim',
         'averms/black-nvim',
         'Vimjas/vim-python-pep8-indent',
+        'aserowy/tmux.nvim',
     }
 
     -- color schemes
