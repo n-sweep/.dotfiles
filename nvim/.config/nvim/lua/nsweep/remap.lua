@@ -3,6 +3,10 @@ local vim = vim
 -- Quick write
 vim.keymap.set("n", "<leader>w", vim.cmd.w)
 
+-- Quick quitting
+vim.keymap.set("n", "<leader>qq", ":qa<CR>")
+vim.keymap.set("n", "<leader>QQ", ":qa!<CR>")
+
 -- Insert new line w/o entering insert mode
 vim.keymap.set("n", "<leader>o", "o<ESC>")
 vim.keymap.set("n", "<leader>O", "O<ESC>")
