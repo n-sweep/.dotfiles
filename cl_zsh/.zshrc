@@ -25,6 +25,7 @@ alias vault_login="vault login -method=ldap username=noah.shreve"
 alias tm='cd ~/work && tmux'
 alias tb=timeblock.py # gcal api script
 alias nnb=create_nb.py
+alias aliases="python ~/bin/aliases"
 
 # Allow Jupyter to open the browser automatically on launch
 BROWSER='/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe'

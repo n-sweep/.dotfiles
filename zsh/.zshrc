@@ -133,6 +133,9 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Quick tmux re-attach
+alias ta=tmux a
+
 # Noted aliases
 alias n=noted
 alias ne=noted edit
