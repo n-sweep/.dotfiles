@@ -8,6 +8,7 @@ local config = {
     initial_cols = 95,
     use_fancy_tab_bar = false,
     hide_tab_bar_if_only_one_tab = true,
+    window_decorations = 'RESIZE',
     window_padding = {
         left = 0,
         right = 0,
