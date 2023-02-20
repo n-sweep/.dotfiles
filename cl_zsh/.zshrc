@@ -23,6 +23,7 @@ alias jup="jupyter lab --notebook-dir=~/work --no-browser > /dev/null 2>&1 &"
 alias aws_creds="python ~/work/closedloop-api-python/closedloop/api_private/scripts/set_aws_prod_s3_credentials.py"
 alias vault_login="vault login -method=ldap username=noah.shreve"
 alias tm='cd ~/work && tmux'
+alias ta='tmux a'
 alias tb=timeblock.py # gcal api script
 alias nnb=create_nb.py
 alias aliases="python ~/bin/aliases"
