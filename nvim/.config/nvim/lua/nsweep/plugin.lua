@@ -16,7 +16,6 @@ return require('packer').startup(function(use)
         'numToStr/FTerm.nvim',
         'preservim/nerdcommenter',
         'goerz/jupytext.vim',
-        'untitled-ai/jupyter_ascending.vim',
         'averms/black-nvim',
         'Vimjas/vim-python-pep8-indent',
         'aserowy/tmux.nvim'
@@ -81,18 +80,12 @@ return require('packer').startup(function(use)
         }
     }
 
-    -- magma-nvim
+    -- jupynium
     use {
-        'dccsillag/magma-nvim',
-        run = ':UpdateRemotePlugins'
+        'kiyoon/jupynium.nvim',
+        run = 'pip3 install --user .'
     }
-
-    -- FireNvim
-    use {
-        'glacambre/firenvim',
-        run = function() vim.fn['firenvim#install'](0) end
-    }
-
+    --
     -- LuaLine
     use {
         'nvim-lualine/lualine.nvim',
