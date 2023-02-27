@@ -134,11 +134,11 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Quick tmux re-attach
-alias ta=tmux a
+alias ta='tmux a'
 
 # Noted aliases
 alias n=noted
-alias ne=noted edit
+alias ne='noted edit'
 
 # Jupyter & Jupyter Ascending
 alias nb="jupyter notebook --port=8889"
