@@ -1,8 +1,9 @@
 vim.keymap.set('n', '<leader>x', ':JupyniumExecuteSelectedCells <CR>')
 vim.keymap.set('v', '<leader>x', ':JupyniumExecuteSelectedCells <CR>')
-vim.keymap.set('n', '<leader>ja', ':JupyniumAttachToServer <CR>')
 vim.keymap.set('n', '<leader>jj', ':JupyniumStartAndAttachToServer <CR>')
-vim.keymap.set('n', '<leader>js', ':JupyniumStartSync <CR>')
+vim.keymap.set('n', '<leader>ja', ':JupyniumAttachToServer <CR>')
+vim.keymap.set('n', '<leader>jt', ':JupyniumStopSync <CR>')
+vim.keymap.set('n', '<leader>js', ':JupyniumStartSync')
 
 require("jupynium").setup({
   --- For Conda environment named "jupynium",
