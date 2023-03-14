@@ -85,7 +85,7 @@ return require('packer').startup(function(use)
         'kiyoon/jupynium.nvim',
         run = 'pip3 install --user .'
     }
-    --
+
     -- LuaLine
     use {
         'nvim-lualine/lualine.nvim',
