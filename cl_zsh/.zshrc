@@ -7,7 +7,7 @@ source ~/.dotfiles/zsh/.zshrc
 export VAULT_ADDR=https://vault.it.cl-aws.net:8200
 
 # QA scratch folder
-export PREDICTOR_SCRATCH=$HOME/.closedloop/predictor_scratch
+export PREDICTOR_SCRATCH=$HOME/.closedloop/work/predictor_scratch
 
 # CL init: mount encrypted drive & connect to vpn
 cl_init() {
@@ -26,7 +26,7 @@ alias tm='cd ~/work && tmux'
 alias ta='tmux a'
 alias tb=timeblock.py # gcal api script
 alias nnb=create_nb.py
-alias aliases="python ~/bin/aliases"
+alias aliases="python ~/work/closedloop-ds/closedloop/ds/alias_cli.py"
 
 # Allow Jupyter to open the browser automatically on launch
 BROWSER='/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe'
