@@ -12,7 +12,7 @@ return require('packer').startup(function(use)
         'tpope/vim-fugitive',
         'tpope/vim-surround',
         'windwp/nvim-autopairs',
-        'Yggdroot/indentLine',
+        'lukas-reineke/indent-blankline.nvim',
         'numToStr/FTerm.nvim',
         'preservim/nerdcommenter',
         'goerz/jupytext.vim',

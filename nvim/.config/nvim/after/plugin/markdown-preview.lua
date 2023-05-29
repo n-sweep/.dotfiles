@@ -3,6 +3,4 @@ vim.g.vim_markdown_conceal = 0
 vim.g.vim_markdown_conceal_code_blocks = 0
 vim.g.vim_markdown_formatter = 1
 
-vim.opt.conceallevel = 0
-
 vim.keymap.set('n', '<leader>mp', ":MarkdownPreview<CR>")
