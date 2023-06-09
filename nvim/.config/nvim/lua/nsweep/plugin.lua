@@ -18,7 +18,8 @@ return require('packer').startup(function(use)
         'goerz/jupytext.vim',
         'averms/black-nvim',
         'Vimjas/vim-python-pep8-indent',
-        'aserowy/tmux.nvim'
+        'aserowy/tmux.nvim',
+        'vimwiki/vimwiki'
     }
 
     -- color schemes
