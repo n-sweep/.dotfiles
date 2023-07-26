@@ -27,6 +27,7 @@ alias ta='tmux a'
 alias tb=timeblock.py # gcal api script
 alias nnb=create_nb.py
 alias aliases="python ~/work/closedloop-ds/closedloop/ds/alias_cli.py"
+alias vpn="openvpn3 session-start --config /home/n/work/.closedloop/CL_VPN.conf > /dev/null 2>&1"
 
 # Allow Jupyter to open the browser automatically on launch
 BROWSER='/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe'
