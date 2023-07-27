@@ -9,13 +9,6 @@ export VAULT_ADDR=https://vault.it.cl-aws.net:8200
 # QA scratch folder
 export PREDICTOR_SCRATCH=$HOME/.closedloop/work/predictor_scratch
 
-# CL init: mount encrypted drive & connect to vpn
-cl_init() {
-    sudo cryptsetup luksOpen /dev/nvme0n1p3 work
-    sudo mount /dev/mapper/work /home/n/work
-    openvpn3 session-start --config /home/n/work/.closedloop/CL_VPN.conf
-}
-
 # ClosedLoop aliases
 alias ci='code-insiders'
 alias lab="jupyter lab --notebook-dir=~/work"
@@ -28,6 +21,13 @@ alias tb=timeblock.py # gcal api script
 alias nnb=create_nb.py
 alias aliases="python ~/work/closedloop-ds/closedloop/ds/alias_cli.py"
 alias vpn="openvpn3 session-start --config /home/n/work/.closedloop/CL_VPN.conf > /dev/null 2>&1"
+
+# CL init: mount encrypted drive & connect to vpn
+cl_init() {
+    sudo cryptsetup luksOpen /dev/nvme0n1p3 work
+    sudo mount /dev/mapper/work /home/n/work
+    vpn
+}
 
 # Allow Jupyter to open the browser automatically on launch
 BROWSER='/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe'
