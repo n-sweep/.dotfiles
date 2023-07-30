@@ -1,1 +1,2 @@
 require('nsweep')
+require('slipbox')
