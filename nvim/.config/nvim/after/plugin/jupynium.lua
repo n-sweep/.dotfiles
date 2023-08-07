@@ -23,7 +23,7 @@ require("jupynium").setup({
   -- Used when notebook is launched by using jupyter_command.
   -- If nil or "", it will open at the git directory of the current buffer,
   -- but still navigate to the directory of the current buffer. (e.g. localhost:8888/tree/path/to/buffer)
-  notebook_dir = nil,
+  notebook_dir = "/home/n/work/.closedloop/jupyter_sandbox/",
 
   -- Used to remember the last session (password etc.).
   -- e.g. '~/.mozilla/firefox/profiles.ini'
