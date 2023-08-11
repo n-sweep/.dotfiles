@@ -27,5 +27,5 @@ VimWiki's `ENTER` functionality is very intuitive; in normal mode, `ENTER` creat
 ## TODO:
 - [x] Backspace to previous file
     - [ ] back history
-- [ ] Creating a new zettel should automatically populate it with the header/key
-- [ ] Creating a new zettel should automatically populate it with a backlink to the previous zettel
+- [ ] Creating a new zettel should automatically populate it with the header/key that is a backlink to the previous zettel
+
