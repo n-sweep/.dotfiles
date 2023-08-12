@@ -12,8 +12,8 @@ export PREDICTOR_SCRATCH=$HOME/.closedloop/work/predictor_scratch
 # ClosedLoop aliases
 alias ci='code-insiders'
 alias lab="jupyter lab --notebook-dir=~/work"
-alias jup="jupyter lab --notebook-dir=~/work --no-browser > /dev/null 2>&1 &"
-alias jupt="jupyter lab --notebook-dir=~/work --NotebookApp.token='' --no-browser > /dev/null 2>&1 &"
+alias jup="jupyter notebook --notebook-dir=~/work --no-browser > /dev/null 2>&1 &"
+alias jupt="jupyter notebook --port 8889 --notebook-dir=~/work --NotebookApp.token='' --no-browser > /dev/null 2>&1 &"
 alias aws_creds="python ~/work/closedloop-api-python/closedloop/api_private/scripts/set_aws_prod_s3_credentials.py"
 alias vault_login="vault login -method=ldap username=noah.shreve"
 alias tm='cd ~/work && tmux'
