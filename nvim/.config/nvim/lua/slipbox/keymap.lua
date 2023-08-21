@@ -19,6 +19,12 @@ function M.setup(mod)
         function() vim.cmd('b#') end,
         {noremap=true, silent=true}
     )
+
+    vim.keymap.set(
+        'n', '<Leader>l',
+        function() mod.find_link() end,
+        {noremap=true, silent=true}
+    )
 end
 
 return M

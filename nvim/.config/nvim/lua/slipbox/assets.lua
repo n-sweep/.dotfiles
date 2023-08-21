@@ -1,5 +1,6 @@
 local vim = vim
 local M = {}
+local link_pattern = '%[%[(.-)%]%((.-)%)%]'
 
 
 -- get the current word under the cursor
@@ -24,6 +25,25 @@ local function get_word_under_cursor()
 end
 
 
+local function create_link(start_col, end_col, word)
+    -- create a markdown link from word and replace
+    local new_str = '[[' .. word .. '](' .. word .. ')]'
+    local row = vim.api.nvim_win_get_cursor(0)[1] - 1
+    vim.api.nvim_buf_set_text(0, row, start_col - 1, row, end_col, {new_str})
+end
+
+
+local function follow_link(name, file)
+    -- edit or create the given file
+    vim.api.nvim_command('edit ' .. file .. '.md')
+
+    -- if the buffer is empty (new file) insert the name as a title
+    if vim.fn.line('$') == 1 and vim.fn.trim(vim.fn.getline(1)) == '' then
+        vim.api.nvim_buf_set_text(0, 0, 0, 0, 0, {'# ' .. name})
+    end
+end
+
+
 function M.insert_date()
     -- inserts a timestamp at the cursor
     local date = os.date('%Y%m%d%H%M')
@@ -37,18 +57,21 @@ end
 
 function M.create_or_follow_link()
     local start_col, end_col, word = unpack(get_word_under_cursor())
-    local pattern = '^%[(.-)%]%((.-)%)$'
-    local name, file = word:match(pattern)
+    local name, file = word:match(link_pattern)
 
     if name and file then
         -- if the string under the cursor is already a link, follow that link
-        vim.api.nvim_command('edit ' .. file)
+        follow_link(name, file)
     else
         -- replace the word with a link
-        local new_str = '[' .. word .. '](' .. word .. ')'
-        local row = vim.api.nvim_win_get_cursor(0)[1] - 1
-        vim.api.nvim_buf_set_text(0, row, start_col - 1, row, end_col, {new_str})
+        create_link(start_col, end_col, word)
     end
+end
+
+
+function M.find_link()
+    vim.fn.setreg('/', '\\[\\[\\d\\+\\](\\d\\+)\\]')
+    vim.cmd('norm n')
 end
 
 
