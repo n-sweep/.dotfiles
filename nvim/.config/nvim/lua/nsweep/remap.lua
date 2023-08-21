@@ -31,6 +31,3 @@ vim.keymap.set("v", "<leader>d", '"_d')
 
 -- Toggle linebreak & wrap
 vim.keymap.set('n', '<leader>sw', ':set wrap! linebreak!<CR>')
-
--- Esc exits terminal mode
-vim.keymap.set('t', '<leader><ESC>', '<C-\\><C-N>')

@@ -11,6 +11,7 @@ local nsweep_group = augroup('nsweep', {})
 --local center_group = augroup('center', {})
 local yank_group = augroup('HighlightYank', {})
 
+-- momentarily highlight yanked text
 autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',

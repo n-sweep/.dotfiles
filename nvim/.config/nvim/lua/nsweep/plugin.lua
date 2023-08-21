@@ -13,7 +13,6 @@ return require('packer').startup(function(use)
         'tpope/vim-surround',
         'windwp/nvim-autopairs',
         'lukas-reineke/indent-blankline.nvim',
-        'numToStr/FTerm.nvim',
         'preservim/nerdcommenter',
         'goerz/jupytext.vim',
         'averms/black-nvim',
@@ -66,17 +65,6 @@ return require('packer').startup(function(use)
             -- Snippets
             'L3MON4D3/LuaSnip',
             'rafamadriz/friendly-snippets',
-        }
-    }
-
-    -- dap
-    use {
-        'mfussenegger/nvim-dap',
-        requires = {
-            'rcarriga/nvim-dap-ui',
-            'mfussenegger/nvim-dap-python',
-            'theHamsta/nvim-dap-virtual-text',
-            'nvim-telescope/telescope-dap.nvim'
         }
     }
 
