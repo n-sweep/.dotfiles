@@ -122,6 +122,7 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
    export EDITOR='vim'
  else
    export EDITOR='nvim'
+   alias vim='nvim'
  fi
 
 # Compilation flags
@@ -136,12 +137,11 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# zettelkasten
+alias zk='cd ~/.zettelkasten/ && nvim index.md'
+
 # Quick tmux re-attach
 alias ta='tmux a'
-
-# Noted aliases
-alias n=noted
-alias ne='noted edit'
 
 # Jupyter & Jupyter Ascending
 alias nb="jupyter notebook --port=8889"
