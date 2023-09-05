@@ -30,6 +30,3 @@ vim.opt.termguicolors = true
 
 -- Allow formatting of long lines with "gq".
 vim.opt.formatoptions:append('q')
-
--- Transparent background
-vim.cmd([[hi normal guibg=NONE]])
