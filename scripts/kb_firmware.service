@@ -1,0 +1,10 @@
+[Unit]
+Description=Keyboard firmware trigger
+Requires=media-n-ADV360PRO.mount
+After=media-n-ADV360PRO.mount
+
+[Service]
+ExecStart=/home/n/.dotfiles/scripts/kb_firmware.sh
+
+[Install]
+WantedBy=media-n-ADV360PRO.mount
