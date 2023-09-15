@@ -7,8 +7,12 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # rust path
 export PATH=$HOME/.cargo/env:$PATH
 
+# mojo path
+export MODULAR_HOME="$HOME/.modular"
+export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+
 # Path to your oh-my-zsh installation.
-export ZSH="/home/n/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -140,14 +144,13 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # zettelkasten
 alias zk='cd ~/.zettelkasten/ && nvim index.md'
 
-# Quick tmux re-attach
+# tmux startup / reattach script
+alias tm='$HOME/.dotfiles/scripts/tmux_startup.sh'
+# tmux quick reattach
 alias ta='tmux a'
 
-# Jupyter & Jupyter Ascending
-alias nb="jupyter notebook --port=8889"
-export JUPYTER_ASCENDING_EXECUTE_HOST=localhost
-export JUPYTER_ASCENDING_EXECUTE_PORT=8889
-source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts
+# Jupytext create new notebook
+alias nnb='$HOME/.dotfiles/jupyter/create_nb.sh'
 
 # fzf init (?)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -155,16 +158,25 @@ source ~/.dotfiles/scripts/.usr_scripts/.ja_scripts
 # run neofetch on startup
 neofetch
 
+# open tmux automatically
+# if sessions exist, reattach, otherwise run tmux startup script
+if [ -z "$TMUX" ]; then
+    if tmux list-sessions 2>/dev/null; then ta; else tm; fi
+fi
+
+# exit the script before conda initialize unless $CONDA_INIT is set
+if [ -z "$CONDA_INIT" ]; then return 0; fi
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/n/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$("$HOME/anaconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/n/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/n/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/n/anaconda3/bin:$PATH"
+        export PATH="$HOME/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup

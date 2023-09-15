@@ -1,5 +1,6 @@
 -- open file_browser when opening neovim / netrw
 require('telescope').setup{
+    defaults = { sorting_strategy = 'ascending'},
     extensions = {
         file_browser = {
             hijack_netrw = true

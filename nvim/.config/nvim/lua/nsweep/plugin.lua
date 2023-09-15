@@ -18,6 +18,7 @@ return require('packer').startup(function(use)
         'averms/black-nvim',
         'Vimjas/vim-python-pep8-indent',
         'aserowy/tmux.nvim',
+        'czheo/mojo.vim'
     }
 
     -- color schemes
