@@ -21,7 +21,7 @@ apt-get install ripgrep
 
 ## ZSH
 
-```bash
+```sh
 # Install zsh
 apt-get install zsh
 # Make default shell
