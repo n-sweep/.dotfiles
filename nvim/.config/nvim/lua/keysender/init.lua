@@ -10,7 +10,7 @@ end
 local function process_text(text)
     -- escape special characters before sending the command to vim
     -- gotta sub the escape char first \\
-    for _, k in ipairs({'\\', '%%', '"', '!', '#' }) do
+    for _, k in ipairs({ '\\', '%%', '"', '!', '#', '%$' }) do
         text = text:gsub(k, '\\' .. k)
     end
     -- surround with quotes before sending the command to vim
