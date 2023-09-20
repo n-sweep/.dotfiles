@@ -94,10 +94,10 @@ __ps1() {
 
 	if ((${#countme} < PROMPT_LONG)); then
 		# short
-		PS1="$addr:$path $prompt"
+		PS1="$addr:$path$prompt"
 	else
 		# long
-		PS1="\n$path\n$addr $prompt"
+		PS1="\n$path\n$addr$prompt"
 	fi
 }
 
@@ -108,11 +108,7 @@ PROMPT_COMMAND="__ps1"
 # note: aliases are in .bash_aliases
 
 set -o vi  # vi mode!
-stty -ixon  # allow Ctrl-S in bash search
 shopt -s expand_aliases
-
-# fzf init (?)
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # open tmux automatically
 # if sessions exist, reattach, otherwise run tmux startup script
@@ -120,8 +116,15 @@ if [ -z "$TMUX" ]; then
     if tmux list-sessions 2>/dev/null; then ta; else tm; fi
 fi
 
-# FZF
+# fzf init
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# go path
+export PATH="$PATH:$HOME/go/bin"
+
+# mojo path
+export MODULAR_HOME="$HOME/.modular"
+export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # run neofetch on startup
 neofetch
