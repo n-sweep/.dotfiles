@@ -1,4 +1,5 @@
 #!/bin/env bash
 
-url="lite.duckduckgo.com/lite?kd=-1&kp=-1&q=$(urlencode "$*")"
+query=$(~/.dotfiles/scripts/urlencode.sh "$*")
+url="lite.duckduckgo.com/lite?q=$query"
 exec w3m "$url"

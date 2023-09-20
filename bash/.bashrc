@@ -94,10 +94,10 @@ __ps1() {
 
 	if ((${#countme} < PROMPT_LONG)); then
 		# short
-		PS1="$addr:$path$prompt"
+		PS1="$addr:$path $prompt"
 	else
 		# long
-		PS1="\n$path\n$addr$prompt"
+		PS1="\n$path\n$addr $prompt"
 	fi
 }
 
