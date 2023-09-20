@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
-base_list=`curl -s "cht.sh/:list"`
-root=`echo $base_list | tr ' ' '\n' | fzf`
-read -p "query: " query
+# fzf init (because .bashrc hasn't run yet?)
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# check if the root is a language
-lang=`curl -s "cht.sh/{$root}/:list"`
+# define the root of the search and check if it is a language
+local root=$(echo curl -s "cht.sh/:list" | tr ' ' '\n' | fzf)
+local lang=`curl -s "cht.sh/{$root}/:list"`
+local sep
 
+# languages and system tools have slightly different query syntax
 if [ ! "$lang" ]; then
-    tmux neww bash -c "curl cht.sh/$root~`echo $query | tr ' ' '+'` & while [ : ]; do sleep 1; done"
+    sep="~"
 else
-    tmux neww bash -c "curl cht.sh/$root/`echo $query | tr ' ' '+'` & while [ : ]; do sleep 1; done"
+    sep="/"
 fi
+
+read -p "query: " query
+tmux neww bash -c "curl cht.sh/$root$sep`echo $query | tr ' ' '+'` & while [ : ]; do sleep 1; done"
+
