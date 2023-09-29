@@ -1,0 +1,17 @@
+#!/bin/env bash
+
+a='\e[90m' x='\e[0m'
+
+while true; do
+    res=$(curl -s wttr.in)
+    if [ -n "$res" ]; then
+        clear
+        if [ "$COLUMNS" -gt 124 ]; then
+            echo "$res" | head -n -2 | tail -n +2
+        else
+            echo "$res" | head -n 7 | tail -n +2
+        fi
+        echo -e "$a$(date +"%F %T")$x"
+    fi
+    sleep 900
+done

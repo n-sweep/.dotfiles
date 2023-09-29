@@ -1,0 +1,13 @@
+#!/bin/env bash
+
+a='\e[90m' x='\e[0m'
+
+while true; do
+    res=$(curl -s wttr.in/Moon)
+    if [ -n "$res" ]; then
+        clear
+        echo "$res" | head -n -2
+        echo -e "$a$(date +"%F %T")$x"
+    fi
+    sleep 3600
+done
