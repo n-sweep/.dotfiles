@@ -25,11 +25,12 @@ local function get_selected_lines()
 end
 
 
-local function get_lines_within_cell()
+local function get_lines_within_cell(div)
+    div = div or "# %%"
     -- find cell divider above cursor
-    local cstart = vim.fn.search('# %%', 'nb') + 1
+    local cstart = vim.fn.search(div, 'nb') + 1
     -- find cell divider below cursor
-    local cend = vim.fn.search('# %%', 'n') - 1
+    local cend = vim.fn.search(div, 'n') - 1
 
     -- if cend wraps around, replace with -1
     if cstart >= cend then
@@ -55,6 +56,9 @@ local function get_lines(selection)
     -- if in a notebook, return the whole cell
     elseif vim.fn.search('# %%', 'n') > 0 then
         return get_lines_within_cell()
+    -- also look for code blocks in markdown
+    elseif vim.fn.search('```', 'n') > 0 then
+        return get_lines_within_cell('```')
     -- otherwise, just return the one line
     else
         return {vim.fn.getline('.')}
