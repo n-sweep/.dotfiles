@@ -72,17 +72,18 @@ __ps1() {
 
         [[ -n "$B" ]] && B=" g:$B$D"
 
+        git_root_base="$(basename $git_root)"
         # count the unformatted cwd to ignore escape strings
-		countme+="${git_root##$HOME/}${cwd##$git_root}"
+		countme+="$git_root_base${cwd##$git_root}"
         # formatted cwd
-		cwd="$bold${git_root##$HOME/}$x$u${cwd##$git_root}"
+		cwd="$bold$git_root_base$x$u${cwd##$git_root}"
 	else
 		cwd="${cwd/#$HOME/\~}"
         countme+=$cwd
 	fi
 
     # get name of conda environment if exists
-    [[ -n "$CONDA_PROMPT_MODIFIER" ]] && C=" c:${CONDA_PROMPT_MODIFIER//[\(\)]/}"
+    [[ -n "$CONDA_PROMPT_MODIFIER" ]] && C=" c:${CONDA_PROMPT_MODIFIER//[\(\) ]/}"
 
     # if we have branch or conda env data, add to G
     [[ -n "$B" || -n "$C" ]] && G="$ital$a$B$C$x"
@@ -119,8 +120,12 @@ fi
 # fzf init
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# bash scripts path
+export PATH="$PATH:$HOME/.dotfiles/scripts"
+
 # go path
-export PATH="$PATH:$HOME/go/bin"
+export GOPATH="$HOME/go/bin"
+export PATH="$PATH:$GOPATH"
 
 # mojo path
 export MODULAR_HOME="$HOME/.modular"
