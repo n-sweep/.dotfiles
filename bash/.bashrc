@@ -120,6 +120,9 @@ fi
 # fzf init
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path '*/.git/*' -o -path '*/.git' -prune \)'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # bash scripts path
 export PATH="$PATH:$HOME/.dotfiles/scripts"
 
@@ -132,7 +135,7 @@ export MODULAR_HOME="$HOME/.modular"
 export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # run neofetch on startup
-neofetch
+clear && neofetch
 
 
 ### anaconda initialization ####################################################
