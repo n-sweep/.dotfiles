@@ -1,0 +1,9 @@
+#!/bin/bash
+
+d=$(date +%Y-%m-%d $*)
+echo $d
+
+mkdir $d
+cd $d
+touch README.md run.py
+echo "# $d" > README.md

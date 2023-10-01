@@ -1,0 +1,26 @@
+#!/usr/bin/bash
+
+process_cmus() {
+    cmus-remote -Q | grep "$*" | sed "s/$*//"
+}
+
+status=$(process_cmus "status ")
+
+if [[ -n $status ]]; then
+    artist=$(process_cmus "tag artist ")
+    album=$(process_cmus "tag album ")
+    track=$(process_cmus "tag title ")
+    num=$(process_cmus "tag tracknumber ")
+    dur=$(process_cmus "duration ")
+    pos=$(process_cmus "position ")
+
+    r=$(($dur - $pos))
+    m=$(($r / 60))
+    s=$(($r % 60))
+
+    if [[ "$status" == "playing" ]]; then
+        printf "🎵[ %s | %s | %s.%s ] " "$artist" "$album" "$num" "$track"
+    elif [[ "$status" == "paused" ]]; then
+        echo "🎵[ cmus ] "
+    fi
+fi

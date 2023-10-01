@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+obs() { obs-cli -q -p="$(head -1 "$HOME/.config/obs/token")" $*; }
+stus=$(obs stream status 2> /tmp/obserr)
+
+if [ -s /tmp/obserr ]; then
+    rm /tmp/obserr
+elif [[ $? -ne 0 ]]; then
+    echo "⚫[$(obs scene current)] "
+else
+    echo "🔴[$(obs scene current)] "
+fi

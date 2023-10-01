@@ -1,12 +1,7 @@
 #!/bin/env bash
 
-#api_key="$(head -1 "$HOME/.config/emoji_api/token")"
-#un=$(echo $* | tr ' ' '-')
-#url="https://emoji-api.com/emojis?search=$un&access_key=$api_key"
+api_key="$(head -1 "$HOME/.config/emoji_api/token")"
+un=$(echo $* | tr ' ' '-')
+url="https://emoji-api.com/emojis?search=$un&access_key=$api_key"
 
-#printf "%b" $(curl -s $url)
-
-code_point="1F5A5FE0F"
-emoji=$(python3 -c "print(chr(int('$code_point', 16)))")
-
-echo "$emoji"
+printf "%b" $(curl -s $url)

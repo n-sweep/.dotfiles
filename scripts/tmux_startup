@@ -43,11 +43,12 @@ then
     tmux new-session -d -s $PYSESSION -e "CONDA_INIT=True" -c "$HOME/Documents/Python/"
 fi
 
-if [ -n $(session_exists $PYSESSION) ];
-then
-    # Start a python session with conda
-    tmux new-session -d -s $PYSESSION -e "CONDA_INIT=True" -c "$HOME/Documents/Python/"
-fi
+# mojo
+#if [ -n $(session_exists $PYSESSION) ];
+#then
+    ## Start a python session with conda
+    #tmux new-session -d -s $PYSESSION -e "CONDA_INIT=True" -c "$HOME/Documents/Python/"
+#fi
 
 # attach to session
 tmux attach-session -t $SESSION:1
