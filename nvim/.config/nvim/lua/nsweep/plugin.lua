@@ -12,10 +12,8 @@ return require('packer').startup(function(use)
         'tpope/vim-fugitive',
         'tpope/vim-surround',
         'windwp/nvim-autopairs',
-        'lukas-reineke/indent-blankline.nvim',
         'preservim/nerdcommenter',
         'goerz/jupytext.vim',
-        'averms/black-nvim',
         'Vimjas/vim-python-pep8-indent',
         'aserowy/tmux.nvim',
         'czheo/mojo.vim'
