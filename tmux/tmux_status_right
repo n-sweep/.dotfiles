@@ -1,0 +1,21 @@
+#!/bin/bash
+
+func() {
+    np=$(~/.dotfiles/scripts/now_playing)
+    os=$(~/.dotfiles/scripts/obs_status)
+
+    lout="$os$np"
+    rout="[$(date +"%H:%M %a %b %d")]"
+
+    ww=$(tmux display-message -p "#{window_width}")
+    hw=$(($ww / 2))
+    rw=$(($ww / 3 * 2))
+
+    space=$(($hw - ${#lout} / 2 - ${#rout} - 2))
+    output="$lout$(printf "%*s" $space)$rout"
+
+    tmux set -g status-right-length $(( ${#output} + 1 ))
+    echo "$output"
+}
+
+func
