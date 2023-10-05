@@ -17,7 +17,7 @@ alias nnb="$HOME/.dotfiles/jupyter/create_nb.sh"
 
 ### obs ########################################################################
 alias obs="obs-cli -q -p='$(head -1 "$HOME/.config/obs/token")'"
-alias stat="obs item toggle 'Static' --scene 'Camera'"
+alias camstat="obs item toggle 'Static' --scene 'Camera'"
 alias cam="obs item toggle 'Camera Mask' --scene 'one'"
 
 function obs_switch_scene() {
