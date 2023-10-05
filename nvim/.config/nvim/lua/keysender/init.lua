@@ -21,6 +21,13 @@ end
 local function get_selected_lines()
     local vstart = vim.fn.getpos("v")
     local vend = vim.fn.getpos(".")
+
+    -- if the selection was made backard, flip start and end
+    if vstart[2] > vend[2] then
+        vend = vim.fn.getpos("v")
+        vstart = vim.fn.getpos(".")
+    end
+
     return vim.fn.getline(vstart[2], vend[2])
 end
 
