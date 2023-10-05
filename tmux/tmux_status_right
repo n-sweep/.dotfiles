@@ -14,7 +14,7 @@ func() {
     space=$(($hw - ${#lout} / 2 - ${#rout} - 2))
     output="$lout$(printf "%*s" $space)$rout"
 
-    tmux set -g status-right-length $(( ${#output} + 1 ))
+    tmux set -g status-right-length $(( ${#output} + 2 ))
     echo "$output"
 }
 
