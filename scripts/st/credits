@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+url='https://api.spacetraders.io/v2'
+token=$(cat $HOME/.config/st/token)
+
+if [[ ! -f '/tmp/agent' ]]; then
+    curl -s "https://api.spacetraders.io/v2/my/agent" --header "Authorization: Bearer $(cat $HOME/.config/st/token)" > /tmp/agent
+fi
+
+echo "¢$(cat /tmp/agent | jq -r .data.credits)"
