@@ -6,7 +6,7 @@ stus=$(obs stream status 2> /tmp/obserr)
 if [ -s /tmp/obserr ]; then
     rm /tmp/obserr
 elif [[ $? -ne 0 ]]; then
-    echo "⚫[$(obs scene current)] "
+    echo "⚫[scene:$(obs scene current)] "
 else
-    echo "🔴[$(obs scene current)] "
+    echo "🔴[scene:$(obs scene current)] "
 fi
