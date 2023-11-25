@@ -4,6 +4,9 @@ alias q="$HOME/.dotfiles/scripts/duck"
 alias qq="$HOME/.dotfiles/scripts/gippity"
 alias pst="xclip -o -selection clipboard"
 
+# date dir
+alias datedir="$HOME/.dotfiles/scripts/datedir"
+
 # zettelkasten
 alias zk="cd $HOME/.zettelkasten/ && nvim index.md"
 
