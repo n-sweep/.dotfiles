@@ -17,17 +17,17 @@ function session_exists {
 #
 if [ -n $(session_exists $SESSION) ];
 then
-    # Start the first session
+    # Start the first session and split windows
     tmux new-session -d -s $SESSION
     tmux rename-window -t 1 'main'
-
-    # 1st session: open htop on the first pane and vertical split a new pane
-    tmux send-keys -t 'main' 'htop' C-m
     tmux split-window -v
-
-    # 1st session: weather
     tmux split-window -h
-    tmux send-keys -t 'main' 'weather' C-m
+
+    # 1st session: open htop on the first pane
+    tmux send-keys -t 0 'htop' C-m
+
+    # 1st session: 2 splits & weather
+    tmux send-keys -t 2 'weather' C-m
 
     # 1st session: open a new window in dotfiles
     tmux new-window -t $SESSION:2 -n 'dotfiles' -c "$HOME/.dotfiles"

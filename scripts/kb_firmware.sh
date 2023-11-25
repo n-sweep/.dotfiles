@@ -3,7 +3,7 @@
 # Along with kb_firmware.service, this automatically extracts the most recently
 # downloaded firmware and pushes the left.uf2 file to the keyboard when the
 # keyboard is detected
-#
+
 # chmod +x ~/.dotfiles/scripts/kb_firmware.sh
 # cp ~/.dotfiles/kb_firmware.service /etc/systemd/system/
 # sudo systemctl enable kb_firmware.service
