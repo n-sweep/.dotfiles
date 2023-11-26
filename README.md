@@ -1,4 +1,9 @@
 # .dotfiles
+`GNU Stow` used to symlink files into home folder  
+1. `git clone` repo into home folder 
+1. cd into `.dotfiles` and `stow dir`
+
+## Table of Contents
 
 ```sh
 # Produce this table of contents
@@ -20,23 +25,16 @@ echo
 	1. [`.bash_aliases`](#.bash_aliases)
 	1. [`.bashrc`](#.bashrc)
 	1. [`.inputrc`](#.inputrc)
-1. [`cl_zsh`](#cl_zsh)
-	1. [`.zshrc`](#.zshrc)
+1. [`cl_zsh/.zshrc`](#cl_zsh/.zshrc)
 1. [`firefox`](#firefox)
-1. [`journals`](#journals)
+1. [`journals`](#journals/vim.md)
 1. [`jupyter`](#jupyter)
-1. [`noted`](#noted)
-	1. [`.notedconfig`](#.notedconfig)
-1. [`nvim`](#nvim)
-	1. [`.config`](#.config)
+1. [`noted`](#noted/.notedconfig)
+1. [`nvim`](#nvim/.config)
 1. [`scripts`](#scripts)
-	1. [`.usr_scripts`](#.usr_scripts)
 1. [`tmux`](#tmux)
-	1. [`.tmux.conf`](#.tmux.conf)
 1. [`wezterm`](#wezterm)
-	1. [`.wezterm.lua`](#.wezterm.lua)
 1. [`zsh`](#zsh)
-	1. [`.zshrc`](#.zshrc)
 
 
 ## `README.md`
@@ -45,7 +43,9 @@ This file.
 ## `bash/`
 This directory gets symlinked to the home folder
 
-> [TODO] add symlink command
+```sh
+cd ~/.dotfiles && stow bash
+```
 
 ### `.bash_aliases`
 Bash aliases:
@@ -106,11 +106,15 @@ blur        toggle blur
 > [DEPRICATED] using bash instead
 
 ## `firefox/`
-Firefox Cuscomization
-1. visit about:support 
-1. find Application Basics > Profile Directory
-1. symlink the ./chrome folder to the Profile Directory
-    > [TODO] add symlink command
+**Firefox Cuscomization**
+1. visit `about:support` 
+1. locate Application Basics > Profile Directory
+    - `/home/n/.mozilla/firefox/l7f2epeq.default-release-1695236326892`
+    - this looks like it will change, maybe when firefox is updated. I wonder if there is a way to get it programatically
+1. stow the ./chrome folder to the Profile Directory
+    ```sh
+    cd ~/.dotfiles && stow firefox/chrome ~/.mozilla/firefox/l7f2epeq.default-release-1695236326892`
+    ```
 1. copy an image to the file /usr/share/backgrounds/wallpaper to be used as the newtab wallpaper
 
 > [TODO] I also have a firefox setting that shrinks the UI. I forget what it is; find and document
@@ -121,7 +125,7 @@ CSS for setting blank tab background image
 ## `journals/vim.md`
 vim stuff to work on
 
-> [TODO] Depricate - this should be removed in favor of the zettelkasten
+> [TODO] Depricate - this should be moved to / removed in favor of the zettelkasten
 
 ## `jupyter/`
 
@@ -139,9 +143,11 @@ Notebook templates
 > [TODO] uninstall noted
 
 ## `nvim/.config/`
-This directory gets symlinked to the home folder
+The parent directory gets stowed to the home folder
 
-> [TODO] add symlink command
+```sh
+cd ~/.dotfiles && stow nvim
+```
 
 ### `pycodestyle`
 code style settings
@@ -240,7 +246,9 @@ This directory contains (primarily bash) scripts
 ## `tmux/`
 This directory gets symlinked to the home folder
 
-> [TODO] add symlink command
+```sh
+cd ~/.dotfiles && stow tmux
+```
 
 ### `.tmux.conf`
 > [TODO] document
@@ -252,7 +260,9 @@ This directory gets symlinked to the home folder
 ## `wezterm/`
 This directory gets symlinked to the home folder
 
-> [TODO] add symlink command
+```sh
+cd ~/.dotfiles && stow wezterm
+```
 
 ### `.wezterm.lua`
 > [TODO] document
