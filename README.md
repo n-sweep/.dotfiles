@@ -1,24 +1,16 @@
 # .dotfiles
-`GNU Stow` used to symlink files into home folder  
-1. `git clone` repo into home folder 
-1. cd into `.dotfiles` and `stow dir`
+### Using `GNU Stow` to symlink files into home folder  
+1. `git clone` repo into home folder   
+    ```sh
+    cd && git clone https://github.com/n-sweep/.dotfiles
+    ```
+1. cd into `.dotfiles` and `stow` the desired directory
+    ```sh
+    cd ~/.dotfiles && stow `dirname`
+    ```
+    > default behavior symlinks the directory to the parent of your current directory
 
 ## Table of Contents
-
-```sh
-# Produce this table of contents
-for d in *; do
-    echo "1. [\`$d\`](#$d)"
-    for sd in $d/.*; do
-        bn=$(basename $sd)
-        if [ "$bn" != "." ] && [ "$bn" != ".." ]; then
-            echo "\t1. [\`$bn\`](#$bn)"
-        fi
-    done
-done
-echo
-~/.dotfiles/scripts/toc
-```
 
 1. [`README.md`](#README.md)
 1. [`bash`](#bash)
@@ -41,8 +33,9 @@ echo
 This file.
 
 ## `bash/`
-This directory gets symlinked to the home folder
+Bash settings and aliases
 
+This directory gets symlinked to the home folder:
 ```sh
 cd ~/.dotfiles && stow bash
 ```
@@ -102,11 +95,16 @@ blur        toggle blur
 1. change cursor depending on vi mode
 1. completion settings
 
+
 ## `cl_zsh/.zshrc`
-> [DEPRICATED] using bash instead
+> [DEPRICATED] laid off lol
+
 
 ## `firefox/`
-**Firefox Cuscomization**
+
+#### Firefox Cuscomization
+Customize firefox to use an image on the system in a blank tab
+
 1. visit `about:support` 
 1. locate Application Basics > Profile Directory
     - `/home/n/.mozilla/firefox/l7f2epeq.default-release-1695236326892`
@@ -117,7 +115,7 @@ blur        toggle blur
     ```
 1. copy an image to the file /usr/share/backgrounds/wallpaper to be used as the newtab wallpaper
 
-> [TODO] I also have a firefox setting that shrinks the UI. I forget what it is; find and document
+> **[TODO]** I also have a firefox setting that shrinks the UI. I forget what it is; find and document
 
 ### `chrome/userContent.css`
 CSS for setting blank tab background image
@@ -125,22 +123,36 @@ CSS for setting blank tab background image
 ## `journals/vim.md`
 vim stuff to work on
 
-> [TODO] Depricate - this should be moved to / removed in favor of the zettelkasten
+> **[TODO]** Depricate - this should be moved to / removed in favor of the zettelkasten
+
 
 ## `jupyter/`
+Settings for jupyter
+
+#### Jupyter notebook themes
+```sh
+pip install jupyterthemes
+pip install --upgrade jupyterthemes
+
+jt -t gruvboxd -f ubuntu -nfs 11 -T -N -kl
+```
 
 ### `create_nb.sh`
 Use JupyText to create a new jupyter notebook based on a template
+
+> **[TODO]** should I move the script to scripts/ instead of jupyter/
 
 ### `templates/`
 Notebook templates
 
     temp.py
 
+
 ## `noted/.notedconfig`
 > [DEPRICATED] in favor of zettelkasten.
 
-> [TODO] uninstall noted
+> **[TODO]** uninstall noted
+
 
 ## `nvim/.config/`
 The parent directory gets stowed to the home folder
@@ -188,59 +200,60 @@ after/plugin/  # lua run automatically after nvim loads
     vim-fugitive.lua
 ```
 
+
 ## `scripts/`
 This directory contains (primarily bash) scripts
 
 ### `cht.sh`
-> [TODO] document
+> **[TODO]** document
 
 ### `datedir`
-> [TODO] document
+> **[TODO]** document
 
 ### `duck`
-> [TODO] document
+> **[TODO]** document
 
 ### `emoji`
-> [TODO] document
+> **[TODO]** document
 
 ### `gippity`
-> [TODO] document
+> **[TODO]** document
 
 ### `install_neovim.sh`
-> [TODO] document
+> **[TODO]** document
 
 ### `kb_firmware.service`
-> [TODO] document
+> **[TODO]** document
 
 ### `kb_firmware.sh`
-> [TODO] document
+> **[TODO]** document
 
 ### `moon`
-> [TODO] document
+> **[TODO]** document
 
 ### `now_playing`
-> [TODO] document
+> **[TODO]** document
 
 ### `obs_status`
-> [TODO] document
+> **[TODO]** document
 
 ### `tmux_startup`
-> [TODO] document
+> **[TODO]** document
 
 ### `toc`
-> [TODO] document
+> **[TODO]** document
 
 ### `urlencode`
-> [TODO] document
+> **[TODO]** document
 
 ### `weather`
-> [TODO] document
+> **[TODO]** document
 
 ### `.usr_scripts/.ja_scripts`
-> [TODO] document
+> **[TODO]** document
 
 ### `st/credits`
-> [TODO] document
+> **[TODO]** document
 
 
 ## `tmux/`
@@ -251,10 +264,10 @@ cd ~/.dotfiles && stow tmux
 ```
 
 ### `.tmux.conf`
-> [TODO] document
+> **[TODO]** document
 
 ### `tmux_status_right`
-> [TODO] document
+> **[TODO]** document
 
 
 ## `wezterm/`
@@ -265,7 +278,7 @@ cd ~/.dotfiles && stow wezterm
 ```
 
 ### `.wezterm.lua`
-> [TODO] document
+> **[TODO]** document
 
 
 ## `zsh/.zshrc`
