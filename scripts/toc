@@ -1,0 +1,49 @@
+#!/bin/env bash
+
+excl=". .. .git .gitignore"
+
+function print_tree {
+
+    # if no directory provided, use the current one
+    local dir=${1:-"."}
+
+    #tab char
+    local t="\t"
+
+    # separate files from directories
+    local files=()
+    local dirs=()
+    for f in $dir/.* $dir/*; do
+        if [ -d "$f" ]; then
+            dirs+=("$f")
+        else
+            files+=("$f")
+        fi
+    done
+
+    # output
+    for f in ${files[@]} ${dirs[@]}; do
+        local bn=$(basename $f)
+        local n=${2:-0}
+
+        # skip exclusions
+        if [[ $excl =~ (^|[[:space:]])$bn($|[[:space:]]) ]]; then continue; fi
+
+        if [ -d "$f" ]; then bn=$bn/; fi
+
+        if [ -n "$2" ]; then printf "$t%.0s" $(seq 1 $2); fi
+
+        if [[ $n -lt 2 ]]; then
+            if [[ $n -lt 1 ]]; then echo; fi
+            printf "#%.0s" $(seq 1 $(expr $n + 2))
+            echo " \`$bn\`"
+        else
+            echo "$bn"
+        fi
+
+        # recursive call
+        if [ -d "$f" ]; then print_tree $f $(expr $n + 1); fi
+    done
+}
+
+print_tree "$@"
