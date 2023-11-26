@@ -1,93 +1,262 @@
-# Environment Setup
-
-## Wezterm
-
-[Installation Instructions](https://wezfurlong.org/wezterm/install/linux.html)
-
-```bash
-flatpak install falthub org.wezfurlong.wezterm
-
-# alias for running terminal
-alias wezterm = flatpak run org.wezfurlong.wezterm
-```
-
-## Misc Packages
-
-```bash
-# Install Packages
-apt-get install git
-apt-get install ripgrep
-```
-
-## ZSH
+# .dotfiles
 
 ```sh
-# Install zsh
-apt-get install zsh
-# Make default shell
-chsh -s $(which zsh)
-# Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-apt-get install fonts-powerline
-# Install zsh plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+# Produce this table of contents
+for d in *; do
+    echo "1. [\`$d\`](#$d)"
+    for sd in $d/.*; do
+        bn=$(basename $sd)
+        if [ "$bn" != "." ] && [ "$bn" != ".." ]; then
+            echo "\t1. [\`$bn\`](#$bn)"
+        fi
+    done
+done
+echo
+~/.dotfiles/scripts/toc
 ```
 
-## Github CLI
+1. [`README.md`](#README.md)
+1. [`bash`](#bash)
+	1. [`.bash_aliases`](#.bash_aliases)
+	1. [`.bashrc`](#.bashrc)
+	1. [`.inputrc`](#.inputrc)
+1. [`cl_zsh`](#cl_zsh)
+	1. [`.zshrc`](#.zshrc)
+1. [`firefox`](#firefox)
+1. [`journals`](#journals)
+1. [`jupyter`](#jupyter)
+1. [`noted`](#noted)
+	1. [`.notedconfig`](#.notedconfig)
+1. [`nvim`](#nvim)
+	1. [`.config`](#.config)
+1. [`scripts`](#scripts)
+	1. [`.usr_scripts`](#.usr_scripts)
+1. [`tmux`](#tmux)
+	1. [`.tmux.conf`](#.tmux.conf)
+1. [`wezterm`](#wezterm)
+	1. [`.wezterm.lua`](#.wezterm.lua)
+1. [`zsh`](#zsh)
+	1. [`.zshrc`](#.zshrc)
 
-```bash
-# Install GitHub CLI
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-sudo apt-add-repository https://cli.github.com/packages
-sudo apt-get update
-sudo apt-get install gh
+
+## `README.md`
+This file.
+
+## `bash/`
+This directory gets symlinked to the home folder
+
+> [TODO] add symlink command
+
+### `.bash_aliases`
+Bash aliases:
+```
+### misc #######################################################################
+c           clear
+q           duck duck go
+            scripts/duck
+qq          chat gpt
+            scripts/gippity
+pst         paste from clipboard
+datedir     create a directory with today's date + a README.md inside
+            scripts/datedir
+zk          open zettelkasten in nvim
+tm          tmux startup / reattach
+            scripts/tmux_startup
+ta          tmux quick reattach
+nnb         create a new jupyter notebook with JupyText
+            scripts/create_nb.sh
+
+### obs ########################################################################
+
+obs         alias for obs-cli w/ quiet flag and security token
+            "$HOME/.config/obs/token"
+cam         toggle camera
+camstat     toggle camera static
+switch      switch to scene (arg)
+blur        toggle blur
 ```
 
-## NeoVim
+### `.bashrc`
+1. default bash settings
+    1. some settings retained from ubuntu's bash defaults
+1. smart prompt
+    1. adapted from angery rob >:( (github.com/rwxrob)
+    1. adjust format depending on length
+    1. show conda environment
+    1. show git branch
+1. personal settings
+    1. vi mode!
+    1. `shopt -s expand_aliases` I don't remember what this does
+    1. open tmux automatically
+    1. fzf initialization
+        1. ctrl + R for command history
+        1. ctrl + T for file/dir fzf
+    1. paths
+        1. bash scripts
+        1. go
+        1. mojo
+    1. clear & run neofetch
+1. anaconda initialization (automatically generated)
 
-```bash
-# Install NeoVim
-sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:neovim-ppa/unstable
-sudo apt-get update
-sudo apt-get install neovim
+### `.inputrc`
+1. change cursor depending on vi mode
+1. completion settings
+
+## `cl_zsh/.zshrc`
+> [DEPRICATED] using bash instead
+
+## `firefox/`
+Firefox Cuscomization
+1. visit about:support 
+1. find Application Basics > Profile Directory
+1. symlink the ./chrome folder to the Profile Directory
+    > [TODO] add symlink command
+1. copy an image to the file /usr/share/backgrounds/wallpaper to be used as the newtab wallpaper
+
+> [TODO] I also have a firefox setting that shrinks the UI. I forget what it is; find and document
+
+### `chrome/userContent.css`
+CSS for setting blank tab background image
+
+## `journals/vim.md`
+vim stuff to work on
+
+> [TODO] Depricate - this should be removed in favor of the zettelkasten
+
+## `jupyter/`
+
+### `create_nb.sh`
+Use JupyText to create a new jupyter notebook based on a template
+
+### `templates/`
+Notebook templates
+
+    temp.py
+
+## `noted/.notedconfig`
+> [DEPRICATED] in favor of zettelkasten.
+
+> [TODO] uninstall noted
+
+## `nvim/.config/`
+This directory gets symlinked to the home folder
+
+> [TODO] add symlink command
+
+### `pycodestyle`
+code style settings
+> ignoring E501, E116
+
+### `nvim/`
+This directory contains lua to be run by neovim at startup
+
+```sh
+init.lua  # entrypoint - runs automatically at startup
+lua/
+    nsweep/  # my user settings
+        init.lua
+        plugin.lua
+        remap.lua
+        set.lua
+    keysender/  # send keys from neovim to tmux pane
+        init.lua
+        README.md
+    slipbox/  # zettelkasten navigator
+        assets.lua
+        init.lua
+        keymap.lua
+        README.md
+after/plugin/  # lua run automatically after nvim loads
+    colorscheme.lua
+    harpoon.lua
+    jupynium.lua
+    jupytext.lua
+    lsp.lua
+    lualine.lua
+    markdown-preview.lua
+    nvim-autopairs.lua
+    telescope.lua
+    tmux.lua
+    treesitter.lua
+    undotree.lua
+    vim-fugitive.lua
 ```
 
-### Packer - NeoVim plugin manager
+## `scripts/`
+This directory contains (primarily bash) scripts
 
-```bash
-# Install Packer plugin manager
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-# Run :PackerInstall in neovim
-```
+### `cht.sh`
+> [TODO] document
 
-## Jupyter Ascending
+### `datedir`
+> [TODO] document
 
-```bash
-# Install jupyter_ascending
-pip install jupyter_ascending && \
-jupyter nbextension install jupyter_ascending --sys-prefix --py && \
-jupyter nbextension enable jupyter_ascending --sys-prefix --py && \
-jupyter serverextension enable jupyter_ascending --sys-prefix --py
+### `duck`
+> [TODO] document
 
-# Make a new paired file
-python -m jupyter_ascending.scripts.make_pair --base file_name
+### `emoji`
+> [TODO] document
 
-# Convert existing notebook to py file
-jupytext --to py:percent nb_file.sync.ipynb
-# Sync notebook w/ python file
-python -m jupyter_ascending.requests.sync --filename py_file.sync.py
-```
+### `gippity`
+> [TODO] document
 
-```bash
-# Jupyter notebook themes
-pip install jupyterthemes
-pip install --upgrade jupyterthemes
+### `install_neovim.sh`
+> [TODO] document
 
-jt -t gruvboxd -f ubuntu -nfs 11 -T -N -kl
+### `kb_firmware.service`
+> [TODO] document
 
-```
+### `kb_firmware.sh`
+> [TODO] document
+
+### `moon`
+> [TODO] document
+
+### `now_playing`
+> [TODO] document
+
+### `obs_status`
+> [TODO] document
+
+### `tmux_startup`
+> [TODO] document
+
+### `toc`
+> [TODO] document
+
+### `urlencode`
+> [TODO] document
+
+### `weather`
+> [TODO] document
+
+### `.usr_scripts/.ja_scripts`
+> [TODO] document
+
+### `st/credits`
+> [TODO] document
+
+
+## `tmux/`
+This directory gets symlinked to the home folder
+
+> [TODO] add symlink command
+
+### `.tmux.conf`
+> [TODO] document
+
+### `tmux_status_right`
+> [TODO] document
+
+
+## `wezterm/`
+This directory gets symlinked to the home folder
+
+> [TODO] add symlink command
+
+### `.wezterm.lua`
+> [TODO] document
+
+
+## `zsh/.zshrc`
+> [DEPRICATED] in favor of bash
