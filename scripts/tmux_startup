@@ -1,8 +1,11 @@
 #!/bin/bash
 
-SESSION="_"
-PYSESSION="py"
-MOJOSESSION="mojo"
+SESSIONS=(
+    "_" \
+    "py" \
+    "mojo" \
+    "go"
+)
 
 function session_exists {
     if tmux list-sessions | grep "$1"; then
@@ -12,13 +15,9 @@ function session_exists {
     fi
 }
 
-# Only start new sessions if they don't already exist
-
-#
-if [ -n $(session_exists $SESSION) ];
-then
+function main_session {
     # Start the first session and split windows
-    tmux new-session -d -s $SESSION
+    tmux new-session -d -s "$1"
     tmux rename-window -t 1 'main'
     tmux split-window -v
     tmux split-window -h
@@ -30,29 +29,35 @@ then
     tmux send-keys -t 2 'weather' C-m
 
     # 1st session: open zettelkasten daily journal
-    tmux new-window -t $SESSION:2 -n 'zk'
+    tmux new-window -t $SESSION:2 -n 'zk' -c "$HOME/.zettelkasten/"
     tmux send-keys -t 'zk' 'journal' C-m
 
     # 1st session: open a new window in dotfiles
-    tmux new-window -t $SESSION:3 -n 'dotfiles' -c "$HOME/.dotfiles"
+    tmux new-window -t $SESSION:3 -n 'dotfiles' -c "$HOME/.dotfiles/"
+}
 
-    # 1st session: open a new window and start zettelkasten
-    #tmux new-window -t $SESSION:3 -n 'zettelkasten'
-    #tmux send-keys -t 'zettelkasten' 'zk' C-m
-fi
-
-if [ -n $(session_exists $PYSESSION) ];
-then
+function py_session {
     # Start a python session with conda
-    tmux new-session -d -s $PYSESSION -e "CONDA_INIT=True" -c "$HOME/Documents/Python/"
+    tmux new-session -d -s "$1" -e "CONDA_INIT=True" -c "$HOME/Documents/Python/"
+}
+
+function mojo_session {
+    tmux new-session -d -s "$1" -c "$HOME/Documents/mojo/"
+}
+
+function go_session {
+    tmux new-session -d -s "$1" -c "$HOME/Documents/golang/"
+}
+
+for s in ${SESSIONS[@]}; do
+    # Only start new sessions if they don't already exist
+    if [[ -z $(session_exists $s) ]]; then
+        func="$s"_session
+        ${func} $s
+    fi
+done
+
+# attach to session 1 if not already attached to a session
+if [[ -z $(echo $TMUX) ]]; then
+    tmux attach-session -t $SESSION:1
 fi
-
-# mojo
-#if [ -n $(session_exists $PYSESSION) ];
-#then
-    ## Start a python session with conda
-    #tmux new-session -d -s $PYSESSION -e "CONDA_INIT=True" -c "$HOME/Documents/Python/"
-#fi
-
-# attach to session
-tmux attach-session -t $SESSION:1
