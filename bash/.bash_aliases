@@ -4,19 +4,23 @@ alias q="$HOME/.dotfiles/scripts/duck"
 alias qq="$HOME/.dotfiles/scripts/gippity"
 alias pst="xclip -o -selection clipboard"
 
+# daily journal
+alias journal="zk '# \d+ Daily Journal'"
+alias daily="journal"
+
 # date dir
 alias datedir="$HOME/.dotfiles/scripts/datedir"
 
-# zettelkasten
-alias zk="cd $HOME/.zettelkasten/ && nvim index.md"
-
-# tmux startup / reattach script
-alias tm="$HOME/.dotfiles/scripts/tmux_startup"
-# tmux quick reattach
-alias ta="tmux a"
-
 # Jupytext create new notebook
 alias nnb="$HOME/.dotfiles/jupyter/create_nb.sh"
+
+### tmux #######################################################################
+
+# startup / reattach script
+alias tm="$HOME/.dotfiles/scripts/tmux_startup"
+
+# quick reattach
+alias ta="tmux a"
 
 ### obs ########################################################################
 alias obs="obs-cli -q -p='$(head -1 "$HOME/.config/obs/token")'"
@@ -41,12 +45,10 @@ alias switch="obs_switch_scene"
 alias blur="obs_toggle_blur"
 
 # dot navigation aliases
-dot_nav() {
-    local dots="." path="cd "
-    for i in {1..5}; do
-        dots="${dots}."
-        path="${path}../"
-        alias "$dots"="$path"
-    done
-}
-dot_nav
+dots="."
+path="cd "
+for i in {1..5}; do
+    dots="${dots}."
+    path="${path}../"
+    alias "$dots"="$path"
+done
