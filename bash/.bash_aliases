@@ -5,7 +5,7 @@ alias qq="$HOME/.dotfiles/scripts/gippity"
 alias pst="xclip -o -selection clipboard"
 
 # daily journal
-alias journal="zk '# \d+ Daily Journal'"
+alias journal="$HOME/.dotfiles/scripts/zk '# \d+ Daily Journal'"
 alias daily="journal"
 
 # date dir
