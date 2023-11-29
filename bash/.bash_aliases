@@ -1,18 +1,23 @@
 alias c=clear
 
-alias q="$HOME/.dotfiles/scripts/duck"
-alias qq="$HOME/.dotfiles/scripts/gippity"
+# copy/paste
 alias pst="xclip -o -selection clipboard"
+alias cpy="xclip -i -selection clipboard"
+
+### script aliases #############################################################
+
+# scripts are symlinked to ~/bin
+
+# search
+alias q="duck"
+alias qq="gippity"
 
 # daily journal
-alias journal="$HOME/.dotfiles/scripts/zk '# \d+ Daily Journal'"
-alias daily="journal"
-
-# date dir
-alias datedir="$HOME/.dotfiles/scripts/datedir"
+alias journal="zk '# \d+ Daily Journal'"
 
 # Jupytext create new notebook
 alias nnb="$HOME/.dotfiles/jupyter/create_nb.sh"
+
 
 ### tmux #######################################################################
 
@@ -21,6 +26,7 @@ alias tm="$HOME/.dotfiles/scripts/tmux_startup"
 
 # quick reattach
 alias ta="tmux a"
+
 
 ### obs ########################################################################
 alias obs="obs-cli -q -p='$(head -1 "$HOME/.config/obs/token")'"
