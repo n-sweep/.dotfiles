@@ -4,17 +4,13 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # define the root of the search and check if it is a language
-local root=$(echo curl -s "cht.sh/:list" | tr ' ' '\n' | fzf)
-local lang=`curl -s "cht.sh/{$root}/:list"`
-local sep
+root=$(curl -s "cht.sh/:list" | fzf)
 
-# languages and system tools have slightly different query syntax
-if [ ! "$lang" ]; then
-    sep="~"
-else
-    sep="/"
+if [ -n "$root" ]; then
+    # languages and system tools have slightly different query syntax
+    lang=$(curl -s "cht.sh/{$root}/:list")
+    if [ -n "$lang" ]; then sep="~"; else sep="/"; fi
+
+    read -p "query: " query
+    tmux neww bash -c "curl cht.sh/$root$sep`echo $query | tr ' ' '+'` & while [ : ]; do sleep 1; done"
 fi
-
-read -p "query: " query
-tmux neww bash -c "curl cht.sh/$root$sep`echo $query | tr ' ' '+'` & while [ : ]; do sleep 1; done"
-
