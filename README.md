@@ -6,7 +6,7 @@
     ```
 1. cd into `.dotfiles` and `stow` the desired directory
     ```sh
-    cd ~/.dotfiles && stow `dirname`
+    stow `dirname` -d ~/.dotfiles -t ~
     ```
     > default behavior symlinks the directory to the parent of your current directory
 
@@ -37,7 +37,7 @@ Bash settings and aliases
 
 This directory gets symlinked to the home folder:
 ```sh
-cd ~/.dotfiles && stow bash
+stow bash -d ~/.dotfiles -t ~
 ```
 
 ### `.bash_aliases`
@@ -111,7 +111,7 @@ Customize firefox to use an image on the system in a blank tab
     - this looks like it will change, maybe when firefox is updated. I wonder if there is a way to get it programatically
 1. stow the ./chrome folder to the Profile Directory
     ```sh
-    cd ~/.dotfiles && stow firefox/chrome ~/.mozilla/firefox/l7f2epeq.default-release-1695236326892`
+    stow chrome -d ~/.dotfiles/firefox -t ~/.mozilla/firefox/l7f2epeq.default-release-1695236326892
     ```
 1. copy an image to the file /usr/share/backgrounds/wallpaper to be used as the newtab wallpaper
 
@@ -158,7 +158,7 @@ Notebook templates
 The parent directory gets stowed to the home folder
 
 ```sh
-cd ~/.dotfiles && stow nvim
+stow nvim -d ~/.dotfiles -t ~
 ```
 
 ### `pycodestyle`
@@ -204,63 +204,18 @@ after/plugin/  # lua run automatically after nvim loads
 ## `scripts/`
 This directory contains (primarily bash) scripts
 
-### `cht.sh`
-> **[TODO]** document
+### `path/`
+Scripts in this directory get symlinked to `~/bin`
 
-### `datedir`
-> **[TODO]** document
-
-### `duck`
-> **[TODO]** document
-
-### `emoji`
-> **[TODO]** document
-
-### `gippity`
-> **[TODO]** document
-
-### `install_neovim.sh`
-> **[TODO]** document
-
-### `kb_firmware.service`
-> **[TODO]** document
-
-### `kb_firmware.sh`
-> **[TODO]** document
-
-### `moon`
-> **[TODO]** document
-
-### `now_playing`
-> **[TODO]** document
-
-### `obs_status`
-> **[TODO]** document
-
-### `tmux_startup`
-> **[TODO]** document
-
-### `toc`
-> **[TODO]** document
-
-### `urlencode`
-> **[TODO]** document
-
-### `weather`
-> **[TODO]** document
-
-### `.usr_scripts/.ja_scripts`
-> **[TODO]** document
-
-### `st/credits`
-> **[TODO]** document
-
+```sh
+stow path -d "~/.dotfiles/scripts" -t "$HOME/bin" 
+```
 
 ## `tmux/`
 This directory gets symlinked to the home folder
 
 ```sh
-cd ~/.dotfiles && stow tmux
+stow tmux -d ~/.dotfiles -t ~
 ```
 
 ### `.tmux.conf`
@@ -274,7 +229,7 @@ cd ~/.dotfiles && stow tmux
 This directory gets symlinked to the home folder
 
 ```sh
-cd ~/.dotfiles && stow wezterm
+stow wezterm -d ~/.dotfiles -t ~
 ```
 
 ### `.wezterm.lua`
