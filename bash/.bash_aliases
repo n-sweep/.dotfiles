@@ -22,7 +22,7 @@ alias nnb="$HOME/.dotfiles/jupyter/create_nb.sh"
 ### tmux #######################################################################
 
 # startup / reattach script
-alias tm="$HOME/.dotfiles/scripts/tmux_startup"
+alias tm="tmux_startup"
 
 # quick reattach
 alias ta="tmux a"
