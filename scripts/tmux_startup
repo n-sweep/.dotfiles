@@ -15,7 +15,7 @@ function session_exists {
     fi
 }
 
-function main_session {
+function __session {
     # Start the first session and split windows
     tmux new-session -d -s "$1"
     tmux rename-window -t 1 'main'
@@ -53,7 +53,7 @@ for s in ${SESSIONS[@]}; do
     # Only start new sessions if they don't already exist
     if [[ -z $(session_exists $s) ]]; then
         func="$s"_session
-        ${func} $s
+        ${func} "$s"
     fi
 done
 
