@@ -28,12 +28,12 @@ function main_session {
     # 1st session: 2 splits & weather
     tmux send-keys -t 2 'weather' C-m
 
-    # 1st session: open zettelkasten daily journal
-    tmux new-window -t $SESSION:2 -n 'zk' -c "$HOME/.zettelkasten/"
-    tmux send-keys -t 'zk' 'journal' C-m
-
     # 1st session: open a new window in dotfiles
-    tmux new-window -t $SESSION:3 -n 'dotfiles' -c "$HOME/.dotfiles/"
+    tmux new-window -t $SESSION:2 -n 'dotfiles' -c "$HOME/.dotfiles/"
+
+    # 1st session: open zettelkasten daily journal
+    #tmux new-window -t $SESSION:3 -n 'zk' -c "$HOME/.zettelkasten/"
+    #tmux send-keys -t 'zk' 'journal' C-m
 }
 
 function py_session {
