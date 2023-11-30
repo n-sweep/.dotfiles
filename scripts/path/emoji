@@ -1,21 +1,29 @@
 #!/bin/env bash
 
-# process flags
+# process flag*
 COPY=0
-if [ "$#" -gt 0 ]; then
-    while getopts 'ci' flag; do
-        case "${flag}" in
-            c) COPY=1;;
-            *) echo "Unexpected option ${flag}"
-            exit 1 ;;
-        esac
-    done
+FILE=0
+MULTI=0
+SLUG=0
+while getopts 'cfms' flag; do
+    case "${flag}" in
+        c) COPY=1;;
+        f) FILE=1;;
+        m) MULTI=1;;
+        s) SLUG=1;;
+        *) echo "Unexpected option ${flag}"
+        exit 1 ;;
+    esac
+done
 
-    # drop processed arguments
-    shift $((OPTIND-1))
-    INPUT=$@
+# drop processed arguments
+shift $((OPTIND-1))
+
+# set input according to environment
+if [ -n "$VIMRUNTIME" ]; then
+    INPUT=$(cat)
 else
-    read -r INPUT
+    INPUT=$*
 fi
 
 # save emoji json in /tmp if not already there
@@ -28,27 +36,67 @@ fi
 # get emojis and slugs
 EMOJIS=$(cat "/tmp/emoji.json" | jq -r '.[] | "\(.character) \(.slug | sub("e[0-9]+-[0-9]+-"; ""))"')
 
-# look for match on user input
-MATCH=$(echo "$EMOJIS" | awk '{print $2}' | rg -x "$(echo $INPUT | tr ' ' '-')")
 
-if [ -n "$MATCH" ]; then
-    # if there's a match, return it
-    CHOICE=$(echo "$EMOJIS" | rg $MATCH)
-else
-    # avoid using fzf when calling from inside vim
-    if [ -n "$VIMRUNTIME" ]; then
-        echo "$INPUT not found"
-        exit 1
+function get_emoji() {
+    # look for match on user input
+    local MATCH=$(echo "$EMOJIS" | awk '{print $2}' | rg -x "$(echo $1 | tr ' ' '-')")
+
+    if [ -n "$MATCH" ]; then
+        # if there's a match, return it
+        local CHOICE=$(echo "$EMOJIS" | rg ".*\\s$MATCH$")
     else
-        CHOICE=$(echo "$EMOJIS" | fzf --height=~10 --select-1 --exit-0 --query="$INPUT")
+        # avoid using fzf when calling from inside vim
+        if [ -z "$VIMRUNTIME" ]; then
+            local CHOICE=$(echo "$EMOJIS" | fzf --height=~10 --select-1 --exit-0 --query="$*")
+        else
+            echo "$* not found"
+            exit 1
+        fi
     fi
-fi
 
-# flagged behavior
-if [ $COPY -gt 0 ]; then
-    # copy to clipboard
-    echo $CHOICE | awk '{printf "%s", $1}' | xclip -selection 'clipboard' -i
+    # if the -s flag was used, we want to return the slug string
+    # instead of the emoji unicode value
+    output_val=$(($SLUG + 1))
+
+    # flagged behavior
+    if [ $COPY -gt 0 ]; then
+        # copy to clipboard
+        echo $CHOICE | awk "{printf \"%s\", \$$output_val}" | xclip -selection 'clipboard' -i
+    else
+        # print to terminal
+        echo $CHOICE | awk "{print \$$output_val}"
+    fi
+}
+
+
+function emoji_replace() {
+    local output="$*"
+
+    # gather up pattern matches
+    declare -A matches
+    while IFS= read -r match; do
+        if [ ${matches[$match]} ]; then continue; fi
+
+        local slug=$(echo $match | sed 's/://g')
+        local emoji=$(get_emoji "$slug")
+
+        if [[ "$emoji" != *"not found" ]]; then
+            matches["$match"]=$emoji
+        fi
+
+    done < <(printf '%s' "$output" | rg -oNr '$0' ':[-\w]+:')
+
+    # replace them with their emoji unicode
+    for match in "${!matches[@]}"; do
+        output="$(echo "$output" | sed "s/$match/${matches[$match]}/g")"
+    done
+
+    echo "$output"
+}
+
+
+if [ $MULTI -gt 0 ]; then
+    emoji_replace "$INPUT"
 else
-    # print to terminal
-    echo $CHOICE | awk '{print $1}'
+    get_emoji "$INPUT"
 fi
