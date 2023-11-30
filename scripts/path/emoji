@@ -21,9 +21,9 @@ shift $((OPTIND-1))
 
 # set input according to environment
 if [ -n "$VIMRUNTIME" ]; then
-    INPUT=$(cat)
+    INPUT="$(cat)"
 else
-    INPUT=$*
+    INPUT="$*"
 fi
 
 # save emoji json in /tmp if not already there
@@ -68,7 +68,6 @@ function get_emoji() {
     fi
 }
 
-
 function emoji_replace() {
     local output="$*"
 
@@ -81,10 +80,10 @@ function emoji_replace() {
         local emoji=$(get_emoji "$slug")
 
         if [[ "$emoji" != *"not found" ]]; then
-            matches["$match"]=$emoji
+            matches["$match"]="$emoji"
         fi
 
-    done < <(printf '%s' "$output" | rg -oNr '$0' ':[-\w]+:')
+    done < <(echo "$output" | rg -oNr '$0' ':[-\w]+:')
 
     # replace them with their emoji unicode
     for match in "${!matches[@]}"; do

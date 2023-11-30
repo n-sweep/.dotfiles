@@ -216,6 +216,28 @@ Scripts in this directory get symlinked to `~/bin`
 stow path -d "~/.dotfiles/scripts" -t "$HOME/bin" 
 ```
 
+#### `emoji`
+an emoji command line tool using [Open Emoji API](https://emoji-api.com/), `fzf`, and `ripgrep`
+
+```sh
+# echo emoji to terminal
+$ emoji waving hand
+> 👋
+
+# copy emoji to clipboard
+$ emoji -c waving hand
+
+# replace multiple emoji with :colon-syntax:
+$ emoji -m "an :avocado: is a fruit. so is a :tomato:. they do not belong in a fruit salad. :grinning-face-with-sweat:"
+> an 🥑 is a fruit. so is a 🍅. they do not belong in a fruit salad. 😅
+
+$ echo "an :avocado: is a fruit.\nso is a :tomato:.\nthey do not belong in a fruit salad. :grinning-face-with-sweat:" > /tmp/text.txt
+$ emoji -m "$(cat /tmp/text.txt)"
+> an 🥑 is a fruit
+> so is a 🍅
+> they do not belong in a fruit salad 😅
+```
+
 ## `tmux/`
 This directory gets symlinked to the home folder
 
