@@ -1,5 +1,10 @@
 # .dotfiles
 ### Using `GNU Stow` to symlink files into home folder  
+0. install `stow`
+    ```sh
+    sudo apt update && sudo apt install -y stow 
+    ```
+
 1. `git clone` repo into home folder   
     ```sh
     cd && git clone https://github.com/n-sweep/.dotfiles
