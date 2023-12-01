@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+dir='/tmp/scratch'
+
+if [ ! -d dir ]; then
+    mkdir "$dir"
+fi
+
+cd "$dir"
+nvim

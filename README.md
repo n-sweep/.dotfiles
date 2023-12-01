@@ -50,19 +50,14 @@ Bash aliases:
 ```
 ### misc #######################################################################
 c           clear
-q           duck duck go
-            scripts/duck
-qq          chat gpt
-            scripts/gippity
-pst         paste from clipboard
 datedir     create a directory with today's date + a README.md inside
-            scripts/datedir
-zk          open zettelkasten in nvim
-tm          tmux startup / reattach
-            scripts/tmux_startup
-ta          tmux quick reattach
 nnb         create a new jupyter notebook with JupyText
-            scripts/create_nb.sh
+pst         paste from clipboard
+q           duck duck go
+qq          chat gpt
+ta          tmux quick reattach
+tm          tmux startup / reattach
+zk          open zettelkasten in nvim
 
 ### obs ########################################################################
 
@@ -214,7 +209,16 @@ Scripts in this directory get symlinked to `~/bin`
 
 ```sh
 stow path -d "~/.dotfiles/scripts" -t "$HOME/bin" 
+# OR the alias
+# stowpath 
 ```
+
+### Small scripts
+
+- scratch
+    - cd into /tmp/scratch/ and run nvim. mkdir if it doesn't exist.
+- stowpath
+    - stows everything from ~/.dotfiles/scripts/path to ~/bin
 
 #### `emoji`
 an emoji command line tool using [Open Emoji API](https://emoji-api.com/), `fzf`, and `ripgrep`
