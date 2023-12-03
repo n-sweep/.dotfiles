@@ -2,7 +2,7 @@
 
 dir='/tmp/scratch'
 
-if [ ! -d dir ]; then
+if [ ! -d $dir ]; then
     mkdir "$dir"
 fi
 
