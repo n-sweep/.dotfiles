@@ -1,3 +1,4 @@
+local vim = vim
 local lsp = require("lsp-zero")
 local cmp = require("cmp")
 
@@ -46,6 +47,19 @@ vim.diagnostic.config({
 })
 
 lsp.setup()
+cmp.setup({
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "path" },
+        { name = "otter" },
+        { name = "buffer" },
+        { name = "treesitter" },
+        { name = "calc" },
+        { name = "latex_symbols" },
+        { name = "spell" },
+        { name = "luasnip" },
+    }
+})
 
 -- Docstring hover
 vim.keymap.set("n", "<leader>k", "<CMD>lua vim.lsp.buf.hover()<CR>")

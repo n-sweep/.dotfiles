@@ -9,14 +9,17 @@ return require('packer').startup(function(use)
     use {
         'theprimeagen/harpoon',
         'mbbill/undotree',
-        'tpope/vim-fugitive',
+        'tpope/vim-dadbod',
+        --'tpope/vim-fugitive',
         'tpope/vim-surround',
         'windwp/nvim-autopairs',
         'preservim/nerdcommenter',
         'goerz/jupytext.vim',
         'Vimjas/vim-python-pep8-indent',
         'aserowy/tmux.nvim',
-        'czheo/mojo.vim'
+        'czheo/mojo.vim',
+        'quarto-dev/quarto-nvim',
+        'jmbuhr/otter.nvim'
     }
 
     -- color schemes
@@ -29,7 +32,7 @@ return require('packer').startup(function(use)
 
     -- Telescope
     use {
-        'nvim-telescope/telescope.nvim', -- tag = '0.1.0',
+        'nvim-telescope/telescope.nvim',
         requires = {
             'nvim-telescope/telescope-file-browser.nvim',
             'nvim-lua/plenary.nvim'
@@ -68,10 +71,10 @@ return require('packer').startup(function(use)
     }
 
     -- jupynium
-    use {
-        'kiyoon/jupynium.nvim',
-        run = 'pip3 install --user .'
-    }
+    --use {
+        --'kiyoon/jupynium.nvim',
+        --run = 'pip3 install --user .'
+    --}
 
     -- LuaLine
     use {
