@@ -14,4 +14,4 @@ else
     )
 fi
 
-if [ -n "$filepath" ]; then nvim "$filepath"; fi
+if [ -n "$filepath" ]; then cd "$loc" && nvim "$filepath"; fi

@@ -2,6 +2,10 @@ local vim = vim
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd("packer.nvim")
 
+-- Example for configuring Neovim to load user-installed installed Lua rocks:
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use { 'wbthomason/packer.nvim' }
@@ -19,7 +23,7 @@ return require('packer').startup(function(use)
         'aserowy/tmux.nvim',
         'czheo/mojo.vim',
         'quarto-dev/quarto-nvim',
-        'jmbuhr/otter.nvim'
+        'jmbuhr/otter.nvim',
     }
 
     -- color schemes

@@ -3,8 +3,8 @@
 SESSIONS=(
     "_" \
     "py" \
-    "mojo" \
-    "go"
+    #"mojo" \
+    #"go"
 )
 
 function session_exists {
