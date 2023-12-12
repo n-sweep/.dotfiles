@@ -59,5 +59,5 @@ done
 
 # attach to session 1 if not already attached to a session
 if [[ -z $(echo $TMUX) ]]; then
-    tmux attach-session -t 0:1
+    tmux attach-session -t _:1
 fi
