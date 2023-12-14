@@ -1,4 +1,10 @@
 local vim = vim
+local filetypes = {
+    ipynb = '# %%',
+    python = '# %%',
+    markdown = '```',
+    quarto = '```'
+}
 
 -- Execute the results of a motion in the previous pane
 local function generate_command(keys, flags)
@@ -18,22 +24,34 @@ local function process_text(text)
 end
 
 
-local function get_selected_lines()
-    local vstart = vim.fn.getpos("v")
-    local vend = vim.fn.getpos(".")
+local function process_lines(lines, filetype)
+    local output = {}
+    for _, str in ipairs(lines) do
 
-    -- if the selection was made backard, flip start and end
-    if vstart[2] > vend[2] then
-        vend = vim.fn.getpos("v")
-        vstart = vim.fn.getpos(".")
+        -- flag to remove commented lines
+        -- [TODO] change comments per filetype (?)
+         local comment = string.match(str, '^#')
+        -- flag to remove empty lines
+         local empty = string.match(str, "^%s*$")
+
+        if not comment and not empty then
+            local processed = process_text(str)
+            table.insert(output, processed)
+        end
+
     end
 
-    return vim.fn.getline(vstart[2], vend[2])
+    local indented = string.match(output[#output], "^\"[%s\t]+") ~= nil
+    if filetype == 'python' and indented then
+        -- adding two empty lines to close an indented block
+        table.insert(output, "")
+    end
+
+    return output
 end
 
 
 local function get_lines_within_cell(div)
-    div = div or "# %%"
     -- find cell divider above cursor
     local cstart = vim.fn.search(div, 'nb') + 1
     -- find cell divider below cursor
@@ -44,28 +62,34 @@ local function get_lines_within_cell(div)
         cend = -1
     end
 
-    -- remove commented lines
-    local output = {}
-    for _, str in ipairs(vim.fn.getline(cstart, cend)) do
-        if not string.match(str, '^#') then
-            table.insert(output, str)
-        end
-    end
-
-    return output
+    return vim.fn.getline(cstart, cend)
 end
 
 
-local function get_lines(selection)
+local function get_selected_lines()
+    local vstart = vim.fn.getpos("v")
+    local vend = vim.fn.getpos(".")
+
+    -- if the selection was made backward, flip start and end
+    if vstart[2] > vend[2] then
+        vend = vim.fn.getpos("v")
+        vstart = vim.fn.getpos(".")
+    end
+
+    return vim.fn.getline(vstart[2], vend[2])
+end
+
+
+local function get_lines(selection, delimiter)
+    -- [TODO] unable to run cells at the end of file (?)
+    -- [TODO] unable to run code blocks with one line (?)
+
     -- prioritize selection first
     if selection then
         return get_selected_lines()
-    -- if in a notebook, return the whole cell
-    elseif vim.fn.search('# %%', 'n') > 0 then
-        return get_lines_within_cell()
-    -- also look for code blocks in markdown
-    elseif vim.fn.search('```', 'n') > 0 then
-        return get_lines_within_cell('```')
+    -- if in a supported file, return the whole cell
+    elseif delimiter then
+        return get_lines_within_cell(delimiter)
     -- otherwise, just return the one line
     else
         return {vim.fn.getline('.')}
@@ -74,23 +98,32 @@ end
 
 
 local function send_keys(selection)
-    -- get lines to be sent to vim
-    local lines = get_lines(selection)
+    local filetype = vim.bo.filetype
+    local delimiter = filetypes[filetype]
 
-    for _, text in ipairs(lines) do
-        -- send command text
-        text = process_text(text)
+    -- get lines to be sent to vim
+    local lines = get_lines(selection, delimiter)
+    local processed_lines = process_lines(lines, filetype)
+
+    for _, text in ipairs(processed_lines) do
+
+        -- convert text into a tmux send-keys command
         local command = generate_command(text, 'l')
+
+        -- send command text
         vim.cmd(command)
 
         -- send carriage return
         vim.cmd(generate_command('Enter'))
-        if selection then
-            -- exit select mode
-            vim.api.nvim_input('<Esc>')
-        end
+
     end
+
+    if selection then
+        -- exit select mode
+        vim.api.nvim_input('<Esc>')
+    end
+
 end
 
-vim.keymap.set('n', '<leader>t', function() send_keys(false) end)
-vim.keymap.set('v', '<leader>t', function() send_keys(true) end)
+vim.keymap.set('n', '<CR>', function() send_keys(false) end)
+vim.keymap.set('v', '<CR>', function() send_keys(true) end)
