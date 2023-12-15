@@ -5,10 +5,23 @@ local filetypes = {
     quarto = '```'
 }
 
+PANE = ''
+
+
+-- attach to a specific pane
+local function attach_to_pane()
+    while PANE == '' do
+        vim.cmd('silent !tmux display-panes -Nbd 0')
+        PANE = vim.fn.input('Attach to pane: ')
+    end
+    print('Attached to pane ' .. PANE)
+end
+
+
 -- Execute the results of a motion in the previous pane
 local function generate_command(keys, flags)
     flags = flags or ''
-    return 'silent !tmux send -' .. flags .. 't .+ ' .. keys
+    return 'silent !tmux send -' .. flags .. 't '.. PANE .. ' ' .. keys
 end
 
 
@@ -99,6 +112,8 @@ end
 local function send_keys(selection)
     local filetype = vim.bo.filetype
     local delimiter = filetypes[filetype]
+
+    attach_to_pane()
 
     -- get lines to be sent to vim
     local lines = get_lines(selection, delimiter)
