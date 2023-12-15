@@ -1,6 +1,5 @@
 local vim = vim
 local filetypes = {
-    ipynb = '# %%',
     python = '# %%',
     markdown = '```',
     quarto = '```'
@@ -127,3 +126,5 @@ end
 
 vim.keymap.set('n', '<CR>', function() send_keys(false) end)
 vim.keymap.set('v', '<CR>', function() send_keys(true) end)
+vim.keymap.set('n', '<leader>t', function() print("that doesn't work any more") end)
+vim.keymap.set('v', '<leader>t', function() print("that doesn't work any more") end)

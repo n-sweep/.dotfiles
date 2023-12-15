@@ -9,7 +9,7 @@ function M.setup(mod)
     )
 
     vim.keymap.set(
-        'n', '<CR>',
+        'n', '<TAB>',
         function() mod.create_or_follow_link() end,
         {noremap=true, silent=true}
     )
