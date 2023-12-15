@@ -1,5 +1,7 @@
 alias c=clear
 
+alias cn="c && neofetch"
+
 # copy/paste
 alias pst="xclip -o -selection clipboard"
 alias cpy="xclip -i -selection clipboard"
