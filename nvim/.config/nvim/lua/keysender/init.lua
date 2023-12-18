@@ -113,7 +113,9 @@ local function send_keys(selection)
     local filetype = vim.bo.filetype
     local delimiter = filetypes[filetype]
 
-    attach_to_pane()
+    if PANE == '' then
+        attach_to_pane()
+    end
 
     -- get lines to be sent to vim
     local lines = get_lines(selection, delimiter)
