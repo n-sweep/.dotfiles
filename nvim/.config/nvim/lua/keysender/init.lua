@@ -8,11 +8,32 @@ local filetypes = {
 PANE = ''
 
 
+-- get desired pane id
+local function get_tmux_pane_id(num)
+    -- read the output of tmux list-panes
+    local f = io.popen("tmux list-panes")
+    if f then
+        local panes = f:read("*a")
+
+        -- gather table of pane numbers : pane ids
+        local output = {}
+        for line in panes:gmatch("[^\r\n]+") do
+            output[line:match("^%d+")] = line:match("%%%d+")
+        end
+
+        -- escape the % in the output
+        return '\\' .. output[num]
+    end
+
+end
+
+
 -- attach to a specific pane
 local function attach_to_pane()
     while PANE == '' do
         vim.cmd('silent !tmux display-panes -Nbd 0')
-        PANE = vim.fn.input('Attach to pane: ')
+        local p = vim.fn.input('Attach to pane: ')
+        PANE = get_tmux_pane_id(p)
     end
     print('Attached to pane ' .. PANE)
 end
