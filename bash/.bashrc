@@ -47,9 +47,6 @@ HISTFILESIZE=10000
 # See bash(1) for more options
 HISTCONTROL=ignorespace:erasedups
 
-# colon-separated list of commands to not add
-HISTIGNORE="ls:..:...:....:....."
-
 
 ### smart prompt #######################################################
 # adapted from angery rob >:(
