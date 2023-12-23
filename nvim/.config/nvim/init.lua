@@ -1,3 +1,3 @@
 require('nsweep')
 require('slipbox')
-require('keysender')
+require('telemux')

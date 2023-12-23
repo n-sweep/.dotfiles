@@ -1,4 +1,5 @@
 local vim = vim
+local M = {}
 local filetypes = {
     python = '# %%',
     markdown = '```',
@@ -22,20 +23,9 @@ local function get_tmux_pane_id(num)
         end
 
         -- escape the % in the output
-        return '\\' .. output[num]
+        return output[num]
     end
 
-end
-
-
--- attach to a specific pane
-local function attach_to_pane()
-    while PANE == '' do
-        vim.cmd('silent !tmux display-panes -Nbd 0')
-        local p = vim.fn.input('Attach to pane: ')
-        PANE = get_tmux_pane_id(p)
-    end
-    print('Attached to pane ' .. PANE)
 end
 
 
@@ -130,12 +120,25 @@ local function get_lines(selection, delimiter)
 end
 
 
-local function send_keys(selection)
+-- attach to pane by id
+function M.attach_to_pane()
+    local p = ''
+    repeat
+        vim.cmd('silent !tmux display-panes -Nbd 0')
+        p = vim.fn.input('Attach to pane: ')
+        PANE = get_tmux_pane_id(p)
+    until PANE ~= ''
+    vim.cmd('redraw')
+    print('Attached to pane ' .. p .. ' (' .. PANE .. ')')
+end
+
+
+function M.send_keys(selection)
     local filetype = vim.bo.filetype
     local delimiter = filetypes[filetype]
 
     if PANE == '' then
-        attach_to_pane()
+        M.attach_to_pane()
     end
 
     -- get lines to be sent to vim
@@ -162,7 +165,4 @@ local function send_keys(selection)
 
 end
 
-vim.keymap.set('n', '<CR>', function() send_keys(false) end)
-vim.keymap.set('v', '<CR>', function() send_keys(true) end)
-vim.keymap.set('n', '<leader>t', function() print("that doesn't work any more") end)
-vim.keymap.set('v', '<leader>t', function() print("that doesn't work any more") end)
+return M
