@@ -6,33 +6,46 @@ local filetypes = {
     quarto = '```'
 }
 
-PANE = ''
+PANE_ID = ''
 
 
--- get desired pane id
-local function get_tmux_pane_id(num)
+local function tmux_list_panes()
     -- read the output of tmux list-panes
     local f = io.popen("tmux list-panes")
     if f then
         local panes = f:read("*a")
 
+        -- we need to be able to map both directions
         -- gather table of pane numbers : pane ids
+        --                      and ids : numbers
         local output = {}
         for line in panes:gmatch("[^\r\n]+") do
             output[line:match("^%d+")] = line:match("%%%d+")
+            output[line:match("%%%d+")] = line:match("^%d+")
         end
 
-        -- escape the % in the output
-        return output[num]
+        return output
     end
+end
 
+
+-- get pane ID by pane number
+local function get_tmux_pane_id(num)
+    return tmux_list_panes()[num]
+end
+
+
+-- get pane number by pane ID
+local function get_tmux_pane_num(id)
+    return tmux_list_panes()[id]
 end
 
 
 -- Execute the results of a motion in the previous pane
 local function generate_command(keys, flags)
     flags = flags or ''
-    return 'silent !tmux send -' .. flags .. 't '.. PANE .. ' ' .. keys
+    local pane = get_tmux_pane_num(PANE_ID)
+    return 'silent !tmux send -' .. flags .. 't '.. pane .. ' ' .. keys
 end
 
 
@@ -126,10 +139,10 @@ function M.attach_to_pane()
     repeat
         vim.cmd('silent !tmux display-panes -Nbd 0')
         p = vim.fn.input('Attach to pane: ')
-        PANE = get_tmux_pane_id(p)
-    until PANE ~= ''
+        PANE_ID = get_tmux_pane_id(p)
+    until PANE_ID ~= ''
     vim.cmd('redraw')
-    print('Attached to pane ' .. p .. ' (' .. PANE .. ')')
+    print('Attached to pane ' .. p .. ' (' .. PANE_ID .. ')')
 end
 
 
@@ -137,7 +150,7 @@ function M.send_keys(selection)
     local filetype = vim.bo.filetype
     local delimiter = filetypes[filetype]
 
-    if PANE == '' then
+    if PANE_ID == '' then
         M.attach_to_pane()
     end
 
