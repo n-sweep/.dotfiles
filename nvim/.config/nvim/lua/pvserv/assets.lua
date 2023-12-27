@@ -6,8 +6,11 @@ function M.start_server()
     if job_id then
         print('Server is already running')
     else
+        local path = debug.getinfo(1, 'S').source:sub(2)
+        local dir = path:match('(.*/)')
+
         job_id = vim.fn.jobstart(
-            'python ~/Documents/Python/pvserv/run_flask.py',
+            'python ' .. dir .. '/server/run_flask.py',
             { on_exit = function() print('Server exited'); job_id = nil end }
         )
         print('Server started')
