@@ -1,3 +1,5 @@
+*__pycache__/
+
 # Exclude compile
 *packer_compiled.lua
 

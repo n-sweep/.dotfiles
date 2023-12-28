@@ -14,7 +14,7 @@ def main():
     port = 5619
 
     logging.basicConfig(
-        filename='~/.local/share/nvim/pvserv.log',
+        filename=os.path.expanduser('~/.local/share/nvim/pvserv.log'),
         level=logging.INFO
     )
 

@@ -1,4 +1,5 @@
 import os
+import logging
 
 
 class FileHandler:
@@ -9,6 +10,7 @@ class FileHandler:
         self.socketio = socketio
 
         self.ensure_directory()
+        logging.info('server started')
 
     def watch_for_modification(self):
         """ look for change in modified time of `file` every `i` ms """
