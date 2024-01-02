@@ -28,7 +28,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
         if cmp.visible() then
             cmp.select_prev_item()
         elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-            feedkey("<Plug>(vsnip-jump-prev)", "")
+            vim.fn.feedkey("<Plug>(vsnip-jump-prev)", "")
         end
     end, { "i", "s" })
 })
