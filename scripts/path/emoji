@@ -20,7 +20,7 @@ done
 shift $((OPTIND-1))
 
 # set input according to environment
-if [ -n "$VIMRUNTIME" ]; then
+if [ -n "$VIMRUNTIME" ] || [ $# -lt 1 ]; then
     INPUT="$(cat)"
 else
     INPUT="$*"
@@ -76,6 +76,7 @@ function emoji_replace() {
     while IFS= read -r match; do
         if [ ${matches[$match]} ]; then continue; fi
 
+        # strip off colons
         local slug=$(echo $match | sed 's/://g')
         local emoji=$(get_emoji "$slug")
 
