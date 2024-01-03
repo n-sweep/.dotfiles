@@ -29,7 +29,7 @@ exec --no-startup-id nm-applet
 #mouse_warping none
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill ~/.wallpaper
+exec_always --no-startup-id feh --bg-fill /usr/share/backgrounds/wallpaper
 
 # Use pactl to adjust volume in PulseAudio.
 #set $refresh_i3status killall -SIGUSR1 i3status
@@ -127,21 +127,21 @@ set $ws12 "12"
 set $ws13 "13"
 
 # Assign workspaces to monitors
-workspace $ws1 output DP-0
-workspace $ws2 output DP-0
-workspace $ws3 output DP-0
-workspace $ws4 output DP-0
-workspace $ws5 output DP-0
+workspace $ws1 output DP-3
+workspace $ws2 output DP-3
+workspace $ws3 output DP-3
+workspace $ws4 output DP-3
+workspace $ws5 output DP-3
 
-workspace $ws6 output HDMI-0
-workspace $ws7 output HDMI-0
-workspace $ws8 output HDMI-0
-workspace $ws9 output HDMI-0
+workspace $ws6 output DP-2
+workspace $ws7 output DP-2
+workspace $ws8 output DP-2
+workspace $ws9 output DP-2
+workspace $ws10 output DP-2
 
-workspace $ws10 output eDP-1-1
-workspace $ws11 output eDP-1-1
-workspace $ws12 output eDP-1-1
-workspace $ws13 output eDP-1-1
+workspace $ws11 output eDP-1
+workspace $ws12 output eDP-1
+workspace $ws13 output eDP-1
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
