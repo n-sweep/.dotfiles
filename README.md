@@ -1,19 +1,24 @@
 # .dotfiles
-### Using `GNU Stow` to symlink files into home folder  
-0. install `stow`
+
+## Environment Setup
+
+0. update system
     ```sh
-    sudo apt update && sudo apt install -y stow 
+    sudo apt update && sudo apt update -y && sudo autoremove
     ```
 
-1. `git clone` repo into home folder   
+1. install `git`, `stow`, and others
+    ```sh
+    sudo apt install -y git stow tmux ripgrep openssh-server i3 htop xclip neofetch
+    # (?) sudo apt install barrier
+    ```
+
+1. clone this repo & open this file
     ```sh
     cd && git clone https://github.com/n-sweep/.dotfiles
+    vi ~/.dotfiles/README.md
     ```
-1. cd into `.dotfiles` and `stow` the desired directory
-    ```sh
-    stow `dirname` -d ~/.dotfiles -t ~
-    ```
-    > default behavior symlinks the directory to the parent of your current directory
+
 
 ## Table of Contents
 
@@ -36,6 +41,7 @@
 
 ## `README.md`
 This file.
+
 
 ## `bash/`
 Bash settings and aliases
@@ -96,6 +102,7 @@ blur        toggle blur
 1. completion settings
 
 
+
 ## `cl_zsh/.zshrc`
 > [DEPRICATED] laid off lol
 
@@ -105,20 +112,35 @@ blur        toggle blur
 #### Firefox Cuscomization
 Customize firefox to use an image on the system in a blank tab
 
-1. visit `about:support` 
+1. navigate to `about:config`
+1. find `toolkit.legacyUserProfileCustomizations.stylesheets` & toggle to `true`
+1. navigate to `about:support` 
 1. locate Application Basics > Profile Directory
-    - `/home/n/.mozilla/firefox/l7f2epeq.default-release-1695236326892`
-    - this looks like it will change, maybe when firefox is updated. I wonder if there is a way to get it programatically
+    - `/home/n/.mozilla/firefox/ut79gu00.default-release`
+    - this changes, maybe when firefox is updated. I wonder if there is a way to get it programatically
 1. stow the ./chrome folder to the Profile Directory
     ```sh
-    stow chrome -d ~/.dotfiles/firefox -t ~/.mozilla/firefox/l7f2epeq.default-release-1695236326892
+    stow firefox -d ~/.dotfiles -t ~/.mozilla/firefox/ut79gu00.default-release
     ```
 1. copy an image to the file /usr/share/backgrounds/wallpaper to be used as the newtab wallpaper
 
 > **[TODO]** I also have a firefox setting that shrinks the UI. I forget what it is; find and document
+1. navigate to `about:config`
+1. find `perpx`
+1. change to scale where 1 = 100%
 
 ### `chrome/userContent.css`
 CSS for setting blank tab background image
+
+
+## `i3/.config/i3/config`
+
+This directory gets symlinked to the home folder:
+```sh
+mv .config/i3/config .config/i3/default_config.bak
+stow i3 -d ~/.dotfiles -t ~
+```
+
 
 ## `journals/vim.md`
 vim stuff to work on
@@ -208,7 +230,8 @@ This directory contains (primarily bash) scripts
 Scripts in this directory get symlinked to `~/bin`
 
 ```sh
-stow path -d "~/.dotfiles/scripts" -t "$HOME/bin" 
+if [ ! -d "$HOME/bin" ]; then mkdir $HOME/bin; fi
+stow path -d ~/.dotfiles/scripts -t $HOME/bin 
 # OR the alias
 # stowpath 
 ```
