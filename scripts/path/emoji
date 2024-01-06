@@ -20,7 +20,7 @@ done
 shift $((OPTIND-1))
 
 # set input according to environment
-if [ -n "$VIMRUNTIME" ] || [ $# -lt 1 ]; then
+if [ -n "$VIMRUNTIME" ] || [ ! -t 0 ]; then
     INPUT="$(cat)"
 else
     INPUT="$*"
