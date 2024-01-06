@@ -123,7 +123,7 @@ export EDITOR=nvim
 
 # open tmux automatically
 # if sessions exist, reattach, otherwise run tmux startup script
-if [ -z "$TMUX" ]; then
+if [ -z "$TMUX" ] && [ ! -n "$SSH_CONNECTION" ]; then
     if tmux list-sessions 2>/dev/null; then ta; else tm; fi
 fi
 
