@@ -117,6 +117,10 @@ PROMPT_COMMAND="__ps1"
 set -o vi  # vi mode!
 shopt -s expand_aliases
 
+# nvim as default editor
+# [TODO]: check for nvim, fall back on vim, vi
+export EDITOR=nvim
+
 # open tmux automatically
 # if sessions exist, reattach, otherwise run tmux startup script
 if [ -z "$TMUX" ]; then

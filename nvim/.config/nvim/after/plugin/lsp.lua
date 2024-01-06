@@ -35,12 +35,12 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-    'jedi_language_server'
-})
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
-})
+--lsp.ensure_installed({
+    --'jedi_language_server'
+--})
+--lsp.setup_nvim_cmp({
+    --mapping = cmp_mappings
+--})
 
 vim.diagnostic.config({
     virtual_text = true
