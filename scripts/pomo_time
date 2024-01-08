@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+
+stus=$(curl -s localhost:5000/status)
+
+event=$(echo $stus | jq -r .event)
+min=$(echo $stus | jq -r .time_remaining.min)
+sec=$(echo $stus | jq -r .time_remaining.sec)
+exceeded=$(echo $stus | jq -r .time_remaining.time_exceeded)
+
+e=''
+if [ $sec == "null" ] || [ $event == 'stop' ]; then
+    exit
+elif [ $event == 'break' ]; then
+    if [ $exceeded -gt 0 ]; then
+        e=":hourglass-done:-"
+    else
+        e=":hourglass-not-done:"
+    fi
+elif [ $event == 'pause' ]; then
+    e=':zzz:'
+else
+    if [ $exceeded -gt 0 ]; then
+        e=":anger-symbol:-"
+    else
+        e=":tomato:"
+    fi
+fi
+
+echo [$e$min:$sec] | emoji -m
