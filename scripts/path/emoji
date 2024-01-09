@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-# process flag*
+# process flags
 COPY=0
 FILE=0
 MULTI=0

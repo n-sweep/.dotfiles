@@ -1,9 +1,27 @@
 #!/bin/bash
 
-d=$(date +%Y%m%d)
-echo $d
+# process flags
+FILE=0
+while getopts 'f' flag; do
+    case "${flag}" in
+        f) FILE=1;;
+        *) echo "Unexpected option ${flag}"
+        exit 1 ;;
+    esac
+done
 
-mkdir $d
-cd $d
+# drop processed arguments
+shift $((OPTIND-1))
+
+d=$(date +%Y%m%d)
+fn=$(echo "$d $*" | sed "s/ /_/g")
+mkdir $fn
+cd $fn
+
 touch README.md run.py
 echo "# $d $*" > README.md
+
+# create a new jupyter notebook
+$HOME/.dotfiles/jupyter/create_nb.sh $(echo $* | sed "s/ /_/g") > /dev/null
+
+echo $fn
