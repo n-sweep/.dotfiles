@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+
+
+invert_status_color() {
+    tmux set -g status-style $(
+        tmux show -g \
+            | rg "status-style " \
+            | sed 's/"//g; s/fg/ph/g; s/bg/fg/g; s/ph/bg/g' \
+            | awk '{printf "%s,%s\n", $2, $3}'
+    )
+}
+
+
+blink() {
+    dur=${1:-0.25}
+    num=${2:-1}
+
+    for i in $(seq 1 $num); do
+        invert_status_color
+        sleep $dur
+        invert_status_color
+        if [ $i -lt $num ]; then
+            sleep $dur
+        fi
+    done
+}
+
+
+blink &
