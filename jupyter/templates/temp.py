@@ -13,6 +13,11 @@
 
 # %%
 import os
+import closedloop.api_private as api
+import closedloop.ds as ds
+
+cl = api.ClosedLoopClientPrivate("PROD")
+psId = ""
 
 # %%
 # %%

@@ -1,6 +1,8 @@
 #!/bin/bash
 # Create a new jupyter nb from template file
 
+export PATH="$PATH:$HOME/.local/bin"
+
 # TODO: a way to select from multiple templates
 tmp="temp"
 
