@@ -2,6 +2,7 @@
 
 SESSIONS=(
     "_" \
+    "cl" \
     "py" \
     #"mojo" \
     #"go"
@@ -38,7 +39,12 @@ function __session {
 
 function py_session {
     # Start a python session with conda
-    tmux new-session -d -s "$1" -e "CONDA_INIT=True" -c "$HOME/Documents/Python/"
+    tmux new-session -d -s "$1" -e "CONDA_INIT=True" -e "CONDA_STARTUP_ENV=base" -c "$HOME/Documents/Python/"
+}
+
+function cl_session {
+    # Start a python session with conda
+    tmux new-session -d -s "$1" -e "CONDA_INIT=True" -e "CONDA_STARTUP_ENV=cl" -c "$HOME/work/cl/"
 }
 
 function mojo_session {
