@@ -1,5 +1,31 @@
 #!/usr/bin/bash
 
+
+invert_status_color() {
+    tmux set -g status-style $(
+        tmux show -g \
+            | rg "status-style " \
+            | sed 's/"//g; s/fg/ph/g; s/bg/fg/g; s/ph/bg/g' \
+            | awk '{printf "%s,%s\n", $2, $3}'
+    )
+}
+
+
+blink() {
+    num=${1:-1}
+    dur=${2:-0.25}
+
+    for i in $(seq 1 $num); do
+        invert_status_color
+        sleep $dur
+        invert_status_color
+        if [ $i -lt $num ]; then
+            sleep $dur
+        fi
+    done
+}
+
+
 stus=$(curl -s http://127.0.1.1:7666/status)
 event=$(echo $stus | jq -r .event)
 time=$(echo $stus | jq -r '.time_remaining | "\(.min):\(.sec)"')
@@ -25,3 +51,8 @@ else
 fi
 
 echo "[$e$time]" | emoji -m
+
+warn='01:00'
+if [ $time == $warn ] || [ $exceeded -gt 0 ]; then
+    (blink &)
+fi

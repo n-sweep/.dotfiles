@@ -1,0 +1,12 @@
+#!/bin/bash
+
+invert_status() {
+    tmux set -g status-style $(
+        tmux show -g \
+            | rg "status-style " \
+            | sed 's/"//g; s/fg/ph/g; s/bg/fg/g; s/ph/bg/g' \
+            | awk '{printf "%s,%s\n", $2, $3}'
+    )
+}
+
+invert_status
