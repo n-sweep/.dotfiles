@@ -24,6 +24,4 @@ function TelemuxStart()
 end
 
 
-vim.api.nvim_command('command! TMAttach lua TelemuxStart()')
-vim.keymap.set('n', '<leader>t', function() print("that doesn't work any more") end)
-vim.keymap.set('v', '<leader>t', function() print("that doesn't work any more") end)
+vim.keymap.set('n', '<leader>ta', function() TelemuxStart() end)

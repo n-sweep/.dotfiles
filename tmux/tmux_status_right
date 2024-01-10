@@ -2,9 +2,10 @@
 
 func() {
     local np=$(~/.dotfiles/scripts/now_playing)
-    local os=$(~/.dotfiles/scripts/obs_status)
+    #local os=$(~/.dotfiles/scripts/obs_status)
+    local pt=$(~/.dotfiles/scripts/pomo_time)
 
-    local lout="$os$np"
+    local lout="$pt$np"
     local rout="[$(date +"%H:%M %a %b %d")]"
 
     local ww=$(tmux display-message -p "#{window_width}")

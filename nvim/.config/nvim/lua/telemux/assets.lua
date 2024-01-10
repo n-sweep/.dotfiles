@@ -146,6 +146,31 @@ function M.attach_to_pane()
 end
 
 
+function execute_lines(lines)
+    for _, text in ipairs(lines) do
+        -- convert text into a tmux send-keys command
+        local command = generate_command(text, 'l')
+        -- send command text
+        vim.cmd(command)
+        -- send carriage return
+        vim.cmd(generate_command('Enter'))
+
+    end
+end
+
+
+function M.ipython()
+    local tbl = {
+        'ipython --no-autoindent',
+        '%load_ext autoreload',
+        '%autoreload 2',
+        'clear'
+    }
+
+    execute_lines(process_lines(tbl))
+end
+
+
 function M.send_keys(selection)
     local filetype = vim.bo.filetype
     local delimiter = filetypes[filetype]
@@ -158,18 +183,7 @@ function M.send_keys(selection)
     local lines = get_lines(selection, delimiter)
     local processed_lines = process_lines(lines, filetype)
 
-    for _, text in ipairs(processed_lines) do
-
-        -- convert text into a tmux send-keys command
-        local command = generate_command(text, 'l')
-
-        -- send command text
-        vim.cmd(command)
-
-        -- send carriage return
-        vim.cmd(generate_command('Enter'))
-
-    end
+    execute_lines(processed_lines)
 
     if selection then
         -- exit select mode

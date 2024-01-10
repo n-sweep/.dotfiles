@@ -148,6 +148,11 @@ export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 clear && neofetch
 
 
+### closedloop #################################################################
+
+export VAULT_ADDR=https://vault.it.cl-aws.net:8200
+
+
 ### anaconda initialization ####################################################
 
 # exit the script before conda initialize unless $CONDA_INIT is set
