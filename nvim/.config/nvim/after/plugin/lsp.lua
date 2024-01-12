@@ -15,38 +15,21 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>eN", "<CMD>lua vim.diagnostic.goto_prev()<CR>")
 end)
 
---local cmp_mappings = lsp.defaults.cmp_mappings({
-    ---- Scroll docs
-    --['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    --['<C-d>'] = cmp.mapping.scroll_docs(4),
-
-    ---- Tab scrolls autocomplete options
-    --["<Tab>"] = cmp.mapping(function(fallback)
-        --if cmp.visible() then
-            --cmp.select_next_item()
-        --elseif has_words_before() then
-            --cmp.complete()
-        --else
-            ---- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-            --fallback()
-        --end
-    --end, { "i", "s" }),
-
-    --["<S-Tab>"] = cmp.mapping(function()
-        --if cmp.visible() then
-            --cmp.select_prev_item()
-        --elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-            --vim.fn.feedkey("<Plug>(vsnip-jump-prev)", "")
-        --end
-    --end, { "i", "s" })
---})
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
-    ensure_installed = { 'jedi_language_server' },
-    handlers = { lsp.default_setup }
+    ensure_installed = { 'pylsp' },
+    handlers = {
+        lsp.default_setup,
+        pylsp = function()
+            require('lspconfig').pylsp.setup({
+                capabilities = require('cmp_nvim_lsp').default_capabilities(
+                    vim.lsp.protocol.make_client_capabilities()
+                )
+            })
+        end
+    }
 })
 
 cmp.setup({
@@ -61,12 +44,12 @@ cmp.setup({
         { name = "spell" },
         { name = "luasnip" },
     },
+    formatting = lsp.cmp_format(),
     mapping = cmp.mapping.preset.insert({
-        -- `Enter` key to confirm completion
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        -- supa tab
+        ['<Tab>'] = cmp_action.luasnip_supertab(),
+        ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 
-        -- Ctrl+Space to trigger completion menu
-        ['<C-Space>'] = cmp.mapping.complete(),
 
         -- Navigate between snippet placeholder
         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
@@ -77,6 +60,6 @@ cmp.setup({
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
     })
 })
+lsp.setup()
 
--- not sure what this does
 vim.diagnostic.config({ virtual_text = true })
