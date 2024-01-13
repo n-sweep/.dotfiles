@@ -28,12 +28,7 @@ return require('packer').startup(function(use)
     }
 
     -- color schemes
-    use {'gruvbox-community/gruvbox', as = 'gruvbox'}
     use {'sainnhe/gruvbox-material', as = 'gruvbox-material'}
-    use {'sainnhe/everforest', as = 'everforest'}
-    use {'Mofiqul/dracula.nvim', as = 'dracula'}
-    use {'jnurmine/Zenburn', as = 'zenburn'}
-    use {'shaunsingh/nord.nvim', as = 'nord'}
 
     -- Telescope
     use {
