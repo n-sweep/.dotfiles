@@ -3,7 +3,6 @@ from app import app, socketio
 import logging
 import os
 import socket
-import time
 import threading
 import webbrowser
 
@@ -11,7 +10,7 @@ import webbrowser
 def get_lan_ip():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 80))  # Use a well-known external server's IP address
+        s.connect(('8.8.8.8', 80))
         return s.getsockname()[0]
 
     except socket.error:
@@ -41,6 +40,8 @@ def main():
     config = {
         'file': plot_file,
         'interval': 0.1,
+        'ip': ip,
+        'port': port,
         'url': f'http://{ip}:{port}'
     }
 
