@@ -1,15 +1,4 @@
-local vim = vim
-
-require('nsweep.plugin')
-require('nsweep.set')
-require('nsweep.remap')
-
-local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-
-local nsweep_group = augroup('nsweep', {})
---local center_group = augroup('center', {})
-local yank_group = augroup('HighlightYank', {})
 
 -- momentarily highlight yanked text
 autocmd('TextYankPost', {
