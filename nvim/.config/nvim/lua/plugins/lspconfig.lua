@@ -7,11 +7,13 @@ P.dependencies = {
     "williamboman/mason-lspconfig.nvim",
 }
 
+function P.init()
+    vim.diagnostic.config({ virtual_text = true })
+end
+
 function P.config()
     local lspconfig = require("lspconfig")
     local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-    vim.diagnostic.config({ virtual_text = true })
 
     require("mason").setup({
         lazy = false,
@@ -29,7 +31,7 @@ function P.config()
         },
         handlers = {
             function(server)
-                -- lspconfig[server].setup({ capabilities = lsp_capabilities })
+                 lspconfig[server].setup({ capabilities = lsp_capabilities })
             end,
         }
     })
