@@ -8,6 +8,7 @@ return {
     'tpope/vim-dadbod',
     'tpope/vim-surround',
     'Vimjas/vim-python-pep8-indent',
+    'windwp/nvim-autopairs',
 
     {
         'goerz/jupytext.vim',
