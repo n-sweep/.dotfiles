@@ -8,9 +8,9 @@ return {
     'preservim/nerdcommenter',
     'quarto-dev/quarto-nvim',
     'tpope/vim-dadbod',
-    'tpope/vim-surround',
     'Vimjas/vim-python-pep8-indent',
 
+    { 'kylechui/nvim-surround', config=true },
     { 'windwp/nvim-autopairs', config=true },
 
     {
