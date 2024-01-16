@@ -1,14 +1,17 @@
+local vim = vim
 return {
 
     'czheo/mojo.vim',
     "folke/which-key.nvim",
     'jmbuhr/otter.nvim',
+    'j-hui/fidget.nvim',
     'preservim/nerdcommenter',
     'quarto-dev/quarto-nvim',
     'tpope/vim-dadbod',
     'tpope/vim-surround',
     'Vimjas/vim-python-pep8-indent',
-    'windwp/nvim-autopairs',
+
+    { 'windwp/nvim-autopairs', config=true },
 
     {
         'goerz/jupytext.vim',
@@ -34,9 +37,7 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        config = function()
-            require('lualine').setup({ options = {theme = 'gruvbox'} })
-        end,
+        opts={ options = {theme = 'gruvbox'} },
     },
 
 }
