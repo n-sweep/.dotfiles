@@ -31,3 +31,6 @@ vim.keymap.set("v", "<leader>d", '"_d')
 
 -- Toggle linebreak & wrap
 vim.keymap.set('n', '<leader>sw', ':set wrap! linebreak!<CR>')
+
+-- nohl hotkey
+vim.keymap.set('n', '<C-h>', ':nohl<CR>')
