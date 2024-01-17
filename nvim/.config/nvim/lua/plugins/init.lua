@@ -12,12 +12,9 @@ return {
 
     { 'kylechui/nvim-surround', config=true },
     { 'windwp/nvim-autopairs', config=true },
-
     {
-        'goerz/jupytext.vim',
-        init = function()
-            vim.g.jupytext_fmt = 'py:percent'
-        end
+        'GCBallesteros/jupytext.nvim',
+        opts = { output_exten = 'light' }
     },
 
     {
