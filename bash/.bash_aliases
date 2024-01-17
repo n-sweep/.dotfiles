@@ -6,6 +6,15 @@ alias cn="c && neofetch"
 alias pst="xclip -o -selection clipboard"
 alias cpy="xclip -i -selection clipboard"
 
+# dot navigation aliases
+dots="."
+path="cd "
+for i in {1..5}; do
+    dots="${dots}."
+    path="${path}../"
+    alias "$dots"="$path"
+done
+
 ### script aliases #############################################################
 
 # scripts are symlinked to ~/bin
@@ -19,6 +28,12 @@ alias journal="zk '# \d+ Daily Journal'"
 
 # Jupytext create new notebook
 alias nnb="$HOME/.dotfiles/jupyter/create_nb.sh"
+
+### git ########################################################################
+
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit -m"
 
 
 ### tmux #######################################################################
@@ -51,12 +66,3 @@ function obs_toggle_blur() {
 
 alias switch="obs_switch_scene"
 alias blur="obs_toggle_blur"
-
-# dot navigation aliases
-dots="."
-path="cd "
-for i in {1..5}; do
-    dots="${dots}."
-    path="${path}../"
-    alias "$dots"="$path"
-done
