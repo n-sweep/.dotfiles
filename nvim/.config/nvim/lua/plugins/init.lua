@@ -2,6 +2,7 @@ local vim = vim
 return {
 
     'czheo/mojo.vim',
+    "Exafunction/codeium.vim",
     "folke/which-key.nvim",
     'jmbuhr/otter.nvim',
     'j-hui/fidget.nvim',
