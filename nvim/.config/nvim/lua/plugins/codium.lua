@@ -2,8 +2,8 @@ local vim = vim
 local P = { "Exafunction/codeium.vim" }
 
 function P.init()
-    vim.g.codium_enabled = false
-    vim.g.codium_no_map_tab = 1
+    vim.g.codeium_enabled = false
+    vim.g.codeium_no_map_tab = 1
 end
 
 function P.config()
