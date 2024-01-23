@@ -34,7 +34,7 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        opts={ options = {theme = 'gruvbox'} },
+        opts={ options = {theme = 'everforest'} },
     },
 
 }
