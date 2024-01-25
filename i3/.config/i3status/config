@@ -1,0 +1,59 @@
+general {
+    output_format = "i3bar"
+    colors = true
+    interval = 5
+    separator = "|"
+}
+
+order += "ethernet eth0"
+ethernet eth0 {
+    format_up = "E: %ip (%speed)"
+    format_down = "E: down"
+}
+
+order += "wireless wlp0s20f3"
+wireless wlp0s20f3 {
+    format_up = "W: (%quality at %essid, %bitrate) %ip"
+    format_down = "W: down"
+}
+
+order += "path_exists VPN"
+path_exists VPN {
+    # path exists when vpn is active
+    path = "/proc/sys/net/ipv4/conf/tun0"
+}
+
+order += "memory"
+memory {
+    format = "🧠%used"
+    threshold_degraded = "10%"
+    format_degraded = "❗MEMORY: %free"
+}
+
+order += "disk /"
+disk "/" {
+    format = "🗄️%free"
+}
+
+order += "cpu_temperature 0"
+cpu_temperature 0 {
+    format = "🌡️%degrees°C"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
+}
+
+order += "battery all"
+battery all {
+    format = "%status %percentage %remaining %emptytime"
+    format_down = "No battery"
+    status_bat = "🪫"
+    status_chr = "⚡"
+    status_full = "🔋"
+    status_unk = "?"
+    path = "/sys/class/power_supply/BAT%d/uevent"
+    low_threshold = 20
+}
+
+order += "tztime local"
+tztime local {
+    format = "🕰️%Y-%m-%d %H:%M:%S"
+}

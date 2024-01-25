@@ -226,6 +226,6 @@ bindsym $mod+r mode "resize"
 
 # Set the font using environment var
 bar {
-    position top
+    position bottom
     status_command i3status
 }
