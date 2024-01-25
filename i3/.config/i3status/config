@@ -13,7 +13,7 @@ ethernet eth0 {
 
 order += "wireless wlp0s20f3"
 wireless wlp0s20f3 {
-    format_up = "W: (%quality at %essid, %bitrate) %ip"
+    format_up = "W: (%quality @ %essid) %ip"
     format_down = "W: down"
 }
 
