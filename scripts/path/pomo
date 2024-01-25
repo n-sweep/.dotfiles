@@ -1,3 +1,10 @@
 #!/usr/bin/bash
 
-curl -s http://192.168.0.130:7666/$* > /dev/null
+if [ "$*" == "status" ]; then
+    # the status command should return the status
+    curl -s http://192.168.0.130:7666/$*
+else
+    # other commands shouldn't reutrn anything
+    curl -s http://192.168.0.130:7666/$* > /dev/null
+    ~/.dotfiles/scripts/pomos_today > /tmp/pomos
+fi

@@ -5,6 +5,13 @@ general {
     separator = "|"
 }
 
+order += "read_file POMOS"
+read_file POMOS {
+    format = "%content"
+    format_bad = ""
+    path = "/tmp/pomos"
+}
+
 order += "ethernet eth0"
 ethernet eth0 {
     format_up = "E: %ip (%speed)"
