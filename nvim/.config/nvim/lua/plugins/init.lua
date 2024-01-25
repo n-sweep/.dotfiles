@@ -4,7 +4,6 @@ return {
     'czheo/mojo.vim',
     "folke/which-key.nvim",
     'jmbuhr/otter.nvim',
-    'j-hui/fidget.nvim',
     'preservim/nerdcommenter',
     'quarto-dev/quarto-nvim',
     'tpope/vim-dadbod',
@@ -12,6 +11,7 @@ return {
 
     { 'kylechui/nvim-surround', config=true },
     { 'windwp/nvim-autopairs', config=true },
+
     {
         'GCBallesteros/jupytext.nvim',
         opts = { output_exten = 'light' }

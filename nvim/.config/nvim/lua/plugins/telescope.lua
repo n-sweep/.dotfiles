@@ -1,3 +1,4 @@
+local vim = vim
 local P = {'nvim-telescope/telescope.nvim'}
 
 P.dependencies = {
@@ -10,7 +11,7 @@ P.cmd = {'Telescope'}
 P.defaults = { sorting_strategy = 'ascending'}
 
 function P.init()
-    vim.keymap.set('n', '<leader>ff', ":Telescope find_files<CR>")  -- I hate that you have to do this
+    vim.keymap.set('n', '<leader>ff', ":Telescope find_files<CR>")
     vim.keymap.set('n', '<leader>ft', ":Telescope find_files hidden=true<CR>")
     vim.keymap.set('n', '<leader>fb', ":Telescope buffers<CR>")
     vim.keymap.set('n', '<leader>fg', ":Telescope live_grep<CR>")
