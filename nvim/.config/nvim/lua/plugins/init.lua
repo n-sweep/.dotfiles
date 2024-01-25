@@ -2,7 +2,6 @@ local vim = vim
 return {
 
     'czheo/mojo.vim',
-    "folke/which-key.nvim",
     'jmbuhr/otter.nvim',
     'preservim/nerdcommenter',
     'quarto-dev/quarto-nvim',
