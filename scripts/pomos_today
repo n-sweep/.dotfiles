@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+curl -s 192.168.0.130:7666/status \
+    | jq .pomos_today \
+    | xargs -I % sh -c 'yes ":tomato:" | head -n % | xargs' \
+    | sed 's/ //g' \
+    | emoji -m
