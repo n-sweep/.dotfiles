@@ -12,12 +12,9 @@
 #       name: Python3
 # ---
 
-# %% [markdown]
-# # Template Notebook
-
 # %%
 import closedloop.api_private as api
-import plotly.express as px
+# import plotly.express as px
 import plotly.io as pio
 import pandas as pd
 
@@ -37,10 +34,12 @@ def pwrite(fig, plt='/tmp/vis/plot.json'):
     fig = fig.update_layout(autosize=False)
     fig.write_json(plt)
 
+# %% [markdown]
+# # Template Notebook
 
 # %%
 cl = api.ClosedLoopClientPrivate("PROD")
-psId = "ltc_aco"
+psId = ""
 cl.getPersonStore(psId).name
 
 # %%
