@@ -45,7 +45,7 @@ disk "/" {
 order += "cpu_temperature 0"
 cpu_temperature 0 {
     format = "🌡️%degrees°C"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input"
 }
 
 order += "battery all"
