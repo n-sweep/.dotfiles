@@ -3,7 +3,6 @@ return {
 
     'czheo/mojo.vim',
     'jmbuhr/otter.nvim',
-    'preservim/nerdcommenter',
     'quarto-dev/quarto-nvim',
     'tpope/vim-dadbod',
     'Vimjas/vim-python-pep8-indent',
