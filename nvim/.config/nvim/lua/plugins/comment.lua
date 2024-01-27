@@ -2,6 +2,6 @@ local P = { 'numToStr/Comment.nvim' }
 
 P.lazy = false
 
-opts = {}
+P.opts = {}
 
 return P
