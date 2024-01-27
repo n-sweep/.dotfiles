@@ -19,7 +19,7 @@ vim.opt.undofile = true
 --vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
-vim.opt.conceallevel = 0
+vim.opt.conceallevel = 1
 vim.opt.scrolloff = 1999
 vim.opt.signcolumn = 'yes'
 vim.opt.colorcolumn = '80'
