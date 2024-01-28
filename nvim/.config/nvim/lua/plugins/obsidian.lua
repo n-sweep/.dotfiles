@@ -8,11 +8,11 @@ P.dependencies = {
     'nvim-lua/plenary.nvim',
 }
 
+-- populate P.event
 P.event = {}
-
 -- always start obsidian when in the obsidian directory
 local events = { "BufReadPre", "BufNewFile", "VimEnter" }
-local locs = { '/Obsidian/*', '/Obsidian/**/*' }
+local locs = { '/Obsidian', '/Obsidian/*', '/Obsidian/**/*' }
 for _, event in pairs(events) do
     for _, loc in pairs(locs) do
         local cmd = event .. " " .. fn.expand("~") .. loc
@@ -21,21 +21,28 @@ for _, event in pairs(events) do
 end
 
 P.opts = {
-    workspaces = {}
+    workspaces = {
+        {
+            name = "slipbox",
+            path = "~/Obsidian/slipbox",
+            overrides = {
+                notes_subdir = "notes",
+                daily_notes = {
+                    folder = "notes/daily"
+                }
+            }
+        },
+        {
+            name = "cl",
+            path = "~/Obsidian/cl",
+            overrides = {
+                notes_subdir = "notes"
+            }
+        },
+    },
+    completion = {
+        new_notes_location = "notes_subdir"
+    },
 }
-
--- insert each directory in ~/Obsidian as a workspace
-local dir = fn.expand( '~/Obsidian')
-local dirs = fn.globpath(dir, "*", 0, 1)
-
--- for each directory, add it to opts.workspaces
-for _, filepath in pairs(dirs) do
-    if fn.isdirectory(filepath) == 1 then
-        table.insert(P.opts.workspaces, {
-            name = fn.fnamemodify(filepath, ":t"),
-            path = filepath
-        })
-    end
-end
 
 return P

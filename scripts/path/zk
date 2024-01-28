@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-loc="$HOME/.zettelkasten"
+loc="$HOME/Obsidian/slipbox"
 
 
 if [ -z "$1" ]; then
