@@ -15,8 +15,10 @@ function P.init()
     vim.keymap.set('n', '<leader>ft', ":Telescope find_files hidden=true<CR>")
     vim.keymap.set('n', '<leader>fb', ":Telescope buffers<CR>")
     vim.keymap.set('n', '<leader>fg', ":Telescope live_grep<CR>")
-    vim.keymap.set('n', '<leader>gg', ":Telescope git_files<CR>")
+    vim.keymap.set('n', '<leader>fc', ":Telescope commands<CR>")
+    vim.keymap.set('n', '<leader>fC', ":Telescope command_history<CR>")
     vim.keymap.set('n', '<leader>fh', ":Telescope help_tags<CR>")
+    vim.keymap.set('n', '<leader>gg', ":Telescope git_files<CR>")
     vim.keymap.set('n', '<leader>dd', ":Telescope lsp_definitions<CR>")
 end
 
