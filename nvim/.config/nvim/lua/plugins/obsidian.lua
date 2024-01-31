@@ -54,8 +54,9 @@ function P.init()
     vim.keymap.set('n', '<leader>bT', ":ObsidianTomorrow <CR>")
     vim.keymap.set('n', '<leader>by', ":ObsidianYesterday <CR>")
     vim.keymap.set('n', '<leader>bs', ":ObsidianSearch <CR>")
-    vim.keymap.set('n', '<leader>bl', ":ObsidianLink <CR>")
-    vim.keymap.set('n', '<leader>bL', ":ObsidianLinkNew <CR>")
+    vim.keymap.set('v', 'bs', ":ObsidianSearch <CR>")
+    vim.keymap.set('v', 'bl', ":ObsidianLink <CR>")
+    vim.keymap.set('v', 'bL', ":ObsidianLinkNew <CR>")
 end
 
 return P
