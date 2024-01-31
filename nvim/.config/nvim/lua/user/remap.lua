@@ -4,7 +4,8 @@ local vim = vim
 vim.keymap.set("n", "<leader>w", vim.cmd.w)
 
 -- Quick quitting
-vim.keymap.set("n", "<leader>qq", ":qa<CR>")
+vim.keymap.set("n", "<leader>qq", ":q<CR>")
+vim.keymap.set("n", "<leader>qQ", ":qa<CR>")
 vim.keymap.set("n", "<leader>QQ", ":qa!<CR>")
 
 -- Insert new line w/o entering insert mode
