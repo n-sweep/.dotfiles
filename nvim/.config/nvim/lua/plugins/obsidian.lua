@@ -1,3 +1,4 @@
+local vim = vim
 local fn = vim.fn
 local P = { "epwalsh/obsidian.nvim" }
 
@@ -45,5 +46,16 @@ P.opts = {
         new_notes_location = "notes_subdir"
     },
 }
+
+function P.init()
+    vim.keymap.set('n', '<CR>', ":ObsidianFollowLink <CR>")
+    vim.keymap.set('n', '<leader>bb', ":ObsidianBacklinks <CR>")
+    vim.keymap.set('n', '<leader>bt', ":ObsidianToday <CR>")
+    vim.keymap.set('n', '<leader>bT', ":ObsidianTomorrow <CR>")
+    vim.keymap.set('n', '<leader>by', ":ObsidianYesterday <CR>")
+    vim.keymap.set('n', '<leader>bs', ":ObsidianSearch <CR>")
+    vim.keymap.set('n', '<leader>bl', ":ObsidianLink <CR>")
+    vim.keymap.set('n', '<leader>bL', ":ObsidianLinkNew <CR>")
+end
 
 return P
