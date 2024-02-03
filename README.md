@@ -50,61 +50,21 @@ This directory gets symlinked to the home folder:
 ```sh
 stow bash -d ~/.dotfiles -t ~
 ```
-
 ### `.bash_aliases`
-Bash aliases:
-```
-### misc #######################################################################
-c           clear
-datedir     create a directory with today's date + a README.md inside
-nnb         create a new jupyter notebook with JupyText
-pst         paste from clipboard
-q           duck duck go
-qq          chat gpt
-ta          tmux quick reattach
-tm          tmux startup / reattach
-zk          open zettelkasten in nvim
 
-### obs ########################################################################
-
-obs         alias for obs-cli w/ quiet flag and security token
-            "$HOME/.config/obs/token"
-cam         toggle camera
-camstat     toggle camera static
-switch      switch to scene (arg)
-blur        toggle blur
-```
+Bash aliases
 
 ### `.bashrc`
 1. default bash settings
-    1. some settings retained from ubuntu's bash defaults
+1. history settings
 1. smart prompt
-    1. adapted from angery rob >:( (github.com/rwxrob)
-    1. adjust format depending on length
-    1. show conda environment
-    1. show git branch
 1. personal settings
-    1. vi mode!
-    1. `shopt -s expand_aliases` I don't remember what this does
-    1. open tmux automatically
-    1. fzf initialization
-        1. ctrl + R for command history
-        1. ctrl + T for file/dir fzf
-    1. paths
-        1. bash scripts
-        1. go
-        1. mojo
-    1. clear & run neofetch
+1. cl settings
 1. anaconda initialization (automatically generated)
 
 ### `.inputrc`
 1. change cursor depending on vi mode
 1. completion settings
-
-
-
-## `cl_zsh/.zshrc`
-> [DEPRICATED] laid off lol
 
 
 ## `firefox/`
@@ -141,13 +101,6 @@ mv .config/i3/config .config/i3/default_config.bak
 stow i3 -d ~/.dotfiles -t ~
 ```
 
-
-## `journals/vim.md`
-vim stuff to work on
-
-> **[TODO]** Depricate - this should be moved to / removed in favor of the zettelkasten
-
-
 ## `jupyter/`
 Settings for jupyter
 
@@ -168,12 +121,6 @@ Use JupyText to create a new jupyter notebook based on a template
 Notebook templates
 
     temp.py
-
-
-## `noted/.notedconfig`
-> [DEPRICATED] in favor of zettelkasten.
-
-> **[TODO]** uninstall noted
 
 
 ## `nvim/.config/`
@@ -288,7 +235,3 @@ stow wezterm -d ~/.dotfiles -t ~
 
 ### `.wezterm.lua`
 > **[TODO]** document
-
-
-## `zsh/.zshrc`
-> [DEPRICATED] in favor of bash
