@@ -19,7 +19,7 @@ function P.init()
     vim.keymap.set('n', '<leader>fC', ":Telescope command_history<CR>")
     vim.keymap.set('n', '<leader>fh', ":Telescope help_tags<CR>")
     vim.keymap.set('n', '<leader>gg', ":Telescope git_files<CR>")
-    vim.keymap.set('n', '<leader>dd', ":Telescope lsp_definitions<CR>")
+    vim.keymap.set('n', '<leader>ld', ":Telescope lsp_definitions<CR>")
 end
 
 function P.config()

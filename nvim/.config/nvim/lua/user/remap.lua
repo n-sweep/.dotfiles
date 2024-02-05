@@ -26,10 +26,6 @@ vim.keymap.set("v", "<leader>V", '"+P')
 -- Paste over selection w/o yanking
 vim.keymap.set("x", "<leader>p", '"_dP')
 
--- Delete w/o yanking
-vim.keymap.set("n", "<leader>d", '"_d')
-vim.keymap.set("v", "<leader>d", '"_d')
-
 -- Toggle linebreak & wrap
 vim.keymap.set('n', '<leader>sw', ':set wrap! linebreak!<CR>')
 
