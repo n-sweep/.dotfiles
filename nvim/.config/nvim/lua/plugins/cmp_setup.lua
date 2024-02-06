@@ -1,3 +1,5 @@
+local vim = vim
+local select_opts = select_opts
 local P = {"hrsh7th/nvim-cmp"}
 
 P.dependencies = {
@@ -22,6 +24,13 @@ function P.config()
     local luasnip = require('luasnip')
 
     cmp.setup({
+
+        snippet = {
+            expand = function(args)
+                require('luasnip').lsp_expand(args.body)
+            end
+        },
+
         sources = {
             { name = "nvim_lsp" },
             { name = "path" },
@@ -84,6 +93,7 @@ function P.config()
                 end
             end, {'i', 's'}),
         },
+
     })
 
 end
