@@ -9,7 +9,7 @@ end
 function P.config()
 
     vim.keymap.set(
-        'i', '<C-Space>',
+        'i', '<M-Space>',
         function() return vim.fn['codeium#Accept']() end,
         { expr = true , silent = true }
     )
