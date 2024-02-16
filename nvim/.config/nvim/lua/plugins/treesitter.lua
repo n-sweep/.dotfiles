@@ -28,7 +28,7 @@ P.opts = {
     auto_install = true,
 }
 
-function P.config(name, opts)
+function P.config(_, opts)
     require('nvim-treesitter.configs').setup(opts)
 end
 
