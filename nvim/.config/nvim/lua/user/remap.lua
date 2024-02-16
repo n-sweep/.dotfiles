@@ -29,5 +29,5 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 -- Toggle linebreak & wrap
 vim.keymap.set('n', '<leader>sw', ':set wrap! linebreak!<CR>')
 
--- nohl hotkey
-vim.keymap.set('n', '<C-h>', ':nohl<CR>')
+-- esc in normal mode turns of hl
+vim.keymap.set('n', '<ESC>', ':nohl<CR>')

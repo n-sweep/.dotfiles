@@ -1,4 +1,5 @@
 local vim = vim
+
 return {
 
     'czheo/mojo.vim',
