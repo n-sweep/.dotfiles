@@ -15,6 +15,10 @@ for i in {1..5}; do
     alias "$dots"="$path"
 done
 
+# neovim
+alias vim=nvim
+alias vi=nvim
+
 ### script aliases #############################################################
 
 # scripts are symlinked to ~/bin
