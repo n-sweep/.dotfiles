@@ -21,7 +21,7 @@ rand_dist() {
     dists="windows macos"
     echo $dists | tr ' ' '\n' | shuf -n 1
 }
-alias cn="neofetch --ascii_distro $(rand_dist)"
+alias cn="c && neofetch --ascii_distro $(rand_dist)"
 
 
 ### script aliases #############################################################
