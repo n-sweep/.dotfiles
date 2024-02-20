@@ -1,7 +1,5 @@
 alias c=clear
 
-alias cn="c && neofetch"
-
 # copy/paste
 alias pst="xclip -o -selection clipboard"
 alias cpy="xclip -i -selection clipboard"
@@ -19,6 +17,13 @@ done
 alias vim=nvim
 alias vi=nvim
 
+rand_dist() {
+    dists="windows macos"
+    echo $dists | tr ' ' '\n' | shuf -n 1
+}
+alias cn="neofetch --ascii_distro $(rand_dist)"
+
+
 ### script aliases #############################################################
 
 # scripts are symlinked to ~/bin
@@ -32,6 +37,7 @@ alias journal="zk '# \d+ Daily Journal'"
 
 # Jupytext create new notebook
 alias nnb="$HOME/.dotfiles/jupyter/create_nb.sh"
+
 
 ### git ########################################################################
 

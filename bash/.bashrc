@@ -145,7 +145,7 @@ export MODULAR_HOME="$HOME/.modular"
 export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # run neofetch on startup
-clear && neofetch
+cn
 
 
 ### closedloop #################################################################
