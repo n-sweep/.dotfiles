@@ -12,15 +12,15 @@ read_file POMOS {
     path = "/tmp/pomos"
 }
 
-order += "ethernet eth0"
-ethernet eth0 {
+order += "ethernet enx8cae4cbc6f02"
+ethernet enx8cae4cbc6f02 {
     format_up = "E: %ip (%speed)"
     format_down = "E: down"
 }
 
 order += "wireless wlp0s20f3"
 wireless wlp0s20f3 {
-    format_up = "W: (%quality @ %essid) %ip"
+    format_up = "W: %ip (%quality @ %essid)"
     format_down = "W: down"
 }
 
@@ -57,7 +57,7 @@ battery all {
     status_full = "🔋"
     status_unk = "?"
     path = "/sys/class/power_supply/BAT%d/uevent"
-    low_threshold = 20
+    low_threshold = 80
 }
 
 order += "tztime local"
