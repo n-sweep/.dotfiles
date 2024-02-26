@@ -1,4 +1,4 @@
-local vim = vim
+ local vim = vim
 
 return {
 
@@ -8,6 +8,8 @@ return {
     'tpope/vim-dadbod',
     'Vimjas/vim-python-pep8-indent',
 
+    { 'n-sweep/telemux-nvim', config = function() require("telemux") end },
+    { 'n-sweep/pvserv', config = function() require("pvserv") end },
     { 'kylechui/nvim-surround', config=true },
     { 'windwp/nvim-autopairs', config=true },
 
