@@ -10,8 +10,10 @@ return {
 
     { 'n-sweep/telemux-nvim', config = function() require("telemux") end },
     { 'n-sweep/pvserv', config = function() require("pvserv") end },
+
     { 'kylechui/nvim-surround', config=true },
     { 'windwp/nvim-autopairs', config=true },
+    { 'j-hui/fidget.nvim', opts={} },
 
     {
         'GCBallesteros/jupytext.nvim',
