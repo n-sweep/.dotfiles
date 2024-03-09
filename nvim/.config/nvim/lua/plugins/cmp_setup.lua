@@ -1,6 +1,6 @@
 local vim = vim
 local select_opts = select_opts
-local P = {"hrsh7th/nvim-cmp"}
+local P = { "hrsh7th/nvim-cmp" }
 
 P.dependencies = {
     -- sources
