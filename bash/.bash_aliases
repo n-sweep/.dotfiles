@@ -17,6 +17,10 @@ done
 alias vim=nvim
 alias vi=nvim
 
+# openvpn
+alias vpn="openvpn3 session-start --config cl"
+
+# randombly choose an icon for neofetch
 rand_dist() {
     dists="windows macos"
     echo $dists | tr ' ' '\n' | shuf -n 1
