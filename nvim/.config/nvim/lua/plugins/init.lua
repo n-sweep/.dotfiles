@@ -8,12 +8,13 @@ return {
     'tpope/vim-dadbod',
     'Vimjas/vim-python-pep8-indent',
 
+    -- everything in brackets should probably be moved to their own files
     { 'n-sweep/telemux-nvim', config = function() require("telemux") end },
     { 'n-sweep/pvserv', config = function() require("pvserv") end },
 
     { 'kylechui/nvim-surround', config=true },
     { 'windwp/nvim-autopairs', config=true },
-    { 'j-hui/fidget.nvim', opts={} },
+    { 'j-hui/fidget.nvim', opts = {} },
 
     {
         'GCBallesteros/jupytext.nvim',

@@ -1,6 +1,13 @@
 local vim = vim
---local P = { "sainnhe/gruvbox-material" }
-local P = { "sainnhe/everforest" }
+local P = {
+    "sainnhe/everforest",
+    "sainnhe/gruvbox-material",
+    "rebelot/kanagawa.nvim",
+    "mellow-theme/mellow.nvim",
+    "sebasruiz09/fizz.nvim",
+    "AlexvZyl/nordic.nvim",
+    "ribru17/bamboo.nvim"
+}
 
 P.opts = {
     lazy = false,
@@ -8,15 +15,12 @@ P.opts = {
 }
 
 function P.config()
-    --vim.g.gruvbox_material_background = 'hard'
-    vim.g.everforest_background = 'soft'
 
-    --vim.cmd([[colorscheme gruvbox-material]])
-    vim.cmd([[colorscheme everforest]])
+    -- default color scheme
+    vim.cmd([[colorscheme kanagawa]])
 
     -- Transparent background
     -- vim.cmd([[hi normal guibg=NONE]])
-
 end
 
 return P
