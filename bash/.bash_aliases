@@ -13,6 +13,9 @@ for i in {1..5}; do
     alias "$dots"="$path"
 done
 
+# lock screen
+alias lock="i3lock -c 000000"
+
 # neovim
 alias vim=nvim
 alias vi=nvim
