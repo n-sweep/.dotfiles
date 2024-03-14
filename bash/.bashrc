@@ -128,9 +128,13 @@ if [ -z "$TMUX" ] && [ ! -n "$SSH_CONNECTION" ]; then
 fi
 
 # fzf init
-if command -v fzf-share >dev/null; then
-    source "$(fzf)share/key-bindings.bash"
-    source "$(fzf)share/completion.bash"
+if grep -qi 'nixos' /etc/*-release ; then
+    if command -v fzf-share >dev/null; then
+        source "$(fzf)share/key-bindings.bash"
+        source "$(fzf)share/completion.bash"
+    fi
+else
+    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 fi
 
 export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path '*/.git/*' -o -path '*/.git' -prune \)'
