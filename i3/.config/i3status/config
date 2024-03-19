@@ -12,8 +12,8 @@ read_file POMOS {
     path = "/tmp/pomos"
 }
 
-order += "ethernet enx8cae4cbc6f02"
-ethernet enx8cae4cbc6f02 {
+order += "ethernet enp0s13f0u1u2i5"
+ethernet enp0s13f0u1u2i5 {
     format_up = "E: %ip (%speed)"
     format_down = "E: down"
 }
