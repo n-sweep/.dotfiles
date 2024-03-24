@@ -110,6 +110,10 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+# floating windows
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="alert"] floating enable
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
