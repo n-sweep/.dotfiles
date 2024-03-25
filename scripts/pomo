@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 if [ "$*" == "status" ]; then
     # the status command should return the status

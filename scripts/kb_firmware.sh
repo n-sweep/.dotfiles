@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Along with kb_firmware.service, this automatically extracts the most recently
 # downloaded firmware and pushes the left.uf2 file to the keyboard when the

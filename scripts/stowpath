@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 cd "$HOME/.dotfiles/scripts"
 stow path -t "$HOME/bin"

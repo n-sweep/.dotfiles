@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 pm_count=$(curl -s 192.168.0.130:7666/status | jq .pomos_today)
 

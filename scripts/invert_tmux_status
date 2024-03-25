@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 invert_status() {
     tmux set -g status-style $(
