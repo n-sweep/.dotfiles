@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 func() {
     local np=$(~/.dotfiles/scripts/now_playing)

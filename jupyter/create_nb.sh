@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Create a new jupyter nb from template file
 
 export PATH="$PATH:$HOME/.local/bin"

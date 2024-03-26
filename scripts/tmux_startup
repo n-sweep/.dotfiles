@@ -39,12 +39,12 @@ function __session {
 
 function py_session {
     # Start a python session with conda
-    tmux new-session -d -s "$1" -e "CONDA_INIT=True" -e "CONDA_STARTUP_ENV=base" -c "$HOME/Documents/Python/"
+    tmux new-session -d -s "$1" -e "PY_INIT=True" -e "DEVSHELL_TAG=default" -c "$HOME/Repos/"
 }
 
 function cl_session {
     # Start a python session with conda
-    tmux new-session -d -s "$1" -e "CONDA_INIT=True" -e "CONDA_STARTUP_ENV=cl" -c "$HOME/work/cl/"
+    tmux new-session -d -s "$1" -e "PY_INIT=True" -e "DEVSHELL_TAG=cl" -c "$HOME/work/cl/"
 }
 
 function mojo_session {
