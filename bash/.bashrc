@@ -89,7 +89,7 @@ __ps1() {
 	fi
 
     # get name of conda environment if exists
-    [[ -n "$CONDA_PROMPT_MODIFIER" ]] && C=" c:${CONDA_PROMPT_MODIFIER//[\(\) ]/}"
+    [[ -n "$DEVSHELL" ]] && C=" e:${DEVSHELL//[\(\) ]/}"
 
     # if we have branch or conda env data, add to G
     [[ -n "$B" || -n "$C" ]] && G="$ital$a$B$C$x"
@@ -117,10 +117,6 @@ PROMPT_COMMAND="__ps1"
 set -o vi  # vi mode!
 shopt -s expand_aliases
 
-# nvim as default editor
-# [TODO]: check for nvim, fall back on vim, vi
-export EDITOR=nvim
-
 # open tmux automatically
 # if sessions exist, reattach, otherwise run tmux startup script
 if [ -z "$TMUX" ] && [ ! -n "$SSH_CONNECTION" ]; then
@@ -128,7 +124,7 @@ if [ -z "$TMUX" ] && [ ! -n "$SSH_CONNECTION" ]; then
 fi
 
 # fzf init
-if grep -qi 'nixos' /etc/*-release ; then
+if rg -qi 'nixos' /etc/*-release ; then
     if command -v fzf-share >dev/null; then
         source "$(fzf)share/key-bindings.bash"
         source "$(fzf)share/completion.bash"
@@ -155,30 +151,18 @@ export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 cn
 
 
+### python initialization ######################################################
+
+# if $PY_INIT is set, we will run a nix devshell on start
+# $DEVSHELL_TAG determines the tag
+# unset PY_INIT to prevent infinite loop
+
+if [[ -n "$PY_INIT" ]]; then
+    unset PY_INIT
+    nix develop "$HOME/nixos/devShell/python/python311/#$DEVSHELL_TAG"
+fi
+
+
 ### closedloop #################################################################
 
 export VAULT_ADDR=https://vault.it.cl-aws.net:8200
-
-
-### anaconda initialization ####################################################
-
-# exit the script before conda initialize unless $CONDA_INIT is set
-# I set $CONDA_INIT in a tmux startup script to control where conda initializes
-if [ -z "$CONDA_INIT" ]; then return 0; fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("$HOME/anaconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-conda activate $CONDA_STARTUP_ENV
