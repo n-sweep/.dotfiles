@@ -96,4 +96,4 @@ function streamsaver() {
 
 alias switch="obs_switch_scene"
 alias blur="obs_toggle_blur"
-alias break="streamsaver"
+alias sbreak="streamsaver"
