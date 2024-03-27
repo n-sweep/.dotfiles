@@ -63,23 +63,37 @@ alias ta="tmux a"
 
 
 ### obs ########################################################################
-alias obs="obs-cli -q -p='$(head -1 "$HOME/.config/obs/token")'"
-alias camstat="obs item toggle 'Static' --scene 'Camera'"
-alias cam="obs item toggle 'Camera Mask' --scene 'one'"
+alias obs="obs-cli --password='$(head -1 "$HOME/.config/obs-studio/token")'"
+alias camstat="obs sceneitem toggle Camera static"
+alias cam="obs sceneitem toggle Camera zerocam"
+alias mute="obs source toggle-mute Mic/Aux"
+alias dtmute="obs source toggle-mute 'Desktop Audio'"
 
 function obs_switch_scene() {
-    obs scene switch "$*" > /dev/null
-    obs scene current
+    obs scene current "$*" > /dev/null
 }
 function obs_toggle_blur() {
-    local curr="$(obs scene current)"
+    local curr="$(obs scene get)"
     if [[ $curr == *" b" ]]; then
-        obs scene switch "$(obs scene current | sed 's/ [^ ]*$//')" > /dev/null
+        obs scene current "$(obs scene get | sed 's/ [^ ]*$//')" > /dev/null
     else
-        obs scene switch "$(obs scene current) b" > /dev/null
+        obs scene current "$(obs scene get) b" > /dev/null
     fi
-    obs scene current
+}
+function streamsaver() {
+    cam
+    mute
+    obs_switch_scene one
+    if ! $(tmux list-panes -F '#F' | rg -q Z); then
+        tmux resize-pane -Z
+    fi
+    if [ -n "$*" ]; then
+        cbonsai -S -t 0.7 -w 2 -m "$*"
+    else
+        cbonsai -S -t 0.7 -w 2
+    fi
 }
 
 alias switch="obs_switch_scene"
 alias blur="obs_toggle_blur"
+alias break="streamsaver"

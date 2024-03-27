@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-obs() { obs-cli -q -p="$(head -1 "$HOME/.config/obs/token")" $*; }
+obs() { obs-cli --password="$(head -1 "$HOME/.config/obs-studio/token")" $*; }
 stus=$(obs stream status 2> /tmp/obserr)
 flag=$?
 
