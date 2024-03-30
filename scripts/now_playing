@@ -19,8 +19,8 @@ if [[ -n $status ]]; then
     s=$(($r % 60))
 
     if [[ "$status" == "playing" ]]; then
-        printf "🎵[ %s | %s | %s.%s ] " "$artist" "$album" "$num" "$track"
+        printf "[🎵 %s | %s | %s.%s ]" "$artist" "$album" "$num" "$track"
     elif [[ "$status" == "paused" ]]; then
-        echo "🎵[ cmus ] "
+        echo "[🎵 cmus ]"
     fi
 fi
