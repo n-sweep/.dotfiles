@@ -23,8 +23,12 @@ alias vi=nvim
 # openvpn
 alias vpn="openvpn3 session-start --config cl"
 
-# randombly choose an icon for neofetch
+# docker
+alias docker="sudo docker"
+
+# neofetch
 rand_dist() {
+    # randombly choose an icon for neofetch
     dists="windows macos"
     echo $dists | tr ' ' '\n' | shuf -n 1
 }

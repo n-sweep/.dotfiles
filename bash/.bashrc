@@ -126,15 +126,16 @@ fi
 # fzf init
 if rg -qi 'nixos' /etc/*-release ; then
     if command -v fzf-share >dev/null; then
-        source "$(fzf)share/key-bindings.bash"
-        source "$(fzf)share/completion.bash"
+        source "$(fzf-share)/key-bindings.bash"
+        source "$(fzf-share)/completion.bash"
     fi
 else
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 fi
 
-export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path '*/.git/*' -o -path '*/.git' -prune \)'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# I don't quite remember what this does, maybe removes git files from the tree?
+# export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path '*/.git/*' -o -path '*/.git' -prune \)'
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # bash scripts path
 export PATH="$PATH:$HOME/.dotfiles/scripts"
