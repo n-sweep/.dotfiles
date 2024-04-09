@@ -111,8 +111,12 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # floating windows
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="alert"] floating enable
+for_window  [window_role="pop-up"]  floating enable
+for_window  [window_role="alert"]   floating enable
+for_window  [class="zoom"]          floating enable
+no_focus    [window_role="pop-up"]
+no_focus    [window_role="alert"]
+no_focus    [class="zoom"]
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -131,18 +135,21 @@ set $ws12 "12"
 set $ws13 "13"
 
 # Assign workspaces to monitors
+# left (vertical)
 workspace $ws1 output DP-2
 workspace $ws2 output DP-2
 workspace $ws3 output DP-2
 workspace $ws4 output DP-2
 workspace $ws5 output DP-2
 
+# middle
 workspace $ws6 output DP-3
 workspace $ws7 output DP-3
 workspace $ws8 output DP-3
 workspace $ws9 output DP-3
 workspace $ws10 output DP-3
 
+# laptop
 workspace $ws11 output eDP-1
 workspace $ws12 output eDP-1
 workspace $ws13 output eDP-1
@@ -177,7 +184,7 @@ bindsym $mod+Shift+minus move container to workspace number $ws11
 bindsym $mod+Shift+backslash move container to workspace number $ws12
 bindsym $mod+Shift+apostrophe move container to workspace number $ws13
 
-bindsym $mod+p workspace number $ws1, workspace number $ws6, workspace number $ws10
+bindsym $mod+p workspace number $ws1, workspace number $ws6, workspace number $ws11
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
