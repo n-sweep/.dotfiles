@@ -2,7 +2,6 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- momentarily highlight yanked text
 autocmd('TextYankPost', {
-    group = yank_group,
     pattern = '*',
     callback = function()
         vim.highlight.on_yank({
@@ -14,7 +13,6 @@ autocmd('TextYankPost', {
 
 -- remove trailing whitespace on save
 autocmd({"BufWritePre"}, {
-    group = nsweep_group,
     pattern = "*",
     callback = function()
         if vim.bo.filetype ~= 'markdown' then

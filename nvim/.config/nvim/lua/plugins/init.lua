@@ -1,4 +1,4 @@
- local vim = vim
+local vim = vim
 
 return {
 
