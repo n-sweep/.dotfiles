@@ -1,3 +1,17 @@
+### python initialization ######################################################
+
+# doing this first will decrease startup time
+
+# if $PY_INIT is set, we will run a nix devshell on start
+# $DEVSHELL_TAG determines the tag
+# unset PY_INIT to prevent infinite loop
+
+if [[ -n "$PY_INIT" ]]; then
+    unset PY_INIT
+    nix develop "$HOME/nixos/devShell/python/python311/#$DEVSHELL_TAG"
+fi
+
+
 ### .bashrc defaults ###################################################
 
 # If not running interactively, don't do anything
@@ -134,8 +148,8 @@ else
 fi
 
 # I don't quite remember what this does, maybe removes git files from the tree?
-# export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path '*/.git/*' -o -path '*/.git' -prune \)'
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path '*/.git/*' -o -path '*/.git' -prune \)'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # bash scripts path
 export PATH="$PATH:$HOME/.dotfiles/scripts"
@@ -148,22 +162,11 @@ export PATH="$PATH:$GOPATH"
 export MODULAR_HOME="$HOME/.modular"
 export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
-# run neofetch on startup
-cn
-
-
-### python initialization ######################################################
-
-# if $PY_INIT is set, we will run a nix devshell on start
-# $DEVSHELL_TAG determines the tag
-# unset PY_INIT to prevent infinite loop
-
-if [[ -n "$PY_INIT" ]]; then
-    unset PY_INIT
-    nix develop "$HOME/nixos/devShell/python/python311/#$DEVSHELL_TAG"
-fi
-
 
 ### closedloop #################################################################
 
 export VAULT_ADDR=https://vault.it.cl-aws.net:8200
+
+
+### run neofetch on startup ####################################################
+cn
