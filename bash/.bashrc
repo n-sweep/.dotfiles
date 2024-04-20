@@ -68,7 +68,7 @@ HISTCONTROL=ignorespace:erasedups
 PROMPT_LONG=30
 __ps1() {
 	# color vars
-	local P='»' cwd="${PWD}" estus="$?"\
+	local P='λ' cwd="${PWD}" estus="$?"\
         B C D G countme conda_env git_root addr path prompt \
 		r='\[\e[31m\]' g='\[\e[32m\]' y='\[\e[33m\]' \
 		u='\[\e[34m\]' p='\[\e[35m\]' c='\[\e[36m\]' \
