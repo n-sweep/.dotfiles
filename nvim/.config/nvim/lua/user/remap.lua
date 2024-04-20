@@ -31,3 +31,7 @@ vim.keymap.set('n', '<leader>sw', ':set wrap! linebreak!<CR>')
 
 -- esc in normal mode turns of hl
 vim.keymap.set('n', '<ESC>', ':nohl<CR>')
+
+-- ctrl/shift + enter
+vim.keymap.set('n', '\\E[20;5~', ':echo hello<CR>')
+vim.keymap.set('n', '\\E[21;5~', ':echo goodbyeCR>')
