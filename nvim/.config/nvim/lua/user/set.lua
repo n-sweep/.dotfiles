@@ -1,8 +1,7 @@
-local vim = vim
 local opt = vim.opt
 vim.g.mapleader = " "
 
-opt.nu = true
+opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
 
@@ -17,7 +16,6 @@ opt.backup = false
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 opt.undofile = true
 
---vim.opt.hlsearch = false
 opt.incsearch = true
 
 opt.conceallevel = 1

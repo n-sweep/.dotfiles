@@ -1,14 +1,11 @@
 local wezterm = require('wezterm')
+local act = wezterm.action
 
 local config = {
     audible_bell = 'Disabled',
     font = wezterm.font 'mononoki Nerd Font Mono',
 
-    -- color_scheme = 'GruvboxDark',
-    -- color_scheme = 'Everforest Dark (Gogh)',
     color_scheme = 'Kanagawa (Gogh)',
-    -- color_scheme = 'Bamboo',
-    -- color_scheme = 'nord',
 
     use_fancy_tab_bar = false,
     hide_tab_bar_if_only_one_tab = true,
@@ -21,6 +18,21 @@ local config = {
         top = 0,
         bottom = 0
     },
+
+    keys = {
+        {
+            key = 'Enter',
+            mods = 'CTRL',
+            action = act.SendString("\x1b[20;5~"),
+            when = "AppCursorMode"
+        },
+        {
+            key = 'Enter',
+            mods = 'SHIFT',
+            action = act.SendString("\x1b[21;5~"),
+            when = "AppCursorMode"
+        }
+    }
 
 }
 
