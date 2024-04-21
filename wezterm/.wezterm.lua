@@ -19,16 +19,15 @@ local config = {
         bottom = 0
     },
 
-    keys = {
-        {
-            key = 'Enter',
-            mods = 'CTRL',
+    -- enabling ctrl/shift + Enter
+    keys = { -- "AppCursorMode" == send to applications (neovim) only, not terminal input
+        {   -- C-Enter sends <F33>
+            key = 'Enter', mods = 'CTRL',
             action = act.SendString("\x1b[20;5~"),
             when = "AppCursorMode"
         },
-        {
-            key = 'Enter',
-            mods = 'SHIFT',
+        {   -- S-Enter sends <F34>
+            key = 'Enter', mods = 'SHIFT',
             action = act.SendString("\x1b[21;5~"),
             when = "AppCursorMode"
         }
