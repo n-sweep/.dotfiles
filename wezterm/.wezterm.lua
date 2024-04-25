@@ -23,7 +23,7 @@ local config = {
     keys = { -- "AppCursorMode" == send to applications (neovim) only, not terminal input
         {   -- C-Enter sends <F33>
             key = 'Enter', mods = 'CTRL',
-            action = act.SendString("\x1b[20;5~"),
+            action = act.SendString("\x1b[20;5~"), -- keycodes found with `infocmp` command
             when = "AppCursorMode"
         },
         {   -- S-Enter sends <F34>
