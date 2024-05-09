@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+mkdir -p /tmp/dictation
+
+# loop waits for 'q' and stops recording
+function exit_loop {
+    while :
+    do
+        read -n 1 key
+        if [ "$key" = "q" ]; then
+            echo && echo "stopping recording..."
+            sleep 2s
+            kill -SIGINT $parec_pid
+            break
+        fi
+    done
+}
+
+# check for filename or use timestamp
+if [ $# -gt 0 ]; then
+    filename=$(echo $@ | sed 's/ /_/g')
+else
+    filename=$(date +%s)
+fi
+
+file_loc="/tmp/dictation/$filename.mp3"
+
+parecord $file_loc &
+parec_pid=$!
+
+echo "recording. press q to stop"
+
+exit_loop
+
+echo "${file_loc} saved."

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+DEEPGRAM_API_KEY="$(head -1 "$HOME/.config/deepgram/token")"
+export DEEPGRAM_API_KEY
+
+# record a new file if none provided
+if [ $# -eq 0 ]; then
+    echo 'no file provided.'
+    source rec
+else
+    file_loc=$@
+fi
+
+output_loc=$(echo $file_loc | sed 's/mp3/json/')
+
+echo 'analyzing audio...'
+curl -so $output_loc \
+  --request POST \
+  --header "Authorization: Token ${DEEPGRAM_API_KEY}" \
+  --header 'Content-Type: audio/wav' \
+  --data-binary @$file_loc \
+  --url 'https://api.deepgram.com/v1/listen?model=nova-2&smart_format=true'
+
+echo "${output_loc} saved."
+
+transcript=$(cat $output_loc \
+    | jq ".results.channels[].alternatives[].transcript" \
+    | sed 's/^"\(.*\)"$/\1/')
+
+echo $transcript | xclip -i -selection clipboard
+
+echo $transcript
+echo 'copied to clipboard'
