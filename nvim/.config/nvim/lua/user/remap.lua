@@ -1,38 +1,43 @@
 local vim = vim
-local keymap = vim.keymap
+local km = vim.keymap
 
 -- Quick write
-keymap.set("n", "<leader>w", ":w<CR>")
+km.set("n", "<leader>w", ":w<CR>")
 
 -- Quick quitting
-keymap.set("n", "<leader>qq", ":q<CR>")
-keymap.set("n", "<leader>qQ", ":qa<CR>")
-keymap.set("n", "<leader>QQ", ":qa!<CR>")
+km.set("n", "<leader>qq", ":q<CR>")
+km.set("n", "<leader>qQ", ":qa<CR>")
+km.set("n", "<leader>QQ", ":qa!<CR>")
 
 -- Insert new line w/o entering insert mode
-keymap.set("n", "<leader>o", "o<ESC>")
-keymap.set("n", "<leader>O", "O<ESC>")
+km.set("n", "<leader>o", "o<ESC>")
+km.set("n", "<leader>O", "O<ESC>")
 
 -- Copy to system clipboard
-keymap.set("n", "<leader>y", '"+y')
-keymap.set("v", "<leader>y", '"+y')
-keymap.set("n", "<leader>Y", '"+Y')
+km.set("n", "<leader>y", '"+y')
+km.set("v", "<leader>y", '"+y')
+km.set("n", "<leader>Y", '"+Y')
 
 -- Paste from system clipboard
-keymap.set("n", "<leader>v", '"+p')
-keymap.set("v", "<leader>v", '"+p')
-keymap.set("n", "<leader>V", '"+P')
-keymap.set("v", "<leader>V", '"+P')
+km.set("n", "<leader>v", '"+p')
+km.set("v", "<leader>v", '"+p')
+km.set("n", "<leader>V", '"+P')
+km.set("v", "<leader>V", '"+P')
 
 -- Paste over selection w/o yanking
-keymap.set("x", "<leader>p", '"_dP')
+km.set("x", "<leader>p", '"_dP')
 
 -- Toggle linebreak & wrap
-keymap.set('n', '<leader>sw', ':set wrap! linebreak!<CR>')
+km.set('n', '<leader>sw', ':set wrap! linebreak!<CR>')
 
 -- esc in normal mode turns of hl
-keymap.set('n', '<ESC>', ':nohl<CR>')
+km.set('n', '<ESC>', ':nohl<CR>')
 
--- ctrl/shift + enter
-keymap.set('n', '\\E[20;5~', ':echo hello<CR>')
-keymap.set('n', '\\E[21;5~', ':echo goodbyeCR>')
+-- ctrl/shift/alt + enter/tab shouldn't do anything in insert mode
+-- unless explicitly remapped later
+km.set('i', '<F30>', function() end)
+km.set('i', '<F31>', function() end)
+km.set('i', '<F32>', function() end)
+km.set('i', '<F33>', function() end)
+km.set('i', '<F34>', function() end)
+km.set('i', '<F35>', function() end)

@@ -19,8 +19,10 @@ local config = {
         bottom = 0
     },
 
-    -- enabling ctrl/shift + Enter
-    keys = { -- "AppCursorMode" == send to applications (neovim) only, not terminal input
+    keys = {  -- enabling ctrl/shift/alt + Enter/Tab
+
+        -- "AppCursorMode" == send to applications (neovim) only, not terminal input
+
         {   -- C-Enter sends <F33>
             key = 'Enter', mods = 'CTRL',
             action = act.SendString("\x1b[20;5~"), -- keycodes found with `infocmp` command
@@ -30,7 +32,29 @@ local config = {
             key = 'Enter', mods = 'SHIFT',
             action = act.SendString("\x1b[21;5~"),
             when = "AppCursorMode"
-        }
+        },
+        {   -- M-Enter sends <F35>
+            key = 'Enter', mods = 'ALT',
+            action = act.SendString("\x1b[23;5~"),
+            when = "AppCursorMode"
+        },
+
+        {   -- C-Tab sends <F30>
+            key = 'Tab', mods = 'CTRL',
+            action = act.SendString("\x1b[17;5~"),
+            when = "AppCursorMode"
+        },
+        {   -- S-Tab sends <F31>
+            key = 'Tab', mods = 'SHIFT',
+            action = act.SendString("\x1b[18;5~"),
+            when = "AppCursorMode"
+        },
+        {   -- M-Tab sends <F32>
+            key = 'Tab', mods = 'ALT',
+            action = act.SendString("\x1b[19;5~"),
+            when = "AppCursorMode"
+        },
+
     }
 
 }
