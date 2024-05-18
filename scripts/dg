@@ -24,10 +24,9 @@ curl -so $output_loc \
 echo "${output_loc} saved."
 
 transcript=$(cat $output_loc \
-    | jq ".results.channels[].alternatives[].transcript" \
-    | sed 's/^"\(.*\)"$/\1/')
+    | jq ".results.channels[].alternatives[].transcript")
 
-echo $transcript | xclip -i -selection clipboard
+echo $transcript | sed 's/^"\(.*\)"$/\1/' | xclip -i -selection clipboard
 
 echo $transcript
 echo 'copied to clipboard'
