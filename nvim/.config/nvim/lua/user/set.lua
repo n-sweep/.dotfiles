@@ -2,6 +2,9 @@ local opt = vim.opt
 
 vim.g.mapleader = " "
 
+-- wtf? addendum: this rules
+opt.inccommand = "split"
+
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
@@ -22,7 +25,7 @@ opt.incsearch = true
 opt.conceallevel = 1
 opt.scrolloff = 1999
 opt.signcolumn = 'yes'
-opt.colorcolumn = '80'
+opt.colorcolumn = '100'
 opt.mouse = ''
 opt.wrap = false
 opt.errorbells = false
