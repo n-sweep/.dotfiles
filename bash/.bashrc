@@ -69,6 +69,7 @@ PROMPT_LONG=30
 __ps1() {
 	# color vars
 	local P='λ' cwd="${PWD}" estus="$?"\
+        venv=" $(echo $VIRTUAL_ENV_PROMPT | sed 's/ //')"\
         B C D G countme conda_env git_root addr path prompt \
 		r='\[\e[31m\]' g='\[\e[32m\]' y='\[\e[33m\]' \
 		u='\[\e[34m\]' p='\[\e[35m\]' c='\[\e[36m\]' \
@@ -102,11 +103,11 @@ __ps1() {
         countme+=$cwd
 	fi
 
-    # get name of conda environment if exists
+    # get name of nix devShell if exists
     [[ -n "$DEVSHELL" ]] && C=" e:${DEVSHELL//[\(\) ]/}"
 
-    # if we have branch or conda env data, add to G
-    [[ -n "$B" || -n "$C" ]] && G="$ital$a$B$C$x"
+    # if we have branch, devshell, or py env data, add to G
+    [[ -n "$B" || -n "$C" ]] && G="$ital$a$B$C$venv$x"
 
 	addr="$y\u$w@$c\h$w"
 	path="$u$cwd$G"
