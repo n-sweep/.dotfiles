@@ -26,14 +26,16 @@ alias vpn="openvpn3 session-start --config cl"
 # docker
 alias docker="sudo docker"
 
-# neofetch
+# fastfetch
 rand_dist() {
-    # randombly choose an icon for neofetch
+    # randombly choose an icon for fastfetch
     dists="windows macos"
     echo $dists | tr ' ' '\n' | shuf -n 1
 }
 alias cn="c && fastfetch --logo $(rand_dist)"
 
+# nixos-rebuild
+alias build="sudo nixos-rebuild switch --impure --flake ~/nixos#xps"
 
 ### script aliases #############################################################
 
