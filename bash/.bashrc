@@ -6,7 +6,7 @@
 # $DEVSHELL_TAG determines the tag
 # unset PY_INIT to prevent infinite loop
 
-if [[ -n "$PY_INIT" ]]; then
+if [[ -n $PY_INIT ]]; then
     unset PY_INIT
     nix develop "$HOME/nixos/devShell/python/python311/#$DEVSHELL_TAG"
 fi

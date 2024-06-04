@@ -67,6 +67,9 @@ alias tm="tmux_startup"
 # quick reattach
 alias ta="tmux a"
 
+# tmux-sessionizer
+alias ts="$HOME/.dotfiles/scripts/tmux_sessionizer"
+
 
 ### obs ########################################################################
 alias obs="obs-cli --password='$(head -1 "$HOME/.config/obs-studio/token")'"

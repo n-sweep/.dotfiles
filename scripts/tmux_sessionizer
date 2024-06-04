@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# tmux-sessionizer
+# stolen from ThePrimeagen
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find $HOME/ $HOME/Repos $HOME/work/cl/Repos -maxdepth 1 -mindepth 1 -type d | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# if the working directory contains python files, start a devshell
+if [[ -n $(find $selected -type f \( -name "*.py" -or -name "*.ipynb" \) -print -quit) ]]; then
+
+    if [[ $selected == $HOME/work/cl* ]]; then
+        dt='cl'
+    else
+        dt='default'
+    fi
+
+    py="PY_INIT=true"
+    ds="DEVSHELL_TAG=$dt"
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected -e $ds -e $py
+    exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected -e $ds -e $py
+fi
+
+tmux switch-client -t $selected_name
+
