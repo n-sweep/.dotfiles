@@ -35,7 +35,7 @@ rand_dist() {
 alias cn="c && fastfetch --logo $(rand_dist)"
 
 # nixos-rebuild
-alias build="sudo nixos-rebuild switch --impure --flake ~/nixos#xps"
+alias build="sudo nixos-rebuild switch --impure --flake ~/.dotfiles/nixos#xps"
 
 ### script aliases #############################################################
 
