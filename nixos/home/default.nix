@@ -131,6 +131,7 @@ in {
 
   programs.nixvim = {
     enable = true;
+    defaultEditor = true;
 
     colorschemes.kanagawa.enable = true;
 
@@ -154,10 +155,10 @@ in {
       luafile /home/n/.dotfiles/nvim/.config/nvim/lua/user/cmd.lua
       luafile /home/n/.dotfiles/nvim/.config/nvim/lua/user/set.lua
       luafile /home/n/.dotfiles/nvim/.config/nvim/lua/user/remap.lua
-      luafile /home/n/nixos/nvim/lua/tmux.lua
-      luafile /home/n/nixos/nvim/lua/treesitter.lua
-      luafile /home/n/nixos/nvim/lua/obsidian.lua
-      luafile /home/n/nixos/nvim/lua/vim-dadbod.lua
+      luafile /home/n/.dotfiles/nixos/nvim/lua/tmux.lua
+      luafile /home/n/.dotfiles/nixos/nvim/lua/treesitter.lua
+      luafile /home/n/.dotfiles/nixos/nvim/lua/obsidian.lua
+      luafile /home/n/.dotfiles/nixos/nvim/lua/vim-dadbod.lua
     '';
 
     extraConfigLua = ''
