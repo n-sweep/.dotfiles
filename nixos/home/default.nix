@@ -75,7 +75,9 @@ in {
       gitAndTools.gh
       obs-cli
       parsec-bin
+      peek
       quarto
+      sxiv
       # vault
       wezterm
       zoom-us
