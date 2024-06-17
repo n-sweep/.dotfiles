@@ -103,7 +103,7 @@ __ps1() {
 	fi
 
     # get name of nix devShell if exists
-    [[ -n "$DEVSHELL" ]] && C=" e:${DEVSHELL//[\(\) ]/}"
+    [[ $(echo $NIX_BUILD_TOP | tr -dc '/' | wc -c) -gt 2 ]] && C=" e:${DEVSHELL//[\(\) ]/}"
 
     # get python venv
     [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" $(echo $VIRTUAL_ENV_PROMPT | sed 's/ //')"
@@ -142,7 +142,7 @@ fi
 
 # fzf init
 if rg -qi 'nixos' /etc/*-release ; then
-    if command -v fzf-share >dev/null; then
+    if command -v fzf-share >/dev/null; then
         source "$(fzf-share)/key-bindings.bash"
         source "$(fzf-share)/completion.bash"
     fi

@@ -43,6 +43,7 @@
             pynvim
             pyperclip
             pyqt6
+            pytz
             requests
             scikit-learn
             scipy
@@ -97,16 +98,12 @@
 
         default = pkgs.mkShell {
           packages = [(python.withPackages pyPkgsCommon)];
-          shellHook = ''
-            export DEVSHELL="default"
-          '';
+          shellHook = ''export DEVSHELL="default"'';
         };
 
         cl = pkgs.mkShell {
           packages = [(python.withPackages pyPkgsCL)];
-          shellHook = ''
-            export DEVSHELL="cl"
-          '';
+          shellHook = ''export DEVSHELL="cl"'';
         };
 
     });
