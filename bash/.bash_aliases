@@ -20,10 +20,6 @@ alias lock="i3lock -c 000000"
 alias vim=nvim
 alias vi=nvim
 
-# openvpn
-alias vpn="openvpn3 session-start -c cl"
-alias vpnd="openvpn3 session-manage -c cl --disconnect"
-
 # docker
 alias docker="sudo docker"
 
