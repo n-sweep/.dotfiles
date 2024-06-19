@@ -2,20 +2,6 @@
 
 mkdir -p /tmp/dictation
 
-# loop waits for 'q' and stops recording
-function exit_loop {
-    while :
-    do
-        read -n 1 key
-        if [ "$key" = "q" ]; then
-            echo && echo "stopping recording..."
-            sleep 2s
-            kill -SIGINT $parec_pid
-            break
-        fi
-    done
-}
-
 # check for filename or use timestamp
 if [ $# -gt 0 ]; then
     filename=$(echo $@ | sed 's/ /_/g')
@@ -30,6 +16,16 @@ parec_pid=$!
 
 echo "recording. press q to stop"
 
-exit_loop
+# loop waits for 'q' and stops recording
+while :
+do
+    read -n 1 key
+    if [ "$key" = "q" ]; then
+        echo && echo "stopping recording..."
+        sleep 2s
+        kill -SIGINT $parec_pid
+        break
+    fi
+done
 
 echo "${file_loc} saved."
