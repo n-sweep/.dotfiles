@@ -79,6 +79,7 @@ in {
       quarto
       sxiv
       # vault
+      vhs
       wezterm
       zoom-us
 
@@ -233,57 +234,59 @@ in {
       keymaps = {
         "<leader>ff" = {
             action = "find_files";
-            desc = "Telescope Find Files";
+            options.desc = "Telescope Find Files";
         };
         "<leader>fb" = {
             action = "buffers";
-            desc = "Telescope Buffers";
+            options.desc = "Telescope Buffers";
         };
         "<leader>fg" = {
             action = "live_grep";
-            desc = "Telescope Live grep";
+            options.desc = "Telescope Live grep";
         };
         "<leader>fc" = {
             action = "commands";
-            desc = "Telescope vim Commands";
+            options.desc = "Telescope vim Commands";
         };
         "<leader>fC" = {
             action = "command_history";
-            desc = "Telescope vim Command History";
+            options.desc = "Telescope vim Command History";
         };
         "<leader>fh" = {
             action = "help_tags";
-            desc = "Telescope vim Help Tags";
+            options.desc = "Telescope vim Help Tags";
         };
         "<leader>gg" = {
             action = "git_files";
-            desc = "Telescope git Files";
+            options.desc = "Telescope git Files";
         };
         "<leader>ld" = {
             action = "lsp_definitions";
-            desc = "Telescope LSP Definitions";
+            options.desc = "Telescope LSP Definitions";
         };
       };
     };
 
-    plugins.nvim-cmp = {
+    plugins.cmp = {
       enable = true;
       autoEnableSources = true;
-      sources = [
-        {name = "buffer";}
-        {name = "nvim_lsp";}
-        {name = "otter";}
-        {name = "path";}
-        {name = "treesitter";}
-      ];
-      mapping = {
-        "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-        "<C-e>" = "cmp.mapping.close()";
-        "<C-f>" = "cmp.mapping.scroll_docs(4)";
-        "<C-n>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-        "<C-p>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-        "<C-Space>" = "cmp.mapping.complete()";
-        "<CR>" = "cmp.mapping.confirm({ select = true })";
+      settings = {
+        mapping = {
+          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-e>" = "cmp.mapping.close()";
+          "<C-f>" = "cmp.mapping.scroll_docs(4)";
+          "<C-n>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+          "<C-p>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+          "<C-Space>" = "cmp.mapping.complete()";
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+        };
+        sources = [
+          {name = "buffer";}
+          {name = "nvim_lsp";}
+          {name = "otter";}
+          {name = "path";}
+          {name = "treesitter";}
+        ];
       };
     };
 

@@ -29,7 +29,7 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   # closedloop certificate file
-  security.pki.certificateFiles = [ "/etc/ssl/certs/ClosedLoopCACombined.crt" ];
+  # security.pki.certificateFiles = [ "/etc/ssl/ClosedLoopCACombined.crt" ];
 
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
