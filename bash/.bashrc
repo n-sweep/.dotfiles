@@ -151,7 +151,7 @@ else
 fi
 
 # I don't quite remember what this does, maybe removes git files from the tree?
-export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path '*/.git/*' -o -path '*/.git' -prune \)'
+export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path "*/.git/*" -o -path "*/.git" -prune \)'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # bash scripts path
