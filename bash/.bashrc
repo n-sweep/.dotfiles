@@ -103,7 +103,7 @@ __ps1() {
 	fi
 
     # get name of nix devShell if exists
-    [[ $(echo $NIX_BUILD_TOP | tr -dc '/' | wc -c) -gt 2 ]] && C=" e:${DEVSHELL//[\(\) ]/}"
+    [[ $(echo $NIX_BUILD_TOP | tr -dc '/' | wc -c) -gt 1 ]] && C=" e:${DEVSHELL//[\(\) ]/}"
 
     # get python venv
     [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" $(echo $VIRTUAL_ENV_PROMPT | sed 's/ //')"
@@ -164,11 +164,6 @@ export PATH="$PATH:$GOPATH"
 # mojo path
 export MODULAR_HOME="$HOME/.modular"
 export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
-
-
-### closedloop #################################################################
-
-export VAULT_ADDR=https://vault.it.cl-aws.net:8200
 
 
 ### run neofetch on startup ####################################################
