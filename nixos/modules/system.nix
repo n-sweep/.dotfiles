@@ -28,9 +28,6 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # closedloop certificate file
-  # security.pki.certificateFiles = [ "/etc/ssl/ClosedLoopCACombined.crt" ];
-
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -83,10 +80,12 @@ in {
 
   virtualisation = {
     containers.enable = true;
-    podman = {
+    docker = {
       enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
     };
   };
 
@@ -104,9 +103,11 @@ in {
       fastfetch
       feh
       gawk
+      gcc-unwrapped
       git
       htop
       inetutils
+      jdk19
       jq
       lshw
       maim
@@ -115,6 +116,7 @@ in {
       # reaper
       ripgrep
       sqlite
+      sshfs
       stdenv.cc.cc.lib  # make
       unzip
       wget
