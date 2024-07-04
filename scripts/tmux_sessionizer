@@ -1,22 +1,29 @@
 #!/usr/bin/env bash
 
 # tmux-sessionizer
-# stolen from ThePrimeagen
+# stolen & adapted from ThePrimeagen
 
+dirs="$HOME/ $HOME/Repos $HOME/work $HOME/work/plato/Repos"
+addtl="_"
+
+# user can provide an argument, else find from list of directories
 if [[ $# -eq 1 ]]; then
-    selected=$1
+    target_dir=$1
 else
-    selected=$(find $HOME/ $HOME/Repos $HOME/work/cl/Repos -maxdepth 1 -mindepth 1 -type d | fzf)
+    found=$(find $dirs -maxdepth 1 -mindepth 1 -type d)
+    all_choices="${found}\n${addtl}"
+    target_dir=$(echo -e "${all_choices}"| fzf)
 fi
 
-if [[ -z $selected ]]; then
+# if no target, exit
+if [[ -z $target_dir ]]; then
     exit 0
 fi
 
 # if the working directory contains python files, start a devshell
-if [[ -n $(find $selected -type f \( -name "*.py" -or -name "*.ipynb" \) -print -quit) ]]; then
+if [[ -n $(find $target_dir -type f \( -name "*.py" -or -name "*.ipynb" \) -print -quit) ]]; then
 
-    if [[ $selected == $HOME/work/cl* ]]; then
+    if [[ $target_dir == $HOME/work/cl* ]]; then
         dt='cl'
     else
         dt='default'
@@ -26,17 +33,17 @@ if [[ -n $(find $selected -type f \( -name "*.py" -or -name "*.ipynb" \) -print 
     ds="DEVSHELL_TAG=$dt"
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+target_name=$(basename "$target_dir" | tr . _)
 tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected -e $ds -e $py
-    exit 0
+# if not connected to tmux and tmux is not running
+if [[ -z $TMUX ]] || [[ -z $tmux_running ]]; then
+    tm
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected -e $ds -e $py
+if ! tmux has-session -t=$target_name 2> /dev/null; then
+    tmux new-session -ds $target_name -c $target_dir -e $ds -e $py
 fi
 
-tmux switch-client -t $selected_name
+tmux switch-client -t $target_name
 
