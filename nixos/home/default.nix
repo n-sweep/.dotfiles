@@ -70,6 +70,7 @@ in {
       barrier
       cmus
       cockatrice
+      firebase-tools
       floorp
       gimp
       gitAndTools.gh
@@ -78,8 +79,6 @@ in {
       peek
       quarto
       sxiv
-      # vault
-      vhs
       wezterm
       zoom-us
 
