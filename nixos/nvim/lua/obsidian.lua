@@ -16,9 +16,9 @@ local function startup()
                 }
             },
         },
+        new_notes_location = "notes_subdir",
         completion = {
             nvim_cmp = true,
-            new_notes_location = "notes_subdir"
         },
     })
 
