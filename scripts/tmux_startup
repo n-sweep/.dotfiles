@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-SESSIONS=(
-    "_" \
-    "cl" \
-    "py" \
-    #"mojo" \
-    #"go"
-)
-
 function session_exists {
     if tmux list-sessions | grep "$1"; then
         return 0
@@ -16,54 +8,21 @@ function session_exists {
     fi
 }
 
-function __session {
-    # Start the first session and split windows
-    tmux new-session -d -s "$1"
-    tmux rename-window -t 1 'main'
+# Only start new sessions if they don't already exist
+if ! pgrep -x 'tmux' > /dev/null || [[ -n $(session_exists "_") ]]; then
 
-    # open htop on the first pane
-    tmux send-keys -t 0 'htop' C-m
+    tmux new-session -d -s _ 'htop'
+    tmux rename-window -t _ 'main'
 
-    tmux split-window -v
+    tmux split-window -t _ -v 'zk'
+    tmux split-window -t _ -h
 
-    # 2 splits & weather
-    tmux split-window -h
-    tmux send-keys -t 2 'weather' C-m
+    tmux send-keys -t _:1.1 ':ObsidianToday' Enter
+    tmux send-keys -t _:1.2 'weather' Enter
 
-    # open a new window in dotfiles
-    tmux new-window -t $1:2 -n 'dotfiles' -c "$HOME/.dotfiles/"
+fi
 
-    #tmux new-window -t $SESSION:3 -n 'zk' -c "$HOME/.zettelkasten/"
-    #tmux send-keys -t 'zk' 'journal' C-m
-}
-
-function py_session {
-    # Start a python session with conda
-    tmux new-session -d -s "$1" -e "PY_INIT=True" -e "DEVSHELL_TAG=default" -c "$HOME/Repos/"
-}
-
-function cl_session {
-    # Start a python session with conda
-    tmux new-session -d -s "$1" -e "PY_INIT=True" -e "DEVSHELL_TAG=cl" -c "$HOME/work/cl/"
-}
-
-function mojo_session {
-    tmux new-session -d -s "$1" -c "$HOME/Documents/mojo/"
-}
-
-function go_session {
-    tmux new-session -d -s "$1" -c "$HOME/Documents/golang/"
-}
-
-for s in ${SESSIONS[@]}; do
-    # Only start new sessions if they don't already exist
-    if [[ -z $(session_exists $s) ]]; then
-        func="$s"_session
-        ${func} "$s"
-    fi
-done
-
-# attach to session 1 if not already attached to a session
 if [[ -z $(echo $TMUX) ]]; then
-    tmux attach-session -t _:1
+    # attach to session 1 if exists and not already attached to a session
+    tmux attach-session -t _:1.1
 fi
