@@ -1,15 +1,36 @@
 #!/usr/bin/env bash
 
 DEEPGRAM_API_KEY="$(head -1 "$HOME/.config/deepgram/token")"
-export DEEPGRAM_API_KEY
 
-# record a new file if none provided
-if [ $# -eq 0 ]; then
-    echo 'no file provided.'
-    source rec
+mkdir -p /tmp/dictation
+
+# check for filename or use timestamp
+if [ $# -gt 0 ]; then
+    filename=$(echo $@ | sed 's/ /_/g')
 else
-    file_loc=$@
+    filename=$(date +%s)
 fi
+
+file_loc="/tmp/dictation/$filename.mp3"
+
+parecord $file_loc &
+parec_pid=$!
+
+echo "recording. press q to stop"
+
+# loop waits for 'q' and stops recording
+while :
+do
+    read -n 1 key
+    if [ "$key" = "q" ]; then
+        echo && echo "stopping recording..."
+        sleep 2s
+        kill -SIGINT $parec_pid
+        break
+    fi
+done
+
+echo "${file_loc} saved."
 
 output_loc=$(echo $file_loc | sed 's/mp3/json/')
 
