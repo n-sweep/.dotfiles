@@ -313,6 +313,42 @@ in {
       }];
     };
 
+    plugins.alpha = {
+      enable = true;
+      layout = [
+        {
+          type = "padding";
+          val = 8;
+        }
+        {
+          opts = {
+            hl = "Type";
+            position = "center";
+          };
+          type = "text";
+          val = [
+        "                                              _/               "
+        "   _/_/_/      _/_/      _/_/    _/      _/      _/_/_/  _/_/  "
+        "  _/    _/  _/_/_/_/  _/    _/  _/      _/  _/  _/    _/    _/ "
+        " _/    _/  _/        _/    _/    _/  _/    _/  _/    _/    _/  "
+        "_/    _/    _/_/_/    _/_/        _/      _/  _/    _/    _/   "
+          ];
+        }
+        {
+          type = "padding";
+          val = 5;
+        }
+        {
+          opts = {
+            hl = "Keyword";
+            position = "center";
+          };
+          type = "text";
+          val = "The only way to begin is by beginning, so without further ado...\n\r- Sam Reich";
+        }
+      ];
+    };
+
   };
 
   ### firefox ##################################################################
