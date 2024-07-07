@@ -106,6 +106,7 @@ in {
       gcc-unwrapped
       git
       htop
+      i3lock
       inetutils
       jdk19
       jq

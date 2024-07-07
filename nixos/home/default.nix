@@ -347,7 +347,6 @@ in {
         bitwarden
         darkreader
         ublock-origin
-        simple-tab-groups
         # tridactyl
         vimium
       ];
