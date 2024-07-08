@@ -168,9 +168,9 @@ in {
 
   # xserver + i3
   services = {
+    displayManager.defaultSession = "none+i3";
     xserver = {
       enable = true;
-      displayManager.defaultSession = "none+i3";
       desktopManager = {
         xterm.enable = false;
         session = [{

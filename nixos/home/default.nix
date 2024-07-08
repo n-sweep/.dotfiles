@@ -187,7 +187,7 @@ in {
     };
 
     plugins = {
-      comment-nvim.enable = true;
+      comment.enable = true;
       fidget.enable = true;
       markdown-preview.enable = true;
       molten.enable = true;
@@ -215,7 +215,7 @@ in {
       servers = {
         lua-ls.enable = true;
         pyright.enable = true;
-        nil_ls.enable = true;
+        nil-ls.enable = true;
       };
       keymaps = {
         lspBuf = { "<leader>k" = "hover"; };
@@ -229,7 +229,7 @@ in {
 
     plugins.telescope = {
       enable = true;
-      defaults = { sorting_strategy = "ascending"; };
+      settings.defaults = { sorting_strategy = "ascending"; };
       keymaps = {
         "<leader>ff" = {
             action = "find_files";
@@ -336,7 +336,7 @@ in {
         }
         {
           type = "padding";
-          val = 5;
+          val = 4;
         }
         {
           opts = {
@@ -344,7 +344,7 @@ in {
             position = "center";
           };
           type = "text";
-          val = "The only way to begin is by beginning, so without further ado...\n\r- Sam Reich";
+          val = "The only way to begin is by beginning, so without further ado...\n\n    - Sam Reich";
         }
       ];
     };
