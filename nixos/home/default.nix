@@ -109,6 +109,7 @@ in {
     userName = "n-sweep";
     userEmail = "34486798+n-sweep@users.noreply.github.com";
     extraConfig = {
+      push.autoSetupRemote = "true";
       init.defaultBranch = "main";
     };
   };
