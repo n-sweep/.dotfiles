@@ -213,17 +213,22 @@ in {
 
   ### vnc ######################################################################
 
-  systemd.services.x11vnc = {
-    description = "x11vnc";
-    after = [ "network.target" "display-manager.service" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.x11vnc}/bin/x11vnc -forever -display :0 -auth /home/n/.Xauthority -noxdamage";
-      ExecStop = "${pkgs.killall}/bin/killall x11vnc";
-      Type = "simple";
-      Restart = "on-failure";
-      User = "n";
+  systemd = {
+    services.x11vnc = {
+      description = "x11vnc";
+      after = [ "network.target" "display-manager.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.x11vnc}/bin/x11vnc -forever -display :0 -auth /home/n/.Xauthority -noxdamage";
+        ExecStop = "${pkgs.killall}/bin/killall x11vnc";
+        Type = "simple";
+        Restart = "on-failure";
+        User = "n";
+      };
     };
+    extraConfig = ''
+      DefaultTimeoutStopSec=5s
+    '';
   };
 
 

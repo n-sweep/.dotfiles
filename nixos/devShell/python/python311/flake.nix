@@ -31,6 +31,7 @@
             google-api-python-client
             google-auth-httplib2
             google-auth-oauthlib
+            graph-tool
             ipykernel
             ipython
             jupyter
