@@ -4,7 +4,7 @@
 # stolen & adapted from ThePrimeagen
 
 dirs="$HOME/ $HOME/Repos $HOME/work $HOME/work/plato/Repos"
-addtl="_"
+addtl="_\n/tmp/scratch"
 
 # user can provide an argument, else find from list of directories
 if [[ $# -eq 1 ]]; then
