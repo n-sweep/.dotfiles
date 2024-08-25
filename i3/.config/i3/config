@@ -129,6 +129,10 @@ set $ws11 "11"
 set $ws12 "12"
 set $ws13 "13"
 
+set $mon1 eDP-1
+set $mon2 DP-2
+set $mon3 DP-3
+
 # Assign applications to workspaces
 assign [class="org.wezfurlong.wezterm"] $ws6
 assign [class="brave-browser"] $ws7
@@ -136,23 +140,27 @@ assign [class="obs"] $ws12
 
 # Assign workspaces to monitors
 # left (vertical)
-workspace $ws1 output DP-2
-workspace $ws2 output DP-2
-workspace $ws3 output DP-2
-workspace $ws4 output DP-2
-workspace $ws5 output DP-2
+workspace $ws1 output $mon3
+workspace $ws2 output $mon3
+workspace $ws3 output $mon3
+workspace $ws4 output $mon3
+workspace $ws5 output $mon3
 
 # middle
-workspace $ws6 output DP-3
-workspace $ws7 output DP-3
-workspace $ws8 output DP-3
-workspace $ws9 output DP-3
-workspace $ws10 output DP-3
+workspace $ws6 output $mon2
+workspace $ws7 output $mon2
+workspace $ws8 output $mon2
+workspace $ws9 output $mon2
+workspace $ws10 output $mon2
+
+# workspace $ws11 output $mon2
+# workspace $ws12 output $mon2
+# workspace $ws13 output $mon2
 
 # laptop
-workspace $ws11 output eDP-1
-workspace $ws12 output eDP-1
-workspace $ws13 output eDP-1
+workspace $ws11 output $mon1
+workspace $ws12 output $mon1
+workspace $ws13 output $mon1
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
