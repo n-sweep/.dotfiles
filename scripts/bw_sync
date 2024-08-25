@@ -17,7 +17,6 @@ function prompt_passwd {
 }
 
 function login {
-    echo 'login'
 
     # log in with email & password if bitwarden env variables are not set
     if [[ -z "$BW_CLIENTID" || -z "$BW_CLIENTSECRET" ]]; then
@@ -37,7 +36,6 @@ function login {
 }
 
 function unlock {
-    echo 'unlock'
     if [ -z $BW_PASSWD ]; then
         prompt_passwd
     fi
@@ -47,14 +45,12 @@ function unlock {
 }
 
 function parse_session_key {
-    echo 'parse'
     # parse out the session key returned by bitwarden and export it to the local environment
     session_key=$(cat $logfile | rg '\$ export' | sed 's/\$ export //')
     export $(echo $session_key)
 }
 
 function populate_secrets {
-    echo 'populate'
     # each secret's `name` is a file path
     # the file at each path location is populated with the `value`
     bw list items | jq -c '.[] | select(.name == "secrets") | .fields[]' |
