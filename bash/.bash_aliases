@@ -39,7 +39,7 @@ alias activate="source ./.venv/bin/activate"
 alias venv='if [[ -n $VIRTUAL_ENV_PROMPT ]]; then deactivate; elif [ -d "./.venv" ]; then source ./.venv/bin/activate; elif [ -d "./venv" ]; then source ./venv/bin/activate; else echo "no environment found"; fi'
 
 # setup monitors
-alias mon3="xrandr --output DP-2 --primary --rotate right --output DP-3 --right-of DP-2 --output eDP-1 --right-of DP-3"
+alias mon3="xrandr --output DP-3 --primary --rotate right --output DP-2 --right-of DP-3 --output eDP-1 --right-of DP-2"
 
 ### script aliases #############################################################
 
