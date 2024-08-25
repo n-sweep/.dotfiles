@@ -27,11 +27,14 @@ km.set("v", "<leader>V", '"+P')
 -- Paste over selection w/o yanking
 km.set("x", "<leader>p", '"_dP')
 
--- Toggle linebreak & wrap
-km.set('n', '<leader>sw', ':set wrap! linebreak!<CR>')
-
 -- esc in normal mode turns of hl
 km.set('n', '<ESC>', ':nohl<CR>')
+
+-- Toggle linebreak & wrap
+km.set('n', '<F6>', ':set wrap! linebreak!<CR>')
+
+-- Toggle spell check
+km.set('n', '<F7>', ':set spell!<CR>')
 
 -- ctrl/shift/alt + enter/tab shouldn't do anything in insert mode
 -- unless explicitly remapped later
