@@ -58,6 +58,7 @@ function populate_secrets {
             filename=$(echo "$item" | jq -r '.name' | sed 's/ //g')
             content=$(echo "$item" | jq -r '.value' | sed 's/ //g' | sed 's/ /\n/g')
             dest=$HOME/.config/$filename
+            mkdir -p $(dirname $dest)
             echo $content > $dest
         done
 }
