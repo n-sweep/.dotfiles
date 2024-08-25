@@ -66,8 +66,8 @@ function populate_secrets {
         done
 }
 
-if [ status == "unauthenticated" ]; then login; fi
-if [ status == "locked" ]; then unlock; fi
+if [ $(status) == "unauthenticated" ]; then login; fi
+if [ $(status) == "locked" ]; then unlock; fi
 
 bw sync
 
