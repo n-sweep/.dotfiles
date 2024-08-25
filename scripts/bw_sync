@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+logfile=/tmp/bw.log
+
+function status {
+    echo $(bw status | jq -r '.status')
+}
+
+function prompt_email {
+    read -p "Bitwarden Email: " email
+    export BW_EMAIL=$email
+}
+
+function prompt_passwd {
+    read -s -p "Master Password: " passwd
+    export BW_PASSWD=$passwd
+}
+
+function login {
+
+    # log in with email & password if bitwarden env variables are not set
+    if [[ -z "$BW_CLIENTID" || -z "$BW_CLIENTSECRET" ]]; then
+        if [ -z $BW_EMAIL ]; then
+            prompt_email
+        fi
+        prompt_passwd
+
+        # push output to log file for parsing session key
+        bw login $BW_EMAIL $BW_PASSWD 2>&1 | tee $logfile
+        parse_session_key
+
+    # otherwise log in with api key
+    else
+        bw login --apikey
+    fi
+}
+
+function unlock {
+    if [ -z $BW_PASSWD ]; then
+        prompt_passwd
+    fi
+    # push output to log file for parsing session key
+    bw unlock --passwordenv BW_PASSWD 2>&1 | tee $logfile
+    parse_session_key
+}
+
+function parse_session_key {
+    # parse out the session key returned by bitwarden and export it to the local environment
+    session_key=$(cat $logfile | rg '\$ export' | sed 's/\$ export //')
+    export $(echo $session_key)
+}
+
+function populate_secrets {
+    # each secret's `name` is a file path
+    # the file at each path location is populated with the `value`
+    bw list items | jq -c '.[] | select(.name == "secrets") | .fields[]' |
+        while read -r item; do
+            filename=$(echo "$item" | jq -r '.name' | sed 's/ //g')
+            content=$(echo "$item" | jq -r '.value' | sed 's/ //g')
+            dest=$HOME/.config/$filename
+            echo $content > $dest
+        done
+}
+
+if [ status == "unauthenticated" ]; then login; fi
+if [ status == "locked" ]; then unlock; fi
+
+populate_secrets
+
+rm $logfile
