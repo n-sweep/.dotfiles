@@ -97,6 +97,7 @@ in {
   environment = {
 
     systemPackages = with pkgs; [
+      bitwarden-cli
       cbonsai
       clang
       curl
@@ -110,11 +111,11 @@ in {
       inetutils
       jdk19
       jq
+      libstdcxx5
       lshw
       maim
       nettools
       pcmanfm
-      # reaper
       ripgrep
       sqlite
       sshfs
@@ -148,7 +149,7 @@ in {
 
   networking.wireless = {
     userControlled.enable = true;
-    environmentFile = "/home/n/.wifi/wireless.env";
+    environmentFile = "/home/${username}/.wifi/wireless.env";
     networks = {
       "Waffle House".psk = ''@PSK_HOME@'';
     };
@@ -168,7 +169,10 @@ in {
 
   # xserver + i3
   services = {
+
     displayManager.defaultSession = "none+i3";
+    logind.lidSwitch = "ignore";
+
     xserver = {
       enable = true;
       desktopManager = {
@@ -186,6 +190,7 @@ in {
         ];
       };
     };
+
   };
 
   # Configure keymap in X11

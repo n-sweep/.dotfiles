@@ -38,12 +38,14 @@
             jupytext
             matplotlib
             numpy
+            opencv4
             openpyxl
             pandas
             plotly
             pynvim
             pyperclip
             pyqt6
+            pytesseract
             pytz
             requests
             scikit-learn

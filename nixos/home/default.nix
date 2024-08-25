@@ -14,6 +14,13 @@ in {
     username = "n";
     homeDirectory = "/home/n";
 
+    sessionVariables = {
+      BW_CLIENTID = builtins.readFile "${config.home.homeDirectory}/.config/bw/client_id";
+      BW_CLIENTSECRET = builtins.readFile "${config.home.homeDirectory}/.config/bw/client_secret";
+      BW_EMAIL = builtins.readFile "${config.home.homeDirectory}/.config/bw/email";
+    };
+
+
     # source files to home directory
     file = {
       ".bash_aliases".source = "${dfPath}/bash/.bash_aliases";
@@ -71,15 +78,18 @@ in {
       cmus
       cockatrice
       firebase-tools
-      floorp
       gimp
       gitAndTools.gh
-      obs-cli
+      infisical
+      mods
+      obs-studio
       parsec-bin
       peek
       quarto
       sxiv
+      tigervnc
       wezterm
+      yazi
       zoom-us
 
       # base python - use devShell for dev
@@ -356,13 +366,12 @@ in {
 
   ### obs ######################################################################
 
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-pipewire-audio-capture
-      obs-websocket
-    ];
-  };
+  # programs.obs-studio = {
+  #   enable = true;
+  #   plugins = with pkgs.obs-studio-plugins; [
+  #     obs-pipewire-audio-capture
+  #   ];
+  # };
 
   ##############################################################################
 
