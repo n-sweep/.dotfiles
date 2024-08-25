@@ -65,6 +65,8 @@ function populate_secrets {
 if [ status == "unauthenticated" ]; then login; fi
 if [ status == "locked" ]; then unlock; fi
 
+bw sync
+
 populate_secrets
 
 rm $logfile
