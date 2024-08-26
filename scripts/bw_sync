@@ -22,6 +22,9 @@ function login {
     if [[ -z "$BW_CLIENTID" || -z "$BW_CLIENTSECRET" ]]; then
         if [ -z $BW_EMAIL ]; then
             prompt_email
+            dest=$HOME/.config/bw/email
+            mkdir -p $(dirname $dest)
+            echo $BW_EMAIL > $dest
         fi
         prompt_passwd
 
