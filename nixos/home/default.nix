@@ -2,7 +2,16 @@
 { config, pkgs, inputs, ...}:
 let
 
-  dfPath = "${config.home.homeDirectory}/.dotfiles";
+  home_dir = "/home/${config.home.username}";
+  config_dir = "${home_dir}/.config";
+  dotfiles_dir = "${home_dir}/.dotfiles";
+  nix_dir = "${dotfiles_dir}/nixos";
+
+  # Flakes (these can be git repos rather than local files)
+  jupytext_nvim.url = "path:${nix_dir}/modules/jupytext-nvim";
+  # mojo_vim = builtins.getFlake "path:${nix_dir}/modules/mojo-vim";
+  # obsidian_nvim = builtins.getFlake "path:${nix_dir}/modules/obsidian-nvim";
+  # otter_nvim = builtins.getFlake "path:${nix_dir}/modules/otter-nvim";
 
 in {
 
@@ -11,50 +20,51 @@ in {
   ];
 
   home ={
+
     username = "n";
-    homeDirectory = "/home/n";
 
     sessionVariables = {
-      BW_CLIENTID = builtins.readFile "${config.home.homeDirectory}/.config/bw/client_id";
-      BW_CLIENTSECRET = builtins.readFile "${config.home.homeDirectory}/.config/bw/client_secret";
-      BW_EMAIL = builtins.readFile "${config.home.homeDirectory}/.config/bw/email";
+      BW_CLIENTID = builtins.readFile "${config_dir}/bw/client_id";
+      BW_CLIENTSECRET = builtins.readFile "${config_dir}/bw/client_secret";
+      BW_EMAIL = builtins.readFile "${config_dir}/bw/email";
     };
 
 
     # source files to home directory
     file = {
-      ".bash_aliases".source = "${dfPath}/bash/.bash_aliases";
-      ".config/i3/config".source = "${dfPath}/i3/.config/i3/config";
-      ".config/i3status/config".source = "${dfPath}/i3/.config/i3status/config";
-      ".inputrc".source = "${dfPath}/bash/.inputrc";
-      ".wezterm.lua".source = "${dfPath}/wezterm/.wezterm.lua";
+      ".bash_aliases".source = "${dotfiles_dir}/bash/.bash_aliases";
+      ".config/i3/config".source = "${dotfiles_dir}/i3/.config/i3/config";
+      ".config/i3status/config".source = "${dotfiles_dir}/i3/.config/i3status/config";
+      ".inputrc".source = "${dotfiles_dir}/bash/.inputrc";
+      ".wezterm.lua".source = "${dotfiles_dir}/wezterm/.wezterm.lua";
 
       # these plugins crash OBS. missing dependency?
       # ".vst".source = "${pkgs.reaper}/opt/REAPER/Plugins/";
 
       # jupytext.nvim repo
-      ".config/nvim/pack/vendor/start/jupytext".source = (pkgs.fetchgit {
-        url = "https://github.com/GCBallesteros/jupytext.nvim";
-        hash = "sha256-x5emW+qfUTUDR72B9QdDgVdrb8wGH9D7AdtRrQm80sI=";
-      });
+      ".config/nvim/pack/vendor/start/jupytext".source = jupytext_nvim.packages.x86_64-linux;
+      # ".config/nvim/pack/vendor/start/jupytext".source = (pkgs.fetchgit {
+      #   url = "https://github.com/GCBallesteros/jupytext.nvim";
+      #   hash = "sha256-x5emW+qfUTUDR72B9QdDgVdrb8wGH9D7AdtRrQm80sI=";
+      # });
 
-      # mojo.vim repo
-      ".config/nvim/pack/vendor/start/moji".source = (pkgs.fetchgit {
-        url = "https://github.com/czheo/mojo.vim";
-        hash = "sha256-gUq2OBA1VuJFgaJCX+9GBFv0jlFL1sKuiDv/DnJl5qo=";
-      });
+      # # mojo.vim repo
+      # ".config/nvim/pack/vendor/start/mojo".source = (pkgs.fetchgit {
+      #   url = "https://github.com/czheo/mojo.vim";
+      #   hash = "sha256-gUq2OBA1VuJFgaJCX+9GBFv0jlFL1sKuiDv/DnJl5qo=";
+      # });
 
-      # obsidian.nvim repo
-      ".config/nvim/pack/vendor/start/obsidian".source = (pkgs.fetchgit {
-        url = "https://github.com/epwalsh/obsidian.nvim";
-        hash = "sha256-t1MSU1ufujdDI6ne6AOtIqnC45JjWXtOkmFloxsrfRU=";
-      });
+      # # obsidian.nvim repo
+      # ".config/nvim/pack/vendor/start/obsidian".source = (pkgs.fetchgit {
+      #   url = "https://github.com/epwalsh/obsidian.nvim";
+      #   hash = "sha256-t1MSU1ufujdDI6ne6AOtIqnC45JjWXtOkmFloxsrfRU=";
+      # });
 
-      # otter.nvim repo
-      ".config/nvim/pack/vendor/start/otter".source = (pkgs.fetchgit {
-        url = "https://github.com/jmbuhr/otter.nvim";
-        hash = "sha256-7y+dqDAx3EHL4A4bvWzoDi9aXwQMp4NfLgVp++XTfps=";
-      });
+      # # otter.nvim repo
+      # ".config/nvim/pack/vendor/start/otter".source = (pkgs.fetchgit {
+      #   url = "https://github.com/jmbuhr/otter.nvim";
+      #   hash = "sha256-7y+dqDAx3EHL4A4bvWzoDi9aXwQMp4NfLgVp++XTfps=";
+      # });
 
       #  telemux repo
       ".config/nvim/pack/vendor/start/telemux".source = "/home/n/Repos/telemux-nvim";
@@ -80,6 +90,7 @@ in {
       firebase-tools
       gimp
       gitAndTools.gh
+      google-cloud-sdk
       infisical
       mods
       obs-studio
@@ -127,7 +138,7 @@ in {
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    bashrcExtra = builtins.readFile "${config.home.homeDirectory}/.dotfiles/bash/.bashrc";
+    bashrcExtra = builtins.readFile "${dotfiles_dir}/bash/.bashrc";
   };
 
   programs.fzf = {
@@ -137,7 +148,7 @@ in {
 
   programs.tmux = {
     enable = true;
-    extraConfig = builtins.readFile "${config.home.homeDirectory}/.dotfiles/tmux/.tmux.conf";
+    extraConfig = builtins.readFile "${dotfiles_dir}/tmux/.tmux.conf";
   };
 
   ### nixvim ###################################################################

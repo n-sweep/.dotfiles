@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   username = "n";
 in {
@@ -115,6 +115,7 @@ in {
       lshw
       maim
       nettools
+      nix-prefetch-git
       pcmanfm
       ripgrep
       sqlite
