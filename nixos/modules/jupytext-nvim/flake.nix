@@ -14,6 +14,11 @@
         sha256 = "sha256-x5emW+qfUTUDR72B9QdDgVdrb8wGH9D7AdtRrQm80sI=";
       };
 
+      installPhase = ''
+        mkdir -p $out
+        cp -r $src/* $out
+      '';
+
     };
   };
 }

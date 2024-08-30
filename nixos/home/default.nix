@@ -2,16 +2,20 @@
 { config, pkgs, inputs, ...}:
 let
 
+  # directories
   home_dir = "/home/${config.home.username}";
   config_dir = "${home_dir}/.config";
   dotfiles_dir = "${home_dir}/.dotfiles";
   nix_dir = "${dotfiles_dir}/nixos";
+  nvim_plug_dir = ".config/nvim/pack/vendor/start";
 
   # Flakes (these can be git repos rather than local files)
-  jupytext_nvim.url = "path:${nix_dir}/modules/jupytext-nvim";
-  # mojo_vim = builtins.getFlake "path:${nix_dir}/modules/mojo-vim";
-  # obsidian_nvim = builtins.getFlake "path:${nix_dir}/modules/obsidian-nvim";
-  # otter_nvim = builtins.getFlake "path:${nix_dir}/modules/otter-nvim";
+  get_flake = path: (builtins.getFlake (builtins.toPath path)).packages.x86_64-linux;
+  jupytext_nvim = get_flake "${nix_dir}/modules/jupytext-nvim";
+  mojo_vim = get_flake "${nix_dir}/modules/mojo-vim";
+  obsidian_nvim = get_flake "${nix_dir}/modules/obsidian-nvim";
+  otter_nvim = get_flake "${nix_dir}/modules/otter-nvim";
+
 
 in {
 
@@ -41,44 +45,13 @@ in {
       # these plugins crash OBS. missing dependency?
       # ".vst".source = "${pkgs.reaper}/opt/REAPER/Plugins/";
 
-      # jupytext.nvim repo
-      ".config/nvim/pack/vendor/start/jupytext".source = jupytext_nvim.packages.x86_64-linux;
-      # ".config/nvim/pack/vendor/start/jupytext".source = (pkgs.fetchgit {
-      #   url = "https://github.com/GCBallesteros/jupytext.nvim";
-      #   hash = "sha256-x5emW+qfUTUDR72B9QdDgVdrb8wGH9D7AdtRrQm80sI=";
-      # });
-
-      # # mojo.vim repo
-      # ".config/nvim/pack/vendor/start/mojo".source = (pkgs.fetchgit {
-      #   url = "https://github.com/czheo/mojo.vim";
-      #   hash = "sha256-gUq2OBA1VuJFgaJCX+9GBFv0jlFL1sKuiDv/DnJl5qo=";
-      # });
-
-      # # obsidian.nvim repo
-      # ".config/nvim/pack/vendor/start/obsidian".source = (pkgs.fetchgit {
-      #   url = "https://github.com/epwalsh/obsidian.nvim";
-      #   hash = "sha256-t1MSU1ufujdDI6ne6AOtIqnC45JjWXtOkmFloxsrfRU=";
-      # });
-
-      # # otter.nvim repo
-      # ".config/nvim/pack/vendor/start/otter".source = (pkgs.fetchgit {
-      #   url = "https://github.com/jmbuhr/otter.nvim";
-      #   hash = "sha256-7y+dqDAx3EHL4A4bvWzoDi9aXwQMp4NfLgVp++XTfps=";
-      # });
-
-      #  telemux repo
-      ".config/nvim/pack/vendor/start/telemux".source = "/home/n/Repos/telemux-nvim";
-      # ".config/nvim/pack/vendor/start/telemux".source = (pkgs.fetchgit {
-      #   url = "https://github.com/n-sweep/telemux-nvim";
-      #   hash = "sha256-h7sPEY5loIRVDmpxNEPNntr0jGJkipAdw3rH3o63jW4=";
-      # });
-
-      #  pvserv repo
-      ".config/nvim/pack/vendor/start/pvserv".source = "/home/n/Repos/pvserv";
-      # ".config/nvim/pack/vendor/start/pvserv".source = (pkgs.fetchgit {
-      #   url = "https://github.com/n-sweep/pvserv";
-      #   hash = "sha256-Q29bSnCJvjI8ZlPSMwUWeR/jdyhv4ZWz9HYnHqQ9n88=";
-      # });
+      # nvim plugins
+      "${nvim_plug_dir}/jupytext".source = jupytext_nvim;
+      "${nvim_plug_dir}/mojo".source = mojo_vim;
+      "${nvim_plug_dir}/obsidian".source = obsidian_nvim;
+      "${nvim_plug_dir}/otter".source = otter_nvim;
+      "${nvim_plug_dir}/telemux".source = "/home/n/Repos/telemux-nvim";
+      "${nvim_plug_dir}/pvserv".source = "/home/n/Repos/pvserv";
 
     };
 

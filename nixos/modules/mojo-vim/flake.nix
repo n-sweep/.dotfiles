@@ -3,22 +3,22 @@
 
   outputs = { self, nixpkgs }: {
     # Define your packages or configurations
-    defaultPackage.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.stdenv.mkDerivation {
+    packages.x86_64-linux = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux ;
+    in pkgs.stdenv.mkDerivation {
       pname = "mojo.vim";
       version = "1.0";
 
-      src = nixpkgs.fetchgit {
+      src = pkgs.fetchgit {
         url = "https://github.com/czheo/mojo.vim";
-        hash = "sha256-gUq2OBA1VuJFgaJCX+9GBFv0jlFL1sKuiDv/DnJl5qo=";
+        sha256 = "sha256-gUq2OBA1VuJFgaJCX+9GBFv0jlFL1sKuiDv/DnJl5qo=";
       };
 
-      # buildInputs = [ ];
-
       installPhase = ''
-        dest=$out/.config/nvim/pack/vendor/start/mojo
-        mkdir -p $dest
-        cp -r $src/* $dest
+        mkdir -p $out
+        cp -r $src/* $out
       '';
+
     };
   };
 }
