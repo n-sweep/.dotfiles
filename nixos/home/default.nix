@@ -43,7 +43,7 @@ in {
       ".wezterm.lua".source = "${dotfiles_dir}/wezterm/.wezterm.lua";
 
       # these plugins crash OBS. missing dependency?
-      # ".vst".source = "${pkgs.reaper}/opt/REAPER/Plugins/";
+      ".vst".source = "${pkgs.reaper}/opt/REAPER/Plugins/";
 
       # nvim plugins
       "${nvim_plug_dir}/jupytext".source = jupytext_nvim;
