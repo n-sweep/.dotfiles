@@ -21,9 +21,8 @@
       ];
 
       # solves `Couldn't make directory /homeless-shelter: Permission denied` error
-      buildPhase = ''
-        export HOME=$TMP
-      '';
+      # this may have something to do with --impure when building flakes?
+      buildPhase = ''export HOME=$TMP'';
 
       installPhase = ''
         mkdir -p $out

@@ -11,7 +11,7 @@
 
       src = pkgs.fetchgit {
         url = "https://github.com/GCBallesteros/jupytext.nvim";
-        sha256 = "sha256-x5emW+qfUTUDR72B9QdDgVdrb8wGH9D7AdtRrQm80sI=";
+        sha256 = "sha256-LBBRZOSqn70qruSA/vbPMTzS7y05F/z4EqC+5JlU6NM=";
       };
 
       installPhase = ''
