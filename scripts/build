@@ -4,7 +4,7 @@ NIX_HOST_PATH=$HOME/.config/nixos/host
 
 function new_host {
     echo "Generating hardware config..."
-    read -p "New host name ($(hostname)):" host
+    read -p "New host name ($(hostname)): " host
 
     if [[ -z $host ]]; then
         host=$(hostname)
