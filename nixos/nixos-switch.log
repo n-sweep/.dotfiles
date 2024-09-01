@@ -1,1 +1,1 @@
-/run/current-system/sw/bin/nixos-rebuild: unknown option `/home/n/.dotfiles/nixos#xps'
+/run/current-system/sw/bin/nixos-rebuild: unknown option `.#xps'

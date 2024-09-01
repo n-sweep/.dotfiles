@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-HOST_PATH=$HOME/.config/nixos/host
+NIX_HOST_PATH=$HOME/.config/nixos/host
 
 function new_host {
     echo "Generating hardware config..."
@@ -17,14 +17,14 @@ function new_host {
 
 function choose_host {
     # if host path doesn't exist, choose one
-    if [[ ! -e $HOST_PATH || ! -s $HOST_PATH ]]; then
-        mkdir -p $(dirname $HOST_PATH)
+    if [[ ! -e $NIX_HOST_PATH || ! -s $NIX_HOST_PATH ]]; then
+        mkdir -p $(dirname $NIX_HOST_PATH)
         choices=$(find ./hosts/* -maxdepth 1 -type d -exec basename {} \;)
         choice=$(echo $choices | sed 's/^/new_host /' | sed 's/ /\n/g' | fzf --height 10%)
         if [[ $choice == "new_host" ]]; then
             choice=$(new_host)
         fi
-        echo $choice > $HOST_PATH
+        echo $choice > $NIX_HOST_PATH
     fi
 }
 
@@ -35,7 +35,7 @@ echo "Rebuilding ❄️NixOS..."
 choose_host
 
 git diff -U0 **/*.nix
-sudo nixos-rebuild switch --flake --impure ~/.dotfiles/nixos#$(cat $HOST_PATH) &>nixos-switch.log \
+sudo nixos-rebuild switch --flake --impure .#$(cat $NIX_HOST_PATH) &>nixos-switch.log \
     || cat nixos-switch.log | rg --color=always error && false
 
 git commit -am "$(nixos-rebuild list-generations | rg current)"
