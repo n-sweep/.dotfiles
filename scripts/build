@@ -47,12 +47,15 @@ git diff -U0 **/*.nix
 sudo nixos-rebuild switch --impure --flake .#$host &>nixos-switch.log
 
 if [[ $? -gt 0 ]]; then
-    error=$(cat nixos-switch.log | rg --color=always error)
-    if [[ $error == *$host* ]]; then
-        rm $NIX_HOST_PATH
-    fi
     echo "🔴 Build Failed..."
-    echo $error
+    hash=$(echo cat nixos-switch.log | rg --color=always 'hash mismatch')
+    if [[ -z $hash ]]; then
+        echo $hash
+        echo cat nixos-switch.log | rg --color=always 'specified: sha256'
+        echo cat nixos-switch.log | rg --color=always 'got:    sha256'
+    else
+        echo cat nixos-switch.log | rg --color=always error
+    fi
 else
     echo "🔵 Build Succeeded"
     git commit -am "$(nixos-rebuild list-generations | rg current)"
