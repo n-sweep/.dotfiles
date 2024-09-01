@@ -1,1 +1,1 @@
-/run/current-system/sw/bin/nixos-rebuild: unknown option `.#xps'
+/run/current-system/sw/bin/nixos-rebuild: unknown option `../nixos#xps'
