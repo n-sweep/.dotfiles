@@ -11,7 +11,7 @@ function new_host {
     fi
 
     # copy and update template default.nix
-    cp -r ./hosts/temp ./hosts/${host}
+    cp -r ./hosts/.temp ./hosts/${host}
     default=./hosts/${host}/default.nix
     to_replace=$(rg 'system.stateVersion' $default)
     replacement_text=$(rg 'system.stateVersion' /etc/nixos/configuration.nix)
