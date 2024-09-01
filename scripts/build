@@ -32,6 +32,8 @@ set -e
 cd ~/.dotfiles/nixos
 echo "Rebuilding ❄️NixOS..."
 
+choose_host
+
 git diff -U0 **/*.nix
 sudo nixos-rebuild switch --flake --impure .#$(cat $HOST_PATH) &>nixos-switch.log \
     || cat nixos-switch.log | rg --color=always error && false
