@@ -10,9 +10,16 @@ function new_host {
         host=$(hostname)
     fi
 
-    mkdir ./hosts/${host}
+    # copy and update template default.nix
+    cp -r ./hosts/temp ./hosts/${host}
+    default=./hosts/${host}/default.nix
+    to_replace=$(rg 'system.stateVersion' $default)
+    replacement_text=$(rg 'system.stateVersion' /etc/nixos/configuration.nix)
+    sed -i "/$to_replace/c\\$replacement_text" $default
+
+    # generate hardware configuration
     nixos-generate-config --show-hardware-config > hosts/${host}/hardware-configuration.nix
-    echo $host
+    echo $host > $NIX_HOST_PATH
 }
 
 function choose_host {
@@ -22,26 +29,30 @@ function choose_host {
         choices=$(find ./hosts/* -maxdepth 1 -type d -exec basename {} \;)
         choice=$(echo $choices | sed 's/^/new_host /' | sed 's/ /\n/g' | fzf --height 10%)
         if [[ $choice == "new_host" ]]; then
-            choice=$(new_host)
+            $(new_host)
+        else
+            echo $choice > $NIX_HOST_PATH
         fi
-        echo $choice > $NIX_HOST_PATH
     fi
 }
 
 cd $HOME/.dotfiles/nixos
-pwd
 echo "❄️ Rebuilding NixOS..."
 
 choose_host
 
+host=$(cat $NIX_HOST_PATH)
 git diff -U0 **/*.nix
-sudo nixos-rebuild switch --impure --flake .#$(cat $NIX_HOST_PATH) &>nixos-switch.log
+sudo nixos-rebuild switch --impure --flake .#$host &>nixos-switch.log
 
 if [[ $? -gt 0 ]]; then
+    error=$(cat nixos-switch.log | rg --color=always error)
+    if [[ $error == *$host* ]]; then
+        rm $NIX_HOST_PATH
+    fi
     echo "🔴 Build Failed..."
-    cat nixos-switch.log | rg --color=always error
+    echo $error
 else
     echo "🔵 Build Succeeded"
     git commit -am "$(nixos-rebuild list-generations | rg current)"
 fi
-
