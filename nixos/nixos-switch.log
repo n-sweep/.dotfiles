@@ -1,1 +1,17 @@
-/run/current-system/sw/bin/nixos-rebuild: unknown option `.#xps'
+warning: Git tree '/home/n/.dotfiles' is dirty
+building the system configuration...
+warning: Git tree '/home/n/.dotfiles' is dirty
+warning: not writing modified lock file of flake 'path:/home/n/.dotfiles/nixos/modules/mojo-vim':
+• Added input 'nixpkgs':
+    'path:/nix/store/6x9871n5b2whrrf51gfciszvink2avm0-source?lastModified=0&narHash=sha256-0XH9MJk54imJm%2BRHOLTUJ7e%2BponLW00tw5ke4MTVa1Y%3D' (1970-01-01)
+warning: not writing modified lock file of flake 'path:/home/n/.dotfiles/nixos/modules/obsidian-nvim':
+• Added input 'nixpkgs':
+    'path:/nix/store/6x9871n5b2whrrf51gfciszvink2avm0-source?lastModified=0&narHash=sha256-0XH9MJk54imJm%2BRHOLTUJ7e%2BponLW00tw5ke4MTVa1Y%3D' (1970-01-01)
+warning: not writing modified lock file of flake 'path:/home/n/.dotfiles/nixos/modules/otter-nvim':
+• Added input 'nixpkgs':
+    'path:/nix/store/6x9871n5b2whrrf51gfciszvink2avm0-source?lastModified=0&narHash=sha256-0XH9MJk54imJm%2BRHOLTUJ7e%2BponLW00tw5ke4MTVa1Y%3D' (1970-01-01)
+trace: warning: n profile: The option `options' defined in `/nix/store/6x9871n5b2whrrf51gfciszvink2avm0-source/flake.nix' has been renamed to `opts'.
+activating the configuration...
+setting up /etc...
+reloading user units for n...
+restarting sysinit-reactivation.target
