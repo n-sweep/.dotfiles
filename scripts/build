@@ -51,8 +51,8 @@ if [[ $? -gt 0 ]]; then
     hash=$(cat nixos-switch.log | rg --color=always 'hash mismatch')
     if [[ -n $hash ]]; then
         echo $hash
-        cat nixos-switch.log | rg --color=always 'specified: sha256'
-        cat nixos-switch.log | rg --color=always 'got:    sha256'
+        cat nixos-switch.log | rg --color=always 'specified:'
+        cat nixos-switch.log | rg --color=always 'got:'
     else
         cat nixos-switch.log | rg --color=always error
     fi
