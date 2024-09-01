@@ -25,32 +25,26 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
 
+    common = {
+      system = "x86_64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.n = import ./home;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+        }
+      ];
+    };
+
     nixosConfigurations = {
 
-      nixvm = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/nixvm
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.n = import ./home;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-          }
-        ];
-      };
+      nixvm = nixpkgs.lib.nixosSystem (common // {
+        modules = [./hosts/nixvm] ++ common.modules or [];
+      });
 
-      xps = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/xps
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.n = import ./home;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-          }
-        ];
+      nixvm = nixpkgs.lib.nixosSystem (common // {
+        modules = [./hosts/xps] ++ common.modules or [];
       };
 
     };
