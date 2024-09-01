@@ -48,13 +48,15 @@ sudo nixos-rebuild switch --impure --flake .#$host &>nixos-switch.log
 
 if [[ $? -gt 0 ]]; then
     echo "🔴 Build Failed..."
-    hash=$(echo cat nixos-switch.log | rg --color=always 'hash mismatch')
+    hash=$(
+    echo cat nixos-switch.log | rg --color=always 'hash mismatch'
+)
     if [[ -z $hash ]]; then
         echo $hash
-        echo cat nixos-switch.log | rg --color=always 'specified: sha256'
-        echo cat nixos-switch.log | rg --color=always 'got:    sha256'
+        cat nixos-switch.log | rg --color=always 'specified: sha256'
+        cat nixos-switch.log | rg --color=always 'got:    sha256'
     else
-        echo cat nixos-switch.log | rg --color=always error
+        cat nixos-switch.log | rg --color=always error
     fi
 else
     echo "🔵 Build Succeeded"
