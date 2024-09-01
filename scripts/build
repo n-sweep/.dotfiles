@@ -29,7 +29,7 @@ function choose_host {
         choices=$(find ./hosts/* -maxdepth 1 -type d -exec basename {} \;)
         choice=$(echo $choices | sed 's/$/ new_host/' | sed 's/ /\n/g' | fzf --height 10%)
         if [[ $choice == "new_host" ]]; then
-            $(new_host)
+            new_host
         else
             echo $choice > $NIX_HOST_PATH
         fi
