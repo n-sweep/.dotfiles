@@ -19,6 +19,7 @@ function new_host {
 
     # generate hardware configuration
     nixos-generate-config --show-hardware-config > hosts/${host}/hardware-configuration.nix
+    git add .
     echo $host > $NIX_HOST_PATH
 }
 
