@@ -23,7 +23,8 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  let
 
     common = {
       system = "x86_64-linux";
@@ -37,21 +38,16 @@
       ];
     };
 
-    nixosConfigurations = {
-
-      nixvm = nixpkgs.lib.nixosSystem (self.common // {
+    generate_host_configs = dirs: builtins.listToAttrs (map (dir: {
+      name = dir;
+      value = nixpkgs.lib.nixosSystem (common // {
         modules = [
-          ./hosts/nixvm
-        ] ++ self.common.modules or [];
+          ./hosts/${dir}
+        ] ++ common.modules or [];
       });
+    }) dirs);
 
-      xps = nixpkgs.lib.nixosSystem (self.common // {
-        modules = [
-          ./hosts/xps
-        ] ++ self.common.modules or [];
-      });
+    host_dirs = builtins.attrNames (builtins.readDir ./hosts);
 
-    };
-
-  };
+  in { nixosConfigurations = generate_host_configs host_dirs; };
 }
