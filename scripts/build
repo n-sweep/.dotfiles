@@ -28,8 +28,9 @@ function choose_host {
     fi
 }
 
-cd ~/.dotfiles/nixos
-echo "Rebuilding ❄️NixOS..."
+cd $HOME/.dotfiles/nixos
+pwd
+echo "❄️ Rebuilding NixOS..."
 
 choose_host
 
@@ -37,9 +38,10 @@ git diff -U0 **/*.nix
 sudo nixos-rebuild switch --impure --flake .#$(cat $NIX_HOST_PATH) &>nixos-switch.log
 
 if [[ $? -gt 0 ]]; then
-    echo "Build failed..."
+    echo "🔴 Build Failed..."
     cat nixos-switch.log | rg --color=always error
 else
+    echo "🔵 Build Succeeded"
     git commit -am "$(nixos-rebuild list-generations | rg current)"
 fi
 
