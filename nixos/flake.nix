@@ -39,13 +39,17 @@
 
     nixosConfigurations = {
 
-      nixvm = nixpkgs.lib.nixosSystem (common // {
-        modules = [./hosts/nixvm] ++ common.modules or [];
+      nixvm = nixpkgs.lib.nixosSystem (self.common // {
+        modules = [
+          ./hosts/nixvm
+        ] ++ self.common.modules or [];
       });
 
-      nixvm = nixpkgs.lib.nixosSystem (common // {
-        modules = [./hosts/xps] ++ common.modules or [];
-      };
+      xps = nixpkgs.lib.nixosSystem (self.common // {
+        modules = [
+          ./hosts/xps
+        ] ++ self.common.modules or [];
+      });
 
     };
 

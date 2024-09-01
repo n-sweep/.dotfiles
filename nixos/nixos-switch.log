@@ -1,0 +1,9 @@
+warning: Git tree '/home/n/.dotfiles' is dirty
+error: undefined variable 'common'
+
+       at /nix/store/rsh59r4llhp0xjriaw1v4yhl0qxv6k30-source/nixos/flake.nix:42:40:
+
+           41|
+           42|       nixvm = nixpkgs.lib.nixosSystem (common // {
+             |                                        ^
+           43|         modules = [./hosts/nixvm] ++ common.modules or [];
