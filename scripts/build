@@ -27,7 +27,7 @@ function choose_host {
     if [[ ! -e $NIX_HOST_PATH || ! -s $NIX_HOST_PATH ]]; then
         mkdir -p $(dirname $NIX_HOST_PATH)
         choices=$(find ./hosts/* -maxdepth 1 -type d -exec basename {} \;)
-        choice=$(echo $choices | sed 's/^/new_host /' | sed 's/ /\n/g' | fzf --height 10%)
+        choice=$(echo $choices | sed 's/$/ new_host/' | sed 's/ /\n/g' | fzf --height 10%)
         if [[ $choice == "new_host" ]]; then
             $(new_host)
         else
