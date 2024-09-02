@@ -7,9 +7,11 @@ function update {
     url=$(rg url $flake | sed -n 's/.*url = "\(.*\)";/\1/p')
     old_hash=$(rg sha256 $flake | sed -n 's/sha256 = "\(sha256-.*=\)";/\1/p')
     new_hash=$(nix-prefetch-git --quiet $url | jq -r ".hash")
-    if [[ $old_hash != $new_hash ]]; then
+    if [[ *$old_hash* != *$new_hash* ]]; then
         echo "updating $flake"
-        sed -i 's/$old_hash/new_hash/' $flake
+        target=$(echo $old_hash | sed 's/\//\\\//g')
+        replace=$(echo $new_hash | sed 's/\//\\\//g')
+        sed -i "s/$target/$replace/" $flake
     fi
 }
 

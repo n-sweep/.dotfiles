@@ -11,7 +11,7 @@
 
       src = pkgs.fetchgit {
         url = "https://github.com/epwalsh/obsidian.nvim";
-        sha256 = "sha256-t1MSU1ufujdDI6ne6AOtIqnC45JjWXtOkmFloxsrfRU=";
+        sha256 = "sha256-mbq7fAPmlwOAbWlN3lGX9WGBKTV8cAPZx8pnRCyszJc=";
       };
 
       buildInputs = with pkgs; [

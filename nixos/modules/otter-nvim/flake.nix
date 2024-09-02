@@ -11,7 +11,7 @@
 
       src = pkgs.fetchgit {
         url = "https://github.com/jmbuhr/otter.nvim";
-        sha256 = "sha256-7y+dqDAx3EHL4A4bvWzoDi9aXwQMp4NfLgVp++XTfps=";
+        sha256 = "sha256-euHwoK2WHLF/hrjLY2P4yGrIbYyBN38FL3q4CKNZmLY=";
       };
 
       installPhase = ''
