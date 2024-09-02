@@ -67,6 +67,7 @@ in {
       google-cloud-sdk
       infisical
       mods
+      obs-studio
       parsec-bin
       peek
       quarto

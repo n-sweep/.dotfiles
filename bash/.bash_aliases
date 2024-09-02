@@ -31,9 +31,6 @@ rand_dist() {
 }
 alias cn="c && fastfetch --logo $(rand_dist)"
 
-# nixos-rebuild
-alias build="sudo nixos-rebuild switch --impure --flake ~/.dotfiles/nixos#xps"
-
 # venv activation
 alias activate="source ./.venv/bin/activate"
 alias venv='if [[ -n $VIRTUAL_ENV_PROMPT ]]; then deactivate; elif [ -d "./.venv" ]; then source ./.venv/bin/activate; elif [ -d "./venv" ]; then source ./venv/bin/activate; else echo "no environment found"; fi'

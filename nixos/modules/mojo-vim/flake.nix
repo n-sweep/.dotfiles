@@ -6,7 +6,7 @@
     packages.x86_64-linux = let
       pkgs = nixpkgs.legacyPackages.x86_64-linux ;
     in pkgs.stdenv.mkDerivation {
-      pname = "mojo.vim";
+      pname = "mojo-vim";
       version = "1.0";
 
       src = pkgs.fetchgit {

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+cd $HOME/.dotfiles/nixos/modules
+
+function update {
+    flake=./$1/flake.nix
+    url=$(rg url $flake | sed -n 's/.*url = "\(.*\)";/\1/p')
+    old_hash=$(rg sha256 $flake | sed -n 's/sha256 = "\(sha256-.*=\)";/\1/p')
+    new_hash=$(nix-prefetch-git --quiet $url | jq -r ".hash")
+    if [[ $old_hash != $new_hash ]]; then
+        echo "updating $flake"
+        sed -i 's/$old_hash/new_hash/' $flake
+    fi
+}
+
+function update_all {
+    modules=$(find ./* -maxdepth 1 -type d -exec basename {} \;)
+    for dir in $modules; do
+        update $dir
+    done
+}
+
+update_all
