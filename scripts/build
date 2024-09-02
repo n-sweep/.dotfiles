@@ -39,7 +39,7 @@ function choose_host {
 function rebuild {
     host=$(cat $NIX_HOST_PATH)
 
-    git diff -U0 **/*.nix
+    git diff -U0 ../**/*.nix
     sudo nixos-rebuild switch --impure --flake .#$host &>nixos-switch.log
 
     if [[ $? -gt 0 ]]; then
