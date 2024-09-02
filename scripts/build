@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-NIX_HOST_PATH=$HOME/.config/nixos/host
-
 function new_host {
+    # generate default.nix and hardware-configuration.nix for a new host
     echo "Generating hardware config..."
     read -p "New host name ($(hostname)): " host
 
@@ -37,26 +36,32 @@ function choose_host {
     fi
 }
 
+function rebuild {
+    host=$(cat $NIX_HOST_PATH)
+
+    git diff -U0 **/*.nix
+    sudo nixos-rebuild switch --impure --flake .#$host &>nixos-switch.log
+
+    if [[ $? -gt 0 ]]; then
+        echo "🔴 Build Failed..."
+        hash=$(cat nixos-switch.log | rg --color=always 'hash mismatch')
+        if [[ -n $hash ]]; then
+            echo $hash
+            cat nixos-switch.log | rg --color=always 'specified:'
+            cat nixos-switch.log | rg --color=always 'got:'
+        else
+            cat nixos-switch.log | rg --color=always error
+        fi
+    else
+        echo "🔵 Build Succeeded"
+        git commit -am "$(nixos-rebuild list-generations | rg current)"
+    fi
+}
+
+NIX_HOST_PATH=$HOME/.config/nixos/host
+
 cd $HOME/.dotfiles/nixos
 echo "❄️ Rebuilding NixOS..."
 
 choose_host
-
-host=$(cat $NIX_HOST_PATH)
-git diff -U0 **/*.nix
-sudo nixos-rebuild switch --impure --flake .#$host &>nixos-switch.log
-
-if [[ $? -gt 0 ]]; then
-    echo "🔴 Build Failed..."
-    hash=$(cat nixos-switch.log | rg --color=always 'hash mismatch')
-    if [[ -n $hash ]]; then
-        echo $hash
-        cat nixos-switch.log | rg --color=always 'specified:'
-        cat nixos-switch.log | rg --color=always 'got:'
-    else
-        cat nixos-switch.log | rg --color=always error
-    fi
-else
-    echo "🔵 Build Succeeded"
-    git commit -am "$(nixos-rebuild list-generations | rg current)"
-fi
+rebuild
