@@ -39,7 +39,6 @@ function choose_host {
 function rebuild {
     host=$(cat $NIX_HOST_PATH)
 
-    git diff -U0 ../**/*.nix
     sudo nixos-rebuild switch --impure --flake .#$host &>nixos-switch.log
 
     if [[ $? -gt 0 ]]; then
@@ -62,6 +61,8 @@ NIX_HOST_PATH=$HOME/.config/nixos/host
 
 cd $HOME/.dotfiles/nixos
 echo "❄️ Rebuilding NixOS..."
+
+git diff -U0 **/*.nix
 
 choose_host
 rebuild
