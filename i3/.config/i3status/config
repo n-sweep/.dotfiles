@@ -18,8 +18,8 @@ ethernet $ETH_INTERFACE {
     format_down = "E: down"
 }
 
-order += "wireless $WIFI_INTERFACE"
-wireless $WIFI_INTERFACE {
+order += "wireless wrong"
+wireless wrong {
     format_up = "W: %ip (%quality @ %essid)"
     format_down = "W: down"
 }
