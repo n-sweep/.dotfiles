@@ -240,21 +240,41 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+set $white  #ffffff
+set $black  #000000
+set $red    #bf616a
 
-# Set the font using environment var
+set $fbg    #285577
+set $fbr    #4c7899
+set $fibg   #5f676a
+set $ufbg   #222222
+set $ufbr   #333333
+set $uftx   #888888
+set $urbr   #2f343a
+
+hide_edge_borders smart
+
+# class                     border  backgr. text
+client.focused              $fbg    $fbg    $white
+client.focused_inactive     $ufbr   $fibg   $white
+client.unfocused            $ufbr   $ufbg   $uftx
+client.urgent               $urbr   $red    $white
+# client.placeholder          $black  #0c0c0c $white
+
+# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
     position bottom
     status_command i3status
     colors {
-        background #282a36
-        focused_background #000000
-        separator #44475a
-        focused_separator #666666
+        background          $ufbg
+        focused_background  $black
+        separator           $uftx
+        focused_separator   #666666
+        # statusline          $white
 
-        # Colors for workspaces
-        focused_workspace  #bd93f9 #44475a #bd93f9
-        inactive_workspace #6272a4 #282a36 #6272a4
-        urgent_workspace   #ff5555 #282a36 #ff5555
+        focused_workspace   $fbg    $fbg    $white
+        active_workspace    $ufbr   $fibg   $white
+        inactive_workspace  $ufbr   $ufbg   $uftx
+        urgent_workspace    $urbr   $red    $white
+        # binding_mode        $urbr   #900000 $white
 } }
