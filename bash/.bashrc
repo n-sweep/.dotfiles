@@ -150,6 +150,12 @@ else
     [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 fi
 
+### environment variables ######################################################
+
+export ETH_INTERFACE=$(ip link show | rg -o 'enp[^\s:]+')
+export WIFI_INTERFACE=$(ip link show | rg -o 'wlp[^\s:]+')
+
+
 # I don't quite remember what this does, maybe removes git files from the tree?
 export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path "*/.git/*" -o -path "*/.git" -prune \)'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

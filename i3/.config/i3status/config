@@ -12,14 +12,14 @@ read_file POMOS {
     path = "/tmp/pomos"
 }
 
-order += "ethernet enp0s13f0u2u2i5"
-ethernet enp0s13f0u2u2i5 {
+order += "ethernet $ETH_INTERFACE"
+ethernet $ETH_INTERFACE {
     format_up = "E: %ip (%speed)"
     format_down = "E: down"
 }
 
-order += "wireless wlp0s20f3"
-wireless wlp0s20f3 {
+order += "wireless $WIFI_INTERFACE"
+wireless $WIFI_INTERFACE {
     format_up = "W: %ip (%quality @ %essid)"
     format_down = "W: down"
 }
