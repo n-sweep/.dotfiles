@@ -201,14 +201,6 @@ in {
   # services.xserver.libinput.enable = true;
 
 
-  ### filesystems ##############################################################
-
-  fileSystems."/mnt/music" = {
-    device = "192.168.0.112:/mnt/pool-1/media/music/library";
-    fsType = "nfs";
-  };
-
-
   ### vpn ######################################################################
 
   # load config

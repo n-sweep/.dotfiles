@@ -59,6 +59,8 @@ function rebuild {
 
 NIX_HOST_PATH=$HOME/.config/nixos/host
 
+shopt -s globstar
+
 cd $HOME/.dotfiles/nixos
 echo "❄️ Rebuilding NixOS..."
 
