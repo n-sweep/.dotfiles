@@ -10,3 +10,5 @@ nvim/*
 nvim/.config/*
 !nvim/.config/nvim/
 !nvim/.config/pycodestyle
+
+*nixos-switch.log
