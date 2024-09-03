@@ -12,14 +12,14 @@ read_file POMOS {
     path = "/tmp/pomos"
 }
 
-order += "ethernet __first__"
-ethernet __first__ {
+order += "ethernet _first_"
+ethernet _first_ {
     format_up = "E: %ip (%speed)"
     format_down = "E: down"
 }
 
-order += "wireless __first__"
-wireless __first__ {
+order += "wireless _first_"
+wireless _first_ {
     format_up = "W: %ip (%quality @ %essid)"
     format_down = "W: down"
 }
