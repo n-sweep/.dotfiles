@@ -43,7 +43,7 @@ in {
       ".wezterm.lua".source = "${dotfiles_dir}/wezterm/.wezterm.lua";
 
       # these plugins crash OBS. missing dependency?
-      ".vst".source = "${pkgs.reaper}/opt/REAPER/Plugins/";
+      # ".vst".source = "${pkgs.reaper}/opt/REAPER/Plugins/";
 
       # nvim plugins
       "${nvim_plug_dir}/jupytext".source = jupytext_nvim;
@@ -65,9 +65,7 @@ in {
       gimp
       gitAndTools.gh
       google-cloud-sdk
-      infisical
       mods
-      obs-studio
       parsec-bin
       peek
       quarto
@@ -351,12 +349,12 @@ in {
 
   ### obs ######################################################################
 
-  # programs.obs-studio = {
-  #   enable = true;
-  #   plugins = with pkgs.obs-studio-plugins; [
-  #     obs-pipewire-audio-capture
-  #   ];
-  # };
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-capture
+    ];
+  };
 
   ##############################################################################
 
