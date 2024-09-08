@@ -63,7 +63,6 @@ in {
       cmus
       cockatrice
       firebase-tools
-      freecad
       gimp
       gitAndTools.gh
       google-cloud-sdk
