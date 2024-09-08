@@ -37,5 +37,38 @@
   # networking.interfaces.wlp43s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware = {
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+    pulseaudio = {
+      enable = true;
+      extraConfig = ''
+        set-default-sink-by-name "AG06/AG03 Analog Stereo"
+      '';
+    };
+
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+
+    opengl.enable = true;
+
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+      prime = {
+        sync.enable = true;
+
+        # lspci | rg VGA
+        nvidiaBusId = "PCI:01:00:0";
+        intelBusId = "PCI:00:02:0";
+
+      };
+
+    };
+
+  };
 }

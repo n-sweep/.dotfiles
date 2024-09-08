@@ -58,31 +58,6 @@ in {
   # Enable sound.
   sound.enable = true;
 
-  hardware = {
-
-    pulseaudio = {
-      enable = true;
-      extraConfig = ''
-        set-default-sink-by-name "AG06/AG03 Analog Stereo"
-      '';
-    };
-
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
-
-    opengl.enable = true;
-
-    nvidia = {
-      modesetting.enable = true;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
-
-  };
-
-
   ### virtualization ###########################################################
   # note the (necessary) incorrect spelling
 

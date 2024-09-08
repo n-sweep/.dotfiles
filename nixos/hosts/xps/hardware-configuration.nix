@@ -34,5 +34,22 @@
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware = {
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+    pulseaudio = {
+      enable = true;
+      extraConfig = ''
+        set-default-sink-by-name "AG06/AG03 Analog Stereo"
+      '';
+    };
+
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+
+    opengl.enable = true;
+
+  };
 }
