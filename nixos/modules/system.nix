@@ -124,6 +124,7 @@ in {
       maim
       nettools
       nix-prefetch-git
+      pciutils
       pcmanfm
       ripgrep
       sqlite
