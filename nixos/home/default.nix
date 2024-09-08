@@ -57,6 +57,7 @@ in {
 
     packages = with pkgs; [
 
+      autorandr
       awscli
       barrier
       cmus
