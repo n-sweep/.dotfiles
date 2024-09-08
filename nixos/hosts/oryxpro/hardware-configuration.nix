@@ -37,6 +37,7 @@
   # networking.interfaces.wlp43s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
@@ -69,6 +70,8 @@
       };
 
     };
+
+    system76.enableAll = true;
 
   };
 }
