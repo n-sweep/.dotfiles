@@ -72,6 +72,8 @@ in {
       powerOnBoot = true;
     };
 
+    opengl.enable = true;
+
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
@@ -181,6 +183,7 @@ in {
 
     xserver = {
       enable = true;
+      videoDrivers = [ "nvidia" ];
       desktopManager = {
         xterm.enable = false;
         session = [{
@@ -195,9 +198,6 @@ in {
           i3status
         ];
       };
-
-      videoDrivers = [ "nvidia" ];
-
     };
 
   };
