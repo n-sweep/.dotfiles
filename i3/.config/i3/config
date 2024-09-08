@@ -50,9 +50,6 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
 
-# vim-anywhere
-bindsym $mod+Shift+v exec ~/.vim-anywhere/bin/run
-
 # screenshot selection to clipboard
 bindsym $mod+Shift+s exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
@@ -129,9 +126,9 @@ set $ws11 "11"
 set $ws12 "12"
 set $ws13 "13"
 
-set $mon1 eDP-1
-set $mon2 DP-2
-set $mon3 DP-3
+set $mon1 eDP-1-1
+set $mon2 HDMI-0
+set $mon3 DP-0
 
 # Assign applications to workspaces
 assign [class="org.wezfurlong.wezterm"] $ws6
