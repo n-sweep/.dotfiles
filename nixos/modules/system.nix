@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   username = "n";
 in {
@@ -70,6 +70,12 @@ in {
     bluetooth = {
       enable = true;
       powerOnBoot = true;
+    };
+
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
   };
@@ -189,6 +195,9 @@ in {
           i3status
         ];
       };
+
+      videoDrivers = [ "nvidia" ];
+
     };
 
   };
