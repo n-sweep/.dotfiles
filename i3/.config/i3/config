@@ -132,8 +132,8 @@ set $mon3 DP-0
 
 # Assign applications to workspaces
 assign [class="org.wezfurlong.wezterm"] $ws6
-assign [class="brave-browser"] $ws7
-assign [class="obs"] $ws12
+assign [class="brave"] $ws7
+# assign [class="obs"] $ws12
 
 # Assign workspaces to monitors
 # left (vertical)
