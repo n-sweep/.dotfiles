@@ -76,10 +76,11 @@ alias ts="$HOME/.dotfiles/scripts/tmux_sessionizer"
 alias obs-studio="$(which obs)"
 alias obs="obs-cmd --websocket obsws://localhost:4455/$(head -1 "$HOME/.config/obs-studio/token")"
 alias camstat="obs scene-item toggle masked_cam static &> /dev/null"
-alias cam="obs sceneitem toggle desktop1 masked_cam"
+alias cam="obs scene-item toggle desktop1 masked_cam"
+alias blur="obs scene-item toggle desktop1 'HDMI-0 blur'"
 alias mute="obs toggle-mute Mic/Aux"
 alias dtmute="obs toggle-mute 'Desktop Audio'"
-alias blur="obs sceneitem toggle desktop1 HDMI-0 blur"
+alias sbreak="streamsaver"
 
 function streamsaver() {
     cam
