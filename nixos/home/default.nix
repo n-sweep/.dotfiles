@@ -67,6 +67,7 @@ in {
       gitAndTools.gh
       google-cloud-sdk
       mods
+      obs-cli
       parsec-bin
       peek
       quarto
