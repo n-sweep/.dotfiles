@@ -73,23 +73,14 @@ alias ts="$HOME/.dotfiles/scripts/tmux_sessionizer"
 
 
 ### obs ########################################################################
-alias obs="obs-cli --password='$(head -1 "$HOME/.config/obs-studio/token")'"
-alias camstat="obs sceneitem toggle Camera static"
-alias cam="obs sceneitem toggle Camera zerocam"
-alias mute="obs source toggle-mute Mic/Aux"
-alias dtmute="obs source toggle-mute 'Desktop Audio'"
+alias obs-studio="$(which obs)"
+alias obs="obs-cmd --websocket obsws://localhost:4455/$(head -1 "$HOME/.config/obs-studio/token")"
+alias camstat="obs scene-item toggle masked_cam static &> /dev/null"
+alias cam="obs sceneitem toggle desktop1 masked_cam"
+alias mute="obs toggle-mute Mic/Aux"
+alias dtmute="obs toggle-mute 'Desktop Audio'"
+alias blur="obs sceneitem toggle desktop1 HDMI-0 blur"
 
-function obs_switch_scene() {
-    obs scene current "$*" > /dev/null
-}
-function obs_toggle_blur() {
-    local curr="$(obs scene get)"
-    if [[ $curr == *" b" ]]; then
-        obs scene current "$(obs scene get | sed 's/ [^ ]*$//')" > /dev/null
-    else
-        obs scene current "$(obs scene get) b" > /dev/null
-    fi
-}
 function streamsaver() {
     cam
     mute
@@ -104,6 +95,3 @@ function streamsaver() {
     fi
 }
 
-alias switch="obs_switch_scene"
-alias blur="obs_toggle_blur"
-alias sbreak="streamsaver"
