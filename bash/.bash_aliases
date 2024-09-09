@@ -76,16 +76,15 @@ alias ts="$HOME/.dotfiles/scripts/tmux_sessionizer"
 alias obs-studio="$(which obs)"
 alias obs="obs-cmd --websocket obsws://localhost:4455/$(head -1 "$HOME/.config/obs-studio/token")"
 alias camstat="obs scene-item toggle masked_cam static &> /dev/null"
-alias cam="obs scene-item toggle desktop1 masked_cam"
-alias blur="obs scene-item toggle desktop1 'HDMI-0 blur'"
-alias mute="obs toggle-mute Mic/Aux"
-alias dtmute="obs toggle-mute 'Desktop Audio'"
-alias sbreak="streamsaver"
+alias cam="obs scene-item toggle desktop1 masked_cam &> /dev/null"
+alias blur="obs scene-item toggle desktop1 'HDMI-0 blur' &> /dev/null"
+alias mute="obs toggle-mute Mic/Aux &> /dev/null"
+alias dtmute="obs toggle-mute 'Desktop Audio' &> /dev/null"
+alias sbreak="streamsaver &> /dev/null"
 
 function streamsaver() {
-    cam
+    camstat
     mute
-    obs_switch_scene one
     if ! $(tmux list-panes -F '#F' | rg -q Z); then
         tmux resize-pane -Z
     fi
