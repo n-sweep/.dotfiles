@@ -16,7 +16,6 @@ let
   obsidian_nvim = get_flake "${nix_dir}/modules/obsidian-nvim";
   otter_nvim = get_flake "${nix_dir}/modules/otter-nvim";
 
-
 in {
 
   imports = [
