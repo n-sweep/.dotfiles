@@ -70,7 +70,6 @@ in {
       parsec-bin
       peek
       quarto
-      screenkey
       sxiv
       tigervnc
       wezterm
