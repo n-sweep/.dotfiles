@@ -71,6 +71,7 @@ in {
       peek
       quarto
       screenkey
+      slop
       sxiv
       tigervnc
       wezterm
