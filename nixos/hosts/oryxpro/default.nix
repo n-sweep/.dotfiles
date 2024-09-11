@@ -11,6 +11,11 @@
 
   networking.hostName = "oryxpro"; # Define your hostname.
 
+  fileSystems."/mnt/music" = {
+    device = "192.168.0.112:/mnt/pool-1/media/music/library";
+    fsType = "nfs";
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
