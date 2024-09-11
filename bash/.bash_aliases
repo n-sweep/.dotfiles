@@ -73,6 +73,7 @@ alias ts="$HOME/.dotfiles/scripts/tmux_sessionizer"
 
 
 ### obs ########################################################################
+# https://github.com/grigio/obs-cmd
 alias obs-studio="$(which obs)"
 alias obs="obs-cmd --websocket obsws://localhost:4455/$(head -1 "$HOME/.config/obs-studio/token")"
 alias cam="obs scene-item toggle cam zerocam &> /dev/null"
@@ -83,8 +84,7 @@ alias dtmute="obs toggle-mute 'Desktop Audio' &> /dev/null"
 alias sbreak="streamsaver &> /dev/null"
 
 function streamsaver() {
-    camstat
-    mute
+    cam && mute
     if ! $(tmux list-panes -F '#F' | rg -q Z); then
         tmux resize-pane -Z
     fi
