@@ -28,7 +28,7 @@ fi
 
 # save emoji json in /tmp if not already there
 if [ ! -f "/tmp/emoji.json" ]; then
-    TOKEN=$(cat "$HOME/.config/emoji_api/token")
+    TOKEN=$(cat "$HOME/.config/emoji/api_key")
     curl -s "https://emoji-api.com/emojis?access_key=${TOKEN}" > /tmp/emoji.json
     # TODO: invalid token
 fi
