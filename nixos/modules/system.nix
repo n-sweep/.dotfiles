@@ -55,9 +55,6 @@ in {
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-
   ### virtualization ###########################################################
   # note the (necessary) incorrect spelling
 
@@ -92,7 +89,6 @@ in {
       htop
       i3lock
       inetutils
-      jdk19
       jq
       libstdcxx5
       lshw

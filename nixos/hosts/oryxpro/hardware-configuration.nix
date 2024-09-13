@@ -38,15 +38,16 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
+  # audio
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-    pulseaudio = {
-      enable = true;
-      extraConfig = ''
-        set-default-sink-by-name "AG06/AG03 Analog Stereo"
-      '';
-    };
 
     bluetooth = {
       enable = true;
@@ -59,6 +60,7 @@
       modesetting.enable = true;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
+      open = false;
 
       prime = {
         sync.enable = true;
