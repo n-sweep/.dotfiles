@@ -74,7 +74,7 @@ in {
       slop
       sxiv
       tigervnc
-      wezterm
+      inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
       yazi
       zoom-us
 
