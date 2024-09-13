@@ -45,30 +45,30 @@
     alsa.support32Bit = true;
     pulse.enable = true;
 
-    extraConfig.pipewire."91-null-sinks" = {
-      "context.objects" = [
-        {
-          factory = "adapter";
-          args = {
-            "factory.name" = "support.null-audio-sink";
-            "node.name" = "alsa_input.usb-Yamaha_Corporation_AG06_AG03-00.analog-stereo";
-            "node.description" = "AG06/AG03 Analog Stereo";
-            "media.class" = "Audio/Source/Virtual";
-            "audio.position" = "MONO";
-          };
-        }
-        {
-          factory = "adapter";
-          args = {
-            "factory.name" = "support.null-audio-sink";
-            "node.name" = "alsa_input.usb-Yamaha_Corporation_AG06_AG03-00.analog-stereo";
-            "node.description" = "AG06/AG03 Analog Stereo";
-            "media.class" = "Audio/Sink";
-            "audio.position" = "FL,FR";
-          };
-        }
-      ];
-    };
+    # extraConfig.pipewire."91-null-sinks" = {
+    #   "context.objects" = [
+    #     {
+    #       factory = "adapter";
+    #       args = {
+    #         "factory.name" = "support.null-audio-sink";
+    #         "node.name" = "alsa_input.usb-Yamaha_Corporation_AG06_AG03-00.analog-stereo";
+    #         "node.description" = "AG06/AG03 Analog Stereo";
+    #         "media.class" = "Audio/Source/Virtual";
+    #         "audio.position" = "MONO";
+    #       };
+    #     }
+    #     {
+    #       factory = "adapter";
+    #       args = {
+    #         "factory.name" = "support.null-audio-sink";
+    #         "node.name" = "alsa_input.usb-Yamaha_Corporation_AG06_AG03-00.analog-stereo";
+    #         "node.description" = "AG06/AG03 Analog Stereo";
+    #         "media.class" = "Audio/Sink";
+    #         "audio.position" = "FL,FR";
+    #       };
+    #     }
+    #   ];
+    # };
   };
 
   hardware = {
@@ -102,5 +102,3 @@
 
   };
 }
-
-
