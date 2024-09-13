@@ -19,6 +19,9 @@ local config = {
         bottom = 0
     },
 
+    -- rendering probs? nixos-unstable 2024-09-13
+    front_end = "webGpu",
+
     keys = {  -- enabling ctrl/shift/alt + Enter/Tab
 
         -- "AppCursorMode" == send to applications (neovim) only, not terminal input
