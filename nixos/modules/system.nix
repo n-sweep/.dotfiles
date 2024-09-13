@@ -95,6 +95,7 @@ in {
       maim
       nettools
       nix-prefetch-git
+      pavucontrol
       pciutils
       pcmanfm
       ripgrep
