@@ -20,6 +20,7 @@ local config = {
     },
 
     -- rendering probs? nixos-unstable 2024-09-13
+    enable_wayland = false,
     front_end = "WebGpu",
 
     keys = {  -- enabling ctrl/shift/alt + Enter/Tab
