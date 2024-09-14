@@ -13,22 +13,16 @@
 # ---
 
 # %%
-import closedloop.api_private as api
-# import plotly.express as px
-import plotly.io as pio
+import os
+import json
+import numpy as np
 import pandas as pd
+import plotly.io as pio
+# import plotly.express as px
 
 # plotly setup
 pio.renderers.default = 'notebook'
 pd.options.plotting.backend = 'plotly'
-
-# plot using CL colors
-cl_colors = ['#207DBA', '#F7C31A', '#1fad58', '#7f52e0']
-cl_template = pio.templates['plotly']
-cl_template.layout.colorway = cl_colors
-pio.templates['cl_template'] = cl_template
-pio.templates.default = 'cl_template'
-
 
 def pwrite(fig, plt='/tmp/vis/plot.json'):
     fig = fig.update_layout(autosize=False)
@@ -36,11 +30,6 @@ def pwrite(fig, plt='/tmp/vis/plot.json'):
 
 # %% [markdown]
 # # Template Notebook
-
-# %%
-cl = api.ClosedLoopClientPrivate("PROD")
-psId = ""
-cl.getPersonStore(psId).name
 
 # %%
 # %%
