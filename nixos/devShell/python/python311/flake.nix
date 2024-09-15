@@ -36,6 +36,7 @@
             ipython
             jupyter
             jupytext
+            lxml
             matplotlib
             numpy
             opencv4
@@ -51,6 +52,7 @@
             scikit-learn
             scipy
             seaborn
+            selenium
             stdenv.cc.cc.lib  # make
             xgboost
             xlrd
