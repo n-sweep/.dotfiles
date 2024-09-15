@@ -87,6 +87,7 @@ in {
         jupyter
         jupyter-client
         jupytext
+        lxml
         numpy
         plotly
         pynvim
