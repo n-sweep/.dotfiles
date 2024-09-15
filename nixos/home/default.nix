@@ -61,6 +61,7 @@ in {
       barrier
       cmus
       cockatrice
+      discord
       firebase-tools
       gimp
       gitAndTools.gh
