@@ -85,13 +85,10 @@ alias sbreak="streamsaver &> /dev/null"
 
 function streamsaver() {
     cam && mute
-    if ! $(tmux list-panes -F '#F' | rg -q Z); then
-        tmux resize-pane -Z
-    fi
     if [ -n "$*" ]; then
-        cbonsai -S -t 0.7 -w 2 -m "$*"
+        tmux neww cbonsai -S -t 0.7 -w 2 -m "$*"
     else
-        cbonsai -S -t 0.7 -w 2
+        tmux neww cbonsai -S -t 0.7 -w 2
     fi
 }
 
