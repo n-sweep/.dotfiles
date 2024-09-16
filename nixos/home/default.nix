@@ -75,9 +75,12 @@ in {
       slop
       sxiv
       tigervnc
-      inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
       yazi
+      inputs.zen-browser.packages.${pkgs.system}.default
       zoom-us
+
+      # 2024-09 wezterm has a visual bug; use older version
+      inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
 
       # base python - use devShell for dev
       (python3.withPackages (ps: with ps;[
