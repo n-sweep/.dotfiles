@@ -85,10 +85,7 @@ alias sbreak="streamsaver &> /dev/null"
 
 function streamsaver() {
     cam && mute
-    if [ -n "$*" ]; then
-        tmux neww cbonsai -S -t 0.7 -w 2 -m "$*"
-    else
-        tmux neww cbonsai -S -t 0.7 -w 2
-    fi
+    tmux neww cbonsai -S -t 0.7 -w 2 -m "$*"
+    cam && mute
 }
 
