@@ -85,8 +85,14 @@ alias sbreak="streamsaver &> /dev/null"
 
 function streamsaver() {
     cam && mute
-    tmux neww cbonsai -S -t 0.7 -w 2 -m "$*"
-    tmux wait-for -S window-closed
+    if [ -n "$*" ]; then
+        tmux neww -n cbonsai cbonsai -S -t 0.7 -w 2 -m "$*"
+    else
+        tmux neww -n cbonsai cbonsai -S -t 0.7 -w 2
+    fi
+    while tmux list-windows | rg -q cbonsai; do
+        sleep 1
+    done
     cam && mute
 }
 
