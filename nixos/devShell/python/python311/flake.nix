@@ -26,6 +26,7 @@
             aiohttp
             beautifulsoup4
             black
+            duckdb
             flask
             flask-socketio
             google-api-python-client
