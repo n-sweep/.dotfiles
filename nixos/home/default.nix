@@ -62,6 +62,7 @@ in {
       cmus
       cockatrice
       discord
+      duckdb
       firebase-tools
       gimp
       gitAndTools.gh
