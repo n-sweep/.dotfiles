@@ -325,7 +325,6 @@ in {
     profiles.default = {
       id = 0;
       name = "default";
-      isDefault = true;
       settings = {
         "full-screen-api.ignore-widgets" = true;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
