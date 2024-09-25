@@ -21,7 +21,7 @@ local function startup()
             nvim_cmp = true,
         },
         follow_url_func = function(url)
-          vim.fn.jobstart({"open", url})
+          vim.fn.jobstart({"zen", url})
         end
     })
 
