@@ -20,6 +20,9 @@ local function startup()
         completion = {
             nvim_cmp = true,
         },
+        follow_url_func = function(url)
+          vim.fn.jobstart({"open", url})
+        end
     })
 
     km.set('n', '<CR>', ":ObsidianFollowLink <CR>")
