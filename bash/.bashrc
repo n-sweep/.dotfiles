@@ -8,7 +8,7 @@
 
 if [[ -n $PY_INIT ]]; then
     unset PY_INIT
-    nix develop "$HOME/.dotfiles/nixos/devShell/python/python311/#$DEVSHELL_TAG"
+    nix develop "$HOME/.dotfiles/nixos/devShell/python/python312/#$DEVSHELL_TAG"
 fi
 
 
