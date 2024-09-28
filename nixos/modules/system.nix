@@ -130,9 +130,9 @@ in {
 
   networking.wireless = {
     userControlled.enable = true;
-    environmentFile = "/home/${username}/.config/wifi/wireless.env";
+    secretsFile = "/home/${username}/.config/wifi/wireless.env";
     networks = {
-      "Waffle House".psk = ''@PSK_HOME@'';
+      "Waffle House".pskRaw = "ext:PSK_HOME";
     };
   };
 

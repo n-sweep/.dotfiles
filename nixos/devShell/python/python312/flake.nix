@@ -35,6 +35,7 @@
             graph-tool
             ipykernel
             ipython
+            imageio
             jupyter
             jupytext
             lxml
@@ -43,6 +44,7 @@
             opencv4
             openpyxl
             pandas
+            pillow
             plotly
             pynvim
             pyperclip
