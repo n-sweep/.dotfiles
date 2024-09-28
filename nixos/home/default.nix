@@ -77,14 +77,16 @@ in {
       sxiv
       tigervnc
       yazi
-      inputs.zen-browser.packages.${pkgs.system}.default
       zoom-us
+
+      # zen browser
+      inputs.zen-browser.packages.${pkgs.system}.default
 
       # 2024-09 wezterm has a visual bug; use older version
       inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
 
       # base python - use devShell for dev
-      (python3.withPackages (ps: with ps;[
+      (python312.withPackages (ps: with ps;[
         black
         flask
         flask-socketio
@@ -215,11 +217,18 @@ in {
 
     plugins.lsp = {
       enable = true;
+
+      servers.pylsp = {
+        enable = true;
+        package = pkgs.python312Packages.python-lsp-server;
+      };
+
       servers = {
         lua-ls.enable = true;
-        pyright.enable = true;
         nil-ls.enable = true;
+        marksman.enable = true;
       };
+
       keymaps = {
         lspBuf = { "<leader>k" = "hover"; };
         diagnostic = {
@@ -228,6 +237,7 @@ in {
           "<leader>eN" = "goto_prev";
         };
       };
+
     };
 
     plugins.telescope = {
