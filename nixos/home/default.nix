@@ -59,6 +59,7 @@ in {
       autorandr
       awscli
       barrier
+      bashInteractive  # dependency of vhs?
       cmus
       cockatrice
       discord
