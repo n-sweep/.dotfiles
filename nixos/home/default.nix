@@ -59,7 +59,6 @@ in {
       autorandr
       awscli
       barrier
-      bashInteractive  # dependency of vhs?
       cmus
       cockatrice
       discord
@@ -77,7 +76,6 @@ in {
       slop
       sxiv
       tigervnc
-      vhs
       yazi
       zoom-us
 
@@ -221,8 +219,9 @@ in {
       enable = true;
       servers = {
         lua-ls.enable = true;
-        pyright.enable = true;
+        pylsp.enable = true;
         nil-ls.enable = true;
+        marksman.enable = true;
       };
       keymaps = {
         lspBuf = { "<leader>k" = "hover"; };
