@@ -49,7 +49,6 @@
       powerOnBoot = true;
     };
 
-    opengl.enable = true;
-
+    graphics.enable = true;
   };
 }
