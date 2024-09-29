@@ -219,7 +219,7 @@ in {
       enable = true;
 
       servers.pylsp = {
-        enable = true;
+        # enable = true;
         package = pkgs.python312Packages.python-lsp-server;
         settings = {
           plugins = {
@@ -233,8 +233,9 @@ in {
 
       servers = {
         lua-ls.enable = true;
-        nil-ls.enable = true;
         marksman.enable = true;
+        nil-ls.enable = true;
+        pyright.enable = true;
       };
 
       keymaps = {
