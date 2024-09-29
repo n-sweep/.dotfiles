@@ -218,24 +218,15 @@ in {
     plugins.lsp = {
       enable = true;
 
-      servers.pylsp = {
-        # enable = true;
-        package = pkgs.python312Packages.python-lsp-server;
-        settings = {
-          plugins = {
-            black.enabled = true;
-            jedi_completion.enabled = true;
-            jedi_hover.enabled = true;
-            jedi_references.enabled = true;
-          };
-        };
+      servers.pyright = {
+        enable = true;
+        filetypes = ["py" "ipynb"];
       };
 
       servers = {
         lua-ls.enable = true;
         marksman.enable = true;
         nil-ls.enable = true;
-        pyright.enable = true;
       };
 
       keymaps = {
