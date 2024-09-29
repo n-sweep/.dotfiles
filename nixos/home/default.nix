@@ -218,15 +218,11 @@ in {
     plugins.lsp = {
       enable = true;
 
-      servers.pyright = {
-        enable = true;
-        filetypes = ["py" "ipynb"];
-      };
-
       servers = {
         lua-ls.enable = true;
         marksman.enable = true;
         nil-ls.enable = true;
+        pyright.enable = true;
       };
 
       keymaps = {
