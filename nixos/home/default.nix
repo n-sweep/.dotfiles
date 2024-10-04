@@ -219,6 +219,7 @@ in {
       enable = true;
 
       servers = {
+        dockerls.enable = true;
         lua-ls.enable = true;
         marksman.enable = true;
         nil-ls.enable = true;
