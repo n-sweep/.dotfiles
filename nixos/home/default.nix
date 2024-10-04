@@ -219,11 +219,15 @@ in {
       enable = true;
 
       servers = {
+        bashls.enable = true;
         dockerls.enable = true;
+        jsonls.enable = true;
         lua-ls.enable = true;
         marksman.enable = true;
         nil-ls.enable = true;
         pyright.enable = true;
+        sqls.enable = true;
+        typos-lsp.enable = true;
       };
 
       keymaps = {
