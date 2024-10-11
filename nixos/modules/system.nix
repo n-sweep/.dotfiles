@@ -81,6 +81,7 @@ in {
       cbonsai
       clang
       curl
+      dunst
       fastfetch
       feh
       gawk
@@ -90,6 +91,7 @@ in {
       i3lock
       inetutils
       jq
+      libnotify
       libstdcxx5
       lshw
       maim
@@ -214,10 +216,12 @@ in {
   ### fonts ####################################################################
 
   fonts.packages = with pkgs; [
+    roboto
     (nerdfonts.override { fonts = [
       "Mononoki"
       "RobotoMono"
       "UbuntuMono"
-    ]; }) ];
+    ]; })
+  ];
 
 }

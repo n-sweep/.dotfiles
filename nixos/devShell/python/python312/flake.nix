@@ -26,6 +26,7 @@
             aiohttp
             beautifulsoup4
             black
+            discordpy
             duckdb
             flask
             flask-socketio
