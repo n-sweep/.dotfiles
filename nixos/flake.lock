@@ -31,11 +31,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1727409802,
-        "narHash": "sha256-bTdztNxJL+dAcQ1yCtXy2upnvPt1FWerbRvzg3quhbU=",
+        "lastModified": 1729029507,
+        "narHash": "sha256-WDbJ0TOyuOg9TFpzykuYnhYUGvTHBIVQiYDlr3M0/0I=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "7964499d31675bc17b042f5ba46abe6bc2ea79af",
+        "rev": "46320f7c4fae7759d11ced3f1ba118663d66bcc1",
         "type": "gitlab"
       },
       "original": {
@@ -64,11 +64,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1726153070,
-        "narHash": "sha256-HO4zgY0ekfwO5bX0QH/3kJ/h4KvUDFZg8YpkNwIbg1U=",
+        "lastModified": 1727826117,
+        "narHash": "sha256-K5ZLCyfO/Zj9mPFldf3iwS6oZStJcU4tSpiXTMYaaL0=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "bcef6817a8b2aa20a5a6dbb19b43e63c5bf8619a",
+        "rev": "3d04084d54bedc3d6b8b736c70ef449225c361b1",
         "type": "github"
       },
       "original": {
@@ -240,11 +240,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-4M+4PvQFCPoTsA2ykT/fhCjKZFTy+O7vIe1YGyG0HI8=",
-        "path": "/nix/store/rzx50abma4g7mvw3qgsc2gc31i5l02j8-source/nixos/modules/mojo-vim",
+        "path": "/nix/store/7ja07swwripw33vfafx1af0zgkf1jcby-source/nixos/modules/mojo-vim",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/rzx50abma4g7mvw3qgsc2gc31i5l02j8-source/nixos/modules/mojo-vim",
+        "path": "/nix/store/7ja07swwripw33vfafx1af0zgkf1jcby-source/nixos/modules/mojo-vim",
         "type": "path"
       }
     },
@@ -288,23 +288,23 @@
     },
     "nixpkgs-lib": {
       "locked": {
-        "lastModified": 1728142745,
-        "narHash": "sha256-Ss8QWLXdr2JCBPcYChJhz4xJm+h/xjl4G0c0XlP6a74=",
+        "lastModified": 1727825735,
+        "narHash": "sha256-0xHYkMkeLVQAMa7gvkddbPqpxph+hDzdu1XdGPJR+Os=",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/356624c12086a18f2ea2825fed34523d60ccc4e3.tar.gz"
+        "url": "https://github.com/NixOS/nixpkgs/archive/fb192fec7cc7a4c26d51779e9bab07ce6fa5597a.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/356624c12086a18f2ea2825fed34523d60ccc4e3.tar.gz"
+        "url": "https://github.com/NixOS/nixpkgs/archive/fb192fec7cc7a4c26d51779e9bab07ce6fa5597a.tar.gz"
       }
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1727397532,
-        "narHash": "sha256-pojbL/qteElw/nIXlN8kmHn/w6PQbEHr7Iz+WOXs0EM=",
+        "lastModified": 1728909085,
+        "narHash": "sha256-WLxED18lodtQiayIPDE5zwAfkPJSjHJ35UhZ8h3cJUg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f65141456289e81ea0d5a05af8898333cab5c53d",
+        "rev": "c0b1da36f7c34a7146501f684e9ebdf15d2bebf8",
         "type": "github"
       },
       "original": {
@@ -340,12 +340,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-CvUdTZav+42vA3UFZ8mDgnCVlBTHYfRbGew9orNI0uo=",
-        "path": "/nix/store/rzx50abma4g7mvw3qgsc2gc31i5l02j8-source/nixos/modules/nixvim",
+        "narHash": "sha256-cQr37XM7MXrTeB2+mnWvtn0xd9JpQZR5krIuZZLr8yA=",
+        "path": "/nix/store/7ja07swwripw33vfafx1af0zgkf1jcby-source/nixos/modules/nixvim",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/rzx50abma4g7mvw3qgsc2gc31i5l02j8-source/nixos/modules/nixvim",
+        "path": "/nix/store/7ja07swwripw33vfafx1af0zgkf1jcby-source/nixos/modules/nixvim",
         "type": "path"
       }
     },

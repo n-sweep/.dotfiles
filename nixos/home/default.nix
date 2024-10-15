@@ -6,11 +6,7 @@ let
   home_dir = "/home/${config.home.username}";
   config_dir = "${home_dir}/.config";
   dotfiles_dir = "${home_dir}/.dotfiles";
-  nix_dir = "${dotfiles_dir}/nixos";
   nvim_plug_dir = ".config/nvim/pack/vendor/start";
-
-  # Flakes (these can be git repos rather than local files)
-  get_flake = path: (builtins.getFlake (builtins.toPath path)).packages.x86_64-linux;
 
 in {
 
