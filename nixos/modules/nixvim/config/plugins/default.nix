@@ -119,13 +119,21 @@
         bashls.enable = true;
         dockerls.enable = true;
         jsonls.enable = true;
-        lua-ls.enable = true;
         marksman.enable = true;
         nil-ls.enable = true;
         pyright.enable = true;
         sqls.enable = true;
         typos-lsp.enable = true;
+
+        lua-ls = {
+          enable = true;
+          settings = {
+            diagnostics.global = [ "vim" ];
+          };
+        };
+
       };
+
       keymaps = {
         lspBuf = { "<leader>k" = "hover"; };
         diagnostic = {
@@ -134,6 +142,7 @@
           "<leader>eN" = "goto_prev";
         };
       };
+
     };
 
     obsidian = {
