@@ -84,6 +84,7 @@ in {
       dunst
       fastfetch
       feh
+      ffmpeg-full
       gawk
       gcc-unwrapped
       git

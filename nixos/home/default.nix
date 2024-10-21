@@ -56,6 +56,7 @@ in {
       gimp
       gitAndTools.gh
       google-cloud-sdk
+      kcl
       mods
       obs-cmd
       parsec-bin
