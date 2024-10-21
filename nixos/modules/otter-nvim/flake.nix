@@ -15,8 +15,8 @@
       };
 
       installPhase = ''
-        mkdir -p $out
-        cp -r $src/* $out
+        mkdir -p "$out"
+        cp -r "$src"/* "$out"
       '';
 
     };
