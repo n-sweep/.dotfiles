@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+read -r x y width height <<< "$(slop -f "%x %y %w %h")"
+ffmpeg -f x11grab -video_size "${width}"x"${height}" -i :0+"$x","$y" -pix_fmt rgb8 -r 10 output.gif
