@@ -136,6 +136,7 @@ in {
     secretsFile = "/home/${username}/.config/wifi/wireless.env";
     networks = {
       "Waffle House".pskRaw = "ext:PSK_HOME";
+      "Kindred Hippie".pskRaw = "ext:PSK_KH";
     };
   };
 

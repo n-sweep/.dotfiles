@@ -14,10 +14,10 @@
   ### filesystems ##############################################################
   # this doesn't work on the oryxpro for some reason
 
-  fileSystems."/mnt/music" = {
-    device = "192.168.0.112:/mnt/pool-1/media/music/library";
-    fsType = "nfs";
-  };
+  # fileSystems."/mnt/music" = {
+  #   device = "192.168.0.112:/mnt/pool-1/media/music/library";
+  #   fsType = "nfs";
+  # };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

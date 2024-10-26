@@ -5,8 +5,7 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+    [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
@@ -33,16 +32,17 @@
   # networking.interfaces.enp0s13f0u1u2i5.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
+  # audio
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-    pulseaudio = {
-      enable = true;
-      extraConfig = ''
-        set-default-sink-by-name "AG06/AG03 Analog Stereo"
-      '';
-    };
 
     bluetooth = {
       enable = true;
@@ -50,5 +50,23 @@
     };
 
     graphics.enable = true;
+
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      open = false;
+
+      prime = {
+        sync.enable = true;
+
+        # lspci | rg VGA
+        nvidiaBusId = "PCI:01:00:0";
+        intelBusId = "PCI:00:02:0";
+
+      };
+
+    };
+
   };
 }
