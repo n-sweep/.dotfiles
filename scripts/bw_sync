@@ -3,16 +3,16 @@
 logfile=/tmp/bw.log
 
 function status {
-    echo $(bw status | jq -r '.status')
+    bw status | jq -r '.status'
 }
 
 function prompt_email {
-    read -p "Bitwarden Email: " email
+    read -r -p "Bitwarden Email: " email
     export BW_EMAIL=$email
 }
 
 function prompt_passwd {
-    read -s -p "Master Password: " passwd
+    read -rs -p "Master Password: " passwd
     export BW_PASSWD=$passwd
 }
 
@@ -20,16 +20,16 @@ function login {
 
     # log in with email & password if bitwarden env variables are not set
     if [[ -z "$BW_CLIENTID" || -z "$BW_CLIENTSECRET" ]]; then
-        if [ -z $BW_EMAIL ]; then
+        if [ -z "$BW_EMAIL" ]; then
             prompt_email
             dest=$HOME/.config/bw/email
-            mkdir -p $(dirname $dest)
-            echo $BW_EMAIL > $dest
+            mkdir -p "$(dirname "$dest")"
+            echo "$BW_EMAIL" > "$dest"
         fi
         prompt_passwd
 
         # push output to log file for parsing session key
-        bw login $BW_EMAIL $BW_PASSWD 2>&1 | tee $logfile
+        bw login "$BW_EMAIL" "$BW_PASSWD" 2>&1 | tee $logfile
         parse_session_key
 
     # otherwise log in with api key
@@ -39,7 +39,7 @@ function login {
 }
 
 function unlock {
-    if [ -z $BW_PASSWD ]; then
+    if [ -z "$BW_PASSWD" ]; then
         prompt_passwd
     fi
     # push output to log file for parsing session key
@@ -50,7 +50,7 @@ function unlock {
 function parse_session_key {
     # parse out the session key returned by bitwarden and export it to the local environment
     session_key=$(cat $logfile | rg '\$ export' | sed 's/\$ export //')
-    export $(echo $session_key)
+    export session_key
 }
 
 function populate_secrets {
@@ -61,13 +61,13 @@ function populate_secrets {
             filename=$(echo "$item" | jq -r '.name' | sed 's/ //g')
             content=$(echo "$item" | jq -r '.value' | sed 's/ //g' | sed 's/ /\n/g')
             dest=$HOME/.config/$filename
-            mkdir -p $(dirname $dest)
-            echo $content > $dest
+            mkdir -p "$(dirname "$dest")"
+            echo "$content" > "$dest"
         done
 }
 
-if [ $(status) == "unauthenticated" ]; then login; fi
-if [ $(status) == "locked" ]; then unlock; fi
+if [ "$(status)" == "unauthenticated" ]; then login; fi
+if [ "$(status)" == "locked" ]; then unlock; fi
 
 bw sync
 
