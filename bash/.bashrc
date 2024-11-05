@@ -131,6 +131,9 @@ PROMPT_COMMAND="__ps1"
 ### personal settings ##########################################################
 # note: aliases are in .bash_aliases
 
+EDITOR=$(readlink -f "$(which nvim)")
+export EDITOR
+
 set -o vi  # vi mode!
 shopt -s expand_aliases
 
