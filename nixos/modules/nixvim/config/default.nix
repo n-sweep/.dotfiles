@@ -29,6 +29,7 @@ in
     colorcolumn = "100";
     wrap = false;
 
+    incsearch = true;
     inccommand = "split";
     mouse = "";
     errorbells = false;
