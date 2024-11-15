@@ -56,7 +56,6 @@ in {
       gimp
       gitAndTools.gh
       google-cloud-sdk
-      guacamole-server
       kcl
       mods
       obs-cmd
