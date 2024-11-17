@@ -64,6 +64,7 @@ in {
       quarto
       screenkey
       slop
+      sqlcmd
       sxiv
       tigervnc
       yazi
