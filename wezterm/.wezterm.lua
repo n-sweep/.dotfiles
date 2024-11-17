@@ -66,7 +66,9 @@ local config = {
 -- if on windows, make wsl the default program
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     config['default_prog'] = {'wsl.exe', '~'}
-    config['modifyCursorKeys'] = 1
+    config['allow_win32_input_mode'] = false
+    config['send_composed_key_when_left_alt_is_pressed'] = false
+    config['send_composed_key_when_right_alt_is_pressed'] = false
 end
 
 return config
