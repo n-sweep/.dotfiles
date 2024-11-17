@@ -66,6 +66,7 @@ in {
       slop
       sqlcmd
       sxiv
+      tailscale
       tigervnc
       yazi
       zoom-us
