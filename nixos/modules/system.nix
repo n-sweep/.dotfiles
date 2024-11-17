@@ -140,9 +140,6 @@ in {
     };
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -154,6 +151,11 @@ in {
 
   # xserver + i3
   services = {
+
+    # Enable the OpenSSH daemon.
+    openssh.enable = true;
+
+    tailscale.enable = true;
 
     displayManager.defaultSession = "none+i3";
     logind.lidSwitch = "ignore";
