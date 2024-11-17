@@ -66,6 +66,7 @@ local config = {
 -- if on windows, make wsl the default program
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     config['default_prog'] = {'wsl.exe', '~'}
+    config['modifyCursorKeys'] = 1
 end
 
 return config
