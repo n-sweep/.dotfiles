@@ -41,6 +41,7 @@
             jupytext
             lxml
             matplotlib
+            pymssql
             numpy
             opencv4
             openpyxl
