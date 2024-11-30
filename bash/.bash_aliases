@@ -82,6 +82,8 @@ alias camstat="obs scene-item toggle cam static &> /dev/null"
 alias mute="obs toggle-mute Mic/Aux &> /dev/null"
 alias dtmute="obs toggle-mute 'Desktop Audio' &> /dev/null"
 alias sbreak="streamsaver &> /dev/null"
+alias switch="obs scene switch"
+alias sw="switch"
 
 function streamsaver() {
     cam && mute
