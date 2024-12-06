@@ -68,6 +68,7 @@ in {
       sxiv
       tailscale
       tigervnc
+      uv
       yazi
       zoom-us
 
