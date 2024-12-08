@@ -6,7 +6,7 @@ let
   home_dir = "/home/${config.home.username}";
   config_dir = "${home_dir}/.config";
   dotfiles_dir = "${home_dir}/.dotfiles";
-  nvim_plug_dir = ".config/nvim/pack/vendor/start";
+  nvim_plug_dir = "${config_dir}/nvim/pack/vendor/start";
 
 in {
 
@@ -37,9 +37,8 @@ in {
       # ".vst".source = "${pkgs.reaper}/opt/REAPER/Plugins/";
 
       # nvim plugins
-      "${nvim_plug_dir}/mojo".source = inputs.mojo_vim;
-      "${nvim_plug_dir}/telemux".source = "/home/n/Repos/telemux-nvim";
       "${nvim_plug_dir}/pvserv".source = "/home/n/Repos/pvserv";
+      "${nvim_plug_dir}/telemux".source = "/home/n/Repos/telemux-nvim";
 
     };
 
