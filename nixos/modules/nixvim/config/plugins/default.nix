@@ -31,7 +31,6 @@
     vim-dadbod-ui
     vim-dadbod-completion
     vim-python-pep8-indent
-    scnvim
   ];
 
   extraConfigLua = ''

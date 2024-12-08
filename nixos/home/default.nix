@@ -63,6 +63,7 @@ in {
       quarto
       screenkey
       slop
+      sonic-pi
       sqlcmd
       sxiv
       tailscale
