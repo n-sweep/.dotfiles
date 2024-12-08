@@ -1,24 +1,26 @@
 #!/usr/bin/env bash
 
-cd $HOME/.dotfiles/nixos/modules
+cd "$HOME/.dotfiles/nixos/modules" || exit
 
 function update {
     flake=./$1/flake.nix
-    url=$(rg url $flake | sed -n 's/.*url = "\(.*\)";/\1/p')
-    old_hash=$(rg sha256 $flake | sed -n 's/sha256 = "\(sha256-.*=\)";/\1/p')
-    new_hash=$(nix-prefetch-git --quiet $url | jq -r ".hash")
-    if [[ *$old_hash* != *$new_hash* ]]; then
+    url=$(rg "url = \"https" "$flake" | sed -n 's/.*url = "\(.*\)";/\1/p')
+    [[ -z "$url"  ]] && return
+    old_hash=$(rg sha256 "$flake" | sed -n 's/sha256 = "\(sha256-.*=\)";/\1/p')
+    [[ -z "$old_hash"  ]] && return
+    new_hash=$(nix-prefetch-git --quiet "$url" | jq -r ".hash")
+    if [[ "*$old_hash*" != *$new_hash* ]]; then
         echo "updating $flake"
-        target=$(echo $old_hash | sed 's/\//\\\//g')
-        replace=$(echo $new_hash | sed 's/\//\\\//g')
-        sed -i "s/$target/$replace/" $flake
+        target=$(echo "$old_hash" | sed 's/\//\\\//g')
+        replace=$(echo "$new_hash" | sed 's/\//\\\//g')
+        sed -i "s/$target/$replace/" "$flake"
     fi
 }
 
 function update_all {
-    modules=$(find ./* -maxdepth 1 -type d -exec basename {} \;)
+    modules=$(find ./* -maxdepth 0 -type d -exec basename {} \;)
     for dir in $modules; do
-        update $dir
+        update "$dir"
     done
 }
 
