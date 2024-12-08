@@ -11,7 +11,7 @@
 
       src = pkgs.fetchgit {
         url = "https://github.com/davidgranstrom/scnvim";
-        sha256 = "sha256-euHwoK2WHLF/hrjLY2P4yGrIbYyBN38FL3q4CKNZmLY=";
+        sha256 = "sha256-N1lfoIT8bHQhgIQzwv34dDY7O7yFvsn9pGYCHIB4Mvw=";
       };
 
       installPhase = ''

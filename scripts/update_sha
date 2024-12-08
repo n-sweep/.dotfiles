@@ -3,17 +3,15 @@
 cd "$HOME/.dotfiles/nixos/modules" || exit
 
 function update {
-    flake=./$1/flake.nix
+    flake=$(realpath ./"$1"/flake.nix)
     url=$(rg "url = \"https" "$flake" | sed -n 's/.*url = "\(.*\)";/\1/p')
     [[ -z "$url"  ]] && return
-    old_hash=$(rg sha256 "$flake" | sed -n 's/sha256 = "\(sha256-.*=\)";/\1/p')
+    old_hash=$(rg sha256 "$flake" | sed -n 's/\s*sha256 = "\(sha256-.*=\)";/\1/p')
     [[ -z "$old_hash"  ]] && return
     new_hash=$(nix-prefetch-git --quiet "$url" | jq -r ".hash")
     if [[ "*$old_hash*" != *$new_hash* ]]; then
         echo "updating $flake"
-        target=$(echo "$old_hash" | sed 's/\//\\\//g')
-        replace=$(echo "$new_hash" | sed 's/\//\\\//g')
-        sed -i "s/$target/$replace/" "$flake"
+        sed -i "s|$old_hash|$new_hash|" "$flake"
     fi
 }
 
