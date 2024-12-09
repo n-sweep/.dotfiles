@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# recursively list contents of given file
+# I have no idea why I built this
+
 excl=". .. .git .gitignore"
 
 function print_tree {
@@ -46,4 +49,4 @@ function print_tree {
     done
 }
 
-# print_tree "$@"
+print_tree "$@"
