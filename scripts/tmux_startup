@@ -14,6 +14,7 @@ if ! pgrep -x 'tmux' > /dev/null || [[ -n $(session_exists "_") ]]; then
     tmux new-session -d -s _ 'htop'
     tmux rename-window -t _ 'main'
 
+    sleep 0.25
     tmux split-window -t _ -l 67 -h 'moon'
     tmux split-window -t _ -vf
     tmux split-window -t _:1.2 -l 125 -h 'weather'
@@ -22,8 +23,8 @@ fi
 
 if [[ -z "$TMUX" ]]; then
     # attach to session 1 if exists and not already attached to a session
-    tmux attach-session -t _:1.1
+    tmux attach-session -t _:1.2
 else
     # put focus for session 1 on the bottom left pane
-    tmux select-pane -t _:1.1
+    tmux select-pane -t _:1.2
 fi
