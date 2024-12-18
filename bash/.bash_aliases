@@ -4,10 +4,12 @@ alias c=clear
 alias pst="xclip -o -selection clipboard"
 alias cpy="xclip -i -selection clipboard"
 
-# dot navigation aliases
+# navigation aliases
+alias -="cd -"
+
 dots="."
 path="cd "
-for i in {1..5}; do
+for _ in {1..5}; do
     dots="${dots}."
     path="${path}../"
     alias "$dots"="$path"
@@ -29,7 +31,7 @@ rand_dist() {
     dists="windows macos"
     echo $dists | tr ' ' '\n' | shuf -n 1
 }
-alias cn="c && fastfetch --logo $(rand_dist)"
+alias cn="c && fastfetch --logo \$(rand_dist)"
 
 # venv activation
 alias activate="source ./.venv/bin/activate"
