@@ -26,7 +26,7 @@ blink() {
 }
 
 
-stus=$(curl -s http://192.168.0.130:7666/status)
+stus=$(curl -s "$POMO_URL")
 event=$(echo "$stus" | jq -r .event)
 time=$(echo "$stus" | jq -r '.time_remaining | "\(.min):\(.sec)"')
 exceeded=$(echo "$stus" | jq -r .time_remaining.time_exceeded)
