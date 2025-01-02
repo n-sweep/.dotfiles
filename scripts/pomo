@@ -2,9 +2,9 @@
 
 if [ "$*" == "status" ]; then
     # the status command should return the status
-    curl -s http://192.168.0.102:7666/$*
+    curl -s "$POMO_URL/$*"
 else
     # other commands shouldn't return anything
-    curl -s http://192.168.0.102:7666/$* > /dev/null
+    curl -s  "$POMO_URL/$*" > /dev/null
     ~/.dotfiles/scripts/pomos_today > /tmp/pomos
 fi

@@ -2,48 +2,48 @@
 
 
 invert_status_color() {
-    tmux set -g status-style $(
+    "tmux set -g status-style $(
         tmux show -g \
             | rg "status-style " \
             | sed 's/"//g; s/fg/ph/g; s/bg/fg/g; s/ph/bg/g' \
             | awk '{printf "%s,%s\n", $2, $3}'
-    )
+    )"
 }
 
 
 blink() {
-    num=${1:-1}
-    dur=${2:-0.25}
+    num=1
+    dur=0.25
 
-    for i in $(seq 1 $num); do
+    for i in $(seq 1 "$num"); do
         invert_status_color
-        sleep $dur
+        sleep "$dur"
         invert_status_color
-        if [ $i -lt $num ]; then
-            sleep $dur
+        if [ "$i" -lt "$num" ]; then
+            sleep "$dur"
         fi
     done
 }
 
 
 stus=$(curl -s http://192.168.0.130:7666/status)
-event=$(echo $stus | jq -r .event)
-time=$(echo $stus | jq -r '.time_remaining | "\(.min):\(.sec)"')
-exceeded=$(echo $stus | jq -r .time_remaining.time_exceeded)
+event=$(echo "$stus" | jq -r .event)
+time=$(echo "$stus" | jq -r '.time_remaining | "\(.min):\(.sec)"')
+exceeded=$(echo "$stus" | jq -r .time_remaining.time_exceeded)
 
 e=''
-if [ $time == "null:null" ] || [ $event == "stop" ]; then
+if [ "$time" == "null:null" ] || [ "$event" == "stop" ]; then
     exit
-elif [ $event == "break" ]; then
-    if [ $exceeded -gt 0 ]; then
+elif [ "$event" == "break" ]; then
+    if [ "$exceeded" -gt 0 ]; then
         e=":hourglass-done:-"
     else
         e=":hourglass-not-done:"
     fi
-elif [ $event == "pause" ]; then
+elif [ "$event" == "pause" ]; then
     e=":zzz:"
 else
-    if [ $exceeded -gt 0 ]; then
+    if [ "$exceeded" -gt 0 ]; then
         e=":anger-symbol:-"
     else
         e=":tomato:"
@@ -53,6 +53,6 @@ fi
 echo "[$e$time]" | emoji -m
 
 warn='01:00'
-if [ $time == $warn ] || [ $exceeded -gt 0 ]; then
+if [ "$time" == $warn ] || [ "$exceeded" -gt 0 ]; then
     (blink &)
 fi
