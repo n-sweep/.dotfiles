@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+random_sgf() {
+    local remote="tn_front"
+    local cmd=" choose() {
+        local dir=\"\${1:-/mnt/pool-1/media/misc/go_games/sgfs-by-date}\"
+        local choice=\"\$dir/\$(ls \$dir | shuf -n 1)\"
+        [[ -d \"\$choice\" ]] && choose \"\$choice\" || echo \$choice
+    }; cat \"\$(choose)\""
+    local sgf
+    sgf=$(ssh "$remote" "$cmd")
+    if [[ -n $1 ]]; then
+        echo "$sgf" > "${1%.sgf}.sgf"
+    else
+        echo "$sgf"
+    fi
+}
+random_sgf "$1"
