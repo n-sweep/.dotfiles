@@ -11,7 +11,7 @@ func() {
 
     ww=$(tmux display-message -p "#{window_width}")
     hw=$((ww / 2))
-    rw=$((ww / 3 * 2))
+    # rw=$((ww * 2 / 3 ))
 
     space=$((hw - ${#lout} / 2 - ${#rout} - 2))
     output="$lout$(printf "%*s" $space)$rout"

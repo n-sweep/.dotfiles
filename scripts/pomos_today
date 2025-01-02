@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+POMO_URL="http://192.168.0.102:7666/"
+
 pm_count=$(curl -s "$POMO_URL/status" | jq .pomos_today)
 
 d=4
