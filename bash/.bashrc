@@ -92,28 +92,29 @@ __ps1() {
 
         [[ -n "$B" ]] && B=" g:$B$D"
 
-        git_root_base="$(basename $git_root)"
+        git_root_base="$(basename "$git_root")"
         # count the unformatted cwd to ignore escape strings
-		countme+="$git_root_base${cwd##$git_root}"
+		countme+="$git_root_base${cwd##"$git_root"}"
         # formatted cwd
-		cwd="$bold$git_root_base$x$u${cwd##$git_root}"
+		cwd="$bold$git_root_base$x$u${cwd##"$git_root"}"
 	else
 		cwd="${cwd/#$HOME/\~}"
         countme+=$cwd
 	fi
 
     # get name of nix devShell if exists
-    [[ $(echo $NIX_BUILD_TOP | tr -dc '/' | wc -c) -gt 1 ]] && C=" e:${DEVSHELL//[\(\) ]/}"
+    [[ $(echo "$NIX_BUILD_TOP" | tr -dc '/' | wc -c) -gt 1 ]] && C=" e:${DEVSHELL//[\(\) ]/}"
 
     # get python venv
-    [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" $(echo $VIRTUAL_ENV_PROMPT | sed 's/ //')"
+    [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" ${VIRTUAL_ENV_PROMPT// /}"
+
 
     # if we have branch, devshell, or py env data, add to G
     [[ -n "$B" || -n "$C" ]] && G="$ital$a$B$C$E$x"
 
 	addr="$y\u$w@$c\h$w"
 	path="$u$cwd$G"
-    prompt="$(if [ $estus -eq 0 ]; then echo -n $p; else echo -n $r; fi)$P$x "
+    prompt="$(if [ $estus -eq 0 ]; then echo -n "$p"; else echo -n "$r"; fi)$P$x "
     countme+="$B$C $P "
 
 	if ((${#countme} < PROMPT_LONG)); then
@@ -131,6 +132,8 @@ PROMPT_COMMAND="__ps1"
 ### personal settings ##########################################################
 # note: aliases are in .bash_aliases
 
+export POMO_URL="http://192.168.0.102:5000"
+
 EDITOR=$(readlink -f "$(which nvim)")
 export EDITOR
 
@@ -139,7 +142,7 @@ shopt -s expand_aliases
 
 # open tmux automatically
 # if sessions exist, reattach, otherwise run tmux startup script
-if [ -z "$TMUX" ] && [ ! -n "$SSH_CONNECTION" ]; then
+if [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ]; then
     if tmux list-sessions 2>/dev/null; then ta; else tm; fi
 fi
 
