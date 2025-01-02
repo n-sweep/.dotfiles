@@ -3,10 +3,10 @@
 pm_count=$(curl -s "$POMO_URL/status" | jq .pomos_today)
 
 d=4
-m=$($pm_count / $d)
-r=$($pm_count % $d)
+m=$((pm_count / d))
+r=$((pm_count % d))
 
-tens=$(echo "$m" | xargs -I % sh -c 'yes ":canned-food:" | head -n % | xargs')
-ones=$(echo "$r" | xargs -I % sh -c 'yes ":tomato:" | head -n % | xargs')
+tens=$(echo $m | xargs -I % sh -c 'yes ":canned-food:" | head -n % | xargs')
+ones=$(echo $r | xargs -I % sh -c 'yes ":tomato:" | head -n % | xargs')
 
 echo "$ones $tens" | sed 's/ //g' | emoji -m
