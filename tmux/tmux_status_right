@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
 func() {
-    local np=$(~/.dotfiles/scripts/now_playing)
+    local np, pt, lout, rout, ww, hw, rw, space, output
+    np=$(~/.dotfiles/scripts/now_playing)
     #local os=$(~/.dotfiles/scripts/obs_status)
-    # local pt=$(~/.dotfiles/scripts/pomo_time)
+    pt=$(~/.dotfiles/scripts/pomo_time)
 
-    # local lout="$pt$np"
-    local lout="$np"
-    local rout="[$(date +"%H:%M %a %b %d")]"
+    lout="$pt$np"
+    rout="[$(date +"%H:%M %a %b %d")]"
 
-    local ww=$(tmux display-message -p "#{window_width}")
-    local hw=$(($ww / 2))
-    local rw=$(($ww / 3 * 2))
+    ww=$(tmux display-message -p "#{window_width}")
+    hw=$((ww / 2))
+    rw=$((ww / 3 * 2))
 
-    local space=$(($hw - ${#lout} / 2 - ${#rout} - 2))
-    local output="$lout$(printf "%*s" $space)$rout"
+    space=$((hw - ${#lout} / 2 - ${#rout} - 2))
+    output="$lout$(printf "%*s" $space)$rout"
 
     tmux set -g status-right-length $(( ${#output} + 2 ))
     echo "$output"
