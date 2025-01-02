@@ -3,53 +3,53 @@
 function new_host {
     # generate default.nix and hardware-configuration.nix for a new host
     echo "Generating hardware config..."
-    read -p "New host name ($(hostname)): " host
+    read -rp "New host name ($(hostname)): " host
 
     if [[ -z $host ]]; then
         host=$(hostname)
     fi
 
     # copy and update template default.nix
-    cp -r ./hosts/.temp ./hosts/${host}
+    cp -r ./hosts/.temp ./hosts/"${host}"
     default=./hosts/${host}/default.nix
-    to_replace=$(rg 'system.stateVersion' $default)
+    to_replace=$(rg 'system.stateVersion' "$default")
     replacement_text=$(rg 'system.stateVersion' /etc/nixos/configuration.nix)
-    sed -i "/$to_replace/c\\$replacement_text" $default
+    sed -i "/$to_replace/c\\$replacement_text" "$default"
 
     # generate hardware configuration
-    nixos-generate-config --show-hardware-config > hosts/${host}/hardware-configuration.nix
+    nixos-generate-config --show-hardware-config > hosts/"${host}"/hardware-configuration.nix
     git add .
-    echo $host > $NIX_HOST_PATH
+    echo "$host" > "$NIX_HOST_PATH"
 }
 
 function choose_host {
     # if host path doesn't exist, choose one
     if [[ ! -e $NIX_HOST_PATH || ! -s $NIX_HOST_PATH ]]; then
-        mkdir -p $(dirname $NIX_HOST_PATH)
+        mkdir -p "$(dirname "$NIX_HOST_PATH")"
         choices=$(find ./hosts/* -maxdepth 1 -type d -exec basename {} \;)
-        choice=$(echo $choices | sed 's/$/ new_host/' | sed 's/ /\n/g' | fzf --height 10%)
+        choice=$(echo "$choices" | sed 's/$/ new_host/' | sed 's/ /\n/g' | fzf --height 10%)
         if [[ $choice == "new_host" ]]; then
             new_host
         else
-            echo $choice > $NIX_HOST_PATH
+            echo "$choice" > "$NIX_HOST_PATH"
         fi
     fi
 }
 
 function rebuild {
-    host=$(cat $NIX_HOST_PATH)
+    host=$(cat "$NIX_HOST_PATH")
 
-    sudo nixos-rebuild switch --impure --flake .#$host &>nixos-switch.log
+    sudo nixos-rebuild switch --impure --flake .#"$host" &>nixos-switch.log
 
     if [[ $? -gt 0 ]]; then
         echo "🔴 Build Failed..."
-        hash=$(cat nixos-switch.log | rg --color=always 'hash mismatch')
+        hash=$(rg --color=always 'hash mismatch' < nixos-switch.log)
         if [[ -n $hash ]]; then
             echo $hash
-            cat nixos-switch.log | rg --color=always 'specified:'
-            cat nixos-switch.log | rg --color=always 'got:'
+            rg --color=always 'specified:' < nixos-switch.log
+            rg --color=always 'got:' < nixos-switch.log
         else
-            cat nixos-switch.log | rg --color=always error
+            rg --color=always error < nixos-switch.log
         fi
     else
         echo "🔵 Build Succeeded"
@@ -59,12 +59,12 @@ function rebuild {
 
 NIX_HOST_PATH=$HOME/.config/nixos/host
 
-cd $HOME/.dotfiles/nixos
+cd "$HOME/.dotfiles/nixos" || exit
 echo "❄️ Rebuilding NixOS..."
 
 shopt -s globstar
 
-git diff -U0 **/*.nix
+git diff -U0 -- **/*.nix
 
 choose_host
 rebuild
