@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+POMO_URL="http://192.168.0.102:7666/"
 
 invert_status_color() {
     "tmux set -g status-style $(
@@ -26,7 +27,7 @@ blink() {
 }
 
 
-stus=$(curl -s "$POMO_URL")
+stus=$(curl -s $POMO_URL/status)
 event=$(echo "$stus" | jq -r .event)
 time=$(echo "$stus" | jq -r '.time_remaining | "\(.min):\(.sec)"')
 exceeded=$(echo "$stus" | jq -r .time_remaining.time_exceeded)

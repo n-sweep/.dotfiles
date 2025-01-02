@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+POMO_URL="http://192.168.0.102:7666/"
+
 if [ "$*" == "status" ]; then
     # the status command should return the status
     curl -s "$POMO_URL/$*"
