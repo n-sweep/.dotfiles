@@ -61,7 +61,6 @@ in {
       sonic-pi
       sqlcmd
       sxiv
-      tailscale
       tigervnc
       uv
       # wezterm

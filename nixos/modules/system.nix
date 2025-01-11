@@ -1,6 +1,6 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 let
-  uname = config.home.username;
+  uname = "n";
   home_dir = "/home/${uname}";
 in {
 
@@ -94,7 +94,6 @@ in {
       inetutils
       jq
       libnotify
-      libstdcxx5
       lshw
       maim
       nettools
@@ -149,6 +148,9 @@ in {
   #   enableSSHSupport = true;
   # };
 
+  # https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.network.wait-online.enable = false;
+  boot.initrd.systemd.network.wait-online.enable = false;
 
   # xserver + i3
   services = {
@@ -222,11 +224,9 @@ in {
 
   fonts.packages = with pkgs; [
     roboto
-    (nerdfonts.override { fonts = [
-      "Mononoki"
-      "RobotoMono"
-      "UbuntuMono"
-    ]; })
+    nerd-fonts.mononoki
+    nerd-fonts.roboto-mono
+    nerd-fonts.ubuntu-mono
   ];
 
 }

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+file="$HOME/Obsidian/slipbox/notes/daily/$(date +"%Y-%m-%d").md"
+
+if [[ ! -f $file ]]; then
+    nvim -c ":ObsidianToday" -c :q
+fi
+
+if [[ -z "$*" ]]; then
+    tmpfile=$(mktemp)
+    nvim -c ":set nobackup" -c ":set nowritebackup" -c ":set noswapfile" "$tmpfile"
+    input=$(< "$tmpfile")
+    rm -f "$tmpfile"
+else
+    input="$*"
+fi
+
+if [[ -n $input ]]; then
+    echo "- $input ($(date +'%H:%M'))" >> "$file"
+fi
