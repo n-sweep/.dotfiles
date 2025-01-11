@@ -33,9 +33,6 @@ in {
       ".inputrc".source = "${dotfiles_dir}/bash/.inputrc";
       ".wezterm.lua".source = "${dotfiles_dir}/wezterm/.wezterm.lua";
 
-      # these plugins crash OBS. missing dependency?
-      # ".vst".source = "${pkgs.reaper}/opt/REAPER/Plugins/";
-
       # nvim plugins
       "${nvim_plug_dir}/pvserv".source = "/home/n/Repos/pvserv";
       "${nvim_plug_dir}/telemux".source = "/home/n/Repos/telemux-nvim";
@@ -69,6 +66,7 @@ in {
       tailscale
       tigervnc
       uv
+      wezterm
       yazi
       zoom-us
 
@@ -77,7 +75,7 @@ in {
       inputs.nixvim.packages.${pkgs.system}.default
 
       # 2024-09 wezterm has a visual bug; use older version
-      inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
+      # inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
 
       # base python - use devShell for dev
       (python312.withPackages (ps: with ps;[

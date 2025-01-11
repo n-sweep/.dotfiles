@@ -17,12 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # [TODO] this does not work
-    mojo_vim = {
-      url = "./modules/mojo-vim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixvim = {
       url = "./modules/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
