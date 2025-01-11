@@ -16,8 +16,6 @@ in {
 
   home = {
 
-    username = "n";
-
     sessionVariables = {
       BW_CLIENTID = builtins.readFile "${config_dir}/bw/client_id";
       BW_CLIENTSECRET = builtins.readFile "${config_dir}/bw/client_secret";
@@ -34,8 +32,8 @@ in {
       ".wezterm.lua".source = "${dotfiles_dir}/wezterm/.wezterm.lua";
 
       # nvim plugins
-      "${nvim_plug_dir}/pvserv".source = "/home/n/Repos/pvserv";
-      "${nvim_plug_dir}/telemux".source = "/home/n/Repos/telemux-nvim";
+      "${nvim_plug_dir}/pvserv".source = "${home_dir}/Repos/pvserv";
+      "${nvim_plug_dir}/telemux".source = "${home_dir}/Repos/telemux-nvim";
 
     };
 
@@ -66,7 +64,7 @@ in {
       tailscale
       tigervnc
       uv
-      wezterm
+      # wezterm
       yazi
       zoom-us
 
@@ -75,7 +73,7 @@ in {
       inputs.nixvim.packages.${pkgs.system}.default
 
       # 2024-09 wezterm has a visual bug; use older version
-      # inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
+      inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
 
       # base python - use devShell for dev
       (python312.withPackages (ps: with ps;[

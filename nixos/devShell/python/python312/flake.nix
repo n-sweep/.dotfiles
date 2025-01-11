@@ -63,57 +63,11 @@
             xlrd
         ];
 
-        # common packages plus extras
-        pyPkgsCL = ps: pyPkgsCommon ps ++ (with ps; [
-          # add cl packages
-          (buildPythonPackage {
-            name = "closedloop-api-private";
-            src = /home/n/work/cl/Repos/closedloop-api-python;
-            format = "pyproject";
-            buildInputs = [ pkgs.python3Packages.setuptools ];
-            propagatedBuildInputs = with pkgs.python3Packages; [
-              boto3
-              cachecontrol
-              certifi
-              deepdiff
-              google-api-python-client
-              google-auth
-              google-cloud-storage
-              hvac
-              pyjwt
-              pytest
-              pyyaml
-              requests
-              requests-toolbelt
-              six
-              sqlparse
-              websocket_client
-
-              geopandas
-              shapely
-            ];
-           })
-
-          (buildPythonPackage {
-            name = "closedloop-ds";
-            src = /home/n/work/cl/Repos/closedloop-ds;
-            format = "pyproject";
-            buildInputs = [ pkgs.python3Packages.setuptools ];
-            # propagatedBuildInputs = with pkgs.python3Packages; [ ]
-          })
-
-        ]);
-
       in {
 
         default = pkgs.mkShell {
           packages = [(python.withPackages pyPkgsCommon)];
           shellHook = ''export DEVSHELL="default"'';
-        };
-
-        cl = pkgs.mkShell {
-          packages = [(python.withPackages pyPkgsCL)];
-          shellHook = ''export DEVSHELL="cl"'';
         };
 
     });

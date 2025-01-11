@@ -1,16 +1,17 @@
 { pkgs, config, ... }:
 let
-  username = "n";
+  uname = config.home.username;
+  home_dir = "/home/${uname}";
 in {
 
   ### users ####################################################################
 
-  users.users.${username} = {
+  users.users.${uname} = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "audio" "docker" ];
   };
 
-  nix.settings.trusted-users = [username];
+  nix.settings.trusted-users = [uname];
 
 
   ### misc #####################################################################
@@ -133,7 +134,7 @@ in {
 
   networking.wireless = {
     userControlled.enable = true;
-    secretsFile = "/home/${username}/.config/wifi/wireless.env";
+    secretsFile = "${home_dir}/.config/wifi/wireless.env";
     networks = {
       "Waffle House".pskRaw = "ext:PSK_HOME";
       "Kindred Hippie".pskRaw = "ext:PSK_KH";
@@ -204,7 +205,7 @@ in {
       after = [ "network.target" "display-manager.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.x11vnc}/bin/x11vnc -forever -display :0 -auth /home/n/.Xauthority -noxdamage";
+        ExecStart = "${pkgs.x11vnc}/bin/x11vnc -forever -display :0 -auth ${home_dir}/.Xauthority -noxdamage";
         ExecStop = "${pkgs.killall}/bin/killall x11vnc";
         Type = "simple";
         Restart = "on-failure";
