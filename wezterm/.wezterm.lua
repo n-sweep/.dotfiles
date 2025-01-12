@@ -23,9 +23,7 @@ local config = {
         source = { File = '~/.wallpaper' },
         attachment = "Fixed",
         vertical_align = "Middle",
-        horizontal_align = "Middle",
-        height = "Cover",
-        width = "Cover"
+        horizontal_align = "Middle"
     },
 
     keys = {  -- enabling ctrl/shift/alt + Enter/Tab
