@@ -20,7 +20,7 @@ local config = {
     },
 
     background = {
-        source = { File = '/home/n/.wallpaper' },
+        source = { File = '/home/n/.wallpaper.png' },
         attachment = "Fixed",
         vertical_align = "Middle",
         horizontal_align = "Middle",
