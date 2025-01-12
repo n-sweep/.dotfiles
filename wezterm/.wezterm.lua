@@ -1,5 +1,6 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
+local home = os.getenv("xdg_config_home")
 
 local config = {
     audible_bell = 'Disabled',
@@ -20,10 +21,12 @@ local config = {
     },
 
     background = {
-        source = { File = '~/.wallpaper' },
+        source = { File = home .. '/.wallpaper' },
         attachment = "Fixed",
         vertical_align = "Middle",
-        horizontal_align = "Middle"
+        horizontal_align = "Middle",
+        height = "Cover",
+        width = "Cover"
     },
 
     keys = {  -- enabling ctrl/shift/alt + Enter/Tab
