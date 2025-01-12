@@ -19,15 +19,6 @@ local config = {
         bottom = 0
     },
 
-    background = {
-        source = { File = '/home/n/.wallpaper.png' },
-        attachment = "Fixed",
-        vertical_align = "Middle",
-        horizontal_align = "Middle",
-        height = "Cover",
-        width = "Cover"
-    },
-
     keys = {  -- enabling ctrl/shift/alt + Enter/Tab
 
         -- "AppCursorMode" == send to applications (neovim) only, not terminal input
