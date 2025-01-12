@@ -4,13 +4,12 @@ if [[ -n "$TMUX" ]]; then
 
     tmux select-pane -t _
 
-    cols=$COLUMNS
     moon_w=67
     weather_w=126
 
-    tmux send-keys 'moon' C-m
-    tmux split-window -l $(( cols - moon_w )) -h 'weather'
-    tmux split-window -l $(( cols - (moon_w + weather_w) )) -h 'htop'
+    tmux send-keys 'htop' C-m
+    tmux split-window -l $(( moon_w + weather_w )) -h 'weather'
+    tmux split-window -l $(( moon_w )) -h 'moon'
     tmux split-window -vf
     tmux split-window -h 'cmus'
     tmux select-pane -t 1.3

@@ -19,9 +19,14 @@ local config = {
         bottom = 0
     },
 
-    -- rendering probs? nixos-unstable 2024-09-13
-    enable_wayland = false,
-    front_end = "WebGpu",
+    background = {
+        source = { File = '~/.wallpaper' },
+        attachment = "Fixed",
+        vertical_align = "Middle",
+        horizontal_align = "Middle",
+        height = "Cover",
+        width = "Cover"
+    },
 
     keys = {  -- enabling ctrl/shift/alt + Enter/Tab
 
