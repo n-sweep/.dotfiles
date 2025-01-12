@@ -1,6 +1,6 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
-local home = os.getenv("xdg_config_home")
+local home = os.getenv("HOME")
 
 local config = {
     audible_bell = 'Disabled',
