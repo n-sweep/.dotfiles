@@ -71,9 +71,6 @@ in {
       inputs.zen-browser.packages.${pkgs.system}.default
       inputs.nixvim.packages.${pkgs.system}.default
 
-      # 2024-09 wezterm has a visual bug; use older version
-      # inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.wezterm
-
       # base python - use devShell for dev
       (python312.withPackages (ps: with ps;[
         black
