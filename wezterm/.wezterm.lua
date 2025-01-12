@@ -1,6 +1,5 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
-local home = os.getenv("HOME")
 
 local config = {
     audible_bell = 'Disabled',
@@ -21,7 +20,7 @@ local config = {
     },
 
     background = {
-        source = { File = home .. '/.wallpaper' },
+        source = { File = '/home/n/.wallpaper' },
         attachment = "Fixed",
         vertical_align = "Middle",
         horizontal_align = "Middle",
