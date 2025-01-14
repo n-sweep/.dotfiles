@@ -40,6 +40,7 @@ alias venv='if [[ -n $VIRTUAL_ENV_PROMPT ]]; then deactivate; elif [ -d "./.venv
 # setup monitors
 alias mon3="xrandr --output DP-3 --primary --rotate right --output DP-2 --right-of DP-3 --output eDP-1 --right-of DP-2"
 
+
 ### script aliases #############################################################
 
 # scripts are symlinked to ~/bin
@@ -48,11 +49,11 @@ alias mon3="xrandr --output DP-3 --primary --rotate right --output DP-2 --right-
 alias q="duck"
 alias qq="gippity"
 
-# daily journal
-alias journal="zk '# \d+ Daily Journal'"
-
 # Jupytext create new notebook
 alias nnb="$HOME/.dotfiles/jupyter/create_nb.sh"
+
+alias n="daily_note"
+alias today="vim -c :ObsidianToday"
 
 
 ### git ########################################################################
