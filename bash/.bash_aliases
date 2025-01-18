@@ -12,7 +12,7 @@ path="cd "
 for _ in {1..5}; do
     dots="${dots}."
     path="${path}../"
-    alias "$dots"="$path"
+    alias "\$dots"="\$path"
 done
 
 # lock screen
@@ -29,7 +29,7 @@ alias docker="sudo docker"
 rand_dist() {
     # randombly choose an icon for fastfetch
     dists="windows macos"
-    echo $dists | tr ' ' '\n' | shuf -n 1
+    echo "$dists" | tr ' ' '\n' | shuf -n 1
 }
 alias cn="c && fastfetch --logo \$(rand_dist)"
 
@@ -50,7 +50,7 @@ alias q="duck"
 alias qq="gippity"
 
 # Jupytext create new notebook
-alias nnb="$HOME/.dotfiles/jupyter/create_nb.sh"
+alias nnb="\$HOME/.dotfiles/jupyter/create_nb.sh"
 
 alias n="daily_note"
 alias today="vim -c :ObsidianToday"
@@ -72,13 +72,13 @@ alias tm="tmux_startup"
 alias ta="tmux a"
 
 # tmux-sessionizer
-alias ts="$HOME/.dotfiles/scripts/tmux_sessionizer"
+alias ts="\$HOME/.dotfiles/scripts/tmux_sessionizer"
 
 
 ### obs ########################################################################
 # https://github.com/grigio/obs-cmd
-alias obs-studio="$(which obs)"
-alias obs="obs-cmd --websocket obsws://localhost:4455/$(head -1 "$HOME/.config/obs-studio/token")"
+alias obs-studio="\$(which obs)"
+alias obs="obs-cmd --websocket obsws://localhost:4455/\$(head -1 \$HOME/.config/obs-studio/token)"
 alias cam="obs scene-item toggle cam zerocam &> /dev/null"
 alias blur="obs scene-item toggle desktop1 'HDMI-0 blur' &> /dev/null"
 alias camstat="obs scene-item toggle cam static &> /dev/null"
