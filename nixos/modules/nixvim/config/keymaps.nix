@@ -4,19 +4,28 @@
     key = "<ESC>";
     action = ":nohl<CR>";
     mode = "n";
-    options.silent = true;
+    options = {
+      silent = true;
+      desc = "Remove search highlighting";
+    };
   }
 
   { # toggle spell check
     key = "<F6>";
     action = ":set spell!<CR>";
-    options.silent = true;
+    options = {
+      silent = true;
+      desc = "Set spell check";
+    };
   }
 
   { # toggle line break
     key = "<F7>";
     action = ":set wrap! linebreak!<CR>";
-    options.silent = true;
+    options = {
+      silent = true;
+      desc = "Set line breaks";
+    };
   }
 
 
