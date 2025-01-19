@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# set the hostname for this machine at this location
+NIX_HOST_PATH=$HOME/.config/nixos/host
+
 function new_host {
     # generate default.nix and hardware-configuration.nix for a new host
     echo "Generating hardware config..."
@@ -39,32 +42,45 @@ function choose_host {
 function rebuild {
     host=$(cat "$NIX_HOST_PATH")
 
-    sudo nixos-rebuild switch --impure --flake .#"$host" &>nixos-switch.log
+    [[ $1 == true ]] && dry="--dry-run "
+    sudo nixos-rebuild switch --impure --flake "$dry".#"$host" | tee nixos-switch.log
 
-    if [[ $? -gt 0 ]]; then
+    #  [[ $? -eq 0 ]] throws an LSP error
+    if test $? -eq 0; then
+        echo "🔵 Build Succeeded"
+        if [[ $1 == true ]]; then  # do not commit on dry runs
+            git commit -am "$(nixos-rebuild list-generations | rg current)"
+        else
+            echo "(dry run; no changes applied)"
+        fi
+    else
         echo "🔴 Build Failed..."
         hash=$(rg --color=always 'hash mismatch' < nixos-switch.log)
         if [[ -n $hash ]]; then
-            echo $hash
+            echo "$hash"
             rg --color=always 'specified:' < nixos-switch.log
             rg --color=always 'got:' < nixos-switch.log
         else
             rg --color=always error < nixos-switch.log
         fi
-    else
-        echo "🔵 Build Succeeded"
-        git commit -am "$(nixos-rebuild list-generations | rg current)"
     fi
 }
-
-NIX_HOST_PATH=$HOME/.config/nixos/host
 
 cd "$HOME/.dotfiles/nixos" || exit
 echo "❄️ Rebuilding NixOS..."
 
 shopt -s globstar
+eval set -- "$(getopt -o d --long dry-run: -- "$@")"
+
+while true; do
+    case "$1" in
+        -d|--dry-run) dry_run=true shift;;
+        --) shift; break;;
+        *) echo "Usage: $0 [-d|--dry-run]"; exit 1;;
+    esac
+done
 
 git diff -U0 -- **/*.nix
 
 choose_host
-rebuild
+rebuild dry_run
