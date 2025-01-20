@@ -16,5 +16,5 @@ else
 fi
 
 if [[ -n $input ]]; then
-    echo "- $input ($(date +'%H:%M'))" >> "$file"
+    echo "- [ ] $input ($(date +'%H:%M'))" >> "$file"
 fi
