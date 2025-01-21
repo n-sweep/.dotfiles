@@ -123,7 +123,6 @@
         nil-ls.enable = true;
         pyright.enable = true;
         sqls.enable = true;
-        typos-lsp.enable = true;
 
         lua-ls = {
           enable = true;
