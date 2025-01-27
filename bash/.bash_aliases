@@ -12,7 +12,7 @@ path="cd "
 for _ in {1..5}; do
     dots="${dots}."
     path="${path}../"
-    alias "\$dots"="\$path"
+    alias "$dots"="$path"
 done
 
 # lock screen
