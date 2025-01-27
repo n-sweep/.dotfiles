@@ -40,8 +40,8 @@ alias l='ls -CF'
 
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f "$HOME/.bash_aliases" ]; then
+    . "$HOME/.bash_aliases"
 fi
 
 
@@ -153,7 +153,7 @@ if rg -qi 'nixos' /etc/*-release ; then
         source "$(fzf-share)/completion.bash"
     fi
 else
-    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    [ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 fi
 
 ### environment variables ######################################################
