@@ -4,9 +4,6 @@ alias c=clear
 alias pst="xclip -o -selection clipboard"
 alias cpy="xclip -i -selection clipboard"
 
-# navigation aliases
-alias -="cd -"
-
 dots="."
 path="cd "
 for _ in {1..5}; do
@@ -42,8 +39,6 @@ alias mon3="xrandr --output DP-3 --primary --rotate right --output DP-2 --right-
 
 
 ### script aliases #############################################################
-
-# scripts are symlinked to ~/bin
 
 # search
 alias q="duck"
