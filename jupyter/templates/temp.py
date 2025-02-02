@@ -12,22 +12,6 @@
 #       name: Python3
 # ---
 
-# %%
-import os
-import json
-import numpy as np
-import pandas as pd
-import plotly.io as pio
-# import plotly.express as px
-
-# plotly setup
-pio.renderers.default = 'notebook'
-pd.options.plotting.backend = 'plotly'
-
-def pwrite(fig, plt='/tmp/vis/plot.json'):
-    fig = fig.update_layout(autosize=False)
-    fig.write_json(plt)
-
 # %% [markdown]
 # # Template Notebook
 

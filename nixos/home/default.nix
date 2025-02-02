@@ -7,6 +7,7 @@ let
   config_dir = "${home_dir}/.config";
   dotfiles_dir = "${home_dir}/.dotfiles";
   nvim_plug_dir = "${config_dir}/nvim/pack/vendor/start";
+  mksl = config.lib.file.mkOutOfStoreSymlink;
 
 in {
 
@@ -23,17 +24,20 @@ in {
     };
 
 
-    # source files to home directory
+    # symlink files to home directory
     file = {
-      ".bash_aliases".source = "${dotfiles_dir}/bash/.bash_aliases";
-      ".config/i3/config".source = "${dotfiles_dir}/i3/.config/i3/config";
-      ".config/i3status/config".source = "${dotfiles_dir}/i3/.config/i3status/config";
-      ".inputrc".source = "${dotfiles_dir}/bash/.inputrc";
-      ".wezterm.lua".source = "${dotfiles_dir}/wezterm/.wezterm.lua";
+      ".bash_aliases".source = mksl "${dotfiles_dir}/bash/.bash_aliases";
+      ".config/i3/config".source = mksl "${dotfiles_dir}/i3/.config/i3/config";
+      ".config/i3status/config".source = mksl "${dotfiles_dir}/i3/.config/i3status/config";
+      ".inputrc".source = mksl "${dotfiles_dir}/bash/.inputrc";
+      ".wezterm.lua".source = mksl "${dotfiles_dir}/wezterm/.wezterm.lua";
+
+      # I had to manually `rm -rf ~/.ipython/profile_default/startup` and rebuild for this to work
+      ".ipython/profile_default/startup".source = mksl "${dotfiles_dir}/.ipython/profile_default/startup";
 
       # nvim plugins
-      "${nvim_plug_dir}/pvserv".source = "${home_dir}/Repos/pvserv";
-      "${nvim_plug_dir}/telemux".source = "${home_dir}/Repos/telemux-nvim";
+      "${nvim_plug_dir}/pvserv".source = mksl "${home_dir}/Repos/pvserv";
+      "${nvim_plug_dir}/telemux".source = mksl "${home_dir}/Repos/telemux-nvim";
 
     };
 
