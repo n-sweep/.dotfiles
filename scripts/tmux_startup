@@ -11,15 +11,23 @@ function session_exists {
 # Only start new sessions if they don't already exist
 if ! pgrep -x 'tmux' > /dev/null || [[ -n $(session_exists "_") ]]; then
 
-    tmux new-session -d -s _
+    tmux new-session -d -s _ 'htop'
     tmux rename-window -t _ 'main'
+
+    # these numbers are crazy because tmux doesn't actually know the size of my
+    # terminal window while these commands are running
+    tmux split-window -t _ -l 64 -h 'weather'
+    tmux split-window -t _ -l 6 -h 'moon'
+
+    tmux split-window -t _ -vf
+    tmux split-window -t _ -h 'cmus'
 
 fi
 
 if [[ -z "$TMUX" ]]; then
     # attach to session 1 if exists and not already attached to a session
-    tmux attach-session -t _
+    tmux attach-session -t _:1.0
 else
     # put focus for session 1 on the bottom left pane
-    tmux select-pane -t _
+    tmux select-pane -t _:1.0
 fi
