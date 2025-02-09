@@ -1,3 +1,9 @@
+# ipython
+.ipython/*
+!.ipython/profile_defaults/startup
+!.ipython/profile_defaults/startup/**
+*.sqlite
+
 *__pycache__/
 
 # Exclude compile
