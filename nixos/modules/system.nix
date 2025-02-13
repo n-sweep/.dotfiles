@@ -224,6 +224,7 @@ in {
 
   fonts.packages = with pkgs; [
     roboto
+    google-fonts
     nerd-fonts.mononoki
     nerd-fonts.roboto-mono
     nerd-fonts.ubuntu-mono
