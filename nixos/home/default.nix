@@ -64,6 +64,7 @@ in {
       slop
       sonic-pi
       sqlcmd
+      sqlfluff
       sxiv
       tigervnc
       uv
