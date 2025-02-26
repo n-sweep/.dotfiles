@@ -32,24 +32,29 @@ outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     system = "x86_64-linux";
 
-    # Generate config for a single host
+    # generate config for a single host
     mkHostConfig = host: nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
+
+        # host-specific module
         ./hosts/${host}
+
+        # host-specific home config
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.n = ./hosts/${host}/home.nix;
           home-manager.extraSpecialArgs = { inherit inputs; };
         }
+
       ];
     };
 
-    # Get list of host directories
+    # get list of host directories
     hostDirs = builtins.attrNames (builtins.readDir ./hosts);
 
-    # Generate configurations for all hosts
+    # generate configs for all hosts
     nixosConfigurations = builtins.listToAttrs (map
       (host: { name = host; value = mkHostConfig host; })
       hostDirs
