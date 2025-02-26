@@ -6,6 +6,10 @@ let
   home_dir = "/home/${uname}";
 in {
 
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   networking.wireless = {
     userControlled.enable = true;
     secretsFile = "${home_dir}/.config/wifi/wireless.env";
