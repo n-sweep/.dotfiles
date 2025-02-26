@@ -31,6 +31,11 @@
       fsType = "ext4";
     };
 
+    "/mnt/music" = {
+      device = "192.168.0.112:/mnt/pool-1/media/music/library";
+      fsType = "nfs";
+    };
+
   };
 
   swapDevices =

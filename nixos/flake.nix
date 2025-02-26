@@ -28,33 +28,32 @@
 
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs:
+outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
+    system = "x86_64-linux";
 
-    common = {
-      system = "x86_64-linux";
+    # Generate config for a single host
+    mkHostConfig = host: nixpkgs.lib.nixosSystem {
+      inherit system;
       modules = [
+        ./hosts/${host}
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.n = import ./home;
+          home-manager.users.n = ./hosts/${host}/home.nix;
           home-manager.extraSpecialArgs = { inherit inputs; };
         }
       ];
     };
 
-    # generates configs for every host
-    # see nixvim flake for maybe a better way to do this
-    generate_host_configs = dirs: builtins.listToAttrs (map (dir: {
-      name = dir;
-      value = nixpkgs.lib.nixosSystem (common // {
-        modules = [
-          ./hosts/${dir}
-        ] ++ common.modules or [];
-      });
-    }) dirs);
+    # Get list of host directories
+    hostDirs = builtins.attrNames (builtins.readDir ./hosts);
 
-    host_dirs = builtins.attrNames (builtins.readDir ./hosts);
+    # Generate configurations for all hosts
+    nixosConfigurations = builtins.listToAttrs (map
+      (host: { name = host; value = mkHostConfig host; })
+      hostDirs
+    );
 
-  in { nixosConfigurations = generate_host_configs host_dirs; };
+  in { inherit nixosConfigurations; };
 }
