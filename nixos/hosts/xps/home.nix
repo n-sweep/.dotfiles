@@ -3,9 +3,10 @@
 {
   imports = [
     (self + "/home")
+    (self + "/home/workstation")
   ];
 
-  # host-specific config goes here
+  # any host-specific config goes here
   home = {};
 
 }

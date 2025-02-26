@@ -37,16 +37,29 @@ in {
 
       autorandr
       barrier
+      cmus
       cockatrice
       discord
+      dunst
+      feh
       gimp
+      i3lock
       kcl
+      libnotify
+      maim
       obs-cmd
       parsec-bin
+      pavucontrol
+      pcmanfm
+      peek
       screenkey
       sxiv
       wezterm
+      xclip
+      xorg.xauth
+      xorg.xinit
       zoom-us
+
 
       # zen browser
       inputs.zen-browser.packages.${pkgs.system}.default

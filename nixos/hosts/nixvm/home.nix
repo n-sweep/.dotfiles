@@ -5,7 +5,7 @@
     (self + "/home")
   ];
 
-  # host-specific config goes here
+  # any host-specific config goes here
   home = {};
 
 }

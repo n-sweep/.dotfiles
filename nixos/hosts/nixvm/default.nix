@@ -2,8 +2,8 @@
 
 {
 
-  imports = [ # Include the results of the hardware scan.
-    (self + "/modules/system.nix")
+  imports = [
+    (self + "/modules/")
 
     # results of the hardware scan
     ./hardware-configuration.nix

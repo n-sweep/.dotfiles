@@ -3,7 +3,8 @@
 {
 
   imports = [
-    (self + "/modules/system.nix")
+    (self + "/modules/")
+    (self + "/modules/workstation")
 
     # results of the hardware scan
     ./hardware-configuration.nix

@@ -72,18 +72,34 @@ in {
     };
     packages = with pkgs; [
 
-      cmus
+      bitwarden-cli
+      cbonsai
       duckdb
+      fastfetch
+      ffmpeg-full
       firebase-tools
+      gawk
+      gcc-unwrapped
       gitAndTools.gh
       google-cloud-sdk
+      htop
+      inetutils
+      jq
+      lshw
       mods
-      peek
+      nettools
+      nix-prefetch-git
+      pciutils
       quarto
+      ripgrep
       slop
       sqlcmd
       sqlfluff
+      sqlite
+      sshfs
+      unzip
       uv
+      zip
 
       # base python - use devShell for dev
       (python312.withPackages (ps: with ps;[
