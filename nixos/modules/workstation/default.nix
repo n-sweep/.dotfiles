@@ -22,11 +22,6 @@ in {
   # xserver + i3
   services = {
 
-    # Enable the OpenSSH daemon.
-    openssh.enable = true;
-
-    tailscale.enable = true;
-
     displayManager.defaultSession = "none+i3";
     logind.lidSwitch = "ignore";
 
