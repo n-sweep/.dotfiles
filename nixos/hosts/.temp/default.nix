@@ -1,9 +1,11 @@
-{ config, pkgs, ... }:
-
+{ ... }:
+let
+  rootDir = ./../..;
+in
 {
 
   imports = [ # Include the results of the hardware scan.
-    ../../modules/system.nix
+    (rootDir + /modules/system.nix)
 
     # results of the hardware scan
     ./hardware-configuration.nix

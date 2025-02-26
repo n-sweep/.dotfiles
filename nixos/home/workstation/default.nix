@@ -26,13 +26,6 @@ in {
 
     };
 
-    programs.obs-studio = {
-      enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        obs-pipewire-audio-capture
-      ];
-    };
-
     packages = with pkgs; [
 
       autorandr
@@ -67,6 +60,13 @@ in {
 
     ];
 
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-capture
+    ];
   };
 
 }

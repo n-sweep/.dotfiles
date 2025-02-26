@@ -41,35 +41,6 @@ in {
 
     };
 
-    programs = {
-
-      bash = {
-        enable = true;
-        enableCompletion = true;
-        bashrcExtra = builtins.readFile "${dotfiles_dir}/bash/.bashrc";
-      };
-
-      fzf = {
-        enable = true;
-        enableBashIntegration = true;
-      };
-
-      git = {
-        enable = true;
-        userName = "n-sweep";
-        userEmail = "34486798+n-sweep@users.noreply.github.com";
-        extraConfig = {
-          push.autoSetupRemote = "true";
-          init.defaultBranch = "main";
-        };
-      };
-
-      tmux = {
-        enable = true;
-        extraConfig = builtins.readFile "${dotfiles_dir}/tmux/.tmux.conf";
-      };
-
-    };
     packages = with pkgs; [
 
       bitwarden-cli
@@ -119,6 +90,36 @@ in {
       ]))
 
     ];
+
+  };
+
+  programs = {
+
+    bash = {
+      enable = true;
+      enableCompletion = true;
+      bashrcExtra = builtins.readFile "${dotfiles_dir}/bash/.bashrc";
+    };
+
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+
+    git = {
+      enable = true;
+      userName = "n-sweep";
+      userEmail = "34486798+n-sweep@users.noreply.github.com";
+      extraConfig = {
+        push.autoSetupRemote = "true";
+        init.defaultBranch = "main";
+      };
+    };
+
+    tmux = {
+      enable = true;
+      extraConfig = builtins.readFile "${dotfiles_dir}/tmux/.tmux.conf";
+    };
 
   };
 

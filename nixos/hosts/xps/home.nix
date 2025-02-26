@@ -1,9 +1,11 @@
-{ self, ... }:
-
+{ ... }:
+let
+  rootDir = ./../..;
+in
 {
   imports = [
-    (self + "/home")
-    (self + "/home/workstation")
+    (rootDir + /home)
+    (rootDir + /home/workstation)
   ];
 
   # any host-specific config goes here

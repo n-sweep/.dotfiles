@@ -1,10 +1,12 @@
-{ self, ... }:
-
+{ ... }:
+let
+  rootDir = ./../..;
+in
 {
 
   imports = [
-    (self + "/modules/")
-    (self + "/modules/workstation")
+    (rootDir + /modules)
+    (rootDir + /modules/workstation)
 
     # results of the hardware scan
     ./hardware-configuration.nix
