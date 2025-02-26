@@ -1,5 +1,8 @@
 # $man home-configuration.nix
-{ config, inputs, pkgs, ...}:
+
+# config in this file will be included on every machine
+
+{ config, pkgs, ...}:
 let
 
   # directories
@@ -11,9 +14,9 @@ let
 
 in {
 
-  imports = [
-    ./programs.nix
-  ];
+  # imports = [
+  #   ./programs.nix
+  # ];
 
   home = {
 
@@ -27,10 +30,7 @@ in {
     # symlink files to home directory
     file = {
       ".bash_aliases".source = mksl "${dotfiles_dir}/bash/.bash_aliases";
-      ".config/i3/config".source = mksl "${dotfiles_dir}/i3/.config/i3/config";
-      ".config/i3status/config".source = mksl "${dotfiles_dir}/i3/.config/i3status/config";
       ".inputrc".source = mksl "${dotfiles_dir}/bash/.inputrc";
-      ".wezterm.lua".source = mksl "${dotfiles_dir}/wezterm/.wezterm.lua";
 
       # I had to manually `rm -rf ~/.ipython/profile_default/startup` and rebuild for this to work
       ".ipython/profile_default/startup".source = mksl "${dotfiles_dir}/.ipython/profile_default/startup";
@@ -41,40 +41,49 @@ in {
 
     };
 
+    programs = {
+
+      bash = {
+        enable = true;
+        enableCompletion = true;
+        bashrcExtra = builtins.readFile "${dotfiles_dir}/bash/.bashrc";
+      };
+
+      fzf = {
+        enable = true;
+        enableBashIntegration = true;
+      };
+
+      git = {
+        enable = true;
+        userName = "n-sweep";
+        userEmail = "34486798+n-sweep@users.noreply.github.com";
+        extraConfig = {
+          push.autoSetupRemote = "true";
+          init.defaultBranch = "main";
+        };
+      };
+
+      tmux = {
+        enable = true;
+        extraConfig = builtins.readFile "${dotfiles_dir}/tmux/.tmux.conf";
+      };
+
+    };
     packages = with pkgs; [
 
-      autorandr
-      awscli
-      barrier
       cmus
-      cockatrice
-      discord
       duckdb
       firebase-tools
-      gimp
       gitAndTools.gh
       google-cloud-sdk
-      kcl
       mods
-      obs-cmd
-      parsec-bin
       peek
       quarto
-      screenkey
       slop
-      sonic-pi
       sqlcmd
       sqlfluff
-      sxiv
-      tigervnc
       uv
-      wezterm
-      yazi
-      zoom-us
-
-      # zen browser
-      inputs.zen-browser.packages.${pkgs.system}.default
-      inputs.nixvim.packages.${pkgs.system}.default
 
       # base python - use devShell for dev
       (python312.withPackages (ps: with ps;[
