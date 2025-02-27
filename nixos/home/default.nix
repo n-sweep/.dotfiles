@@ -2,7 +2,7 @@
 
 # config in this file will be included on every machine
 
-{ config, pkgs, ...}:
+{ config, inputs, pkgs, ...}:
 let
 
   # directories
