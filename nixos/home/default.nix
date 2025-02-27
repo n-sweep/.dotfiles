@@ -72,6 +72,9 @@ in {
       uv
       zip
 
+      # nvim
+      inputs.nixvim.packages.${pkgs.system}.default
+
       # base python - use devShell for dev
       (python312.withPackages (ps: with ps;[
         black

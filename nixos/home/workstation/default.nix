@@ -53,10 +53,8 @@ in {
       xorg.xinit
       zoom-us
 
-
       # zen browser
       inputs.zen-browser.packages.${pkgs.system}.default
-      inputs.nixvim.packages.${pkgs.system}.default
 
     ];
 
