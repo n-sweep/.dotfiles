@@ -1,23 +1,37 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
 
+local DOMAIN_TO_COLORSCHEME = {
+    osgiliath = 'Kanagawa (Gogh)',
+    oryxpro = 'Kanagawa Dragon (Gogh)',
+    robot_house = 'Gruvbox (Gogh)',
+    default = 'Kasugano (terminal.sexy)'
+}
+
+wezterm.on('update-status', function(window, pane)
+    local host = "default"
+    local overrides = window:get_config_overrides() or {}
+    local handle = io.popen("hostname")
+
+    if handle then
+        host = string.gsub(handle:read("*a"), "[\r\n]+", "")
+        handle:close()
+    end
+
+    overrides.color_scheme = DOMAIN_TO_COLORSCHEME[host]
+    window:set_config_overrides(overrides)
+end)
+
 local config = {
     audible_bell = 'Disabled',
     font = wezterm.font 'mononoki Nerd Font Mono',
-
-    color_scheme = 'Kanagawa (Gogh)',
 
     use_fancy_tab_bar = false,
     hide_tab_bar_if_only_one_tab = true,
     force_reverse_video_cursor = true,
 
     window_decorations = 'RESIZE',
-    window_padding = {
-        left = 0,
-        right = 0,
-        top = 0,
-        bottom = 0
-    },
+    window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
 
     keys = {  -- enabling ctrl/shift/alt + Enter/Tab
 

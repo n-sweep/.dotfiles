@@ -25,18 +25,22 @@
   ];
 
   extraPlugins = with pkgs.vimPlugins; [
+
     quarto-nvim
     tmux-nvim
     vim-dadbod
     vim-dadbod-ui
     vim-dadbod-completion
     vim-python-pep8-indent
+
+    # colorschemes
+    kanagawa-nvim
+    gruvbox-nvim
+
   ];
 
-  extraConfigLua = ''
-    require("telemux")
-    require("pvserv")
-  '' + builtins.concatStringsSep "\n" (map builtins.readFile [
+  extraConfigLua = builtins.concatStringsSep "\n" (map builtins.readFile [
+    ./colorschemes.lua
     ./tmux.lua
     ./vim-dadbod.lua
   ]);

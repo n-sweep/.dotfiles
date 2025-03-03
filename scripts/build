@@ -47,10 +47,8 @@ function rebuild {
   else
     switch="switch"
   fi
-  sudo nixos-rebuild "$switch" --impure --flake .#"$host" 2>&1 | sudo tee nixos-switch.log > /dev/null
 
-  #  [[ $? -eq 0 ]] throws an LSP error
-  if test $? -eq 0; then
+  if sudo nixos-rebuild "$switch" --impure --flake .#"$host" 2>&1 | sudo tee nixos-switch.log > /dev/null; then
       echo "🔵 Build Succeeded"
       if [[ $1 == true ]]; then  # do not commit on dry runs
           echo "(dry run; no changes applied)"

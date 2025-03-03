@@ -7,7 +7,6 @@ let
 in
 {
 
-  colorschemes.kanagawa.enable = true;
   enableMan = true;
 
   globals.mapleader = " ";

@@ -1,4 +1,5 @@
 local tmux = require("tmux")
+
 -- vim & tmux split navigation
 vim.keymap.set("n", "<M-h>", function() tmux.move_left() end)
 vim.keymap.set("n", "<M-j>", function() tmux.move_bottom() end)
