@@ -34,8 +34,9 @@
     vim-python-pep8-indent
 
     # colorschemes
-    kanagawa-nvim
     gruvbox-nvim
+    kanagawa-nvim
+    tokyonight-nvim
 
   ];
 

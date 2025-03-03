@@ -2,23 +2,28 @@ local wezterm = require('wezterm')
 local act = wezterm.action
 
 local DOMAIN_TO_COLORSCHEME = {
+    default = 'Tokyo Night (Gogh)',
     osgiliath = 'Kanagawa (Gogh)',
     oryxpro = 'Kanagawa Dragon (Gogh)',
     robot_house = 'Gruvbox (Gogh)',
-    default = 'Kasugano (terminal.sexy)'
 }
 
 wezterm.on('update-status', function(window, pane)
-    local host = "default"
     local overrides = window:get_config_overrides() or {}
-    local handle = io.popen("hostname")
+    local domain = string.gsub(pane:get_domain_name(), "SSH to ", "")
+    local color_scheme = DOMAIN_TO_COLORSCHEME[domain]
 
-    if handle then
-        host = string.gsub(handle:read("*a"), "[\r\n]+", "")
-        handle:close()
+    if color_scheme == nil then
+        local handle = io.popen("hostname")
+
+        if handle then
+            local hostname = string.gsub(handle:read("*a"), "[\r\n]+", "")
+            color_scheme = DOMAIN_TO_COLORSCHEME[hostname]
+            handle:close()
+        end
     end
 
-    overrides.color_scheme = DOMAIN_TO_COLORSCHEME[host]
+    overrides.color_scheme = color_scheme or DOMAIN_TO_COLORSCHEME["default"]
     window:set_config_overrides(overrides)
 end)
 

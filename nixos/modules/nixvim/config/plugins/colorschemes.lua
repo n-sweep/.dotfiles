@@ -6,6 +6,6 @@ local schemes = {
   robot_house = "gruvbox",
 }
 
-local scheme = schemes[hostname] or "vim"
+local scheme = schemes[hostname] or "tokyonight"
 
 vim.cmd("colorscheme " .. scheme)
