@@ -192,7 +192,12 @@
 
       settings = {
         defaults = { sorting_strategy = "ascending"; };
-        pickers.find_files.hidden = true;
+        pickers = {
+          find_files = {
+            hidden = true;
+            find_command = ''rg --files --hidden --glob !**/.git/*'';
+          };
+        };
       };
 
       keymaps = {
