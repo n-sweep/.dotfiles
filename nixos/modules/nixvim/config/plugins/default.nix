@@ -189,7 +189,12 @@
 
     telescope = {
       enable = true;
-      settings.defaults = { sorting_strategy = "ascending"; };
+
+      settings = {
+        defaults = { sorting_strategy = "ascending"; };
+        pickers.find_files.hidden = true;
+      };
+
       keymaps = {
         "<leader>ff" = {
             action = "find_files";
@@ -224,6 +229,7 @@
             options.desc = "Telescope LSP Definitions";
         };
       };
+
     };
 
     treesitter = {
