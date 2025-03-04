@@ -1,17 +1,3 @@
-### python initialization ######################################################
-
-# doing this first will decrease startup time
-
-# if $PY_INIT is set, we will run a nix devshell on start
-# $DEVSHELL_TAG determines the tag
-# unset PY_INIT to prevent infinite loop
-
-if [[ -n $PY_INIT ]]; then
-    unset PY_INIT
-    nix develop "$HOME/.dotfiles/nixos/devShell/python/python312/#$DEVSHELL_TAG"
-fi
-
-
 ### .bashrc defaults ###################################################
 
 # If not running interactively, don't do anything
