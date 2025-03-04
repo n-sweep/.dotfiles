@@ -92,7 +92,13 @@ in {
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 5900 5619 24800 ];
+  networking.firewall.allowedTCPPorts = [
+    22      # ssh
+    5900    # obs (?)
+    5619    # pomo (?)
+    8888    # jupyter notebook
+    24800   # ????
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
