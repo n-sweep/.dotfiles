@@ -1,11 +1,10 @@
 { pkgs, ... }:
-let
-
-  plugins = import ./plugins { inherit pkgs; };
-  keymaps = import ./keymaps.nix;
-
-in
 {
+
+  imports = [
+    (import ./plugins { inherit pkgs; })
+    ./keymaps.nix
+  ];
 
   enableMan = true;
 
@@ -64,12 +63,6 @@ in
     }
 
   ];
-
-  keymaps = keymaps ++ plugins.keymaps;
-
-  plugins = plugins.plugins;
-  extraPlugins = plugins.extraPlugins;
-  extraConfigLua = plugins.extraConfigLua;
 
   files = {
 

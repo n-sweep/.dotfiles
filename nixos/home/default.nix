@@ -10,6 +10,7 @@ let
   config_dir = "${home_dir}/.config";
   dotfiles_dir = "${home_dir}/.dotfiles";
   nvim_plug_dir = "${config_dir}/nvim/pack/vendor/start";
+
   mksl = config.lib.file.mkOutOfStoreSymlink;
 
 in {
