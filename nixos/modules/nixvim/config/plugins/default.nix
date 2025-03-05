@@ -55,7 +55,6 @@
     markdown-preview.enable = true;
     nvim-autopairs.enable = true;
     nvim-surround.enable = true;
-    oil.enable = true;
     otter.enable = true;
     undotree.enable = true;
     web-devicons.enable = true;
@@ -185,6 +184,13 @@
         ];
       };
       luaConfig.post = builtins.readFile ./obsidian.lua;
+    };
+
+    oil = {
+      enable = true;
+      settings = {
+        view_options.show_hidden = true;
+      };
     };
 
     telescope = {
