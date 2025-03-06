@@ -3,14 +3,14 @@
 # tmux-sessionizer
 # stolen & adapted from ThePrimeagen
 
-dirs="$HOME/ $HOME/Repos $HOME/work $HOME/work/plato/Repos"
+dirs="$HOME/ $HOME/Repos $HOME/work $HOME/work/*/Repos"
 addtl="_\n/tmp/scratch"
 
 # user can provide an argument, else find from list of directories
 if [[ $# -eq 1 ]]; then
     target_dir=$1
 else
-    found=$(find "$dirs" -maxdepth 1 -mindepth 1 -type d)
+    found=$(find $dirs -maxdepth 1 -mindepth 1 -type d)
     all_choices="${found}\n${addtl}"
     target_dir=$(echo -e "${all_choices}"| fzf)
 fi
