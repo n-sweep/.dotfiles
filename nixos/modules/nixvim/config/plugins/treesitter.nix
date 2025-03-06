@@ -1,6 +1,6 @@
 { ... }: {
 
-  treesitter = {
+  plugins.treesitter = {
     enable = true;
     settings = {
       highlight.enable = true;
@@ -34,7 +34,7 @@
     };
   };
 
-  treesitter-textobjects = {
+  plugins.treesitter-textobjects = {
     enable = true;
     select = {
       enable = true;

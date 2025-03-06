@@ -5,7 +5,7 @@
     ./harpoon.nix
     ./lsp.nix
     ./oil.nix
-    ./obsidian.nix
+    ./obsidian
     ./telescope.nix
     ./treesitter.nix
     ./undotree.nix

@@ -1,6 +1,6 @@
 { ... }: {
 
-  obsidian = {
+  plugins.obsidian = {
 
     enable = true;
 

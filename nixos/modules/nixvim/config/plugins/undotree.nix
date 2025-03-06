@@ -1,6 +1,6 @@
 { ... }: {
 
-  undotree.enable = true;
+  plugins.undotree.enable = true;
 
   keymaps = [
 
