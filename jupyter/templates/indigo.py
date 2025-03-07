@@ -91,7 +91,7 @@ def get_filter_pd(filter_start_wi:str) -> pd.DataFrame:
 
     Args:
         filter_start_wi (str): starting string of data filter file names.
-    
+
     Returns:
         pd.DataFrame
     """
@@ -169,10 +169,12 @@ for fname, sql, _ in sql_codes:
 
 # %%
 frames = {}
+# [TODO] get correct filter name
 filter = 'procedures_dhc'
 for fname, _, _ in sql_codes:
     frames[fname] = {
         'query': get_df_from_query_file(fname, filter),
+        # [TODO] get correct filter source
         'filter': get_filter_pd("Physicians_Commercial_Procedures")
     }
 
