@@ -4,6 +4,8 @@
 NIX_HOST_PATH=$HOME/.config/nixos/host
 
 function new_host {
+    # [TODO] work on this function
+
     # generate default.nix and hardware-configuration.nix for a new host
     echo "Generating hardware config..."
     read -rp "New host name ($(hostname)): " host
@@ -40,23 +42,28 @@ function choose_host {
 }
 
 function rebuild {
+  local dry_run hash host switch
+
+  dry_run=$1
   host=$(cat "$NIX_HOST_PATH")
+  switch="switch"
 
   if [[ $1 == true ]]; then
-    switch="dry-activate"
-  else
-    switch="switch"
+      switch="dry-activate"
   fi
 
-  if sudo nixos-rebuild "$switch" --impure --flake .#"$host" 2>&1 | sudo tee nixos-switch.log > /dev/null; then
-      echo "🔵 Build Succeeded"
+  sudo nixos-rebuild "$switch" --impure --flake .#"$host" 2>&1 | sudo tee nixos-switch.log > /dev/null
+
+  if test "${PIPESTATUS[0]}" -eq 0; then
+      echo ":blue-circle: Build Succeeded" | emoji -m
       if [[ $1 == true ]]; then  # do not commit on dry runs
           echo "(dry run; no changes applied)"
       else
-          git commit -am "$(nixos-rebuild list-generations | rg current)"
+          echo "I'd rather be committing..."
+          # git commit -am "$(nixos-rebuild list-generations | rg current)"
       fi
   else
-      echo "🔴 Build Failed..."
+      echo ":red-circle: Build Failed..." | emoji -m
       hash=$(rg --color=always 'hash mismatch' < nixos-switch.log)
       if [[ -n $hash ]]; then
           echo "$hash"
@@ -68,22 +75,33 @@ function rebuild {
   fi
 }
 
-cd "$HOME/.dotfiles/nixos" || exit
-echo "❄️ Rebuilding NixOS..."
+function main {
+    local dry_run script usage
 
-shopt -s globstar
-eval set -- "$(getopt -o d --long dry-run: -- "$@")"
+    script=$(basename "$0")
+    usage="Usage: $script [-d|--dry-run] [-h|--help]"
 
-dry_run=false
-while true; do
-    case "$1" in
-        -d|--dry-run) dry_run=true; shift;;
-        --) shift; break;;
-        *) echo "Usage: $0 [-d|--dry-run]"; exit 1;;
-    esac
-done
+    cd "$HOME/.dotfiles/nixos" || exit
+    echo ":snowflake: Rebuilding NixOS..." | emoji -m
 
-git diff -U0 -- **/*.nix
+    shopt -s globstar
+    eval set -- "$(getopt -o 'dh' --long 'dry-run,help' -n "$script" -- "$@")"
 
-choose_host
-rebuild "$dry_run"
+    dry_run=false
+
+    while true; do
+        case "$1" in
+            -d|--dry-run) dry_run=true; shift;;
+            -h|--help) echo "$usage"; exit 0;;
+            --) shift; break;;
+            ?) echo "Invalid option. $usage"; exit 1;;
+        esac
+    done
+
+    git diff -U0 -- **/*.nix
+
+    choose_host
+    rebuild "$dry_run"
+}
+
+main "$@"
