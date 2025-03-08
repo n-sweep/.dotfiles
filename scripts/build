@@ -51,8 +51,8 @@ function rebuild {
   local ask_commit dry_run force_commit hash host switch
 
   dry_run=$1
-  force_commit=$2
-  ask_commit=$3
+  ask_commit=$2
+  force_commit=$3
   host=$(cat "$NIX_HOST_PATH")
   switch="switch"
 
@@ -60,27 +60,27 @@ function rebuild {
       switch="dry-activate"
   fi
 
-  # sudo nixos-rebuild "$switch" \
-  #     --impure --flake \
-  #     "$NIX_CONFIG_PATH"#"$host" 2>&1 \
-  #     | sudo tee nixos-switch.log > /dev/null
-
-  echo "test" | rg "test"
+  sudo -v
+  (sudo nixos-rebuild "$switch" \
+      --impure --flake \
+      "$NIX_CONFIG_PATH"#"$host" 2>&1 \
+      | sudo tee nixos-switch.log > /dev/null) &
+  spinner $! "Rebuilding"
 
   if test "${PIPESTATUS[0]}" -eq 0; then
 
       echo ":blue-circle: Build Succeeded" | emoji -m
-      if $dry_run; then  # do not commit on dry runs
-          echo "(dry run; no changes applied)"
+      if [[ $dry_run == true ]]; then  # do not commit on dry runs
+          echo "(dry run; no changes committed)"
       else
-          if $ask_commit; then
+          if [[ $force_commit == true ]]; then echo hello; gh_commit
+          elif [[ $ask_commit == true ]]; then
               read -rp "Do you want to commit this configuration? (y/n) " yn
               case $yn in
                   [yY] ) gh_commit;;
-                  [nN] ) echo "no commit made"; exit 0;;
+                  [nN] ) exit 0;;
                   * ) echo 'invalid response'; exit 1;;
               esac
-          elif $force_commit; then gh_commit
           fi
       fi
 
@@ -125,12 +125,12 @@ function main {
         esac
     done
 
-    if $ask_commit || $force_commit; then
-        git diff -U0 -- **/*.nix
+    if [[ $ask_commit == true ]] || [[ $force_commit == true ]]; then
+        git diff -U0
     fi
 
     choose_host
-    rebuild "$dry_run $ask_commit $force_commit"
+    rebuild $dry_run $ask_commit $force_commit
 }
 
 main "$@"

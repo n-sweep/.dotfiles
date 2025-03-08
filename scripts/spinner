@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+function erase { printf "\r%*s" "$(tput cols)" ""; }
+
+function spinner {
+    local delay msg pid spinstr temp
+
+    pid=$1
+    msg=${2:+ $2}
+    delay=0.1
+    spinstr="|/-\\"
+
+    while [ "$(ps a | awk '{print $1}' | rg "$pid")" ]; do
+        local temp=${spinstr#?}
+        erase
+        printf "\r [ %c$msg ] " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+    done
+
+    erase
+}
+
+spinner "$@"
