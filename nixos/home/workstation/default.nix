@@ -22,7 +22,7 @@ in {
     file = {
       ".config/i3/config".source = mksl "${dotfiles_dir}/i3/.config/i3/config";
       ".config/i3status/config".source = mksl "${dotfiles_dir}/i3/.config/i3status/config";
-      ".wezterm.lua".source = mksl "${dotfiles_dir}/wezterm/.wezterm.lua";
+      ".wezterm.lua".source = mksl "${dotfiles_dir}/.wezterm.lua";
 
     };
 

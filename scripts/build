@@ -65,7 +65,7 @@ function rebuild {
         --impure --flake \
         "$NIX_CONFIG_PATH"#"$host" 2>&1 \
         | sudo tee nixos-switch.log > /dev/null) &
-    spinner $! "Rebuilding (see $NIX_CONFIG_PATH/nixos-switch.log)"
+    spinner $! "Building..."
 
     if test "${PIPESTATUS[0]}" -eq 0; then
 
