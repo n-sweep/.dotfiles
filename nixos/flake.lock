@@ -324,11 +324,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-W4mZhp+iiNbbiq96OhhNgP5vMjukIPpIfcjB30N169s=",
-        "path": "/nix/store/rdakph7y4x5wykbxy6sn1g79zg904cba-source/nixos/modules/nixvim",
+        "path": "/nix/store/rdfbp0vcba4qs7ifq9zf0gznpfbw00hy-source/nixos/modules/nixvim",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/rdakph7y4x5wykbxy6sn1g79zg904cba-source/nixos/modules/nixvim",
+        "path": "/nix/store/rdfbp0vcba4qs7ifq9zf0gznpfbw00hy-source/nixos/modules/nixvim",
         "type": "path"
       }
     },
