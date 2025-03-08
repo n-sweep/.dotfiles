@@ -122,7 +122,7 @@ in {
 
     tmux = {
       enable = true;
-      extraConfig = builtins.readFile "${dotfiles_dir}/tmux/.tmux.conf";
+      extraConfig = builtins.readFile "${dotfiles_dir}/.tmux.conf";
     };
 
   };
