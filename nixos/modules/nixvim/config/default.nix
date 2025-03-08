@@ -8,7 +8,11 @@
 
   enableMan = true;
 
-  globals.mapleader = " ";
+  globals = {
+    mapleader = " ";
+    loaded_netrw = 1;
+    loaded_netrwPlugin = 1;
+  };
 
   opts = {
     number = true;
@@ -40,11 +44,25 @@
 
   autoCmd = [
 
-    { # remove trailing whitespace on save
+    {
+      desc = "open telescope when opening a directory rather than a file";
+      event = "VimEnter";
+      pattern = "*";
+      callback = { __raw = ''
+        function ()
+          if vim.fn.isdirectory(vim.fn.expand("%")) == 1 or vim.fn.argc() == 0 then
+            vim.schedule(function () require('telescope.builtin').find_files() end)
+          end
+        end
+      ''; };
+    }
+
+    {
+      desc = "remove trailing whitespace on save";
       event = "BufWritePre";
       pattern = "*";
       callback = { __raw = ''
-        function()
+        function ()
             if vim.bo.filetype ~= 'markdown' then
                 vim.cmd([[%s/\s\+$//e]])
             end
@@ -52,11 +70,12 @@
       ''; };
     }
 
-    { # mometarily highlight yanked text
+    {
+      desc = "mometarily highlight yanked text";
       event = "TextYankPost";
       pattern = "*";
       callback = { __raw = ''
-        function()
+        function ()
             vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 40 })
         end
       ''; };

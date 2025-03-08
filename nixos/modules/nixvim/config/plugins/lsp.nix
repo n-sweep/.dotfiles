@@ -14,7 +14,10 @@
       lua-ls = {
         enable = true;
         settings = {
-          diagnostics.globals = [ "vim" ];
+          diagnostics = {
+            globals = [ "vim" ];
+            disable = [ "missing-name" ];
+          };
         };
       };
 

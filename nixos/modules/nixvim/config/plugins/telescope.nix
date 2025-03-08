@@ -31,31 +31,35 @@
     };
 
     keymaps = {
-      "<leader>ff" = {
+      "<leader>sr" = {
+          action = "resume";
+          options.desc = "Telescope Resume";
+      };
+      "<leader>sf" = {
           action = "find_files";
           options.desc = "Telescope Find Files";
       };
-      "<leader>fb" = {
+      "<leader>sb" = {
           action = "buffers";
           options.desc = "Telescope Buffers";
       };
-      "<leader>fg" = {
+      "<leader>sg" = {
           action = "live_grep";
           options.desc = "Telescope Live grep";
       };
-      "<leader>fc" = {
+      "<leader>sc" = {
           action = "commands";
           options.desc = "Telescope vim Commands";
       };
-      "<leader>fC" = {
+      "<leader>sC" = {
           action = "command_history";
           options.desc = "Telescope vim Command History";
       };
-      "<leader>fh" = {
+      "<leader>sh" = {
           action = "help_tags";
           options.desc = "Telescope vim Help Tags";
       };
-      "<leader>gg" = {
+      "<leader>sG" = {
           action = "git_files";
           options.desc = "Telescope git Files";
       };
