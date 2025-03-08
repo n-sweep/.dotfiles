@@ -7,7 +7,7 @@ func() {
     pt=$(~/.dotfiles/scripts/pomo_time)
 
     lout="$pt$np"
-    rout="[$(date +"%H:%M %a %b %d")]"
+    rout=$(echo ":desktop-computer: $(hostname -s) [$(date +"%H:%M %a %b %d")]" | emoji -m)
 
     ww=$(tmux display-message -p "#{window_width}")
     hw=$((ww / 2))
