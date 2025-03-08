@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # set the hostname for this machine at this location
+DOTFILES_PATH=$HOME/.dotfiles
+NIX_CONFIG_PATH=$DOTFILES_PATH/nixos
 NIX_HOST_PATH=$HOME/.config/nixos/host
 
 function new_host {
@@ -41,28 +43,49 @@ function choose_host {
     fi
 }
 
+function gh_commit {
+    git commit -am "$(nixos-rebuild list-generations | rg current)"
+}
+
 function rebuild {
-  local dry_run hash host switch
+  local ask_commit dry_run force_commit hash host switch
 
   dry_run=$1
+  force_commit=$2
+  ask_commit=$3
   host=$(cat "$NIX_HOST_PATH")
   switch="switch"
 
-  if [[ $1 == true ]]; then
+  if $dry_run; then
       switch="dry-activate"
   fi
 
-  sudo nixos-rebuild "$switch" --impure --flake .#"$host" 2>&1 | sudo tee nixos-switch.log > /dev/null
+  # sudo nixos-rebuild "$switch" \
+  #     --impure --flake \
+  #     "$NIX_CONFIG_PATH"#"$host" 2>&1 \
+  #     | sudo tee nixos-switch.log > /dev/null
+
+  echo "test" | rg "test"
 
   if test "${PIPESTATUS[0]}" -eq 0; then
+
       echo ":blue-circle: Build Succeeded" | emoji -m
-      if [[ $1 == true ]]; then  # do not commit on dry runs
+      if $dry_run; then  # do not commit on dry runs
           echo "(dry run; no changes applied)"
       else
-          echo "I'd rather be committing..."
-          # git commit -am "$(nixos-rebuild list-generations | rg current)"
+          if $ask_commit; then
+              read -rp "Do you want to commit this configuration? (y/n) " yn
+              case $yn in
+                  [yY] ) gh_commit;;
+                  [nN] ) echo "no commit made"; exit 0;;
+                  * ) echo 'invalid response'; exit 1;;
+              esac
+          elif $force_commit; then gh_commit
+          fi
       fi
+
   else
+
       echo ":red-circle: Build Failed..." | emoji -m
       hash=$(rg --color=always 'hash mismatch' < nixos-switch.log)
       if [[ -n $hash ]]; then
@@ -72,36 +95,42 @@ function rebuild {
       else
           rg --color=always error < nixos-switch.log
       fi
+
   fi
 }
 
 function main {
-    local dry_run script usage
+    local ask_commit dry_run force_commit script usage
 
+    ask_commit=true
+    dry_run=false
+    force_commit=false
     script=$(basename "$0")
-    usage="Usage: $script [-d|--dry-run] [-h|--help]"
+    usage="Usage: $script [-d|--dry-run] [-y|--commit] [-n|--no-commit] [-h|--help]"
 
-    cd "$HOME/.dotfiles/nixos" || exit
+    cd "$DOTFILES_PATH" || exit
     echo ":snowflake: Rebuilding NixOS..." | emoji -m
 
     shopt -s globstar
-    eval set -- "$(getopt -o 'dh' --long 'dry-run,help' -n "$script" -- "$@")"
-
-    dry_run=false
+    eval set -- "$(getopt -o 'dynh' --long 'dry-run,commit,no-commit,help' -n "$script" -- "$@")"
 
     while true; do
         case "$1" in
             -d|--dry-run) dry_run=true; shift;;
+            -y|--commit) force_commit=true; shift;;
+            -n|--no-commit) ask_commit=false; shift;;
             -h|--help) echo "$usage"; exit 0;;
             --) shift; break;;
             ?) echo "Invalid option. $usage"; exit 1;;
         esac
     done
 
-    git diff -U0 -- **/*.nix
+    if $ask_commit || $force_commit; then
+        git diff -U0 -- **/*.nix
+    fi
 
     choose_host
-    rebuild "$dry_run"
+    rebuild "$dry_run $ask_commit $force_commit"
 }
 
 main "$@"
