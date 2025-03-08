@@ -73,7 +73,7 @@ function rebuild {
         if [[ $dry_run == true ]]; then  # do not commit on dry runs
             echo "(dry run; no changes committed)"
         else
-            if [[ $force_commit == true ]]; then echo hello; gh_commit
+            if [[ $force_commit == true ]]; then gh_commit
             elif [[ $ask_commit == true ]]; then
                 read -rp "Do you want to commit this configuration? (y/n) " yn
                 case $yn in
