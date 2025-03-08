@@ -20,8 +20,8 @@ in {
 
     # symlink files to home directory
     file = {
-      ".config/i3/config".source = mksl "${dotfiles_dir}/i3/.config/i3/config";
-      ".config/i3status/config".source = mksl "${dotfiles_dir}/i3/.config/i3status/config";
+      ".config/i3/config".source = mksl "${dotfiles_dir}/i3/i3_config";
+      ".config/i3status/config".source = mksl "${dotfiles_dir}/i3/i3status_config";
       ".wezterm.lua".source = mksl "${dotfiles_dir}/.wezterm.lua";
 
     };
