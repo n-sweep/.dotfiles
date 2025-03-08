@@ -1,3 +1,5 @@
+SCRIPTS_DIR="\$HOME/.dotfiles/scripts"
+
 alias c=clear
 
 # copy/paste
@@ -45,7 +47,7 @@ alias q="duck"
 alias qq="gippity"
 
 # Jupytext create new notebook
-alias nnb="\$HOME/.dotfiles/jupyter/create_nb.sh"
+alias nnb="$SCRIPTS_DIR/create_nb"
 
 alias n="daily_note"
 alias today="vim -c :ObsidianToday"
@@ -67,7 +69,7 @@ alias tm="tmux_startup"
 alias ta="tmux a"
 
 # tmux-sessionizer
-alias ts="\$HOME/.dotfiles/scripts/tmux_sessionizer"
+alias ts="$SCRIPTS_DIR/tmux_sessionizer"
 
 
 ### obs ########################################################################
