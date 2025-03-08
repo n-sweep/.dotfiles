@@ -4,15 +4,22 @@
 # stolen & adapted from ThePrimeagen
 
 dirs="$HOME/ $HOME/Repos $HOME/work $HOME/work/*/Repos"
-addtl="_\n/tmp/scratch"
+addtl=$(echo "_ /tmp/scratch" | sed 's/ /\\n/g')
 
 # user can provide an argument, else find from list of directories
 if [[ $# -eq 1 ]]; then
     target_dir=$1
 else
     found=$(find $dirs -maxdepth 1 -mindepth 1 -type d)
-    all_choices="${found}\n${addtl}"
-    target_dir=$(echo -e "${all_choices}"| fzf)
+
+    # add * to sessions that are already open
+    existing_session_names=$(TMUX="" tmux list-sessions -F "#{session_id} #{session_name}" 2>/dev/null | sort | sed 's/$[0-9]\+/*/')
+
+    # remove existing sessions from `found`
+    existing_sessions_diff=$(TMUX="" tmux list-sessions -F "#{session_name}\n#{session_path}" 2>/dev/null)
+    diff=$(comm -23 <(echo -e "${found}\n${addtl}" | sort) <(echo -e "${existing_sessions_diff}" | sort))
+
+    target_dir=$(echo -e "${existing_session_names}\n${diff}" | fzf)
 fi
 
 # if no target, exit
@@ -33,4 +40,3 @@ if ! tmux has-session -t="$target_name" 2> /dev/null; then
 fi
 
 tmux switch-client -t "$target_name"
-
