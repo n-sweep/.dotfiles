@@ -69,6 +69,7 @@ in {
     systemPackages = with pkgs; [
       clang
       curl
+      docker-compose
       git
       stdenv.cc.cc.lib  # make
       wget
