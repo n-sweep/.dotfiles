@@ -67,11 +67,11 @@ function rebuild {
         --impure --flake \
         "$NIX_CONFIG_PATH"#"$host" 2>&1 \
         | sudo tee nixos-switch.log > /dev/null) &
-    "$DOTFILES_PATH/scripts/spinner" $! "Building..."
+    $spinner $! "Building..."
 
     if test "${PIPESTATUS[0]}" -eq 0; then
 
-        echo ":blue-circle: Build Succeeded" | emoji -m
+        echo ":blue-circle: Build Succeeded" | $emoji -m
         if [[ $dry_run == true ]]; then  # do not commit on dry runs
             echo "(dry run; no changes committed)"
         else
@@ -88,7 +88,7 @@ function rebuild {
 
     else
 
-      echo ":red-circle: Build Failed..." | emoji -m
+      echo ":red-circle: Build Failed..." | $emoji -m
       hash=$(rg --color=always 'hash mismatch' < nixos-switch.log)
       if [[ -n $hash ]]; then
           echo "$hash"
@@ -111,7 +111,7 @@ function main {
     usage="Usage: $script [-d|--dry-run] [-y|--commit] [-n|--no-commit] [-h|--help]"
 
     cd "$DOTFILES_PATH" || exit
-    echo ":snowflake: Rebuilding NixOS..." | emoji -m
+    echo ":snowflake: Rebuilding NixOS..." | $emoji -m
 
     shopt -s globstar
     eval set -- "$(getopt -o 'dynh' --long 'dry-run,commit,no-commit,help' -n "$script" -- "$@")"
