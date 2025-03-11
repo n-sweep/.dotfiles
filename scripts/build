@@ -17,14 +17,14 @@ function new_host {
     fi
 
     # copy and update template default.nix
-    cp -r ./hosts/.temp ./hosts/"${host}"
-    default=./hosts/${host}/default.nix
+    cp -r ./nixos/hosts/.temp ./nixos/hosts/"${host}"
+    default=./nixos/hosts/${host}/default.nix
     to_replace=$(rg 'system.stateVersion' "$default")
     replacement_text=$(rg 'system.stateVersion' /etc/nixos/configuration.nix)
     sed -i "/$to_replace/c\\$replacement_text" "$default"
 
     # generate hardware configuration
-    nixos-generate-config --show-hardware-config > hosts/"${host}"/hardware-configuration.nix
+    nixos-generate-config --show-hardware-config > ./nixos/hosts/"${host}"/hardware-configuration.nix
     git add .
     echo "$host" > "$NIX_HOST_PATH"
 }
@@ -33,7 +33,7 @@ function choose_host {
     # if host path doesn't exist, choose one
     if [[ ! -e $NIX_HOST_PATH || ! -s $NIX_HOST_PATH ]]; then
         mkdir -p "$(dirname "$NIX_HOST_PATH")"
-        choices=$(find ./hosts/* -maxdepth 1 -type d -exec basename {} \;)
+        choices=$(find ./nixos/hosts/* -maxdepth 1 -type d -exec basename {} \;)
         choice=$(echo "$choices" | sed 's/$/ new_host/' | sed 's/ /\n/g' | fzf --height 10%)
         if [[ $choice == "new_host" ]]; then
             new_host
