@@ -4,6 +4,8 @@
 DOTFILES_PATH=$HOME/.dotfiles
 NIX_CONFIG_PATH=$DOTFILES_PATH/nixos
 NIX_HOST_PATH=$HOME/.config/nixos/host
+spinner="$DOTFILES_PATH/scripts/spinner"
+emoji="$DOTFILES_PATH/scripts/emoji"
 
 function new_host {
     # [TODO] work on this function
@@ -65,7 +67,7 @@ function rebuild {
         --impure --flake \
         "$NIX_CONFIG_PATH"#"$host" 2>&1 \
         | sudo tee nixos-switch.log > /dev/null) &
-    spinner $! "Building..."
+    "$DOTFILES_PATH/scripts/spinner" $! "Building..."
 
     if test "${PIPESTATUS[0]}" -eq 0; then
 
