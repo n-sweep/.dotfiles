@@ -76,7 +76,7 @@ in {
     ];
 
     variables = {
-      XDG_DATA_HOME = "${home_dir}/.local/share/fonts";
+      XDG_DATA_HOME = "${home_dir}/.local/share";
     };
 
   };
