@@ -23,7 +23,7 @@ function new_host {
     default=./nixos/hosts/${host}/default.nix
     to_replace=$(rg 'system.stateVersion' "$default")
     replacement_text=$(rg 'system.stateVersion' /etc/nixos/configuration.nix)
-    sed -i "/$to_replace/c\\$replacement_text" "$default"
+    sed -i "/$to_replace/$replacement_text" "$default"
 
     # generate hardware configuration
     nixos-generate-config --show-hardware-config > "./nixos/hosts/${host}/hardware-configuration.nix"

@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
 
 conf="https://raw.githubusercontent.com/n-sweep/.dotfiles/refs/heads/main/nixos/modules/bootstrap_config.nix"
+
 src="/tmp/configuration.nix"
 dst="/etc/nixos/configuration.nix"
 
+set -e
 sudo -v
+
 curl -o "$src" "$conf"
 
 to_replace=$(grep 'system.stateVersion' "$src")
 replacement_text=$(grep 'system.stateVersion' "$dst")
-sed -i "s/$to_replace/c\\$replacement_text/" "$src"
+sed -i "s/$to_replace/$replacement_text/" "$src"
 
+sudo mv $dst "$dst.bak"
 sudo mv $src $dst
 
 sudo nixos-rebuild switch
 
-ssh-keygen -t ed25519 -C n.e.shreve@gmail.com
+sudo tailscale up
 
+ssh-keygen -t ed25519 -C n.e.shreve@gmail.com
 gh auth login -p ssh
 
 git config --global user.email "34486798+n-sweep@users.noreply.github.com"
@@ -25,8 +30,7 @@ git config --global user.name "n sweep"
 gh repo clone n-sweep/.dotfiles "$HOME/.dotfiles"
 gh repo clone n-sweep/pvserv "$HOME/Repos/pvserv"
 gh repo clone n-sweep/telemux-nvim "$HOME/Repos/telemux-nvim"
-gh repo clone n-sweep/slipbox "$HOME/Obsidian"
+gh repo clone n-sweep/slipbox "$HOME/Obsidian/slipbox"
 
 "$HOME/.dotfiles/scripts/bw_sync"
-
-echo "make sure to copy your hardware-configuration.nix and then run ~/.dotfiles/scripts/build"
+"$HOME/.dotfiles/scripts/build"
