@@ -26,7 +26,7 @@ function new_host {
     sed -i "/$to_replace/c\\$replacement_text" "$default"
 
     # generate hardware configuration
-    nixos-generate-config --show-hardware-config > ./nixos/hosts/"${host}"/hardware-configuration.nix
+    nixos-generate-config --show-hardware-config > "./nixos/hosts/${host}/hardware-configuration.nix"
     git add .
     echo "$host" > "$NIX_HOST_PATH"
 }
