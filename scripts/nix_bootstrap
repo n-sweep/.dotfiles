@@ -7,8 +7,8 @@ dst="/etc/nixos/configuration.nix"
 sudo -v
 curl -o "$src" "$conf"
 
-to_replace=$(rg 'system.stateVersion' "$src")
-replacement_text=$(rg 'system.stateVersion' "$dst")
+to_replace=$(grep 'system.stateVersion' "$src")
+replacement_text=$(grep 'system.stateVersion' "$dst")
 sed -i "s/$to_replace/c\\$replacement_text/" "$src"
 
 sudo mv $src $dst
