@@ -5,22 +5,48 @@ conf="https://raw.githubusercontent.com/n-sweep/.dotfiles/refs/heads/main/nixos/
 src="/tmp/configuration.nix"
 dst="/etc/nixos/configuration.nix"
 
+function change_hostname {
+    read -rp "New hostname: " host
+    sed -i "s/hostName = \"[^\"]*\"/hostName = \"$host\"/" "$1"
+}
+
 set -e
 sudo -v
 
 curl -o "$src" "$conf"
 
+# prompt to change hostname
+default=$(grep -oP '(?<=networking\.hostName = ")[^"]*' /etc/nixos/configuration.nix)
+while true; do
+    read -rp "Change hostname? ($default) [y/n] " yn
+    case $yn in
+        [yY] ) change_hostname $src; break;;
+        [nN] ) break;;
+        * ) echo 'invalid response'; continue;;
+    esac
+done
+
+# sync system version
 to_replace=$(grep 'system.stateVersion' "$src")
 replacement_text=$(grep 'system.stateVersion' "$dst")
 sed -i "s/$to_replace/$replacement_text/" "$src"
 
+# build bootstrap config
 sudo mv $dst "$dst.bak"
 sudo mv $src $dst
-
 sudo nixos-rebuild switch
 
-sudo tailscale up
+# prompt to start tailscale
+while true; do
+    read -rp "Start tailscale? [y/n] " yn
+    case $yn in
+        [yY] ) sudo tailscale up; tailscale status; break;;
+        [nN] ) break;;
+        * ) echo 'invalid response'; continue;;
+    esac
+done
 
+# set up github and clone repos
 ssh-keygen -t ed25519 -C n.e.shreve@gmail.com
 gh auth login -p ssh
 
@@ -32,5 +58,6 @@ gh repo clone n-sweep/pvserv "$HOME/Repos/pvserv"
 gh repo clone n-sweep/telemux-nvim "$HOME/Repos/telemux-nvim"
 gh repo clone n-sweep/slipbox "$HOME/Obsidian/slipbox"
 
+# sync secrets and build final configuration
 "$HOME/.dotfiles/scripts/bw_sync"
 "$HOME/.dotfiles/scripts/build"
