@@ -13,7 +13,8 @@ function change_hostname {
 set -e
 sudo -v
 
-curl -o "$src" "$conf"
+echo "Retreiving boostrapping configuration..."
+curl -so "$src" "$conf"
 
 # prompt to change hostname
 default=$(grep -oP '(?<=networking\.hostName = ")[^"]*' /etc/nixos/configuration.nix)
@@ -40,7 +41,7 @@ sudo nixos-rebuild switch
 while true; do
     read -rp "Start tailscale? [y/n] " yn
     case $yn in
-        [yY] ) sudo tailscale up; tailscale status; break;;
+        [yY] ) sudo tailscale up --hostname=; tailscale status; break;;
         [nN] ) break;;
         * ) echo 'invalid response'; continue;;
     esac

@@ -7,6 +7,10 @@ NIX_HOST_PATH=$HOME/.config/nixos/host
 spinner="$DOTFILES_PATH/scripts/spinner"
 emoji="$DOTFILES_PATH/scripts/emoji"
 
+function generate_hw_config {
+    nixos-generate-config --show-hardware-config > "./nixos/hosts/$1/hardware-configuration.nix"
+}
+
 function new_host {
     # [TODO] work on this function
 
@@ -26,7 +30,7 @@ function new_host {
     sed -i "/$to_replace/$replacement_text" "$default"
 
     # generate hardware configuration
-    nixos-generate-config --show-hardware-config > "./nixos/hosts/${host}/hardware-configuration.nix"
+    generate_hw_config "$host"
     git add .
     echo "$host" > "$NIX_HOST_PATH"
 }
@@ -36,11 +40,21 @@ function choose_host {
     if [[ ! -e $NIX_HOST_PATH || ! -s $NIX_HOST_PATH ]]; then
         mkdir -p "$(dirname "$NIX_HOST_PATH")"
         choices=$(find ./nixos/hosts/* -maxdepth 1 -type d -exec basename {} \;)
-        choice=$(echo "$choices" | sed 's/$/ new_host/' | sed 's/ /\n/g' | fzf --height 10%)
+        choice=$(echo "$choices new_host" | sed 's/ /\n/g' | fzf --height 10%)
         if [[ $choice == "new_host" ]]; then
             new_host
         else
             echo "$choice" > "$NIX_HOST_PATH"
+            msg="Do you want to generate a new hardware config (recommended if this is a new machine)? [y/n] "
+            while true; do
+                read -rp "$msg" yn
+                case $yn in
+                    [yY] ) generate_hw_config "$choice"; break;;
+                    [nN] ) break;;
+                    * ) echo 'invalid response'; continue;;
+                esac
+            done
+
         fi
     fi
 }
