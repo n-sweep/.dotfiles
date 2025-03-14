@@ -10,10 +10,16 @@ function change_hostname {
     sed -i "s/hostName = \"[^\"]*\"/hostName = \"$host\"/" "$1"
 }
 
+function start_tailscale {
+    hn=$(grep -oP '(?<=networking\.hostName = ")[^"]*' /etc/nixos/configuration.nix)
+    sudo tailscale up --hostname="$hn"
+    tailscale status
+}
+
 set -e
 sudo -v
 
-echo "Retreiving boostrapping configuration..."
+echo "Retreiving & setting up boostrapping configuration..."
 curl -so "$src" "$conf"
 
 # prompt to change hostname
@@ -33,6 +39,7 @@ replacement_text=$(grep 'system.stateVersion' "$dst")
 sed -i "s/$to_replace/$replacement_text/" "$src"
 
 # build bootstrap config
+echo "Building boostrapping configuration..."
 sudo mv $dst "$dst.bak"
 sudo mv $src $dst
 sudo nixos-rebuild switch
@@ -41,13 +48,14 @@ sudo nixos-rebuild switch
 while true; do
     read -rp "Start tailscale? [y/n] " yn
     case $yn in
-        [yY] ) sudo tailscale up --hostname=; tailscale status; break;;
+        [yY] ) start_tailscale; break;;
         [nN] ) break;;
         * ) echo 'invalid response'; continue;;
     esac
 done
 
 # set up github and clone repos
+echo "Setting up repositories..."
 ssh-keygen -t ed25519 -C n.e.shreve@gmail.com
 gh auth login -p ssh
 
@@ -60,5 +68,7 @@ gh repo clone n-sweep/telemux-nvim "$HOME/Repos/telemux-nvim"
 gh repo clone n-sweep/slipbox "$HOME/Obsidian/slipbox"
 
 # sync secrets and build final configuration
+echo "Syncing secrets..."
 "$HOME/.dotfiles/scripts/bw_sync"
+echo "Final Build..."
 "$HOME/.dotfiles/scripts/build"
