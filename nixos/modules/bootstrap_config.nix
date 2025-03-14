@@ -43,6 +43,9 @@
     neovim
     ripgrep
   ];
-  services = { openssh.enable = true; };
+  services = {
+    openssh.enable = true;
+    tailscale.enable = true;
+  };
   system.stateVersion = "replace.me";
 }
