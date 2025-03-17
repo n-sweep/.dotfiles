@@ -36,9 +36,8 @@ alias cn="c && fastfetch --logo \$(rand_dist)"
 alias activate="source ./.venv/bin/activate"
 alias venv='if [[ -n $VIRTUAL_ENV_PROMPT ]]; then deactivate; elif [ -d "./.venv" ]; then source ./.venv/bin/activate; elif [ -d "./venv" ]; then source ./venv/bin/activate; else echo "no environment found"; fi'
 
-# setup monitors
-alias mon3="xrandr --output DP-3 --primary --rotate right --output DP-2 --right-of DP-3 --output eDP-1 --right-of DP-2"
-
+# select a window to "paste" into with xdotool
+alias typepaste="nix-shell -p xdotool --run \"xdotool windowfocus \\\$(xdotool selectwindow); xdotool type \$(pst)\""
 
 ### script aliases #############################################################
 
