@@ -53,14 +53,4 @@ in {
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-
-  ### fonts ####################################################################
-
-  fonts.packages = with pkgs; [
-    roboto
-    nerd-fonts.mononoki
-    nerd-fonts.roboto-mono
-    nerd-fonts.ubuntu-mono
-  ];
-
 }

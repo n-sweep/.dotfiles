@@ -124,6 +124,15 @@ in {
 
   # load config
   # openvpn3 config-import --config /etc/openvpn/profile-139.ovpn --name cl --persistent
-  programs.openvpn3.enable = true;
+  # programs.openvpn3.enable = true;
+
+  ### fonts ####################################################################
+
+  fonts.packages = with pkgs; [
+    roboto
+    nerd-fonts.mononoki
+    nerd-fonts.roboto-mono
+    nerd-fonts.ubuntu-mono
+  ];
 
 }
