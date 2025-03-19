@@ -5,7 +5,7 @@ local DOMAIN_TO_COLORSCHEME = {
     default = 'Tokyo Night (Gogh)',
     osgiliath = 'Kanagawa (Gogh)',
     oryxpro = 'Kanagawa Dragon (Gogh)',
-    robot_house = 'Gruvbox (Gogh)',
+    robot_house = 'Gruvbox Dark (Gogh)',
 }
 
 wezterm.on('update-status', function(window, pane)
