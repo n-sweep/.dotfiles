@@ -26,15 +26,8 @@ else
     INPUT="$*"
 fi
 
-# save emoji json in /tmp if not already there
-if [ ! -f "/tmp/emoji.json" ]; then
-    TOKEN=$(cat "$HOME/.config/emoji/api_key")
-    curl -s "https://emoji-api.com/emojis?access_key=${TOKEN}" > /tmp/emoji.json
-    # TODO: invalid token
-fi
-
 # get emojis and slugs
-EMOJIS=$(jq -r '.[] | "\(.character) \(.slug | sub("e[0-9]+-[0-9]+-"; ""))"' < "/tmp/emoji.json" )
+EMOJIS=$(jq -r '.[] | "\(.character) \(.slug | sub("e[0-9]+-[0-9]+-"; ""))"' < "$HOME/.dotfiles/data/emoji.json" )
 
 
 function get_emoji() {
