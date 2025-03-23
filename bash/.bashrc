@@ -118,7 +118,7 @@ PROMPT_COMMAND="__ps1"
 ### personal settings ##########################################################
 # note: aliases are in .bash_aliases
 
-export POMO_URL="http://192.168.0.102:7666"
+export POMO_URL="http://robot-house:7666/"
 
 EDITOR=$(readlink -f "$(which nvim)")
 export EDITOR
