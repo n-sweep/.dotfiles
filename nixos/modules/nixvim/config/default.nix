@@ -45,19 +45,6 @@
   autoCmd = [
 
     {
-      desc = "open telescope when opening a directory rather than a file";
-      event = "VimEnter";
-      pattern = "*";
-      callback = { __raw = ''
-        function ()
-          if vim.fn.isdirectory(vim.fn.expand("%")) == 1 or vim.fn.argc() == 0 then
-            vim.schedule(function () require('telescope.builtin').find_files() end)
-          end
-        end
-      ''; };
-    }
-
-    {
       desc = "remove trailing whitespace on save";
       event = "BufWritePre";
       pattern = "*";
