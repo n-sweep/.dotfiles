@@ -76,7 +76,13 @@ in {
     ];
 
     variables = {
+
       XDG_DATA_HOME = "${home_dir}/.local/share";
+
+      UV_NO_SYNC = "1";
+      UV_PYTHON = "${pkgs.python313}/bin/python3";
+      UV_PYTHON_DOWNLOADS = "never";
+
     };
 
   };
