@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Picker for wezterm ssh
+# dmenu picker for wezterm ssh
 # launched by i3 win+enter; ~/.dotfiles/i3/i3_config
 
 hosts=$(rg "^Host " ~/.ssh/config | awk '{print $2}')
