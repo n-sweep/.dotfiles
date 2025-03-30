@@ -126,11 +126,28 @@ in {
   systemd.network.wait-online.enable = false;
   boot.initrd.systemd.network.wait-online.enable = false;
 
-  ### vpn ######################################################################
+  ### python ###################################################################
+  # https://wiki.nixos.org/wiki/Python
 
-  # load config
-  # openvpn3 config-import --config /etc/openvpn/profile-139.ovpn --name cl --persistent
-  # programs.openvpn3.enable = true;
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      acl
+      attr
+      bzip2
+      curl
+      libsodium
+      libssh
+      libxml2
+      openssl
+      stdenv.cc.cc
+      systemd
+      util-linux
+      xz
+      zlib
+      zstd
+    ];
+  };
 
   ### fonts ####################################################################
 
