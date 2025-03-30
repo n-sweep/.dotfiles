@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Picker for wezterm ssh
+# launched by i3 win+enter; ~/.dotfiles/i3/i3_config
+
+hosts=$(rg "^Host " ~/.ssh/config | awk '{print $2}')
+target=$(echo -e "local\n$hosts" | dmenu -p 'SSH:')
+
+if [ "$target" == 'local' ]; then
+    wezterm
+else
+    wezterm ssh "$target"
+fi
