@@ -1,8 +1,8 @@
 import json
+import http.client
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.io as pio
-import requests
 import socket
 
 
@@ -26,9 +26,11 @@ def patch_figure_show():
             if 'bdata' in data['y']:
                 data['y'] = self.data[i].y.tolist()  # type: ignore
 
-        r = requests.get(f'http://{get_lan_ip()}:5619/plot', json=json.dumps(fig_json))
+        conn = http.client.HTTPConnection(f'http://{get_lan_ip()}:5619/plot')
+        conn.request('GET', '/plot', body=json.dumps(fig_json), headers={'Content-Type': 'application/json'})
+        r = conn.getresponse()
 
-        if r.status_code != 200:
+        if r.status != 200:
             _show(self, *args, **kwargs)
     go.Figure.show = modified_show
 
