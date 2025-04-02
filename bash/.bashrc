@@ -89,7 +89,7 @@ __ps1() {
 	fi
 
     # get name of nix devShell if exists
-    bn=$(basename DEVSHELL)
+    bn=$(basename "$DEVSHELL")
     test -n "$IN_NIX_SHELL" && C=" e:${bn//[\(\) ]/}"
 
     # get python venv
