@@ -145,6 +145,7 @@ fi
 
 # devshell automation
 if [ -z "$IN_NIX_SHELL" ] && [ -n "$DEVSHELL" ]; then
+    export IN_NIX_SHELL='temp'
     nix develop "$DEVSHELL"
 fi
 
