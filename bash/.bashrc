@@ -89,7 +89,7 @@ __ps1() {
 	fi
 
     # get name of nix devShell if exists
-    [[ $(echo "$NIX_BUILD_TOP" | tr -dc '/' | wc -c) -gt 1 ]] && C=" e:${DEVSHELL//[\(\) ]/}"
+    [[ $(echo "$NIX_BUILD_TOP" | tr -dc '/' | wc -c) -gt 1 ]] && C=" e:devshell"
 
     # get python venv
     [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" ${VIRTUAL_ENV_PROMPT// /}"
