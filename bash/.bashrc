@@ -89,7 +89,8 @@ __ps1() {
 	fi
 
     # get name of nix devShell if exists
-    [[ $(echo "$NIX_BUILD_TOP" | tr -dc '/' | wc -c) -gt 1 ]] && C=" e:devshell"
+    bn=$(basename DEVSHELL)
+    test -n "$IN_NIX_SHELL" && C=" e:${bn//[\(\) ]/}"
 
     # get python venv
     [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" ${VIRTUAL_ENV_PROMPT// /}"
@@ -140,6 +141,11 @@ if rg -qi 'nixos' /etc/*-release ; then
     fi
 else
     [ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
+fi
+
+# devshell automation
+if [ -z "$IN_NIX_SHELL" ] && [ -n "$DEVSHELL" ]; then
+    nix develop "$DEVSHELL"
 fi
 
 ### environment variables ######################################################
