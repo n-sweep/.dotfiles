@@ -143,12 +143,6 @@ else
     [ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 fi
 
-# devshell automation
-if [ -z "$IN_NIX_SHELL" ] && [ -n "$DEVSHELL" ]; then
-    export IN_NIX_SHELL='temp'
-    nix develop "$DEVSHELL"
-fi
-
 ### environment variables ######################################################
 
 # I don't quite remember what this does, maybe removes git files from the tree?
