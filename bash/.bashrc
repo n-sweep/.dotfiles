@@ -93,14 +93,14 @@ __ps1() {
     test -n "$IN_NIX_SHELL" && C=" e:${bn//[\(\) ]/}"
 
     # get python venv
-    [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" $VIRTUAL_ENV_PROMPT"
+    [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" ${VIRTUAL_ENV_PROMPT// /}"
 
 
     # if we have branch, devshell, or py env data, add to G
-    [[ -n "$B" || -n "$C" ]] && G="$ital$a$B$C$E$x"
+    [[ -n "$B" || -n "$C" ]] && G="$ital$a$B$C"
 
 	addr="$y\u$w@$c\h$w"
-	path="$u$cwd$G"
+	path="$u$cwd$G$E$x"
     prompt="$(if [ $estus -eq 0 ]; then echo -n "$p"; else echo -n "$r"; fi)$P$x "
     countme+="$B$C $P "
 
