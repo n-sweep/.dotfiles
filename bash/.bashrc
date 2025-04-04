@@ -93,7 +93,7 @@ __ps1() {
     test -n "$IN_NIX_SHELL" && C=" e:${bn//[\(\) ]/}"
 
     # get python venv
-    [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" ${VIRTUAL_ENV_PROMPT// /}"
+    [[ -n $VIRTUAL_ENV_PROMPT ]] && E=" $VIRTUAL_ENV_PROMPT"
 
 
     # if we have branch, devshell, or py env data, add to G
