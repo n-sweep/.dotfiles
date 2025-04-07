@@ -19,9 +19,9 @@ in {
     };
   };
 
-  # xserver + i3
   services = {
 
+    # xserver + i3
     displayManager.defaultSession = "none+i3";
     logind.lidSwitch = "ignore";
 
@@ -44,15 +44,29 @@ in {
       };
     };
 
+    # automatic mounting of adv360 in bootloader mode
+    udev.extraRules = ''
+      ACTION=="add", SUBSYSTEM=="block", ENV{ID_BUS}=="usb",
+      ENV{ID_VENDOR_ID}=="239a", ENV{ID_MODEL_ID}=="00b3",
+      RUN+="${pkgs.util-linux}/bin/mount -t vfat /dev/%k /mnt/adv360"
+    '';
+
   };
 
-  # adv360 updater service
-  systemd.services.kb-firmware-updater = {
-    description = "Watch for Adv360 to attach in bootloader mode; flash the latest firmware";
-    serviceConfig.ExecStart = "${home_dir}/.dotfiles/scripts/kb_firmware.sh";
-    requires = ["media-n-ADV360PRO.mount"];
-    after = ["media-n-ADV360PRO.mount"];
-    wantedBy = ["media-n-ADV360PRO.mount"];
+  systemd = {
+
+    # adv360 mount location
+    tmpfiles.rules = ["d /mnt/adv360 0755 root root"];
+
+    # adv360 updater service
+    services.kb-firmware-updater = {
+      description = "Watch for Adv360 to attach in bootloader mode; flash the latest firmware";
+      serviceConfig.ExecStart = "${home_dir}/.dotfiles/scripts/kb_firmware.sh";
+      requires = ["media-n-ADV360PRO.mount"];
+      after = ["media-n-ADV360PRO.mount"];
+      wantedBy = ["media-n-ADV360PRO.mount"];
+    };
+
   };
 
   # Configure keymap in X11
