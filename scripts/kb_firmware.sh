@@ -9,7 +9,7 @@
 echo "Adv360 found; begin update service"
 
 source="/home/n/Downloads/"
-dest="/media/n/ADV360PRO/"
+dest="/mnt/adv360/"
 
 # get the most recently downloaded firmware
 firmware=$(find "$source" -type f -name "firmware*.zip" -exec ls -t {} + | head -n 1)

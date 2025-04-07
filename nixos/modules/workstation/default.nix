@@ -62,9 +62,9 @@ in {
     services.kb-firmware-updater = {
       description = "Watch for Adv360 to attach in bootloader mode; flash the latest firmware";
       serviceConfig.ExecStart = "${home_dir}/.dotfiles/scripts/kb_firmware.sh";
-      requires = ["media-n-ADV360PRO.mount"];
-      after = ["media-n-ADV360PRO.mount"];
-      wantedBy = ["media-n-ADV360PRO.mount"];
+      requires = ["mnt-adv360.mount"];
+      after = ["mnt-adv360.mount"];
+      wantedBy = ["mnt-adv360.mount"];
     };
 
   };
