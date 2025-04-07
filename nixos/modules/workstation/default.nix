@@ -46,6 +46,15 @@ in {
 
   };
 
+  # adv360 updater service
+  systemd.services.kb-firmware-updater = {
+    description = "Watch for Adv360 to attach in bootloader mode; flash the latest firmware";
+    serviceConfig.ExecStart = "${home_dir}/.dotfiles/scripts/kb_firmware.sh";
+    requires = ["media-n-ADV360PRO.mount"];
+    after = ["media-n-ADV360PRO.mount"];
+    wantedBy = ["media-n-ADV360PRO.mount"];
+  };
+
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
