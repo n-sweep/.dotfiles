@@ -43,28 +43,28 @@ try:
         go.Figure.show = modified_show
 
 
-except:
+    # if pandas isn't installed, we can just skip over the pandas portion
+    try:
+        import pandas as pd
+
+        # pandas setup
+        pd.options.plotting.backend = 'plotly'
+
+
+        def show_df(df: pd.DataFrame, updates: dict = {}) -> None:
+            """plots a table of a pandas dataframe in plotly"""
+            fig = go.Figure(data=go.Table(
+               header=dict(values=df.columns),
+                cells=dict(values=[df[col] for col in df.columns]),
+            )).update_layout(updates)
+            fig.show()
+
+    except Exception as e:
+        print(e)
+        pass
+
+    patch_figure_show()
+
+except Exception as e:
+    print(e)
     exit()
-
-
-# if pandas isn't installed, we can just skip over the pandas portion
-try:
-    import pandas as pd
-
-    # pandas setup
-    pd.options.plotting.backend = 'plotly'
-
-
-    def show_df(df: pd.DataFrame, updates: dict = {}) -> None:
-        """plots a table of a pandas dataframe in plotly"""
-        fig = go.Figure(data=go.Table(
-           header=dict(values=df.columns),
-            cells=dict(values=[df[col] for col in df.columns]),
-        )).update_layout(updates)
-        fig.show()
-
-except:
-    pass
-
-
-patch_figure_show()
