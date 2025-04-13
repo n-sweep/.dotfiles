@@ -28,7 +28,7 @@ in {
 
     packages = with pkgs; [
 
-      autorandr
+      aider-chat
       barrier
       cmus
       cockatrice
