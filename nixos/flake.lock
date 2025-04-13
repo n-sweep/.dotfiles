@@ -327,15 +327,14 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-YYk1LtjYBfBp30nQ+XZbl8njsgOTXJ8cnML+wJ1M63s=",
-        "path": "/nix/store/cm16r0ckanmcc90q5a71lkf3m4y0m1n7-source/nixos/modules/nixvim",
+        "path": "./modules/nixvim",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/cm16r0ckanmcc90q5a71lkf3m4y0m1n7-source/nixos/modules/nixvim",
+        "path": "./modules/nixvim",
         "type": "path"
-      }
+      },
+      "parent": []
     },
     "nixvim_2": {
       "inputs": {

@@ -44,6 +44,7 @@ in {
 
     packages = with pkgs; [
 
+      aider-chat
       bitwarden-cli
       cbonsai
       duckdb
