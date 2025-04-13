@@ -143,11 +143,10 @@ else
     [ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 fi
 
-### environment variables ######################################################
-
-# I don't quite remember what this does, maybe removes git files from the tree?
 export FZF_DEFAULT_COMMAND='find -L . -type f \( ! -path "*/.git/*" -o -path "*/.git" -prune \)'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+### environment variables ######################################################
 
 # bash scripts path
 export PATH="$PATH:$HOME/.dotfiles/scripts"
