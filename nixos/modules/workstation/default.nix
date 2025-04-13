@@ -44,29 +44,6 @@ in {
       };
     };
 
-    # automatic mounting of adv360 in bootloader mode
-    udev.extraRules = ''
-      ACTION=="add", SUBSYSTEM=="block", ENV{ID_BUS}=="usb",
-      ENV{ID_VENDOR_ID}=="239a", ENV{ID_MODEL_ID}=="00b3",
-      RUN+="${pkgs.util-linux}/bin/mount -t vfat /dev/%k /mnt/adv360"
-    '';
-
-  };
-
-  systemd = {
-
-    # adv360 mount location
-    tmpfiles.rules = ["d /mnt/adv360 0755 root root"];
-
-    # adv360 updater service
-    services.kb-firmware-updater = {
-      description = "Watch for Adv360 to attach in bootloader mode; flash the latest firmware";
-      serviceConfig.ExecStart = "${home_dir}/.dotfiles/scripts/kb_firmware.sh";
-      requires = ["mnt-adv360.mount"];
-      after = ["mnt-adv360.mount"];
-      wantedBy = ["mnt-adv360.mount"];
-    };
-
   };
 
   # Configure keymap in X11
