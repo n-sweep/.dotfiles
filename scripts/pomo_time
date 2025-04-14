@@ -37,11 +37,11 @@ echo "[$emoji$time]" | emoji -m
 
 
 if [ "$time" == $WARN ]; then
-    tmux display-message -d 2000 "$WARN_MSG"
+    tmux display-message -N -d 2000 "$WARN_MSG"
     notify-send -u low "$WARN_MSG"
 fi
 
 if [ "$time" == "00:00" ]; then
-    tmux display-message -d 2000 "$EXCEEDED_MSG"
+    tmux display-message -N -d 2000 "$EXCEEDED_MSG"
     notify-send -u low "$EXCEEDED_MSG"
 fi
