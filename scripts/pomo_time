@@ -1,59 +1,47 @@
 #!/usr/bin/env bash
 
 POMO_URL="http://robot-house:7666/"
-
-invert_status_color() {
-    "tmux set -g status-style $(
-        tmux show -g \
-            | rg "status-style " \
-            | sed 's/"//g; s/fg/ph/g; s/bg/fg/g; s/ph/bg/g' \
-            | awk '{printf "%s,%s\n", $2, $3}'
-    )"
-}
-
-
-blink() {
-    num=1
-    dur=0.25
-
-    for i in $(seq 1 "$num"); do
-        invert_status_color
-        sleep "$dur"
-        invert_status_color
-        if [ "$i" -lt "$num" ]; then
-            sleep "$dur"
-        fi
-    done
-}
+WARN='01:00'
+WARN_MSG="🍅⌚One minute remaining!"
+EXCEEDED_MSG="🍅‼️Time for a break!"
 
 
 stus=$(curl -s $POMO_URL/status)
 event=$(echo "$stus" | jq -r .event)
 time=$(echo "$stus" | jq -r '.time_remaining | "\(.min):\(.sec)"')
 exceeded=$(echo "$stus" | jq -r .time_remaining.time_exceeded)
+min=$(echo "$stus" | jq -r .min)
 
-e=''
+
+emoji=''
 if [ "$time" == "null:null" ] || [ "$event" == "stop" ]; then
     exit
 elif [ "$event" == "break" ]; then
     if [ "$exceeded" -gt 0 ]; then
-        e=":hourglass-done:-"
+        emoji=":hourglass-done:-"
     else
-        e=":hourglass-not-done:"
+        emoji=":hourglass-not-done:"
     fi
 elif [ "$event" == "pause" ]; then
-    e=":zzz:"
+    emoji=":zzz:"
 else
     if [ "$exceeded" -gt 0 ]; then
-        e=":anger-symbol:-"
+        emoji=":anger-symbol:-"
     else
-        e=":tomato:"
+        emoji=":tomato:"
     fi
 fi
 
-echo "[$e$time]" | emoji -m
 
-warn='01:00'
-if [ "$time" == $warn ] || [ "$exceeded" -gt 0 ]; then
-    (blink &)
+echo "[$emoji$time]" | emoji -m
+
+
+if [ "$time" == $WARN ]; then
+    tmux display-message -d 2000 "$WARN_MSG"
+    notify-send -u low "$WARN_MSG"
+fi
+
+if [ "$time" == "00:00" ]; then
+    tmux display-message -d 2000 "$EXCEEDED_MSG"
+    notify-send -u low "$EXCEEDED_MSG"
 fi
