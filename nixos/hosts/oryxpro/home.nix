@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   rootDir = ./../..;
 in
@@ -9,6 +9,8 @@ in
   ];
 
   # any host-specific config goes here
-  home = {};
+  home = {
+    packages = with pkgs; [ reaper ];
+  };
 
 }
