@@ -327,15 +327,14 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-YYk1LtjYBfBp30nQ+XZbl8njsgOTXJ8cnML+wJ1M63s=",
-        "path": "/nix/store/5q03k0y8z39vdl7xv812h14mlwsjwyzp-source/nixos/modules/nixvim",
+        "path": "./modules/nixvim",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/5q03k0y8z39vdl7xv812h14mlwsjwyzp-source/nixos/modules/nixvim",
+        "path": "./modules/nixvim",
         "type": "path"
-      }
+      },
+      "parent": []
     },
     "nixvim_2": {
       "inputs": {
@@ -441,11 +440,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744652427,
-        "narHash": "sha256-JUxe8rDb2FKOYVfD7QB16pGac8cfwLZlpg3q4R7Idqo=",
+        "lastModified": 1744727679,
+        "narHash": "sha256-DIAYck5TAJI8/8jXUL9YOteDjjkM81/oQOlX8ieLLnQ=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "da86bf323e252c6df36c9217233db34a14c1c27b",
+        "rev": "02e0840599ba1e89b5adeeca77a0bcc2bcd22df8",
         "type": "github"
       },
       "original": {

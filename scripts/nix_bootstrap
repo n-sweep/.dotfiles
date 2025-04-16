@@ -63,7 +63,6 @@ git config --global user.email "34486798+n-sweep@users.noreply.github.com"
 git config --global user.name "n sweep"
 
 gh repo clone n-sweep/.dotfiles "$HOME/.dotfiles"
-gh repo clone n-sweep/pvserv "$HOME/Repos/pvserv"
 gh repo clone n-sweep/telemux-nvim "$HOME/Repos/telemux-nvim"
 gh repo clone n-sweep/slipbox "$HOME/Obsidian/slipbox"
 

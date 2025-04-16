@@ -37,7 +37,7 @@ in {
       ".ipython/profile_default/startup".source = mksl "${dotfiles_dir}/.ipython/profile_default/startup";
 
       # nvim plugins
-      "${nvim_plug_dir}/pvserv".source = mksl "${home_dir}/Repos/pvserv";
+      # "${nvim_plug_dir}/pvserv".source = mksl "${home_dir}/Repos/pvserv";
       "${nvim_plug_dir}/telemux".source = mksl "${home_dir}/Repos/telemux-nvim";
 
     };
