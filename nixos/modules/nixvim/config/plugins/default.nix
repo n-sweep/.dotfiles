@@ -21,7 +21,6 @@
     nvim-autopairs.enable = true;
     nvim-surround.enable = true;
     otter.enable = true;
-    web-devicons.enable = true;
     which-key.enable = true;
 
     # try later
@@ -29,6 +28,16 @@
     # gitignore.enable = true;
     # molten.enable = true;
     # qmk.enable = true;
+
+    mini = {
+      enable = true;
+      modules = {
+        diff.enable = true;
+        git.enable = true;
+        icons.enable = true;
+        statusline.enable = true;
+      };
+    };
 
   };
 
