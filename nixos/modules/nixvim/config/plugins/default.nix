@@ -30,17 +30,6 @@
     # molten.enable = true;
     # qmk.enable = true;
 
-    lualine = {
-      enable = true;
-      settings = {
-        options.icons_enabled = true;
-        sections.lualine_c = [{
-            name = "filename";
-            extraConfig = { path = 1; };
-          }];
-      };
-    };
-
   };
 
   extraPlugins = with pkgs.vimPlugins; [
