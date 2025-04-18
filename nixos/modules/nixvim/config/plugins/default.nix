@@ -4,6 +4,7 @@
     ./cmp.nix
     ./harpoon.nix
     ./lsp.nix
+    ./mini.nix
     ./oil.nix
     ./obsidian
     ./telescope.nix
