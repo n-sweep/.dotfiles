@@ -15,7 +15,6 @@
 
     comment.enable = true;
     fidget.enable = true;
-    fugitive.enable = true;
     jupytext.enable = true;
     markdown-preview.enable = true;
     nvim-autopairs.enable = true;
@@ -28,16 +27,6 @@
     # gitignore.enable = true;
     # molten.enable = true;
     # qmk.enable = true;
-
-    mini = {
-      enable = true;
-      modules = {
-        diff.enable = true;
-        git.enable = true;
-        icons.enable = true;
-        statusline.enable = true;
-      };
-    };
 
   };
 
