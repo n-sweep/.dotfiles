@@ -1,3 +1,6 @@
+DOTFILES_DIR="\$HOME/.dotfiles"
+SCRIPTS_DIR="$DOTFILES_DIR/scripts"
+
 ### .bashrc defaults ###################################################
 
 # If not running interactively, don't do anything
@@ -149,7 +152,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ### environment variables ######################################################
 
 # bash scripts path
-export PATH="$PATH:$HOME/.dotfiles/scripts"
+export PATH="$PATH:$SCRIPTS_DIR"
 
 # go path
 export GOPATH="$HOME/go/bin"

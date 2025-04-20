@@ -1,4 +1,5 @@
-SCRIPTS_DIR="\$HOME/.dotfiles/scripts"
+DOTFILES_DIR="\$HOME/.dotfiles"
+SCRIPTS_DIR="$DOTFILES_DIR/scripts"
 
 alias c=clear
 
@@ -72,28 +73,7 @@ alias ts="$SCRIPTS_DIR/tmux_sessionizer"
 
 
 ### obs ########################################################################
-# https://github.com/grigio/obs-cmd
-alias obs-studio="\$(which obs)"
-alias obs="obs-cmd --websocket obsws://localhost:4455/\$(head -1 \$HOME/.config/obs-studio/token)"
-alias cam="obs scene-item toggle cam zerocam &> /dev/null"
-alias blur="obs scene-item toggle desktop1 'HDMI-0 blur' &> /dev/null"
-alias camstat="obs scene-item toggle cam static &> /dev/null"
-alias mute="obs toggle-mute Mic/Aux &> /dev/null"
-alias dtmute="obs toggle-mute 'Desktop Audio' &> /dev/null"
-alias sbreak="streamsaver &> /dev/null"
-alias switch="obs scene switch"
-alias sw="switch"
 
-function streamsaver() {
-    cam && mute
-    if [ -n "$*" ]; then
-        tmux neww -n cbonsai cbonsai -S -t 0.7 -w 2 -m "$*"
-    else
-        tmux neww -n cbonsai cbonsai -S -t 0.7 -w 2
-    fi
-    while tmux list-windows | rg -q cbonsai; do
-        sleep 1
-    done
-    cam && mute
-}
-
+if "$(which obs-cmd)"; then
+    source $DOTFILES_DIR/obs
+fi
