@@ -5,6 +5,7 @@
     ./harpoon.nix
     ./lsp.nix
     ./mini.nix
+    ./molten.nix
     ./oil.nix
     ./obsidian
     ./telescope.nix
@@ -26,7 +27,6 @@
     # try later
     # codium-nvim.enable = true;
     # gitignore.enable = true;
-    # molten.enable = true;
     # qmk.enable = true;
 
   };
