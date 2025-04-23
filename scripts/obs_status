@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+TOKEN=$(head -n 1 /home/n/.config/obs-studio/token)
+CMD="obs-cmd --websocket obsws://localhost:4455/$TOKEN"
+
+
+function make_obs_status() {
+  recording=$($CMD recording status 2>&1)
+  streaming=$($CMD streaming status 2>&1)
+
+  rec_status=$(echo "$recording" | rg Recording: | sed 's/^[^:]*: //')
+  stream_status=$(echo "$streaming" | rg Streaming: | sed 's/^[^:]*: //')
+
+  emoji=''
+
+  if [ "$rec_status" == 'true' ]; then
+    e=":red-circle:"
+    emoji=$emoji$e
+  fi
+
+  if [ "$stream_status" == 'true' ]; then
+    e=":hollow-red-circle:"
+    emoji=$emoji$e
+  fi
+
+  echo "[$emoji:video-camera: OBS ]" | emoji -m
+}
+
+
+if timeout 0.5 "$CMD" info &> /dev/null; then
+  make_obs_status
+fi

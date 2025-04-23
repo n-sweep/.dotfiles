@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 main() {
-    local np, pt, lout, rout, ww, hw, rw, space, output
+    local np os pt lout rout ww hw rw space output
     np=$(~/.dotfiles/scripts/now_playing)
-    #local os=$(~/.dotfiles/scripts/obs_status)
+    os=$(~/.dotfiles/scripts/obs_status)
     pt=$(~/.dotfiles/scripts/pomo_time)
 
-    lout="$pt$np"
+    lout="$os$pt$np"
     rout=$(echo "[:desktop-computer: $(hostname -s)] [$(date +"%H:%M %a %b %d")]" | emoji -m)
 
     ww=$(tmux display-message -p "#{window_width}")

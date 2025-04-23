@@ -1,4 +1,4 @@
-DOTFILES_DIR="\$HOME/.dotfiles"
+DOTFILES_DIR="$HOME/.dotfiles"
 SCRIPTS_DIR="$DOTFILES_DIR/scripts"
 
 alias c=clear
@@ -74,6 +74,6 @@ alias ts="$SCRIPTS_DIR/tmux_sessionizer"
 
 ### obs ########################################################################
 
-if "$(which obs-cmd)"; then
-    source $DOTFILES_DIR/obs
+if which obs-cmd &> /dev/null; then
+    source $DOTFILES_DIR/bash/obs
 fi
