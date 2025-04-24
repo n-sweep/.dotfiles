@@ -1,7 +1,8 @@
-{ ... }: {
+{ pkgs, ... }: {
 
     plugins.image.enable = true;  # dependency
     plugins.molten = {
+
       enable = true;
 
       settings = {
@@ -40,5 +41,37 @@
       ];
 
     };
+
+    keymaps = [
+
+      # {
+      #   action = "";
+      #   key = "";
+      #   mode = "n";
+      #   options = {
+      #     silent = true;
+      #     desc = "";
+      #   };
+      # }
+
+    ];
+
+    # extraPlugins = [
+    #   (pkgs.vimUtils.buildVimPlugin {
+    #     name = "molten_overlay";
+    #     src = ./lua/molten_overlay;
+    #   })
+    # ];
+
+    autoCmd = [
+
+      # {
+      #   desc = "Molten notebook setup";
+      #   event = "MoltenInitPost";
+      #   pattern = ".ipynb";
+      #   callback.__raw = "require('molten_overlay')";
+      # }
+
+    ];
 
 }

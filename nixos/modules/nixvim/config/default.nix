@@ -80,6 +80,14 @@
       };
     };
 
+    "ftplugin/lua.lua" = {
+      opts = {
+        tabstop = 4;
+        softtabstop = 4;
+        shiftwidth = 4;
+      };
+    };
+
     "ftplugin/markdown.lua" = {
       extraConfigLua = ''vim.cmd([[syntax region hideAnswers matchgroup=Conceal start="^# A.*" end="$" concealends conceal]])'';
     };
