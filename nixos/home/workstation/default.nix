@@ -30,6 +30,7 @@ in {
 
       autorandr
       barrier
+      brave
       cmus
       cockatrice
       discord
