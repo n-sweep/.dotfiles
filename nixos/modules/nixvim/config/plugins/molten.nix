@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
 
     plugins.image.enable = true;  # dependency
     plugins.molten = {
@@ -56,22 +56,6 @@
 
     ];
 
-    # extraPlugins = [
-    #   (pkgs.vimUtils.buildVimPlugin {
-    #     name = "molten_overlay";
-    #     src = ./lua/molten_overlay;
-    #   })
-    # ];
-
-    autoCmd = [
-
-      # {
-      #   desc = "Molten notebook setup";
-      #   event = "MoltenInitPost";
-      #   pattern = ".ipynb";
-      #   callback.__raw = "require('molten_overlay')";
-      # }
-
-    ];
+    extraFiles."lua/molten_overlay.lua".source = ./lua/molten_overlay.lua;
 
 }

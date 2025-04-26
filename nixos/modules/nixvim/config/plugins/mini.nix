@@ -2,6 +2,7 @@
 
     plugins.mini = {
       enable = true;
+      mockDevIcons = true;
       modules = {
         diff.enable = true;
         git.enable = true;
