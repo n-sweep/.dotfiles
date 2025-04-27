@@ -10,7 +10,7 @@ in
 
   # any host-specific config goes here
   home = {
-    packages = with pkgs; [ reaper ];
+    # packages = with pkgs; [ reaper ];
   };
 
 }
