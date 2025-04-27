@@ -58,4 +58,22 @@
 
     extraFiles."lua/molten_overlay.lua".source = ./lua/molten_overlay.lua;
 
+    autoCmd = [
+
+    {
+      event = "User";
+      pattern = "MoltenInitPost";
+      desc = "Molten notebook setup for ipynb files";
+      callback.__raw = ''
+        function(args)
+          local filename = vim.api.nvim_buf_get_name(args.buf)
+          if filename:match("%.ipynb$") then
+            require("molten_overlay").setup()
+          end
+        end
+      '';
+    }
+
+    ];
+
 }

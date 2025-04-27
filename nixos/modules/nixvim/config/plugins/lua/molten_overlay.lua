@@ -1,35 +1,24 @@
-local vim = vim
 local M = {}
 
 
----- autocmds ------------------------------------------------------------------
-local function autocmds()
+---- setup ---------------------------------------------------------------------
 
-    vim.api.nvim_create_autocmd("MoltenInitPost", {
-      desc = "Molten notebook setup",
-      pattern = "*.ipynb",
-      callback = function()
-        require('molten_overlay').setup()
-      end
-    })
+function M.setup()
 
-end
+    M.define_cells()
 
-
----- keymaps -------------------------------------------------------------------
-local function keymaps(mod)
     -- send keys
     -- ctrl + enter runs a cell
-    vim.keymap.set({'n', 'v'}, '<F33>', function() mod.execute() end)
+    vim.keymap.set({'n', 'v'}, '<F33>', function() M.execute() end)
 
     -- shift + enter runs a cell and sends the cursor to the next cell
-    vim.keymap.set({'n', 'v'}, '<F34>', function() mod.execute() mod.goto_next_cell() end)
+    vim.keymap.set({'n', 'v'}, '<F34>', function() M.execute() M.goto_next_cell() end)
 
     -- shift + tab
-    vim.keymap.set('n', '<F31>', function() mod.goto_next_cell() end)
+    vim.keymap.set('n', '<F31>', function() M.goto_next_cell() end)
 
     -- alt + tab
-    vim.keymap.set('n', '<F32>', function() mod.goto_prev_cell() end)
+    vim.keymap.set('n', '<F32>', function() M.goto_prev_cell() end)
 
 end
 
@@ -63,14 +52,14 @@ local function get_current_cell(div)
     if vim.fn.getline("."):find(div) ~= nil then
         return vim.api.nvim_win_get_cursor(0)[1]
     else
-        return vim.fn.search(div, 'nbW')
+        return vim.fn.search(div, 'bnw')
     end
 end
 
 
 -- find the delimiter of the cell below the cell the cursor is currently in
 local function get_next_cell(div)
-    return vim.fn.search(div, 'nW')
+    return vim.fn.search(div, 'nw')
 end
 
 
@@ -80,7 +69,7 @@ local function get_prev_cell(div)
     local current_pos = vim.api.nvim_win_get_cursor(0)
     vim.api.nvim_win_set_cursor(0, {get_current_cell(div), 0})
     -- reverse search for the next above
-    local prev_cell_line = vim.fn.search(div, 'nbW')
+    local prev_cell_line = vim.fn.search(div, 'bnw')
     vim.api.nvim_win_set_cursor(0, current_pos)
     return prev_cell_line
 end
@@ -89,46 +78,74 @@ end
 -- move the cursor to the next cell
 function M.goto_next_cell()
     local div = get_current_delimiter()
-    vim.api.nvim_win_set_cursor(0, {get_next_cell(div), 0})
+    local cell = get_next_cell(div)
+
+    -- find the first line of the cell; if it is another cell divider,
+    -- move the cursor to the divider of this cell
+    local firstline = vim.api.nvim_buf_get_lines(0, cell, cell + 1, false)[1]
+    print(vim.inspect(firstline))
+    if firstline ~= nil and firstline ~= div then
+        cell = cell + 1
+    end
+
+    vim.api.nvim_win_set_cursor(0, {cell, 0})
+
 end
 
 
 -- move the cursor to the previous cell
 function M.goto_prev_cell()
     local div = get_current_delimiter()
-    vim.api.nvim_win_set_cursor(0, {get_prev_cell(div), 0})
-end
+    local cell = get_prev_cell(div)
 
+    -- find the first line of the cell; if it is another cell divider,
+    -- move the cursor to this cell's divider instead of the first line of the cell
+    local firstline = vim.api.nvim_buf_get_lines(0, cell, cell + 1, false)[1]
+    print(vim.inspect(firstline))
+    if firstline ~= nil and firstline ~= div then
+        cell = cell + 1
+    end
+
+    vim.api.nvim_win_set_cursor(0, {cell, 0})
+
+end
 
 -- define all molten cells in the curren buffer
 -- (jupytext markdown notebook format)
 function M.define_cells()
-    local cstart, cend = 1, 1
-    local initial_pos = vim.api.nvim_win_get_cursor(0)
+
+    local total_cells = 0
     local delimiter = get_current_delimiter()
+    local initial_pos = vim.api.nvim_win_get_cursor(0)
 
     -- position the cursor at the top of the file
     vim.api.nvim_win_set_cursor(0, {1, 1})
 
+    -- start at the first cell
+    local cstart = get_next_cell(delimiter)
+
     while true do
 
-        -- determine the start of the cell
-        cstart = get_next_cell(delimiter)
+        -- move to the start of the next cell
         vim.api.nvim_win_set_cursor(0, {cstart, 1})
 
         -- determine the end of the cell
-        cend = get_next_cell(delimiter)
+        local cend = get_next_cell(delimiter)
 
-        -- cend will be 0 when the end of the file is reached
-        if cend > 0 then
-            vim.api.nvim_win_set_cursor(0, {cend, 1})
-            vim.fn.MoltenDefineCell(cstart, cend - 1)
-        else
-            vim.fn.MoltenDefineCell(cstart, vim.fn.line("$"))
+        -- cend will wrap around when the end of the file is reached
+        if cstart > cend then
             break
         end
 
+        if (cend - cstart) > 2 then
+            vim.fn.MoltenDefineCell(cstart + 1, cend - 1)
+            total_cells = total_cells + 1
+        end
+        cstart = cend
+
     end
+
+    print(total_cells .. ' cells defined')
 
     -- restore initial cursor position
     vim.api.nvim_win_set_cursor(0, initial_pos)
@@ -136,12 +153,6 @@ end
 
 
 function M.execute()
-end
-
-
-function M.setup()
-    autocmds(M)
-    keymaps(M)
 end
 
 
