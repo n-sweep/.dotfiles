@@ -1,4 +1,5 @@
 local M = {}
+-- local Molten = require('molten')
 
 
 ---- setup ---------------------------------------------------------------------
@@ -75,6 +76,40 @@ local function get_prev_cell(div)
 end
 
 
+local function get_lines_within_cell(div)
+
+    -- find cell divider above cursor
+    local cstart = get_current_cell(div)
+
+    -- find cell divider below cursor
+    local cend = get_next_cell(div)
+
+    -- if cend is less than cstart (last cell), replace with the end of the buffer
+    if cend < cstart then
+        cend = vim.fn.line("$")
+    end
+
+    return cstart + 1, cend - 1
+end
+
+
+-- determine if cell is already defined under the cursor
+local function in_molten_cell()
+    local extmarks = vim.api.nvim_buf_get_extmarks(
+        0, -1,
+        {vim.fn.line('.') - 1, 0},
+        {vim.fn.line('.') - 1, -1},
+        {details = true}
+    )
+    for _, mark in ipairs(extmarks) do
+        if mark[4] and mark[4].hl_group and mark[4].hl_group == 'MoltenCell' then
+            return true
+        end
+    end
+    return false
+end
+
+
 -- move the cursor to the next cell
 function M.goto_next_cell()
     local div = get_current_delimiter()
@@ -138,21 +173,30 @@ function M.define_cells()
         end
 
         if (cend - cstart) > 2 then
-            vim.fn.MoltenDefineCell(cstart + 1, cend - 1)
+            vim.fn.MoltenDefineCell(cstart + 1, cend - 2)
             total_cells = total_cells + 1
         end
         cstart = cend
 
     end
 
-    print(total_cells .. ' cells defined')
+    print('Molten: ' .. total_cells .. ' cells defined')
 
     -- restore initial cursor position
     vim.api.nvim_win_set_cursor(0, initial_pos)
 end
 
 
+-- execute code / a cell based on the cursor location
 function M.execute()
+
+    if in_molten_cell() then
+        vim.cmd("MoltenReevaluateCell")
+    else
+        local cstart, cend = get_lines_within_cell()
+        vim.fn.MoltenEvaluateRange(cstart, cend)
+    end
+
 end
 
 

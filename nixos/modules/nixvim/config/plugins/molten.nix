@@ -9,17 +9,21 @@
         auto_image_popup = false;
         auto_init_behavior = "init";
         auto_open_html_in_browser = false;
-        auto_open_output = true;
+        auto_open_output = false;
         cover_empty_lines = false;
         copy_output = false;
-        enter_output_behavior = "open_then_enter";
+        enter_output_behavior = "open_and_enter";
         image_provider = "image.nvim";
-        output_crop_border = true;
-        output_virt_lines = false;
-        output_win_border = [ "" "━" "" "" ];
-        output_win_hide_on_leave = true;
-        output_win_max_height = 15;
-        output_win_max_width = 80;
+
+        virt_text_output = true;
+
+        # output_crop_border = true;
+        # output_virt_lines = false;
+        # output_win_border = [ "" "━" "" "" ];
+        # output_win_hide_on_leave = true;
+        # output_win_max_height = 15;
+        # output_win_max_width = 80;
+
         save_path.__raw = "vim.fn.stdpath('data')..'/molten'";
         tick_rate = 500;
         use_border_highlights = false;
@@ -44,15 +48,25 @@
 
     keymaps = [
 
-      # {
-      #   action = "";
-      #   key = "";
-      #   mode = "n";
-      #   options = {
-      #     silent = true;
-      #     desc = "";
-      #   };
-      # }
+      {
+        action = ":MoltenInit python3<CR>";
+        key = "<leader>mi";
+        mode = "n";
+        options = {
+          silent = true;
+          desc = "Molten Init";
+        };
+      }
+
+      {
+        action = ":MoltenDeinit<CR>";
+        key = "<leader>md";
+        mode = "n";
+        options = {
+          silent = true;
+          desc = "Molten Deinit";
+        };
+      }
 
     ];
 
@@ -60,19 +74,19 @@
 
     autoCmd = [
 
-    {
-      event = "User";
-      pattern = "MoltenInitPost";
-      desc = "Molten notebook setup for ipynb files";
-      callback.__raw = ''
-        function(args)
-          local filename = vim.api.nvim_buf_get_name(args.buf)
-          if filename:match("%.ipynb$") then
-            require("molten_overlay").setup()
+      {
+        event = "User";
+        pattern = "MoltenInitPost";
+        desc = "Molten notebook setup for ipynb files";
+        callback.__raw = ''
+          function(args)
+            local filename = vim.api.nvim_buf_get_name(args.buf)
+            if filename:match("%.ipynb$") then
+              require("molten_overlay").setup()
+            end
           end
-        end
-      '';
-    }
+        '';
+      }
 
     ];
 
