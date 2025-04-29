@@ -17,12 +17,12 @@
 
         virt_text_output = true;
 
-        # output_crop_border = true;
-        # output_virt_lines = false;
-        # output_win_border = [ "" "━" "" "" ];
-        # output_win_hide_on_leave = true;
-        # output_win_max_height = 15;
-        # output_win_max_width = 80;
+        output_crop_border = true;
+        output_virt_lines = false;
+        output_win_border = [ "" "━" "" "" ];
+        output_win_hide_on_leave = true;
+        output_win_max_height = 15;
+        output_win_max_width = 80;
 
         save_path.__raw = "vim.fn.stdpath('data')..'/molten'";
         tick_rate = 500;
@@ -49,7 +49,7 @@
     keymaps = [
 
       {
-        action = ":MoltenInit python3<CR>";
+        action = ":MoltenInit<CR>";
         key = "<leader>mi";
         mode = "n";
         options = {

@@ -21,6 +21,15 @@ function M.setup()
     -- alt + tab
     vim.keymap.set('n', '<F32>', function() M.goto_prev_cell() end)
 
+    -- enter a cell output
+    vim.keymap.set('n', '<CR>', ":noautocmd MoltenEnterOutput<CR>")
+
+    -- reevaluate all molten cells
+    vim.keymap.set('n', '<leader>mA', ":MoltenReevaluateAllCells", { desc = "Reevaluate All Molten Cells"})
+
+    -- kb interrupt
+    vim.keymap.set('n', '<leader>mI', ":MoltenInterrupt", { desc = "Send a Keyboard Interrupt to Molten"})
+
 end
 
 
@@ -118,7 +127,6 @@ function M.goto_next_cell()
     -- find the first line of the cell; if it is another cell divider,
     -- move the cursor to the divider of this cell
     local firstline = vim.api.nvim_buf_get_lines(0, cell, cell + 1, false)[1]
-    print(vim.inspect(firstline))
     if firstline ~= nil and firstline ~= div then
         cell = cell + 1
     end
@@ -136,7 +144,6 @@ function M.goto_prev_cell()
     -- find the first line of the cell; if it is another cell divider,
     -- move the cursor to this cell's divider instead of the first line of the cell
     local firstline = vim.api.nvim_buf_get_lines(0, cell, cell + 1, false)[1]
-    print(vim.inspect(firstline))
     if firstline ~= nil and firstline ~= div then
         cell = cell + 1
     end
@@ -144,6 +151,7 @@ function M.goto_prev_cell()
     vim.api.nvim_win_set_cursor(0, {cell, 0})
 
 end
+
 
 -- define all molten cells in the curren buffer
 -- (jupytext markdown notebook format)
@@ -172,10 +180,18 @@ function M.define_cells()
             break
         end
 
+        -- TODO: better end-of-cell handling
         if (cend - cstart) > 2 then
-            vim.fn.MoltenDefineCell(cstart + 1, cend - 2)
-            total_cells = total_cells + 1
+
+            -- skip if a markdown cell
+            local line = vim.api.nvim_get_current_line()
+            if line and not line:find("markdown") then
+                vim.fn.MoltenDefineCell(cstart + 1, cend - 2)
+                total_cells = total_cells + 1
+            end
+
         end
+
         cstart = cend
 
     end
@@ -193,7 +209,7 @@ function M.execute()
     if in_molten_cell() then
         vim.cmd("MoltenReevaluateCell")
     else
-        local cstart, cend = get_lines_within_cell()
+        local cstart, cend = get_lines_within_cell(get_current_delimiter())
         vim.fn.MoltenEvaluateRange(cstart, cend)
     end
 
