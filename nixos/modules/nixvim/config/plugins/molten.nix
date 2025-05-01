@@ -49,8 +49,18 @@
     keymaps = [
 
       {
-        action = ":MoltenInit<CR>";
+        action = ":luafile ${./lua/molten_init.lua}<CR>";
         key = "<leader>mi";
+        mode = "n";
+        options = {
+          silent = true;
+          desc = "Molten Init";
+        };
+      }
+
+      {
+        action = ":MoltenInit<CR>";
+        key = "<leader>mI";
         mode = "n";
         options = {
           silent = true;

@@ -28,7 +28,7 @@ function M.setup()
     vim.keymap.set('n', '<leader>mA', ":MoltenReevaluateAllCells", { desc = "Reevaluate All Molten Cells"})
 
     -- kb interrupt
-    vim.keymap.set('n', '<leader>mI', ":MoltenInterrupt", { desc = "Send a Keyboard Interrupt to Molten"})
+    vim.keymap.set('n', '<leader>mc', ":MoltenInterrupt", { desc = "Send a Keyboard Interrupt to Molten"})
 
 end
 
