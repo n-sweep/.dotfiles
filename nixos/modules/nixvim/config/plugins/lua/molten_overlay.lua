@@ -22,7 +22,7 @@ function M.setup()
     vim.keymap.set('n', '<F32>', function() M.goto_prev_cell() end)
 
     -- enter a cell output
-    vim.keymap.set('n', '<CR>', ":noautocmd MoltenEnterOutput<CR>")
+    vim.keymap.set('n', '<leader>mo', ":noautocmd MoltenEnterOutput<CR>")
 
     -- reevaluate all molten cells
     vim.keymap.set('n', '<leader>mA', ":MoltenReevaluateAllCells<CR>", { desc = "Reevaluate All Molten Cells" })
