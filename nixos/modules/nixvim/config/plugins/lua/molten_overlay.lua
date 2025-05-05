@@ -25,10 +25,13 @@ function M.setup()
     vim.keymap.set('n', '<CR>', ":noautocmd MoltenEnterOutput<CR>")
 
     -- reevaluate all molten cells
-    vim.keymap.set('n', '<leader>mA', ":MoltenReevaluateAllCells", { desc = "Reevaluate All Molten Cells"})
+    vim.keymap.set('n', '<leader>mA', ":MoltenReevaluateAllCells<CR>", { desc = "Reevaluate All Molten Cells" })
 
     -- kb interrupt
-    vim.keymap.set('n', '<leader>mc', ":MoltenInterrupt", { desc = "Send a Keyboard Interrupt to Molten"})
+    vim.keymap.set('n', '<leader>mc', ":MoltenInterrupt<CR>", { desc = "Send a Keyboard Interrupt to Molten" })
+
+    -- delete cell under cursor
+    vim.keymap.set('n', '<leader>md', ":MoltenDelete<CR>", { desc = "Delete the cell under the cursor" })
 
 end
 
@@ -91,14 +94,24 @@ local function get_lines_within_cell(div)
     local cstart = get_current_cell(div)
 
     -- find cell divider below cursor
-    local cend = get_next_cell(div)
+    local cend = get_next_cell(div) - 1
 
     -- if cend is less than cstart (last cell), replace with the end of the buffer
     if cend < cstart then
         cend = vim.fn.line("$")
     end
 
-    return cstart + 1, cend - 1
+    -- trim empty lines
+    while cend > cstart do
+        local line = vim.fn.getline(cend)
+        if line:match("^%s*$") then
+            cend = cend - 1
+        else
+            break
+        end
+    end
+
+    return cstart + 1, cend
 end
 
 

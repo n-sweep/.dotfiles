@@ -1,5 +1,5 @@
 -- automatically choose the appropriate venv if VIRTUAL_ENV or CONDA_PREFIX exists
-local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+local venv = os.getenv("VIRTUAL_ENV")
 
 if venv ~= nil then
     venv = string.match(venv, "/.+/(.+)")

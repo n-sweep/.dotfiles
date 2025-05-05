@@ -22,7 +22,6 @@
         output_win_border = [ "" "━" "" "" ];
         output_win_hide_on_leave = true;
         output_win_max_height = 15;
-        output_win_max_width = 80;
 
         save_path.__raw = "vim.fn.stdpath('data')..'/molten'";
         tick_rate = 500;
@@ -70,7 +69,7 @@
 
       {
         action = ":MoltenDeinit<CR>";
-        key = "<leader>md";
+        key = "<leader>mD";
         mode = "n";
         options = {
           silent = true;
