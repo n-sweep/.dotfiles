@@ -3,9 +3,9 @@ local venv = os.getenv("VIRTUAL_ENV")
 
 if venv ~= nil then
     venv = string.match(venv, "/.+/(.+)")
-    print(venv .. ' found')
+    vim.notify(venv .. ' found', vim.log.levels.INFO)
     vim.cmd(("MoltenInit %s"):format(venv))
 else
-    print('No environment found')
+    vim.notify('No environment found', vim.log.levels.INFO)
     vim.cmd("MoltenInit python3")
 end

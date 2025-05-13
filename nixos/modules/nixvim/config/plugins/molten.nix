@@ -7,7 +7,6 @@
 
       settings = {
         auto_open_output = false;
-        cover_empty_lines = true;
         enter_output_behavior = "open_and_enter";
         image_provider = "image.nvim";
 
@@ -46,16 +45,6 @@
 
       {
         action = ":luafile ${./lua/molten_init.lua}<CR>";
-        key = "<leader>mi";
-        mode = "n";
-        options = {
-          silent = true;
-          desc = "Molten Init";
-        };
-      }
-
-      {
-        action = ":MoltenInit<CR>";
         key = "<leader>mI";
         mode = "n";
         options = {

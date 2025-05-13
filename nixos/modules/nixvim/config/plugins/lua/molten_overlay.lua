@@ -9,6 +9,7 @@ function M.setup()
     M.define_cells()
 
     -- send keys
+
     -- ctrl + enter runs a cell
     vim.keymap.set({'n', 'v'}, '<F33>', function() M.execute() end)
 
@@ -21,17 +22,27 @@ function M.setup()
     -- alt + tab
     vim.keymap.set('n', '<F32>', function() M.goto_prev_cell() end)
 
-    -- enter a cell output
-    vim.keymap.set('n', '<leader>mo', ":noautocmd MoltenEnterOutput<CR>")
 
-    -- reevaluate all molten cells
-    vim.keymap.set('n', '<leader>mA', ":MoltenReevaluateAllCells<CR>", { desc = "Reevaluate All Molten Cells" })
-
-    -- kb interrupt
-    vim.keymap.set('n', '<leader>mc', ":MoltenInterrupt<CR>", { desc = "Send a Keyboard Interrupt to Molten" })
-
-    -- delete cell under cursor
-    vim.keymap.set('n', '<leader>md', ":MoltenDelete<CR>", { desc = "Delete the cell under the cursor" })
+    vim.keymap.set(
+        'n', '<leader>mo',
+        ":noautocmd MoltenEnterOutput<CR>",
+        { desc = 'Enter Output of Molten Cell' }
+    )
+    vim.keymap.set(
+        'n', '<leader>mA',
+        ":MoltenReevaluateAll<CR>",
+        { desc = "Reevaluate All Molten Cells" }
+    )
+    vim.keymap.set(
+        'n', '<leader>mc',
+        ":MoltenInterrupt<CR>",
+        { desc = "Send a Keyboard Interrupt to Molten" }
+    )
+    vim.keymap.set(
+        'n', '<leader>md',
+        ":MoltenDelete<CR>",
+        { desc = "Delete the cell under the cursor" }
+    )
 
 end
 
