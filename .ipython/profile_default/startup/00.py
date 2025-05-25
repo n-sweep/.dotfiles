@@ -12,16 +12,6 @@ try:
     pio.templates.default = "plotly_dark"
 
 
-    def get_lan_ip() -> None:
-        """get the LAN IP address of the machine running the server"""
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(('8.8.8.8', 80))
-            return s.getsockname()[0]
-        except socket.error:
-            return None
-
-
     def patch_figure_show():
         # overriding plotly's Figure.show()
         _show = go.Figure.show
@@ -33,7 +23,7 @@ try:
                 if 'bdata' in data['y']:
                     data['y'] = self.data[i].y.tolist()  # type: ignore
 
-            conn = http.client.HTTPConnection(f'http://{get_lan_ip()}:5619/plot')
+            conn = http.client.HTTPConnection(f'http://100.115.219.53:8080')
             conn.request('GET', '/plot', body=json.dumps(fig_json), headers={'Content-Type': 'application/json'})
             r = conn.getresponse()
 
