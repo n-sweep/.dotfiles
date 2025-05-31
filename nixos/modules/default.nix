@@ -101,6 +101,7 @@ in {
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     22      # ssh
+    544     # rstp - reolink cameras
     5900    # obs (?)
     5619    # pomo (?)
     8888    # jupyter notebook

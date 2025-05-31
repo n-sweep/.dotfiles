@@ -48,6 +48,7 @@ in {
       peek
       screenkey
       sxiv
+      vlc
       wezterm
       xclip
       xorg.xauth
