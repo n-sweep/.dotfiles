@@ -2,6 +2,8 @@ import json
 import http.client
 import socket
 
+ROBOT_HOUSE = '100.115.219.53'
+
 
 # if plotly isn't installed, we don't care to do any of this
 try:
@@ -10,6 +12,26 @@ try:
 
     # plotly setup
     pio.templates.default = "plotly_dark"
+
+
+    def get_lan_ip() -> str:
+        """get the LAN IP address of the machine running the server"""
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(('8.8.8.8', 80))
+            return s.getsockname()[0]
+        except socket.error:
+            return ''
+
+
+    def send_plot(ip: str, port: int, fig_json: str):
+        conn = http.client.HTTPConnection(ip, port)
+        conn.request(
+            'GET', '/plot',
+            body=json.dumps(fig_json),
+            headers={'Content-Type': 'application/json'}
+        )
+        return conn.getresponse()
 
 
     def patch_figure_show():
@@ -23,12 +45,13 @@ try:
                 if 'bdata' in data['y']:
                     data['y'] = self.data[i].y.tolist()  # type: ignore
 
-            conn = http.client.HTTPConnection(f'http://100.115.219.53:8080')
-            conn.request('GET', '/plot', body=json.dumps(fig_json), headers={'Content-Type': 'application/json'})
-            r = conn.getresponse()
+            r = send_plot(ROBOT_HOUSE, 8080, fig_json)
 
             if r.status != 200:
-                _show(self, *args, **kwargs)
+                # try to fall back on lan
+                r = send_plot(get_lan_ip(), 8080, fig_json)
+                if r.status != 200:
+                    _show(self, *args, **kwargs)
 
         go.Figure.show = modified_show
 
