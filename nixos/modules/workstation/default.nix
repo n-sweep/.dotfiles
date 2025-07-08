@@ -26,8 +26,11 @@ in {
     logind.lidSwitch = "ignore";
 
     xserver = {
+
       enable = true;
       videoDrivers = [ "nvidia" ];
+      xkb.layout = "us";
+
       desktopManager = {
         xterm.enable = false;
         session = [{
@@ -35,6 +38,7 @@ in {
           start = ''${pkgs.i3}/bin/i3'';
         }];
       };
+
       windowManager.i3 = {
         enable = true;
         extraPackages = with pkgs; [
@@ -42,6 +46,7 @@ in {
           i3status
         ];
       };
+
     };
 
   };
