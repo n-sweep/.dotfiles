@@ -70,7 +70,9 @@ in {
       clang
       curl
       docker-compose
+      gcc
       git
+      gnumake
       stdenv.cc.cc.lib  # make
       wget
     ];

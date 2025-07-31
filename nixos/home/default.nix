@@ -13,6 +13,15 @@ let
 
   mksl = config.lib.file.mkOutOfStoreSymlink;
 
+  R-with-pkgs = pkgs.rWrapper.override{
+    packages = with pkgs.rPackages; [
+      dplyr
+      formatR
+      ggplot2
+      roxygen2
+    ];
+  };
+
 in {
 
   # imports = [
@@ -65,6 +74,7 @@ in {
       nix-prefetch-git
       pciutils
       quarto
+      R-with-pkgs
       ripgrep
       slop
       sqlcmd

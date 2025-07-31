@@ -1,4 +1,21 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+
+  r-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "r.nvim";
+    version = "unstable";
+    src = builtins.fetchGit {
+      url = "https://github.com/R-nvim/R.nvim.git";
+      ref = "main";
+    };
+    nvimSkipModules = [
+      "r.roxygen"
+      "r.format"
+    ];
+  };
+
+in
+{
 
   imports = [
     ./cmp.nix
@@ -33,6 +50,7 @@
 
   extraPlugins = with pkgs.vimPlugins; [
 
+    r-nvim
     quarto-nvim
     tmux-nvim
     vim-dadbod
