@@ -1,4 +1,15 @@
-{ ... }: {
+{ ... }:
+let
+
+  navFile = builtins.listToAttrs (
+    builtins.genList (i: {
+        name = toString i;
+        value = "<leader>" + toString i;
+      }) 10
+  );
+
+in
+{
 
   plugins.harpoon = {
 
@@ -8,13 +19,7 @@
     keymaps = {
       addFile = "<leader>a";
       toggleQuickMenu = "<C-h>";
-      navFile = {
-        "1" = "<leader>1";
-        "2" = "<leader>2";
-        "3" = "<leader>3";
-        "4" = "<leader>4";
-        "5" = "<leader>5";
-      };
+      inherit navFile;
     };
 
   };
