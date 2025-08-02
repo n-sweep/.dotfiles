@@ -158,6 +158,7 @@ in {
     roboto
     nerd-fonts.mononoki
     nerd-fonts.roboto-mono
+    nerd-fonts.ubuntu
     nerd-fonts.ubuntu-mono
   ];
 
