@@ -22,7 +22,6 @@ in
     ./harpoon.nix
     ./lsp.nix
     ./mini.nix
-    ./molten.nix
     ./oil.nix
     ./obsidian
     ./telescope.nix
