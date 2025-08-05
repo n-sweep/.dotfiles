@@ -48,6 +48,7 @@ in {
       # nvim plugins
       # "${nvim_plug_dir}/pvserv".source = mksl "${home_dir}/Repos/pvserv";
       "${nvim_plug_dir}/telemux".source = mksl "${home_dir}/Repos/telemux-nvim";
+      "${nvim_plug_dir}/foundry-nvim".source = mksl "${home_dir}/Repos/foundry-nvim";
 
     };
 
