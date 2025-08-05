@@ -1,4 +1,4 @@
-local function foundry_startup()
+local function func()
 
     local foundry = require('foundry')
     foundry.setup({})
@@ -28,5 +28,5 @@ end
 -- start foundry-nvim when an .ipynb file is opened
 vim.api.nvim_create_autocmd('BufEnter', {
     pattern = '*.ipynb',
-    callback = foundry_startup
+    callback = func
 })
