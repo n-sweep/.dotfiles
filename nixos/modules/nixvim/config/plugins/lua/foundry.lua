@@ -5,8 +5,9 @@ local function func()
 
     -- keymaps ---------------------------------------------------------------------
 
-    vim.keymap.set({'n', 'v'}, '<leader>fe', foundry.float_cell_output, { buffer = 0 })
+    vim.keymap.set({'n', 'v'}, '<leader>fo', foundry.open_cell, { buffer = 0 })
     vim.keymap.set({'n', 'v'}, '<leader>fy', foundry.yank_cell_output, { buffer = 0 })
+    vim.keymap.set({'n', 'v'}, '<leader>fY', foundry.yank_cell_input, { buffer = 0 })
     vim.keymap.set({'n', 'v'}, '<leader>fc', foundry.delete_cell, { buffer = 0 })
     vim.keymap.set({'n', 'v'}, '<leader>fC', foundry.delete_all_cells, { buffer = 0 })
 
