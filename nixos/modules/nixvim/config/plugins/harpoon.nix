@@ -5,6 +5,7 @@ let
     builtins.genList (i: {
         name = (if i < 1 then "10" else toString i);
         value = "<leader>" + toString i;
+        desc = "Harpoon goto file " + toString i;
       }) 10
   );
 
