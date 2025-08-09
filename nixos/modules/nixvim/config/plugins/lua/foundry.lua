@@ -5,41 +5,41 @@ local function func()
 
     -- keymaps ---------------------------------------------------------------------
 
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>fo', foundry.open_cell, {
+    vim.keymap.set('n', '<leader>fo', foundry.open_cell, { buffer = 0,
         desc = 'Foundry open output of cell under cursor in a floating window'
     })
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>fy', foundry.yank_cell_output, {
+    vim.keymap.set('n', '<leader>fy', foundry.yank_cell_output, { buffer = 0,
         desc = 'Foundry yank cell output contents'
     })
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>fY', foundry.yank_cell_input, {
+    vim.keymap.set('n', '<leader>fY', foundry.yank_cell_input, { buffer = 0,
         desc = 'Foundry yank cell input contents'
     })
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>fc', foundry.delete_cell, {
+    vim.keymap.set('n', '<leader>fc', foundry.delete_cell, { buffer = 0,
         desc = 'Foundry delete virtual text of cell under cursor'
     })
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>fC', foundry.delete_all_cells, {
+    vim.keymap.set('n', '<leader>fC', foundry.delete_all_cells, { buffer = 0,
         desc = 'Foundry delete virtual text of all cells in notebook'
     })
 
     -- send keys
     -- ctrl + enter runs a cell
-    vim.api.nvim_buf_set_keymap(0, {'n', 'v'}, '<F33>', foundry.execute_cell, {
+    vim.keymap.set({'n', 'v'}, '<F33>', foundry.execute_cell, { buffer = 0,
         desc = 'Foundry execute the current cell'
     })
 
     -- shift + enter runs a cell and sends the cursor to the next cell
-    vim.api.nvim_buf_set_keymap(0, {'n', 'v'}, '<F34>', function() foundry.execute_cell() foundry.goto_next_cell() end, {
+    vim.keymap.set({'n', 'v'}, '<F34>', function() foundry.execute_cell() foundry.goto_next_cell() end, { buffer = 0,
         desc = 'Foundry execute the current cell and move cursor to the next'
     })
 
     -- shift + tab
-    vim.api.nvim_buf_set_keymap(0, 'n', '<F31>', foundry.goto_next_cell, {
+    vim.keymap.set('n', '<F31>', foundry.goto_next_cell, { buffer = 0,
         desc = 'Foundry move cursor to next cell'
     })
 
     -- alt + tab
-    vim.api.nvim_buf_set_keymap(0, 'n', '<F32>', foundry.goto_prev_cell, {
-        desc = 'Foundry move cursor to previous cell'
+    vim.keymap.set('n', '<F32>', foundry.goto_prev_cell, { buffer = 0,
+        desc = 'Foundry move cursor to next cell'
     })
 
 end
