@@ -17,7 +17,7 @@
     };
 
     nixvim = {
-      url = "./modules/nixvim";
+      url = "github:n-sweep/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
