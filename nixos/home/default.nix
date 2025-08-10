@@ -54,7 +54,6 @@ in {
 
     packages = with pkgs; [
 
-      aider-chat
       awscli
       bitwarden-cli
       cbonsai
@@ -73,6 +72,7 @@ in {
       mods
       nettools
       nix-prefetch-git
+      opencode
       pciutils
       quarto
       R-with-pkgs
