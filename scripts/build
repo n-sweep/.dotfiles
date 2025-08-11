@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
 # set the hostname for this machine at this location
-DOTFILES_PATH=$HOME/.dotfiles
-NIX_CONFIG_PATH=$DOTFILES_PATH/nixos
+NIX_CONFIG_PATH=$HOME/Repos/nixos
 NIX_HOST_PATH=$HOME/.config/nixos/host
+DOTFILES_PATH=$HOME/.dotfiles
 spinner="$DOTFILES_PATH/scripts/spinner"
 emoji="$DOTFILES_PATH/scripts/emoji"
+
+set -e
 
 function generate_hw_config {
     nixos-generate-config --show-hardware-config > "./nixos/hosts/$1/hardware-configuration.nix"
@@ -60,7 +62,8 @@ function choose_host {
 }
 
 function gh_commit {
-    git commit -am "$(nixos-rebuild list-generations | rg current)"
+    (git --git-dir="$NIX_CONFIG_PATH/.git" --work-tree="$NIX_CONFIG_PATH" \
+        commit -am "$(nixos-rebuild list-generations | rg current)")
 }
 
 function rebuild {
@@ -142,7 +145,7 @@ function main {
     done
 
     if [[ $ask_commit == true ]] || [[ $force_commit == true ]]; then
-        git diff -U0
+        git git --git-dir="$NIX_CONFIG_PATH/.git" --work-tree="$NIX_CONFIG_PATH" diff -U0
     fi
 
     choose_host
