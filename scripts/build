@@ -33,7 +33,7 @@ function new_host {
 
     # generate hardware configuration
     generate_hw_config "$host"
-    git add .
+    git --git-dir="$NIX_CONFIG_PATH/.git" --work-tree="$NIX_CONFIG_PATH" add .
     echo "$host" > "$NIX_HOST_PATH"
 }
 
@@ -145,7 +145,7 @@ function main {
     done
 
     if [[ $ask_commit == true ]] || [[ $force_commit == true ]]; then
-        git git --git-dir="$NIX_CONFIG_PATH/.git" --work-tree="$NIX_CONFIG_PATH" diff -U0
+        git --git-dir="$NIX_CONFIG_PATH/.git" --work-tree="$NIX_CONFIG_PATH" diff -U0
     fi
 
     choose_host
