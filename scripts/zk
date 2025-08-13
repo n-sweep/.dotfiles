@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
     filepath="$loc/index.md"
 else
     filepath=$(
-        rg -i "$1" $loc | \
+        rg -i "$1" "$loc" | \
         awk -F: '{print NR ". " $1, "\""$2"\""}' | \
         fzf --height=~10% --select-1 --exit-0 | \
         awk '{ print $2 }'
