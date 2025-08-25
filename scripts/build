@@ -4,6 +4,7 @@
 NIX_CONFIG_PATH=$HOME/Repos/nixos
 NIX_HOST_PATH=$HOME/.config/nixos/host
 DOTFILES_PATH=$HOME/.dotfiles
+LOGFILE=$NIX_CONFIG_PATH/nixos-switch.log
 spinner="$DOTFILES_PATH/scripts/spinner"
 emoji="$DOTFILES_PATH/scripts/emoji"
 
@@ -63,12 +64,10 @@ function choose_host {
 
 function gh_commit {
     (git --git-dir="$NIX_CONFIG_PATH/.git" --work-tree="$NIX_CONFIG_PATH" \
-        commit -am "$(nixos-rebuild list-generations | rg current)")
+        commit -am "$(nixos-rebuild list-generations | rg True)")
 }
 
 function rebuild {
-    local ask_commit dry_run force_commit hash host switch
-
     dry_run=$1
     ask_commit=$2
     force_commit=$3
@@ -80,13 +79,20 @@ function rebuild {
     fi
 
     sudo -v
-    (sudo nixos-rebuild "$switch" \
-        --impure --flake \
-        "$NIX_CONFIG_PATH"#"$host" 2>&1 \
-        | sudo tee nixos-switch.log > /dev/null) &
-    $spinner $! "Building..."
 
-    if test "${PIPESTATUS[0]}" -eq 0; then
+    $spinner $$ "Building..." &
+    spinner_pid=$!
+
+    sudo nixos-rebuild "$switch" --impure --flake "$NIX_CONFIG_PATH"#"$host" 2>&1 \
+        | sudo tee "$LOGFILE" > /dev/null
+
+    exit_code=${PIPESTATUS[0]}
+
+    kill $spinner_pid 2>/dev/null || true
+    wait $spinner_pid 2>/dev/null || true
+    echo
+
+    if [ "$exit_code" -eq 0 ]; then
 
         echo ":blue-circle: Build Succeeded" | $emoji -m
         if [[ $dry_run == true ]]; then  # do not commit on dry runs
@@ -106,21 +112,20 @@ function rebuild {
     else
 
       echo ":red-circle: Build Failed..." | $emoji -m
-      hash=$(rg --color=always 'hash mismatch' < nixos-switch.log)
+      set +e
+      hash=$(rg --color=always 'hash mismatch' < "$LOGFILE")
       if [[ -n $hash ]]; then
           echo "$hash"
-          rg --color=always 'specified:' < nixos-switch.log
-          rg --color=always 'got:' < nixos-switch.log
+          rg --color=always 'specified:' < "$LOGFILE"
+          rg --color=always 'got:' < "$LOGFILE"
       else
-          rg --color=always error < nixos-switch.log
+          rg --color=always error < "$LOGFILE"
       fi
 
     fi
 }
 
 function main {
-    local ask_commit dry_run force_commit script usage
-
     ask_commit=true
     dry_run=false
     force_commit=false
