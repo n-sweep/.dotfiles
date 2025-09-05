@@ -1,6 +1,8 @@
+import datetime
 import json
 import http.client
 import socket
+from typing import TypeVar
 
 ROBOT_HOUSE = '100.115.219.53'
 
@@ -27,8 +29,8 @@ try:
     def send_plot(ip: str, port: int, fig_json: str):
         conn = http.client.HTTPConnection(ip, port)
         conn.request(
-            'GET', '/plot',
-            body=json.dumps(fig_json),
+            'POST', '/plot',
+            body=fig_json,
             headers={'Content-Type': 'application/json'}
         )
         return conn.getresponse()
@@ -37,40 +39,50 @@ try:
     def patch_figure_show():
         # overriding plotly's Figure.show()
         _show = go.Figure.show
+        T = TypeVar('T', bound=go.Figure)
 
-        def modified_show(self: go.Figure, *args, **kwargs) -> None:
-            fig_json = json.loads(j if (j:=self.to_json()) is not None else '')
+        def modified_show(self: T, *args, **kwargs) -> T:
+            # Manually construct the figure dictionary
+            fig_dict = {
+                'data': [],
+                'layout': self.layout.to_plotly_json()
+            }
 
-            for i, data in enumerate(fig_json['data']):
-                if 'bdata' in data['y']:
-                    data['y'] = self.data[i].y.tolist()  # type: ignore
+            for trace in self.data:
+                trace_dict = trace.to_plotly_json()
+                for key, value in trace_dict.items():
+                    if hasattr(value, 'tolist'):
+                        trace_dict[key] = value.tolist()
+                fig_dict['data'].append(trace_dict)
 
-            r = send_plot(ROBOT_HOUSE, 8080, fig_json)
+            # Convert datetime objects to ISO 8601 strings
+            def default(o):
+                if isinstance(o, (datetime.date, datetime.datetime)):
+                    return o.isoformat()
+                raise TypeError(f'Object of type {o.__class__.__name__} is not JSON serializable')
+
+            fig_json = json.dumps(fig_dict, default=default)
+
+            # r = send_plot(ROBOT_HOUSE, 8080, fig_json)
+            r = send_plot('localhost', 8080, fig_json)
 
             if r.status != 200:
                 # try to fall back on lan
                 r = send_plot(get_lan_ip(), 8080, fig_json)
                 if r.status != 200:
-                    _show(self, *args, **kwargs)
+                    return _show(self, *args, **kwargs) # type: ignore[arg-type]
 
-        go.Figure.show = modified_show
+            return self
+
+        go.Figure.show = modified_show  # type: ignore[assignment]
 
 
-    # if pandas isn't installed, we can just skip over the pandas portion
     try:
         import pandas as pd
 
         # pandas setup
         pd.options.plotting.backend = 'plotly'
 
-
-        def show_df(df: pd.DataFrame, updates: dict = {}) -> None:
-            """plots a table of a pandas dataframe in plotly"""
-            fig = go.Figure(data=go.Table(
-               header=dict(values=df.columns),
-                cells=dict(values=[df[col] for col in df.columns]),
-            )).update_layout(updates)
-            fig.show()
 
     except Exception as e:
         print(e)
