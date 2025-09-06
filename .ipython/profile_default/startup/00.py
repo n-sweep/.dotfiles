@@ -1,8 +1,7 @@
 import datetime
-import json
 import http.client
+import json
 import socket
-from typing import TypeVar
 
 ROBOT_HOUSE = '100.115.219.53'
 
@@ -17,6 +16,22 @@ except Exception as e:
 
 # plotly setup
 pio.templates.default = "plotly_dark"
+
+
+def sanitize_numpy_types(obj):
+    if isinstance(obj, dict):
+        return {k: sanitize_numpy_types(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_numpy_types(i) for i in obj]
+    elif isinstance(obj, float) and obj != obj:
+        return None
+    elif hasattr(obj, 'tolist'):
+        return sanitize_numpy_types(obj.tolist())  # type: ignore
+    elif hasattr(obj, 'item'):
+        return obj.item()  # type: ignore
+    elif isinstance(obj, (datetime.date, datetime.datetime)):
+        return obj.isoformat()
+    return obj
 
 
 def get_lan_ip() -> str:
@@ -43,40 +58,29 @@ def patch_figure_show():
     # overriding plotly's Figure.show()
     _show = go.Figure.show
 
-    def modified_show(self: go.Figure, *args, **kwargs) -> go.Figure:
+    def modified_show(self: go.Figure, *args, **kwargs) -> None:
         """plotly data has to be cleaned to be properly serialized for sending over HTTPS"""
 
         # separate layout from data
         fig_dict = {
-            'data': [],
+            'data': [sanitize_numpy_types(t.to_plotly_json()) for t in self.data],  # type: ignore
             'layout': self.layout.to_plotly_json()
         }
 
-        # convert np.ndarrys into lists
-        for trace in self.data:
-            trace_dict = trace.to_plotly_json()
-            for key, value in trace_dict.items():
-                if hasattr(value, 'tolist'):
-                    trace_dict[key] = value.tolist()
-            fig_dict['data'].append(trace_dict)
+        fig_json = json.dumps(fig_dict)
 
-        # convert datetime objects to iso 8601 strings
-        def default(o):
-            if isinstance(o, (datetime.date, datetime.datetime)):
-                return o.isoformat()
-            raise TypeError(f'Object of type {o.__class__.__name__} is not JSON serializable')
-
-        fig_json = json.dumps(fig_dict, default=default)
-
-        r = send_plot(ROBOT_HOUSE, 8080, fig_json)
+        try:
+            r = send_plot(ROBOT_HOUSE, 8080, fig_json)
+        except Exception:
+            r = send_plot(get_lan_ip(), 8080, fig_json)
 
         if r.status != 200:
-            print(r.status)
-            print(r.reason)
             # try to fall back on lan
-            # r = send_plot(get_lan_ip(), 8080, fig_json)
-            # if r.status != 200:
-            #     _show(self, *args, **kwargs) # type: ignore[arg-type]
+            r = send_plot(get_lan_ip(), 8080, fig_json)
+            if r.status != 200:
+                print(r.status)
+                print(r.reason)
+                _show(self, *args, **kwargs) # type: ignore[arg-type]
 
     go.Figure.show = modified_show  # type: ignore[assignment]
 
