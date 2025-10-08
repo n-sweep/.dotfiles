@@ -1,14 +1,24 @@
 #!/usr/bin/env bash
 
+# oryxpro
+# LEFT="DP-0"
+# MID="HDMI-0"
+# RIGHT="eDP-1-1"
+
+# xps
+LEFT="DP-1-3"
+MID="DP-1-2"
+RIGHT="eDP-1-1"
+
 if [[ $(xrandr | rg -c " connected") -gt 1 ]]; then
     xrandr \
-    --output DP-0 \
+    --output $LEFT \
     --primary \
     --rotate right \
-    --output HDMI-0 \
-    --right-of DP-0 \
-    --output eDP-1-1 \
-    --right-of HDMI-0
+    --output $MID \
+    --right-of $LEFT \
+    --output $RIGHT \
+    --right-of $MID
 else
     xrandr --output eDP-1-1 --primary
 fi
