@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+cd "$HOME/Obsidian/" || exit
 file="$HOME/Obsidian/slipbox/notes/daily/$(date +"%Y-%m-%d").md"
 
 if [[ ! -f $file ]]; then
-    nvim -c ":ObsidianToday" -c :q
+    nvim -c ":Obsidian today" -c :q
 fi
 
 if [[ -z "$*" ]]; then
@@ -18,3 +19,5 @@ fi
 if [[ -n $input ]]; then
     echo "- [ ] $input ($(date +'%H:%M'))" >> "$file"
 fi
+
+cd - > /dev/null || exit
