@@ -20,6 +20,6 @@ if [[ $(xrandr | rg -c " connected") -gt 1 ]]; then
     --output $RIGHT \
     --right-of $MID
 else
-    xrandr --output eDP-1-1 --primary
+    xrandr --auto
 fi
 

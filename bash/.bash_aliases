@@ -7,7 +7,6 @@ alias c=clear
 alias pst="xclip -o -selection clipboard"
 alias cpy="xclip -i -selection clipboard"
 
-alias "-"="cd -"
 dots="."
 path="cd "
 for _ in {1..5}; do
@@ -51,7 +50,7 @@ alias qq="gippity"
 alias nnb="$SCRIPTS_DIR/create_nb"
 
 alias n="daily_note"
-alias today="vim -c :ObsidianToday"
+alias today="vim -c ':Obsidian today'"
 
 
 ### git ########################################################################
@@ -63,18 +62,15 @@ alias gc="git commit -m"
 
 ### tmux #######################################################################
 
-# startup / reattach script
-alias tm="tmux_startup"
-
-# quick reattach
-alias ta="tmux a"
-
 # tmux-sessionizer
 alias ts="$SCRIPTS_DIR/tmux_sessionizer"
+
+# quick reattach
+alias ta="tmux a || ts"
 
 
 ### obs ########################################################################
 
 if which obs-cmd &> /dev/null; then
-    source $DOTFILES_DIR/bash/obs
+    source "$DOTFILES_DIR/bash/obs"
 fi

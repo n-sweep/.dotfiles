@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+    # tmux new-session -c "$HOME/.dotfiles" -d -s _dotfiles
+    # tmux send-keys -t _dotfiles " sleep 0.2 && clear && fastfetch --logo $HOME/.dotfiles/fastfetch/tmux.txt" C-m
+    # tmux new-session -d -s Obsidian
+    # tmux send-keys -t Obsidian " zk" C-m
+    # tmux attach -t _dotfiles
+
 function session_exists {
     if tmux list-sessions | grep "$1"; then
         return 0
@@ -8,11 +14,13 @@ function session_exists {
     fi
 }
 
-# Only start new sessions if they don't already exist
-if ! pgrep -x 'tmux' > /dev/null || [[ -n $(session_exists "_") ]]; then
+default=_
 
-    tmux new-session -d -s _ 'htop'
-    tmux rename-window -t _ 'main'
+# Only start new sessions if they don't already exist
+if ! pgrep -x 'tmux' > /dev/null || [[ -n $(session_exists $default) ]]; then
+
+    tmux new-session -d -s $default 'btop'
+    tmux rename-window -t $default 'main'
 
     # these numbers are crazy because tmux doesn't actually know the size of my
     # terminal window while these commands are running
@@ -20,14 +28,19 @@ if ! pgrep -x 'tmux' > /dev/null || [[ -n $(session_exists "_") ]]; then
     tmux split-window -t _ -l 6 -h 'moon'
 
     tmux split-window -t _ -vf
+    tmux send-keys -t $default " sleep 0.2 && clear && fastfetch --logo $HOME/.dotfiles/fastfetch/tmux.txt" C-m
+
     tmux split-window -t _ -h 'cmus'
+
+    tmux new-session -d -s Obsidian
+    tmux send-keys -t Obsidian " zk" C-m
 
 fi
 
 if [[ -z "$TMUX" ]]; then
     # attach to session 1 if exists and not already attached to a session
-    tmux attach-session -t _:1.0
+    tmux attach-session -t $default:1.3
 else
     # put focus for session 1 on the bottom left pane
-    tmux select-pane -t _:1.0
+    tmux select-pane -t $default:1.3
 fi

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# oryxpro
+# LEFT="DP-0"
+# MID="HDMI-0"
+# RIGHT="eDP-1-1"
+
+# xps
+LEFT="DP-1-3"
+MID="DP-1-2"
+RIGHT="eDP-1-1"
+
+xrandr --output $LEFT --off
+xrandr --output $MID --off
