@@ -129,7 +129,7 @@ set $mon3 DP-1-3
 
 # Assign applications to workspaces
 assign [class="org.wezfurlong.wezterm"] $ws6
-assign [class="brave"] $ws7
+assign [class="ws3"] $ws3
 # assign [class="obs"] $ws12
 
 # Assign workspaces to monitors
