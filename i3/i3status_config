@@ -27,10 +27,10 @@ wireless _first_ {
     format_down = "W: down"
 }
 
-order += "path_exists VPN"
-path_exists VPN {
+order += "path_exists TS"
+path_exists TS {
     # path exists when vpn is active
-    path = "/proc/sys/net/ipv4/conf/tun0"
+    path = "/proc/sys/net/ipv4/conf/tailscale0"
 }
 
 order += "memory"
