@@ -15,6 +15,8 @@
 # %% [markdown]
 # # Template Notebook
 
+pd.options.display.width = 1000
+
 # %%
 # %%
 # %%
