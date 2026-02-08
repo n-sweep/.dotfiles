@@ -23,7 +23,7 @@ alias vim=nvim
 alias vi=nvim
 
 # opencode
-alias opencode=oc
+alias oc=opencode
 
 # docker
 alias docker="sudo docker"
