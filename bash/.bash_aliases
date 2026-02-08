@@ -22,6 +22,9 @@ alias lock="i3lock -c 000000"
 alias vim=nvim
 alias vi=nvim
 
+# opencode
+alias opencode=oc
+
 # docker
 alias docker="sudo docker"
 
