@@ -47,7 +47,7 @@ def get_lan_ip() -> str:
 def send_plot(ip: str, port: int, fig_json: str):
     conn = http.client.HTTPConnection(ip, port)
     conn.request(
-        'POST', '/plot',
+        'POST', '/plotviewer/plot',
         body=fig_json,
         headers={'Content-Type': 'application/json'}
     )
@@ -61,26 +61,17 @@ def patch_figure_show():
     def modified_show(self: go.Figure, *args, **kwargs) -> None:
         """plotly data has to be cleaned to be properly serialized for sending over HTTPS"""
 
-        # separate layout from data
-        fig_dict = {
-            'data': [sanitize_numpy_types(t.to_plotly_json()) for t in self.data],  # type: ignore
-            'layout': self.layout.to_plotly_json()
-        }
-
-        fig_json = json.dumps(fig_dict)
+        fig_json = str(self.to_json())
 
         try:
             r = send_plot(ROBOT_HOUSE, 8080, fig_json)
         except Exception:
             r = send_plot(get_lan_ip(), 8080, fig_json)
 
-        if r.status != 200:
-            # try to fall back on lan
-            r = send_plot(get_lan_ip(), 8080, fig_json)
-            if r.status != 200:
-                print(r.status)
-                print(r.reason)
-                _show(self, *args, **kwargs) # type: ignore[arg-type]
+        if r.status != 201:
+            print(r.status)
+            print(r.reason)
+            _show(self, *args, **kwargs) # type: ignore[arg-type]
 
     go.Figure.show = modified_show  # type: ignore[assignment]
 
