@@ -1,6 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "theme": "system",
+  "default_agent": "ask",
   "model": "GLM5",
   "small_model": "minimax-m2.5-free",
-  "theme": "system",
+  "permission": {
+      "external_directory": {
+          "{env:OPENCODE_CONFIG_DIR}/**": "allow"
+      }
+  }
 }

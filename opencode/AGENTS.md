@@ -16,3 +16,5 @@ Use the skill tool when prompted to use a skill
 
 - If asked to create a new skill, first read the template skill
 - When asked to work with Obsidian or create notes of any kind, load the obsidian skill
+- When writing or editing Python code, load the python skill
+- When interacting with the Vikunja instance (tasks, projects, labels, users, CLI), load the vikunja skill
