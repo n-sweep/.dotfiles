@@ -151,6 +151,11 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 ### environment variables ######################################################
 
+export OPENCODE_EXPERIMENTAL_EXA=1
+export OPENCODE_EXPERIMENTAL_LSP_TOOL=1
+export OPENCODE_EXPERIMENTAL_LSP_TY=1
+export OPENCODE_EXPERIMENTAL_PLAN_MODE=1
+
 # bash scripts path
 export PATH="$PATH:$SCRIPTS_DIR"
 

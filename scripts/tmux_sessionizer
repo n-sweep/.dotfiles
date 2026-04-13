@@ -3,7 +3,7 @@
 # tmux-sessionizer
 # stolen & adapted from ThePrimeagen
 
-dirs="$HOME/ $HOME/Repos $HOME/work $HOME/work/*/Repos"
+dirs="$HOME/ $HOME/Repos $HOME/Repos/kindredhippie $HOME/work $HOME/work/*/Repos"
 addtl=$(echo "_ /tmp/scratch" | sed 's/ /\\n/g')
 tmux_running=$(pgrep tmux)
 

@@ -2,6 +2,7 @@ DOTFILES_DIR="$HOME/.dotfiles"
 SCRIPTS_DIR="$DOTFILES_DIR/scripts"
 
 alias c=clear
+alias xr="xrandr --auto"
 
 # copy/paste
 alias pst="xclip -o -selection clipboard"
